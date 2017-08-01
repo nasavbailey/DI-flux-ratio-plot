@@ -29,16 +29,23 @@ markersize_points=4
 ########################################################################
 ### ELT Section
 #### Note, comment out this whole section if you don't want to include the ELTs.
-#range_x=np.array((0.03,1))
-#pessimistic_y=np.array((10**-5,10**-8))
-#optimistic_y=np.array((10**-8,10**-9))
-#ax1.plot(range_x,pessimistic_y,color='pink', linestyle='--',linewidth=1)
-#ax1.plot(range_x,optimistic_y,color='pink', linestyle='--',linewidth=1)
-#plt.fill_between(range_x, pessimistic_y, optimistic_y, color='pink', alpha='0.2')
-#ax1.plot(np.array((0.03,1)),np.array((10**-6,10**-9)),color='red', linestyle='--',linewidth=1)
-#
-####Now add text
-#plt.text(0.1,2.5*10**-7,'Future ELTs?',color='Red',horizontalalignment='left',verticalalignment='top',rotation=-19,fontsize=8)
+include_ELT=0
+
+if include_ELT==1:
+    file_name_end = '_ELT'
+    range_x=np.array((0.03,1))
+    pessimistic_y=np.array((10**-5,10**-8))
+    optimistic_y=np.array((10**-8,10**-9))
+    ax1.plot(range_x,pessimistic_y,color='pink', linestyle='--',linewidth=1)
+    ax1.plot(range_x,optimistic_y,color='pink', linestyle='--',linewidth=1)
+    plt.fill_between(range_x, pessimistic_y, optimistic_y, color='pink', alpha='0.2')
+    ax1.plot(np.array((0.03,1)),np.array((10**-6,10**-9)),color='red', linestyle='--',linewidth=1)
+    
+    ###Now add text
+    plt.text(0.1,2.5*10**-7,'Future ELTs?',color='Red',horizontalalignment='left',verticalalignment='top',rotation=-19,fontsize=8)
+    
+else:
+    file_name_end=''
 
 #########################################################################
 ###Planet contrasts at certain separations ((sep in arcsec, contrast))
@@ -201,4 +208,4 @@ plt.text(0.039,1*10**-6,'Solar system planets \nas seen from 10 pc',color='black
 ax1.set_xticks(x_ticks_minor, minor = True)
 ax1.set_xticklabels(x_ticklabels_minor, minor=True)
 
-plt.savefig(path+'flux_ratio_plot.pdf')
+plt.savefig(path+'flux_ratio_plot'+file_name_end+'.pdf')
