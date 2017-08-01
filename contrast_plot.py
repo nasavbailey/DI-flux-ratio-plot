@@ -23,22 +23,22 @@ fig=plt.figure()
 ax1=fig.add_subplot(111)
 
 ###Define path where to find data and where to save to
-path='/Users/meshkat/python/WFIRST/'
+path='/Users/meshkat/python/WFIRST/CGI-flux-ratio-plot/'
 markersize_points=4
 
 ########################################################################
 ### ELT Section
 #### Note, comment out this whole section if you don't want to include the ELTs.
-#range_x=np.array((0.03,1))
-#pessimistic_y=np.array((10**-5,10**-8))
-#optimistic_y=np.array((10**-8,10**-9))
-#ax1.plot(range_x,pessimistic_y,color='pink', linestyle='--',linewidth=1)
-#ax1.plot(range_x,optimistic_y,color='pink', linestyle='--',linewidth=1)
-#plt.fill_between(range_x, pessimistic_y, optimistic_y, color='pink', alpha='0.2')
-#ax1.plot(np.array((0.03,1)),np.array((10**-6,10**-9)),color='red', linestyle='--',linewidth=1)
-#
-####Now add text
-#plt.text(0.1,2*10**-7,'Future ELTs?',color='Red',horizontalalignment='left',verticalalignment='top',rotation=-19)
+range_x=np.array((0.03,1))
+pessimistic_y=np.array((10**-5,10**-8))
+optimistic_y=np.array((10**-8,10**-9))
+ax1.plot(range_x,pessimistic_y,color='pink', linestyle='--',linewidth=1)
+ax1.plot(range_x,optimistic_y,color='pink', linestyle='--',linewidth=1)
+plt.fill_between(range_x, pessimistic_y, optimistic_y, color='pink', alpha='0.2')
+ax1.plot(np.array((0.03,1)),np.array((10**-6,10**-9)),color='red', linestyle='--',linewidth=1)
+
+###Now add text
+plt.text(0.1,2*10**-7,'Future ELTs?',color='Red',horizontalalignment='left',verticalalignment='top',rotation=-19)
 
 #########################################################################
 ###Planet contrasts at certain separations ((sep in arcsec, contrast))
