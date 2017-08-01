@@ -29,7 +29,7 @@ markersize_points=4
 ########################################################################
 ### ELT Section
 #### Note, comment out this whole section if you don't want to include the ELTs.
-include_ELT=0
+include_ELT=1
 
 if include_ELT==1:
     file_name_end = '_ELT'
@@ -42,7 +42,7 @@ if include_ELT==1:
     ax1.plot(np.array((0.03,1)),np.array((10**-6,10**-9)),color='red', linestyle='--',linewidth=1)
     
     ###Now add text
-    plt.text(0.1,2.5*10**-7,'Future ELTs?',color='Red',horizontalalignment='left',verticalalignment='top',rotation=-19,fontsize=8)
+    plt.text(0.1,2.5*10**-7,'Future ELTs (NIR)',color='Red',horizontalalignment='left',verticalalignment='top',rotation=-19,fontsize=8)
     
 else:
     file_name_end=''
