@@ -38,7 +38,7 @@ plt.fill_between(range_x, pessimistic_y, optimistic_y, color='pink', alpha='0.2'
 ax1.plot(np.array((0.03,1)),np.array((10**-6,10**-9)),color='red', linestyle='--',linewidth=1)
 
 ###Now add text
-plt.text(0.1,2*10**-7,'Future ELTs?',color='Red',horizontalalignment='left',verticalalignment='top',rotation=-19)
+plt.text(0.1,2.5*10**-7,'Future ELTs?',color='Red',horizontalalignment='left',verticalalignment='top',rotation=-19,fontsize=8)
 
 #########################################################################
 ###Planet contrasts at certain separations ((sep in arcsec, contrast))
