@@ -12,10 +12,11 @@ import matplotlib.pyplot as plt
 import matplotlib
 import sys
 from matplotlib import rcParams
+from astropy.io import ascii
 
 rcParams.update({'figure.autolayout': True})
 matplotlib.rcParams.update({'font.family':'Times New Roman'})
-matplotlib.rcParams.update({'font.size': 10})
+matplotlib.rcParams.update({'font.size': 12})
 
 
 fig=plt.figure()
@@ -23,13 +24,13 @@ ax1=fig.add_subplot(111)
 
 ###Define path where to find data and where to save to
 path='/Users/meshkat/python/WFIRST/'
+markersize_points=4
 
-
-#########################################################################
-#### ELT Section
+########################################################################
+### ELT Section
 #### Note, comment out this whole section if you don't want to include the ELTs.
 #range_x=np.array((0.03,1))
-#pessimistic_y=np.array((10**-5,10**-9))
+#pessimistic_y=np.array((10**-5,10**-8))
 #optimistic_y=np.array((10**-8,10**-9))
 #ax1.plot(range_x,pessimistic_y,color='pink', linestyle='--',linewidth=1)
 #ax1.plot(range_x,optimistic_y,color='pink', linestyle='--',linewidth=1)
@@ -52,29 +53,32 @@ ProximaCenb=np.array((0.035,4E-8))
 
 ####Plot self luminous planets in orange
 
+a_DI = np.loadtxt(path+'RVtable.txt')
+arcsec_RV=a_RV[:,0]
+contrast_RV=a_RV[:,1]
 
-markersize_self_luminous=4
+a_DI= ascii.read(path+'DIplanets.txt')
+arcsec_DI=a_DI['col2']
+contrast_DI=10**(-a_DI['col4']/2.5) ##Note this is in magnitudes, need to adjust to flux
+planet_name=a_DI['col1']
+
+
 color_self_luminous='red'
-
-plt.plot(HR8799b[0],HR8799b[1],marker='o',color=color_self_luminous,markersize=markersize_self_luminous)
-plt.plot(HR8799c[0],HR8799c[1],marker='o',color=color_self_luminous,markersize=markersize_self_luminous)
-plt.plot(HR8799d[0],HR8799d[1],marker='o',color=color_self_luminous,markersize=markersize_self_luminous)
-plt.plot(HR8799e[0],HR8799e[1],marker='o',color=color_self_luminous,markersize=markersize_self_luminous)
-plt.plot(betaPicb[0],betaPicb[1],marker='o',color=color_self_luminous,markersize=markersize_self_luminous)
-plt.plot(HD95086b[0],HD95086b[1],marker='o',color=color_self_luminous,markersize=markersize_self_luminous)
-plt.plot(Eri51b[0],Eri51b[1],marker='o',color=color_self_luminous,markersize=markersize_self_luminous)
-plt.plot(ProximaCenb[0],ProximaCenb[1],marker='o',color=color_self_luminous,markersize=markersize_self_luminous)
+plt.plot(arcsec_DI,contrast_DI, 'ro',color=color_self_luminous,markersize=markersize_points)
+plt.plot(ProximaCenb[0],ProximaCenb[1],marker='o',color=color_self_luminous,markersize=markersize_points) ##Add proxima
 
 
-###Plot names of planets
-plt.text(HR8799b[0],HR8799b[1],' HR 8799 b ',color='black',horizontalalignment='left',verticalalignment='center')
-plt.text(HR8799c[0],HR8799c[1],' HR 8799 c ',color='black',horizontalalignment='right',verticalalignment='center')
-plt.text(HR8799d[0],HR8799d[1],' HR 8799 d ',color='black',horizontalalignment='left',verticalalignment='center')
-plt.text(HR8799e[0],HR8799e[1],' HR 8799 e ',color='black',horizontalalignment='right',verticalalignment='center')
-plt.text(betaPicb[0],betaPicb[1],' beta Pic b ',color='black',horizontalalignment='left',verticalalignment='center')
-plt.text(HD95086b[0],HD95086b[1],' HD 95086 b ',color='black',horizontalalignment='right',verticalalignment='top')
-plt.text(Eri51b[0],Eri51b[1],' 51 Eri b ',color='black',horizontalalignment='left',verticalalignment='center')
-plt.text(ProximaCenb[0],ProximaCenb[1],'  Proxima Cen b ',color='black',horizontalalignment='left',verticalalignment='center')
+###Plot names of planets 
+###Note, can't loop over this section because the name placement needs adjustment
+plt.text(arcsec_DI[0],contrast_DI[0],'  '+planet_name[0],color='black',horizontalalignment='left',verticalalignment='center',fontsize=10)
+plt.text(arcsec_DI[1],contrast_DI[1],' '+planet_name[1]+' ',color='black',horizontalalignment='right',verticalalignment='center',fontsize=10)
+plt.text(arcsec_DI[2],contrast_DI[2],'  '+planet_name[2],color='black',horizontalalignment='left',verticalalignment='center',fontsize=10)
+plt.text(arcsec_DI[3],contrast_DI[3],' '+planet_name[3]+' ',color='black',horizontalalignment='right',verticalalignment='center',fontsize=10)
+plt.text(arcsec_DI[4],contrast_DI[4],'  '+planet_name[4],color='black',horizontalalignment='left',verticalalignment='center',fontsize=10)
+plt.text(arcsec_DI[5],contrast_DI[5],' '+planet_name[5]+' ',color='black',horizontalalignment='right',verticalalignment='center',fontsize=10)
+plt.text(arcsec_DI[6],contrast_DI[6],' '+planet_name[6],color='black',horizontalalignment='left',verticalalignment='center',fontsize=10)
+plt.text(ProximaCenb[0],ProximaCenb[1],'  Proxima Cen b',color='black',horizontalalignment='left',verticalalignment='center',fontsize=10)
+
 
 #########################################################################
 #########Read in contrast curves for Exoplanet Mode and Disk Mode    
@@ -88,11 +92,11 @@ arcsec_disk=a_d[:,1]
 contrast_disk=a_d[:,2]
 
 plt.plot(arcsec_exoplanet,contrast_exoplanet,color='black',linewidth=2)
-plt.plot(arcsec_disk,contrast_disk,color='black',linewidth=2)
+####plt.plot(arcsec_disk,contrast_disk,color='black',linewidth=2) ###This is commented for now, can be added later
 
 #########################################################################
 ########Add text stating where the CGI Baseline science requirements and CGI threshold technical requirements are
-plt.text(0.15,9*10**-10,'CGI Baseline Science Requirement',color='black',horizontalalignment='left',verticalalignment='top')
+plt.text(0.12,8*10**-10,'CGI Baseline Exoplanet Detectability',color='black',horizontalalignment='left',verticalalignment='top',fontsize=10)
 
 
 ######Add Technical requirement line and text
@@ -133,17 +137,17 @@ plt.text(2.2,10**-8,'HST ACS',color='black',horizontalalignment='left',rotation=
 ###Add Earth and Jupiter
 Earth=np.array((0.09,1*10**-10))
 Jupiter=np.array((0.51, 10**-9))
-plt.plot(Earth[0],Earth[1],marker='o',color='blue',markersize=markersize_self_luminous)
-plt.plot(Jupiter[0],Jupiter[1],marker='o',color='#FF7800',markersize=markersize_self_luminous)
-plt.text(Earth[0],Earth[1],' Earth ',color='blue',horizontalalignment='left',verticalalignment='center')
-plt.text(Jupiter[0],Jupiter[1],' Jupiter ',color='#FF7800',horizontalalignment='left',verticalalignment='center')
+plt.plot(Earth[0],Earth[1],marker='o',color='blue',markersize=markersize_points)
+plt.plot(Jupiter[0],Jupiter[1],marker='o',color='#FF7800',markersize=markersize_points)
+plt.text(Earth[0],Earth[1],' Earth ',color='blue',horizontalalignment='left',verticalalignment='center',fontsize=10)
+plt.text(Jupiter[0],Jupiter[1],' Jupiter ',color='#FF7800',horizontalalignment='left',verticalalignment='center',fontsize=10)
 
 #########################################################################
 ###Add RV planets
 a_RV = np.loadtxt(path+'RVtable.txt')
 arcsec_RV=a_RV[:,0]
 contrast_RV=a_RV[:,1]
-plt.plot(arcsec_RV,contrast_RV, 'ko', markersize=markersize_self_luminous)
+plt.plot(arcsec_RV,contrast_RV, 'ko', markersize=markersize_points)
 
 
 
@@ -152,16 +156,18 @@ plt.plot(arcsec_RV,contrast_RV, 'ko', markersize=markersize_self_luminous)
 ###Plot axes, tick mark ajdusting, legend, etc.
 x_ticklabels=np.array((0.1,1))##arcsec  
 x_ticks=x_ticklabels
-x_ticks_minor=np.array((0.05,0.5))
-x_ticklabels_minor=x_ticks_minor
+
+###To include minor tick labels include the following (note this is not an elegant solution...)
+x_ticks_minor=np.array((0.03,0.04,0.05,0.06,0.07,0.08,0.09,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0,2.0,3.0))
+x_ticklabels_minor=np.array((0.03,'','','','','','','','','','','','','','','','','',''))
 
 y_ticks=np.array((10**-11,10**-10,10**-9,10**-8,10**-7,10**-6,10**-5,10**-4,10**-3))
 y_ticklabels=np.log10(y_ticks)
 ##
 
 
-ax1.set_ylabel('Flux raio to host star')
-ax1.set_xlabel('Separation [arcsec]') 
+ax1.set_ylabel('Flux raio to host star',fontsize=14)
+ax1.set_xlabel('Separation [arcsec]',fontsize=14) 
 
 ax1.set_ylim(10**-11,10**-2.9)
 ax1.set_xlim(0.03,4)
@@ -180,9 +186,9 @@ plt.plot(np.array((0.035,0.15)),np.array((4*10**-4,4*10**-4)), 'k--',linewidth=1
 plt.plot(np.array((0.035,0.15)),np.array((4*10**-7,4*10**-7)), 'k--',linewidth=1, alpha=0.5)
 plt.plot(np.array((0.035,0.035)),np.array((4*10**-7,4*10**-4)), 'k--',linewidth=1, alpha=0.5)
 plt.plot(np.array((0.15,0.15)),np.array((4*10**-7,4*10**-4)), 'k--',linewidth=1, alpha=0.5)
-plt.plot(0.039,2*10**-4,marker='o',color='black',markersize=markersize_self_luminous)
+plt.plot(0.039,2*10**-4,marker='o',color='black',markersize=markersize_points)
 plt.text(0.039,2*10**-4,'  Known RV (visible)',color='black',horizontalalignment='left',verticalalignment='center',fontsize=8)
-plt.plot(0.039,9*10**-5,marker='o',color=color_self_luminous,markersize=markersize_self_luminous)
+plt.plot(0.039,9*10**-5,marker='o',color=color_self_luminous,markersize=markersize_points)
 plt.text(0.039,9*10**-5,'  Known self-luminous (NIR)',color=color_self_luminous,horizontalalignment='left',verticalalignment='center',fontsize=8)
 plt.text(0.039,10**-5,'Reflected light contrast \nas seen at quadrature',color='black',horizontalalignment='left',verticalalignment='center',fontsize=10)
 plt.text(0.039,1*10**-6,'Solar system planets \nas seen from 10 pc',color='black',horizontalalignment='left',verticalalignment='center',fontsize=10)
@@ -191,7 +197,8 @@ plt.text(0.039,1*10**-6,'Solar system planets \nas seen from 10 pc',color='black
 #ax1.set_yticks(y_ticks)
 #ax1.set_yticklabels(y_ticklabels)
 
-#ax1.set_xticks(x_ticks_minor, minor = True)
-#ax1.set_xticklabels(x_ticklabels_minor, minor=True)
+###Again, not an elegant solution, but it works.
+ax1.set_xticks(x_ticks_minor, minor = True)
+ax1.set_xticklabels(x_ticklabels_minor, minor=True)
 
 plt.savefig(path+'flut_ratio_plot.pdf')
