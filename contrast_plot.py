@@ -13,10 +13,16 @@ import matplotlib
 import sys
 from matplotlib import rcParams
 from astropy.io import ascii
+#import decimal
+from matplotlib.pyplot import gca
 
 rcParams.update({'figure.autolayout': True})
 matplotlib.rcParams.update({'font.family':'Times New Roman'})
 matplotlib.rcParams.update({'font.size': 12})
+matplotlib.rcParams['mathtext.fontset'] = 'stix'
+
+
+
 
 
 fig=plt.figure()
@@ -77,13 +83,13 @@ plt.plot(ProximaCenb[0],ProximaCenb[1],marker='o',color=color_self_luminous,mark
 
 ###Plot names of planets 
 ###Note, can't loop over this section because the name placement needs adjustment
-plt.text(arcsec_DI[0],contrast_DI[0],'  '+planet_name[0],color='black',horizontalalignment='left',verticalalignment='center',fontsize=10)
-plt.text(arcsec_DI[1],contrast_DI[1],' '+planet_name[1]+' ',color='black',horizontalalignment='right',verticalalignment='center',fontsize=10)
-plt.text(arcsec_DI[2],contrast_DI[2],'  '+planet_name[2],color='black',horizontalalignment='left',verticalalignment='center',fontsize=10)
-plt.text(arcsec_DI[3],contrast_DI[3],' '+planet_name[3]+' ',color='black',horizontalalignment='right',verticalalignment='center',fontsize=10)
-plt.text(arcsec_DI[4],contrast_DI[4],'  '+planet_name[4],color='black',horizontalalignment='left',verticalalignment='center',fontsize=10)
-plt.text(arcsec_DI[5],contrast_DI[5],' '+planet_name[5]+' ',color='black',horizontalalignment='right',verticalalignment='center',fontsize=10)
-plt.text(arcsec_DI[6],contrast_DI[6],' '+planet_name[6],color='black',horizontalalignment='left',verticalalignment='center',fontsize=10)
+#plt.text(arcsec_DI[0],contrast_DI[0],'  '+planet_name[0],color='black',horizontalalignment='left',verticalalignment='center',fontsize=10)
+#plt.text(arcsec_DI[1],contrast_DI[1],' '+planet_name[1]+' ',color='black',horizontalalignment='right',verticalalignment='center',fontsize=10)
+#plt.text(arcsec_DI[2],contrast_DI[2],'  '+planet_name[2],color='black',horizontalalignment='left',verticalalignment='center',fontsize=10)
+#plt.text(arcsec_DI[3],contrast_DI[3],' '+planet_name[3]+' ',color='black',horizontalalignment='right',verticalalignment='center',fontsize=10)
+#plt.text(arcsec_DI[4],contrast_DI[4],'  '+planet_name[4],color='black',horizontalalignment='left',verticalalignment='center',fontsize=10)
+#plt.text(arcsec_DI[5],contrast_DI[5],' '+planet_name[5]+' ',color='black',horizontalalignment='right',verticalalignment='center',fontsize=10)
+#plt.text(arcsec_DI[6],contrast_DI[6],' '+planet_name[6],color='black',horizontalalignment='left',verticalalignment='center',fontsize=10)
 plt.text(ProximaCenb[0],ProximaCenb[1],'  Proxima Cen b',color='black',horizontalalignment='left',verticalalignment='center',fontsize=10)
 
 
@@ -103,7 +109,7 @@ plt.plot(arcsec_exoplanet,contrast_exoplanet,color='black',linewidth=2)
 
 #########################################################################
 ########Add text stating where the CGI Baseline science requirements and CGI threshold technical requirements are
-plt.text(0.12,8*10**-10,'CGI Baseline Exoplanet Detectability',color='black',horizontalalignment='left',verticalalignment='top',fontsize=10)
+plt.text(0.1,8*10**-10,'WFIRST CGI Baseline Exoplanet Detectability',color='black',horizontalalignment='left',verticalalignment='top',fontsize=10)
 
 
 ######Add Technical requirement line and text
@@ -129,7 +135,7 @@ contrast_GPI=a_GPI[:,1]
 
 ###Plot the contrast curves
 plt.plot(arcsec_HST,contrast_HST,color='black',linewidth=1)
-plt.plot(arcsec_JWST,contrast_JWST,color='red',linewidth=1)
+plt.plot(arcsec_JWST,contrast_JWST,color='red',linewidth=1,linestyle='--')
 plt.plot(arcsec_SPHERE,contrast_SPHERE,color='red',linewidth=1)
 plt.plot(arcsec_GPI,contrast_GPI,color='red',linewidth=1)
 
@@ -168,12 +174,11 @@ x_ticks=x_ticklabels
 x_ticks_minor=np.array((0.03,0.04,0.05,0.06,0.07,0.08,0.09,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0,2.0,3.0))
 x_ticklabels_minor=np.array((0.03,'','','','','','','','','','','','','','','','','',''))
 
-y_ticks=np.array((10**-11,10**-10,10**-9,10**-8,10**-7,10**-6,10**-5,10**-4,10**-3))
-y_ticklabels=np.log10(y_ticks)
-##
+#y_ticks=np.array((10**-11,10**-10,10**-9,10**-8,10**-7,10**-6,10**-5,10**-4,10**-3))
+#y_ticklabels=np.array(('$10^{-11}$','$10^{-10}$','$10^{-9}$','$10^{-8}$','$10^{-7}$','$10^{-6}$','$10^{-5}$','$10^{-4}$', '$10^{-3}$'))
 
 
-ax1.set_ylabel('Flux raio to host star',fontsize=14)
+ax1.set_ylabel('Flux ratio to host star',fontsize=14)
 ax1.set_xlabel('Separation [arcsec]',fontsize=14) 
 
 ax1.set_ylim(10**-11,10**-2.9)
@@ -183,22 +188,23 @@ ax1.set_xscale('log')
 
 ax1.set_xticks(x_ticks)
 ax1.set_xticklabels(x_ticklabels)
-
+#ax1.set_yticks(y_ticks)
+#ax1.set_yticklabels(y_ticklabels)
 
 ###Add grid lines
 plt.grid(b=True, which='major', color='b', linestyle='--', alpha=0.1)
 
 ####Add custom legend (probably a better way to do this?)
 plt.plot(np.array((0.035,0.15)),np.array((4*10**-4,4*10**-4)), 'k--',linewidth=1, alpha=0.5)
-plt.plot(np.array((0.035,0.15)),np.array((4*10**-7,4*10**-7)), 'k--',linewidth=1, alpha=0.5)
-plt.plot(np.array((0.035,0.035)),np.array((4*10**-7,4*10**-4)), 'k--',linewidth=1, alpha=0.5)
-plt.plot(np.array((0.15,0.15)),np.array((4*10**-7,4*10**-4)), 'k--',linewidth=1, alpha=0.5)
+plt.plot(np.array((0.035,0.15)),np.array((9*10**-6,9*10**-6)), 'k--',linewidth=1, alpha=0.5)
+plt.plot(np.array((0.035,0.035)),np.array((9*10**-6,4*10**-4)), 'k--',linewidth=1, alpha=0.5)
+plt.plot(np.array((0.15,0.15)),np.array((9*10**-6,4*10**-4)), 'k--',linewidth=1, alpha=0.5)
 plt.plot(0.039,2*10**-4,marker='o',color='black',markersize=markersize_points)
-plt.text(0.039,2*10**-4,'  Known RV (visible)',color='black',horizontalalignment='left',verticalalignment='center',fontsize=8)
-plt.plot(0.039,9*10**-5,marker='o',color=color_self_luminous,markersize=markersize_points)
-plt.text(0.039,9*10**-5,'  Known self-luminous (NIR)',color=color_self_luminous,horizontalalignment='left',verticalalignment='center',fontsize=8)
-plt.text(0.039,10**-5,'Reflected light contrast \nas seen at quadrature',color='black',horizontalalignment='left',verticalalignment='center',fontsize=10)
-plt.text(0.039,1*10**-6,'Solar system planets \nas seen from 10 pc',color='black',horizontalalignment='left',verticalalignment='center',fontsize=10)
+plt.text(0.039,2.8*10**-4,'  Known RV (Visible, \n reflected light flux ratio \n as seen at quadrature)',color='black',horizontalalignment='left',verticalalignment='top',fontsize=8)
+plt.plot(0.039,1.5*10**-5,marker='o',color=color_self_luminous,markersize=markersize_points)
+plt.text(0.039,1.5*10**-5,'  Known self-luminous (NIR)',color=color_self_luminous,horizontalalignment='left',verticalalignment='center',fontsize=8)
+#plt.text(0.037,1*10**-6,'Reflected light contrast \nas seen at quadrature',color='black',horizontalalignment='left',verticalalignment='center',fontsize=8)
+plt.text(0.037,2*10**-11,'Solar system planets as seen from 10 pc',color='black',horizontalalignment='left',verticalalignment='center',fontsize=8)
 
 ###Add minor tick labels
 #ax1.set_yticks(y_ticks)
@@ -207,5 +213,8 @@ plt.text(0.039,1*10**-6,'Solar system planets \nas seen from 10 pc',color='black
 ###Again, not an elegant solution, but it works.
 ax1.set_xticks(x_ticks_minor, minor = True)
 ax1.set_xticklabels(x_ticklabels_minor, minor=True)
+
+
+
 
 plt.savefig(path+'flux_ratio_plot'+file_name_end+'.pdf')
