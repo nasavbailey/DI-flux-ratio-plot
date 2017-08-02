@@ -35,7 +35,7 @@ markersize_points=4
 ########################################################################
 ### ELT Section
 #### Note, comment out this whole section if you don't want to include the ELTs.
-include_ELT=1
+include_ELT=0
 
 if include_ELT==1:
     file_name_end = '_ELT'
