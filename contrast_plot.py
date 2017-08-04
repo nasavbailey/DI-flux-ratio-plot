@@ -45,13 +45,24 @@ if include_ELT==1:
     ax1.plot(range_x,pessimistic_y,color='pink', linestyle='--',linewidth=1)
     ax1.plot(range_x,optimistic_y,color='pink', linestyle='--',linewidth=1)
     plt.fill_between(range_x, pessimistic_y, optimistic_y, color='pink', alpha='0.2')
-    ax1.plot(np.array((0.03,1)),np.array((10**-6,10**-9)),color='red', linestyle='--',linewidth=1)
+    #ax1.plot(np.array((0.03,1)),np.array((10**-6,10**-9)),color='red', linestyle='--',linewidth=1)
     
     ###Now add text
     plt.text(0.1,2.5*10**-7,'Future ELTs (NIR)?',color='Red',horizontalalignment='left',verticalalignment='top',rotation=-19,fontsize=8)
     
 else:
     file_name_end=''
+
+#########################################################################
+### Also optional: HabEx "goal" contrast curve
+######
+include_HABEX=0
+
+if include_HABEX==1:
+    ax1.plot(np.array((.05,1.7)),np.array((10**-10,10**-10)),color='black', linestyle='--',linewidth=1)
+    ###Now add text
+    plt.text(0.2,9*10**-11,'HabEx Goal',color='black',horizontalalignment='left',verticalalignment='top',fontsize=8)
+   
 
 #########################################################################
 ###Planet contrasts at certain separations ((sep in arcsec, contrast))
@@ -66,9 +77,6 @@ ProximaCenb=np.array((0.035,4E-8))
 
 ####Plot self luminous planets in orange
 
-a_DI = np.loadtxt(path+'RVtable.txt')
-arcsec_RV=a_RV[:,0]
-contrast_RV=a_RV[:,1]
 
 a_DI= ascii.read(path+'DIplanets.txt')
 arcsec_DI=a_DI['col2']
