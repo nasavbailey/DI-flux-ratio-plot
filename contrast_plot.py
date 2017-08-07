@@ -27,6 +27,7 @@ matplotlib.rcParams['mathtext.fontset'] = 'stix'
 
 fig=plt.figure()
 ax1=fig.add_subplot(111)
+#ax2 = ax1.twinxy()
 
 ###Define path where to find data and where to save to
 path='/Users/meshkat/python/WFIRST/CGI-flux-ratio-plot/'
@@ -81,15 +82,32 @@ ProximaCenb=np.array((0.035,4E-8))
 a_DI= ascii.read(path+'DIplanets.txt')
 arcsec_DI=a_DI['col2']
 contrast_DI=10**(-a_DI['col4']/2.5) ##Note this is in magnitudes, need to adjust to flux
+contrast_I_DI=10**(-a_DI['col3']/2.5)
 planet_name=a_DI['col1']
+
+
+#########################################################################
+#### Uncomment this for the I-band measurements of the self luminous planets.
+
+
+#plt.plot(arcsec_DI,contrast_I_DI, 'o',color='grey', mfc='none',markersize=3.5)
+#for i in range(arcsec_DI.shape[0]):
+#    plt.plot(np.array((arcsec_DI[i],arcsec_DI[i])),np.array((contrast_DI[i],contrast_I_DI[i])),'--',color='#E5E8E8',linewidth=1)
+
 
 
 color_self_luminous='red'
 plt.plot(arcsec_DI,contrast_DI, 'ro',color=color_self_luminous,markersize=markersize_points)
+
 plt.plot(ProximaCenb[0],ProximaCenb[1],marker='o',color=color_self_luminous,markersize=markersize_points) ##Add proxima
 
+###Add arrow line connecting self luminous and open circles
 
-###Plot names of planets 
+#plt.annotate('', xy = (0.1,0.1),  xycoords = 'axes fraction', \
+#    xytext = (0.2,0.2), textcoords = 'axes fraction', fontsize = 7, \
+#    color = '#707B7C', arrowprops=dict(edgecolor='#707B7C', arrowstyle = '->'))
+
+###Plot names of planets a
 ###Note, can't loop over this section because the name placement needs adjustment
 #plt.text(arcsec_DI[0],contrast_DI[0],'  '+planet_name[0],color='black',horizontalalignment='left',verticalalignment='center',fontsize=10)
 #plt.text(arcsec_DI[1],contrast_DI[1],' '+planet_name[1]+' ',color='black',horizontalalignment='right',verticalalignment='center',fontsize=10)
