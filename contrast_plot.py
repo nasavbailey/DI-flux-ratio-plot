@@ -1,45 +1,59 @@
 #!/usr/bin/env python2
 # -*- coding: utf-8 -*-
 """
-Created on Mon Jul 31 11:33:07 2017
-
-@author: meshkat
+@author: meshkat (original; July 31, 2017)
+November 2017: VPB reorganized & updated contrast curves
 """
-
 
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib
 import sys
+import os
 from matplotlib import rcParams
 from astropy.io import ascii
 #import decimal
 from matplotlib.pyplot import gca
+
+### User-defined options
+
+# Which contrast curves to include?
+include_ELT = 0
+include_HABEX = 0
+include_ACS = 0
+include_NICMOS = 1
+include_NIRCAM = 0 # don't use until verified
+include_ACS = 0 # don't use until verified
+include_SPHERE = 1
+include_GPI = 1
+
+###Define path where to find data and where to save to
+path = '' # leave blank if this script is in the same folder as the data (default)
+
+
+########################################################################
+### Plot setup
 
 rcParams.update({'figure.autolayout': True})
 matplotlib.rcParams.update({'font.family':'Times New Roman'})
 matplotlib.rcParams.update({'font.size': 12})
 matplotlib.rcParams['mathtext.fontset'] = 'stix'
 
-
-
-
-
 fig=plt.figure()
 ax1=fig.add_subplot(111)
 #ax2 = ax1.twinxy()
 
-###Define path where to find data and where to save to
-path='/Users/meshkat/python/WFIRST/CGI-flux-ratio-plot/'
 markersize_points=4
 
 ########################################################################
-### ELT Section
-#### Note, comment out this whole section if you don't want to include the ELTs.
-include_ELT=0
+# optional suffix, depending on what's plotted?
+file_name_end = '' 
+
+########################################################################
+### ELT 
 
 if include_ELT==1:
-    file_name_end = '_ELT'
+    #file_name_end += '_ELT'
     range_x=np.array((0.03,1))
     pessimistic_y=np.array((10**-5,10**-8))
     optimistic_y=np.array((10**-8,10**-9))
@@ -50,20 +64,74 @@ if include_ELT==1:
     
     ###Now add text
     plt.text(0.1,2.5*10**-7,'Future ELTs (NIR)?',color='Red',horizontalalignment='left',verticalalignment='top',rotation=-19,fontsize=8)
-    
-else:
-    file_name_end=''
+
 
 #########################################################################
-### Also optional: HabEx "goal" contrast curve
-######
-include_HABEX=0
+### HabEx "goal" contrast curve
 
 if include_HABEX==1:
     ax1.plot(np.array((.05,1.7)),np.array((10**-10,10**-10)),color='black', linestyle='--',linewidth=1)
-    ###Now add text
     plt.text(0.2,9*10**-11,'HabEx Goal',color='black',horizontalalignment='left',verticalalignment='top',fontsize=8)
    
+
+#########################################################################
+### NIRCAM
+
+if include_NIRCAM:
+	print "NIRCAM NEEDS VERIFIED"
+	a_JWST = np.loadtxt(path+'jwst_1.txt')
+	arcsec_JWST=a_JWST[:,1]
+	contrast_JWST=a_JWST[:,2]
+	plt.plot(arcsec_JWST,contrast_JWST,color='red',linewidth=1,linestyle='--')
+	plt.text(1.4,7*10**-7,'JWST NIRCam',color='red',horizontalalignment='left',rotation=-30,fontsize=10)
+
+
+#########################################################################
+### NICMOS
+if include_NICMOS:
+	a_NICMOS = np.loadtxt(path+'7226_F160W_5sigmaContrastLimit_Median.txt',delimiter=',')
+	arcsec_NICMOS = a_NICMOS[:,0]
+	contrast_NICMOS = a_NICMOS[:,1]
+	plt.plot(arcsec_NICMOS,contrast_NICMOS,color='red',linewidth=1,linestyle='-.')
+
+	a_NICMOS = np.loadtxt(path+'7226_F160W_5sigmaContrastLimit_Min.txt',delimiter=',')
+	arcsec_NICMOS = a_NICMOS[:,0]
+	contrast_NICMOS = a_NICMOS[:,1]
+	plt.plot(arcsec_NICMOS,contrast_NICMOS,color='g',linewidth=1,linestyle='-.')
+
+
+#########################################################################
+### ACS
+
+if include_ACS:
+	print "ACS data is not verified. Skipping"
+	#a_HST = np.loadtxt(path+'hst_1.txt')
+	#arcsec_HST=a_HST[:,1]
+	#contrast_HST=a_HST[:,2]
+	#plt.plot(arcsec_HST,contrast_HST,color='black',linewidth=1)
+	#plt.text(2.2,10**-8,'HST ACS',color='black',horizontalalignment='left',rotation=-30,fontsize=10)
+
+
+#########################################################################
+### SPHERE 
+if include_SPHERE:
+	a_SPHERE = np.loadtxt(path+'SPHERE_Vigan.txt')
+	arcsec_SPHERE=a_SPHERE[:,0]
+	contrast_SPHERE=10**(-a_SPHERE[:,1]/2.5) ###Note this is in magnitudes, need to convert to flux
+	plt.plot(arcsec_SPHERE,contrast_SPHERE,color='red',linewidth=1)
+	plt.text(0.2,5*10**-7,'SPHERE-Sirius',color='red',horizontalalignment='left',rotation=-20,fontsize=10)
+
+
+
+#########################################################################
+### GPI H-band
+if include_GPI:
+	a_GPI = np.loadtxt(path+'GPIES_T-type_contrast_curve_2per.txt')
+	arcsec_GPI=a_GPI[:,0]
+	contrast_GPI=a_GPI[:,1]
+	plt.plot(arcsec_GPI,contrast_GPI,color='red',linewidth=1)
+	plt.text(0.19,2.5*10**-6,'GPI',color='red',horizontalalignment='left',rotation=-20,fontsize=10)
+
 
 #########################################################################
 ###Planet contrasts at certain separations ((sep in arcsec, contrast))
@@ -142,35 +210,6 @@ plt.text(0.1,8*10**-10,'WFIRST CGI Baseline Exoplanet Detectability',color='blac
 #plt.plot(np.array((0.15,1.)),np.array((10**-7,10**-7)),color='black',linewidth=2)
 #plt.text(0.15,5*10**-8,'CGI Threshold Technical Requirement',color='black',horizontalalignment='left',verticalalignment='top')
 
-#########################################################################
-########Add HST, JWST, SPHERE, GPI contrast curves
-a_HST = np.loadtxt(path+'hst_1.txt')
-a_JWST = np.loadtxt(path+'jwst_1.txt')
-a_SPHERE = np.loadtxt(path+'SPHERE_Vigan.txt')
-a_GPI = np.loadtxt(path+'GPIES_T-type_contrast_curve_2per.txt')
-
-##Read the specific arcsec and contrast columns we need
-arcsec_HST=a_HST[:,1]
-contrast_HST=a_HST[:,2]
-arcsec_JWST=a_JWST[:,1]
-contrast_JWST=a_JWST[:,2]
-arcsec_SPHERE=a_SPHERE[:,0]
-contrast_SPHERE=10**(-a_SPHERE[:,1]/2.5) ###Note this is in magnitudes, need to convert to flux
-arcsec_GPI=a_GPI[:,0]
-contrast_GPI=a_GPI[:,1]
-
-###Plot the contrast curves
-plt.plot(arcsec_HST,contrast_HST,color='black',linewidth=1)
-plt.plot(arcsec_JWST,contrast_JWST,color='red',linewidth=1,linestyle='--')
-plt.plot(arcsec_SPHERE,contrast_SPHERE,color='red',linewidth=1)
-plt.plot(arcsec_GPI,contrast_GPI,color='red',linewidth=1)
-
-###Label the curves
-plt.text(0.2,5*10**-7,'SPHERE-Sirius',color='red',horizontalalignment='left',rotation=-20,fontsize=10)
-plt.text(0.19,2.5*10**-6,'GPI',color='red',horizontalalignment='left',rotation=-20,fontsize=10)
-plt.text(1.4,7*10**-7,'JWST NIRCam',color='red',horizontalalignment='left',rotation=-30,fontsize=10)
-plt.text(2.2,10**-8,'HST ACS',color='black',horizontalalignment='left',rotation=-30,fontsize=10)
-
 
 #########################################################################
 ###Add Earth and Jupiter
@@ -244,3 +283,4 @@ ax1.set_xticklabels(x_ticklabels_minor, minor=True)
 
 
 plt.savefig(path+'flux_ratio_plot'+file_name_end+'.pdf')
+plt.savefig(path+'flux_ratio_plot'+file_name_end+'.jpg')
