@@ -18,14 +18,16 @@ from matplotlib.pyplot import gca
 ### User-defined options
 
 # Which contrast curves to include?
-include_ELT = 0
-include_HABEX = 0
-include_ACS = 0
-include_NICMOS = 1
-include_NIRCAM = 0 # don't use until verified
-include_ACS = 0 # don't use until verified
-include_SPHERE = 1
-include_GPI = 1
+include_ELT 	= False
+include_HABEX 	= False
+include_ACS 	= False
+include_NICMOS 	= True
+include_NIRCAM 	= False # don't use until verified
+include_ACS 	= False # don't use until verified
+include_SPHERE 	= True
+include_GPI 	= True
+
+color_by_lambda = True # colorcode contrast curve lines by wavelength?
 
 ###Define path where to find data and where to save to
 path = '' # leave blank if this script is in the same folder as the data (default)
@@ -44,15 +46,29 @@ ax1=fig.add_subplot(111)
 #ax2 = ax1.twinxy()
 
 markersize_points=4
+ccfs = 8 # contrast curve font size
+ccc = 'darkviolet' # default ontrast curve color
+
+if color_by_lambda:
+	c_yjh = 'coral'
+	c_k12 = 'firebrick'
+	c_h   = 'red'
+	c_l   = 'darkred'
+else:
+	c_yjh = ccc
+	c_k12 = ccc
+	c_h   = 'red'
+	c_l   = ccc
+
 
 ########################################################################
 # optional suffix, depending on what's plotted?
-file_name_end = '' 
+file_name_end = ''
 
 ########################################################################
-### ELT 
+### ELT
 
-if include_ELT==1:
+if include_ELT:
     #file_name_end += '_ELT'
     range_x=np.array((0.03,1))
     pessimistic_y=np.array((10**-5,10**-8))
@@ -61,18 +77,20 @@ if include_ELT==1:
     ax1.plot(range_x,optimistic_y,color='pink', linestyle='--',linewidth=1)
     plt.fill_between(range_x, pessimistic_y, optimistic_y, color='pink', alpha='0.2')
     #ax1.plot(np.array((0.03,1)),np.array((10**-6,10**-9)),color='red', linestyle='--',linewidth=1)
-    
+
     ###Now add text
-    plt.text(0.1,2.5*10**-7,'Future ELTs (NIR)?',color='Red',horizontalalignment='left',verticalalignment='top',rotation=-19,fontsize=8)
+    plt.text(0.1,2.5*10**-7,'Future ELTs (NIR)?',color='Red',horizontalalignment='left',\
+    	verticalalignment='top',rotation=-19,fontsize=ccfs)
 
 
 #########################################################################
 ### HabEx "goal" contrast curve
 
-if include_HABEX==1:
+if include_HABEX:
     ax1.plot(np.array((.05,1.7)),np.array((10**-10,10**-10)),color='black', linestyle='--',linewidth=1)
-    plt.text(0.2,9*10**-11,'HabEx Goal',color='black',horizontalalignment='left',verticalalignment='top',fontsize=8)
-   
+    plt.text(0.2,9*10**-11,'HabEx Goal',color='black',horizontalalignment='left',\
+    	verticalalignment='top',fontsize=ccfs)
+
 
 #########################################################################
 ### NIRCAM
@@ -82,22 +100,19 @@ if include_NIRCAM:
 	a_JWST = np.loadtxt(path+'jwst_1.txt')
 	arcsec_JWST=a_JWST[:,1]
 	contrast_JWST=a_JWST[:,2]
-	plt.plot(arcsec_JWST,contrast_JWST,color='red',linewidth=1,linestyle='--')
-	plt.text(1.4,7*10**-7,'JWST NIRCam',color='red',horizontalalignment='left',rotation=-30,fontsize=10)
+	plt.plot(arcsec_JWST,contrast_JWST,color=c_l,linewidth=1,linestyle='--')
+	plt.text(1.4,7*10**-7,'JWST NIRCam',color=c_l,horizontalalignment='left',rotation=-30,fontsize=ccfs)
 
 
 #########################################################################
 ### NICMOS
 if include_NICMOS:
-	a_NICMOS = np.loadtxt(path+'7226_F160W_5sigmaContrastLimit_Median.txt',delimiter=',')
-	arcsec_NICMOS = a_NICMOS[:,0]
-	contrast_NICMOS = a_NICMOS[:,1]
-	plt.plot(arcsec_NICMOS,contrast_NICMOS,color='red',linewidth=1,linestyle='-.')
-
+	#a_NICMOS = np.loadtxt(path+'7226_F160W_5sigmaContrastLimit_Median.txt',delimiter=',')
 	a_NICMOS = np.loadtxt(path+'7226_F160W_5sigmaContrastLimit_Min.txt',delimiter=',')
 	arcsec_NICMOS = a_NICMOS[:,0]
 	contrast_NICMOS = a_NICMOS[:,1]
-	plt.plot(arcsec_NICMOS,contrast_NICMOS,color='g',linewidth=1,linestyle='-.')
+	plt.plot(arcsec_NICMOS,contrast_NICMOS,color=c_h,linewidth=1)
+	plt.text(1.7,1*10**-6,'HST:NICMOS',color=c_h,horizontalalignment='left',rotation=-20,fontsize=ccfs)
 
 
 #########################################################################
@@ -109,17 +124,22 @@ if include_ACS:
 	#arcsec_HST=a_HST[:,1]
 	#contrast_HST=a_HST[:,2]
 	#plt.plot(arcsec_HST,contrast_HST,color='black',linewidth=1)
-	#plt.text(2.2,10**-8,'HST ACS',color='black',horizontalalignment='left',rotation=-30,fontsize=10)
+	#plt.text(2.2,10**-8,'HST ACS',color='black',horizontalalignment='left',rotation=-30,fontsize=ccfs)
 
 
 #########################################################################
-### SPHERE 
+### SPHERE
 if include_SPHERE:
 	a_SPHERE = np.loadtxt(path+'SPHERE_Vigan.txt')
 	arcsec_SPHERE=a_SPHERE[:,0]
 	contrast_SPHERE=10**(-a_SPHERE[:,1]/2.5) ###Note this is in magnitudes, need to convert to flux
-	plt.plot(arcsec_SPHERE,contrast_SPHERE,color='red',linewidth=1)
-	plt.text(0.2,5*10**-7,'SPHERE-Sirius',color='red',horizontalalignment='left',rotation=-20,fontsize=10)
+
+	idx_yjh = arcsec_SPHERE <= 0.7 # IFS YJH
+	idx_k12 = arcsec_SPHERE >= 0.7  # IRDIS K1-K2
+	plt.plot(arcsec_SPHERE[idx_yjh], contrast_SPHERE[idx_yjh], color=c_yjh, linewidth=1)
+	plt.plot(arcsec_SPHERE[idx_k12], contrast_SPHERE[idx_k12], color=c_k12, linewidth=1)
+	plt.text(0.2,5*10**-7,'SPHERE:IFS',color=c_yjh,horizontalalignment='left',rotation=-20,fontsize=ccfs)
+	plt.text(1.2,1*10**-7,'SPHERE:IRDIS',color=c_k12,horizontalalignment='left',rotation=-20,fontsize=ccfs)
 
 
 
@@ -129,8 +149,8 @@ if include_GPI:
 	a_GPI = np.loadtxt(path+'GPIES_T-type_contrast_curve_2per.txt')
 	arcsec_GPI=a_GPI[:,0]
 	contrast_GPI=a_GPI[:,1]
-	plt.plot(arcsec_GPI,contrast_GPI,color='red',linewidth=1)
-	plt.text(0.19,2.5*10**-6,'GPI',color='red',horizontalalignment='left',rotation=-20,fontsize=10)
+	plt.plot(arcsec_GPI,contrast_GPI,color=c_h,linewidth=1)
+	plt.text(0.15,5*10**-6,'GPI',color=c_h,horizontalalignment='left',rotation=-20,fontsize=ccfs)
 
 
 #########################################################################
@@ -188,7 +208,7 @@ plt.text(ProximaCenb[0],ProximaCenb[1],'  Proxima Cen b',color='black',horizonta
 
 
 #########################################################################
-#########Read in contrast curves for Exoplanet Mode and Disk Mode    
+#########Read in contrast curves for Exoplanet Mode and Disk Mode
 a_e = np.loadtxt(path+'exoplanet_mode.csv',delimiter=',')
 a_d = np.loadtxt(path+'disk_mode.csv',delimiter=',')
 
@@ -199,7 +219,7 @@ arcsec_disk=a_d[:,1]
 contrast_disk=a_d[:,2]
 
 plt.plot(arcsec_exoplanet,contrast_exoplanet,color='black',linewidth=2)
-####plt.plot(arcsec_disk,contrast_disk,color='black',linewidth=2) ###This is commented for now, can be added later
+plt.plot(arcsec_disk,contrast_disk,color='gray',linewidth=2) ###This is commented for now, can be added later
 
 #########################################################################
 ########Add text stating where the CGI Baseline science requirements and CGI threshold technical requirements are
@@ -232,7 +252,7 @@ plt.plot(arcsec_RV,contrast_RV, 'ko', markersize=markersize_points)
 
 #########################################################################
 ###Plot axes, tick mark ajdusting, legend, etc.
-x_ticklabels=np.array((0.1,1))##arcsec  
+x_ticklabels=np.array((0.1,1))##arcsec
 x_ticks=x_ticklabels
 
 ###To include minor tick labels include the following (note this is not an elegant solution...)
@@ -244,7 +264,7 @@ x_ticklabels_minor=np.array((0.03,'','','','','','','','','','','','','','','','
 
 
 ax1.set_ylabel('Flux ratio to host star',fontsize=14)
-ax1.set_xlabel('Separation [arcsec]',fontsize=14) 
+ax1.set_xlabel('Separation [arcsec]',fontsize=14)
 
 ax1.set_ylim(10**-11,10**-2.9)
 ax1.set_xlim(0.03,4)
