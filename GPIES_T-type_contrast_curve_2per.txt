@@ -1,4 +1,5 @@
-#separation (as)	2%				
+#Rho(as)	H_contr				
+# 2%ile contrast curve.  From set of 5-sigma contrast curves for all ~1hr H-band (IFS) sequences reduced with JB Ruffio’s FMMF code, optimized for T-type objects. At each separation, take the 2%ile value. Provided in early 2017.
 0.177075	7.18E-06				
 0.198324	5.85E-06				
 0.205407	5.25E-06				
@@ -55,3 +56,4 @@
 0.934956	4.10E-07				
 0.942039	4.05E-07				
 0.963288	5.01E-07				
+
