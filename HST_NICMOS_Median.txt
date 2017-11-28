@@ -1,5 +1,5 @@
-#Rho(as)     H_contr
-#From Elodie Choquet (personal comm. Nov 21 2017). 5 sigma contrast curve from ALICE (KLIP processed w/ FMMF). This is the MEDIAN contrast curve from the program. Cite http://adsabs.harvard.edu/abs/2014SPIE.9143E..57C
+#Rho(as)     F160W_contr
+#From Elodie Choquet (personal comm. Nov. 2017). 5 sigma contrast curve from ALICE (HST program 7226). Typical exposure time 1200s (600-1600s range). KLIP processed w/ FMMF. This is the MEDIAN contrast curve from the program. Cite http://adsabs.harvard.edu/abs/2014SPIE.9143E..57C
 0.5157673708313977  0.00003140245135178175
 0.7907871124941928  0.00001220046747510595
 1.065806854156988   6.482750150075888e-6

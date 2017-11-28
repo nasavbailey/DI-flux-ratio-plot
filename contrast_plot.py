@@ -73,6 +73,16 @@ else:
     c_h   = ccc
     c_l   = ccc
 
+########################################################################
+caption = ''
+def extract_short_caption(filename):
+    f = open(filename,'r')
+    lines = f.readlines()
+    f.close()
+    for l in lines:
+        if '#Short caption:' in l:
+            return l.split(':')[1].strip()
+
 
 ########################################################################
 # optional suffix, depending on what's plotted?
@@ -116,9 +126,9 @@ if include_NIRCAM:
 #########################################################################
 ### NICMOS contrast curve
 if include_NICMOS:
-    #a_NICMOS = ascii.read(path+'7226_F160W_5sigmaContrastLimit_Median.txt')
-    a_NICMOS = ascii.read(path+'7226_F160W_5sigmaContrastLimit_Min.txt')
-    plt.plot(a_NICMOS['Rho(as)'],a_NICMOS['H_contr'],color=c_h,linewidth=cclw,label='')
+    #a_NICMOS = ascii.read(path+'HST_NICMOS_Median.txt')
+    a_NICMOS = ascii.read(path+'HST_NICMOS_Min.txt')
+    plt.plot(a_NICMOS['Rho(as)'],a_NICMOS['F160W_contr'],color=c_h,linewidth=cclw,label='')
     plt.text(1.7,1*10**-6,'HST:NICMOS',color=c_h,horizontalalignment='left',rotation=-20,fontsize=ccfs)
 
 
@@ -155,7 +165,8 @@ if include_GPI:
     a_GPI = ascii.read('GPIES_T-type_contrast_curve_2per.txt')
     plt.plot(a_GPI['Rho(as)'],a_GPI['H_contr'],color=c_h,linewidth=cclw,label='')
     plt.text(0.17,1*10**-5,'GPI',color=c_h,horizontalalignment='left',rotation=-20,fontsize=ccfs)
-
+    caption += extract_short_caption('GPIES_T-type_contrast_curve_2per.txt')
+    print caption
 
 #########################################################################
 ### WFIRST

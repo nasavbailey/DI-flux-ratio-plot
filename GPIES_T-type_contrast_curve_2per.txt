@@ -1,5 +1,6 @@
 #Rho(as)	H_contr				
-# 2%ile contrast curve.  From set of 5-sigma contrast curves for all ~1hr H-band (IFS) sequences reduced with JB Ruffio’s FMMF code, optimized for T-type objects. At each separation, take the 2%ile value. Provided in early 2017.
+#Short caption: GPI 2-percentile best 5-sigma contrast curve for H-band IFS mode, 1hr exposure time.
+#Full explanation: GPI 2%ile H-band 5 sigma contrast curve.  From set all ~1hr H-band IFS sequences from GPIES campaign reduced with Jean-Baptiste Ruffio’s Forward Model Matched Filter code, optimized for T-type objects. At each separation, he took the 2%ile value. Provided in early 2017, private communication.
 0.177075	7.18E-06				
 0.198324	5.85E-06				
 0.205407	5.25E-06				

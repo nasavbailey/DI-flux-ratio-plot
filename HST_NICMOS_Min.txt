@@ -1,5 +1,5 @@
-#Rho(as)     H_contr
-#From Elodie Choquet (personal comm. Nov 21 2017). 5 sigma contrast curve from ALICE (KLIP processed w/ FMMF). This is the BEST contrast curve from the program. Cite http://adsabs.harvard.edu/abs/2014SPIE.9143E..57C
+#Rho(as)     F160W_contr
+#From Elodie Choquet (personal comm. Nov. 2017). 5 sigma contrast curve from ALICE (HST program 7226). Typical exposure time 1200s (600-1600s range). KLIP processed w/ FMMF. This is the BEST contrast curve from the program. Cite http://adsabs.harvard.edu/abs/2014SPIE.9143E..57C
 0.5157673708313977  0.0000169230091163628
 0.7907871124941928  7.930261292889146e-6
 1.065806854156988   3.425894282264645e-6

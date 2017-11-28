@@ -14,6 +14,6 @@
 4.71e+0 4.76e-9
 5.00e+0 4.44e-9
 
-# extracted from online user guide plot of 210 Round 5 sigma contrast
-# Originally from Beichmann et al. 2010, with +5/-5dgr rolls.
+# 210 Round occulter; 5 sigma contrast; 2x1hr rolls (+5/-5dgr).
+# Beichmann et al. 2010: http://adsabs.harvard.edu/abs/2010PASP..122..162B
 # https://jwst-docs.stsci.edu/display/JTI/NIRCam+Coronagraphic+Imaging
