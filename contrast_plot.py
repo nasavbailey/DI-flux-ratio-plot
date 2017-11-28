@@ -22,7 +22,7 @@ include_ELT     = False
 include_HABEX   = False
 include_ACS     = False
 include_NICMOS  = True
-include_NIRCAM  = False # don't use until verified
+include_NIRCAM  = True
 include_ACS     = False # don't use until verified
 include_SPHERE  = True
 include_GPI     = True
@@ -60,6 +60,11 @@ if color_by_lambda:
     c_k12 = 'firebrick'
     c_h   = 'red'
     c_l   = 'darkred'
+
+    plt.plot([1,1],[1,1],color=c_yjh,linewidth=cclw, label='YJH-band')
+    plt.plot([1,1],[1,1],color=c_h,linewidth=cclw, label='H-band')
+    plt.plot([1,1],[1,1],color=c_k12,linewidth=cclw, label='K-band')
+
 else:
     c_550 = ccc
     c_750 = ccc
@@ -104,13 +109,9 @@ if include_HABEX:
 ### NIRCAM contrast curve
 
 if include_NIRCAM:
-	print "NIRCAM NEEDS VERIFIED"
-	a_JWST = np.loadtxt(path+'jwst_1.txt')
-	arcsec_JWST=a_JWST[:,1]
-	contrast_JWST=a_JWST[:,2]
-	plt.plot(arcsec_JWST,contrast_JWST,color=c_l,linewidth=cclw,linestyle='--')
-	plt.text(1.4,7*10**-7,'JWST NIRCam',color=c_l,horizontalalignment='left',rotation=-30,fontsize=ccfs)
-
+    a_JWST = ascii.read(path+'jwst_nircam.txt')
+    plt.plot(a_JWST['arcsec'],a_JWST['210_contr'],color=c_h,linewidth=cclw-0.5,linestyle='--',label='')
+    plt.text(0.9,2*10**-6,'JWST:NIRCam',color=c_h,horizontalalignment='left',rotation=-35,fontsize=ccfs)
 
 #########################################################################
 ### NICMOS contrast curve
@@ -147,7 +148,7 @@ if include_SPHERE:
 	plt.plot(arcsec_SPHERE[idx_yjh], contrast_SPHERE[idx_yjh], color=c_yjh, linewidth=cclw)
 	plt.plot(arcsec_SPHERE[idx_k12], contrast_SPHERE[idx_k12], color=c_k12, linewidth=cclw)
 	plt.text(0.15,1*10**-6,'SPHERE:IFS',color=c_yjh,horizontalalignment='left',rotation=-20,fontsize=ccfs)
-	plt.text(2,3*10**-8,'SPHERE:IRDIS',color=c_k12,horizontalalignment='left',rotation=-20,fontsize=ccfs)
+	plt.text(1.05,2*10**-7,'SPHERE:IRDIS',color=c_k12,horizontalalignment='left',rotation=-25,fontsize=ccfs)
 
 
 
@@ -165,7 +166,7 @@ if include_GPI:
 ### Self luminous directly imaged planets
 
 if include_DI_H or include_DI_extrap:
-    a_DI = ascii.read(path+'DI_table.txt')
+    a_DI = ascii.read(path+'DIplanets.txt')
     a_DI['547m_contr'] = 10**(a_DI['547m_delta']/-2.5)
     a_DI['763m_contr'] = 10**(a_DI['763m_delta']/-2.5)
     a_DI['H_contr'] = 10**(a_DI['H_delta']/-2.5)
