@@ -18,14 +18,17 @@ from matplotlib.pyplot import gca
 ### User-defined options
 
 # Which contrast curves to include?
-include_ELT 	= False
-include_HABEX 	= False
-include_ACS 	= False
-include_NICMOS 	= True
-include_NIRCAM 	= False # don't use until verified
-include_ACS 	= False # don't use until verified
-include_SPHERE 	= True
-include_GPI 	= True
+include_ELT     = False
+include_HABEX   = False
+include_ACS     = False
+include_NICMOS  = True
+include_NIRCAM  = False # don't use until verified
+include_ACS     = False # don't use until verified
+include_SPHERE  = True
+include_GPI     = True
+include_DI_H    = True # real H-band contrasts of known directly imaged planets
+include_DI_750_extrap = True # COND/BT-Settl model extrapolations to ~750nm
+include_DI_550_extrap = True # COND/BT-Settl model extrapolations to ~550nm
 
 color_by_lambda = True # colorcode contrast curve lines by wavelength?
 
@@ -47,18 +50,23 @@ ax1=fig.add_subplot(111)
 
 markersize_points=4
 ccfs = 8 # contrast curve font size
-ccc = 'darkviolet' # default ontrast curve color
+ccc = 'darkviolet' # default contrast curve color
+cclw = 2 # default contrast curve line width
 
 if color_by_lambda:
-	c_yjh = 'coral'
-	c_k12 = 'firebrick'
-	c_h   = 'red'
-	c_l   = 'darkred'
+    c_550 = 'limegreen'
+    c_750 = 'goldenrod'
+    c_yjh = 'coral'
+    c_k12 = 'firebrick'
+    c_h   = 'red'
+    c_l   = 'darkred'
 else:
-	c_yjh = ccc
-	c_k12 = ccc
-	c_h   = 'red'
-	c_l   = ccc
+    c_550 = ccc
+    c_750 = ccc
+    c_yjh = ccc
+    c_k12 = ccc
+    c_h   = ccc
+    c_l   = ccc
 
 
 ########################################################################
@@ -73,7 +81,7 @@ if include_ELT:
     range_x=np.array((0.03,1))
     pessimistic_y=np.array((10**-5,10**-8))
     optimistic_y=np.array((10**-8,10**-9))
-    ax1.plot(range_x,pessimistic_y,color='pink', linestyle='--',linewidth=1)
+    ax1.plot(range_x,pessimistic_y,color='pink', linestyle='--',linewidth=cclw)
     ax1.plot(range_x,optimistic_y,color='pink', linestyle='--',linewidth=1)
     plt.fill_between(range_x, pessimistic_y, optimistic_y, color='pink', alpha='0.2')
     #ax1.plot(np.array((0.03,1)),np.array((10**-6,10**-9)),color='red', linestyle='--',linewidth=1)
@@ -93,30 +101,30 @@ if include_HABEX:
 
 
 #########################################################################
-### NIRCAM
+### NIRCAM contrast curve
 
 if include_NIRCAM:
 	print "NIRCAM NEEDS VERIFIED"
 	a_JWST = np.loadtxt(path+'jwst_1.txt')
 	arcsec_JWST=a_JWST[:,1]
 	contrast_JWST=a_JWST[:,2]
-	plt.plot(arcsec_JWST,contrast_JWST,color=c_l,linewidth=1,linestyle='--')
+	plt.plot(arcsec_JWST,contrast_JWST,color=c_l,linewidth=cclw,linestyle='--')
 	plt.text(1.4,7*10**-7,'JWST NIRCam',color=c_l,horizontalalignment='left',rotation=-30,fontsize=ccfs)
 
 
 #########################################################################
-### NICMOS
+### NICMOS contrast curve
 if include_NICMOS:
-	#a_NICMOS = np.loadtxt(path+'7226_F160W_5sigmaContrastLimit_Median.txt',delimiter=',')
-	a_NICMOS = np.loadtxt(path+'7226_F160W_5sigmaContrastLimit_Min.txt',delimiter=',')
-	arcsec_NICMOS = a_NICMOS[:,0]
-	contrast_NICMOS = a_NICMOS[:,1]
-	plt.plot(arcsec_NICMOS,contrast_NICMOS,color=c_h,linewidth=1)
-	plt.text(1.7,1*10**-6,'HST:NICMOS',color=c_h,horizontalalignment='left',rotation=-20,fontsize=ccfs)
+    #a_NICMOS = np.loadtxt(path+'7226_F160W_5sigmaContrastLimit_Median.txt',delimiter=',')
+    a_NICMOS = np.loadtxt(path+'7226_F160W_5sigmaContrastLimit_Min.txt',delimiter=',')
+    arcsec_NICMOS = a_NICMOS[:,0]
+    contrast_NICMOS = a_NICMOS[:,1]
+    plt.plot(arcsec_NICMOS,contrast_NICMOS,color=c_h,linewidth=cclw)
+    plt.text(1.7,1*10**-6,'HST:NICMOS',color=c_h,horizontalalignment='left',rotation=-20,fontsize=ccfs)
 
 
 #########################################################################
-### ACS
+### ACS contrast curve
 
 if include_ACS:
 	print "ACS data is not verified. Skipping"
@@ -128,7 +136,7 @@ if include_ACS:
 
 
 #########################################################################
-### SPHERE
+### SPHERE contrast curve
 if include_SPHERE:
 	a_SPHERE = np.loadtxt(path+'SPHERE_Vigan.txt')
 	arcsec_SPHERE=a_SPHERE[:,0]
@@ -136,10 +144,10 @@ if include_SPHERE:
 
 	idx_yjh = arcsec_SPHERE <= 0.7 # IFS YJH
 	idx_k12 = arcsec_SPHERE >= 0.7  # IRDIS K1-K2
-	plt.plot(arcsec_SPHERE[idx_yjh], contrast_SPHERE[idx_yjh], color=c_yjh, linewidth=1)
-	plt.plot(arcsec_SPHERE[idx_k12], contrast_SPHERE[idx_k12], color=c_k12, linewidth=1)
-	plt.text(0.2,5*10**-7,'SPHERE:IFS',color=c_yjh,horizontalalignment='left',rotation=-20,fontsize=ccfs)
-	plt.text(1.2,1*10**-7,'SPHERE:IRDIS',color=c_k12,horizontalalignment='left',rotation=-20,fontsize=ccfs)
+	plt.plot(arcsec_SPHERE[idx_yjh], contrast_SPHERE[idx_yjh], color=c_yjh, linewidth=cclw)
+	plt.plot(arcsec_SPHERE[idx_k12], contrast_SPHERE[idx_k12], color=c_k12, linewidth=cclw)
+	plt.text(0.15,1*10**-6,'SPHERE:IFS',color=c_yjh,horizontalalignment='left',rotation=-20,fontsize=ccfs)
+	plt.text(2,3*10**-8,'SPHERE:IRDIS',color=c_k12,horizontalalignment='left',rotation=-20,fontsize=ccfs)
 
 
 
@@ -149,61 +157,45 @@ if include_GPI:
 	a_GPI = np.loadtxt(path+'GPIES_T-type_contrast_curve_2per.txt')
 	arcsec_GPI=a_GPI[:,0]
 	contrast_GPI=a_GPI[:,1]
-	plt.plot(arcsec_GPI,contrast_GPI,color=c_h,linewidth=1)
-	plt.text(0.15,5*10**-6,'GPI',color=c_h,horizontalalignment='left',rotation=-20,fontsize=ccfs)
+	plt.plot(arcsec_GPI,contrast_GPI,color=c_h,linewidth=cclw)
+	plt.text(0.17,1*10**-5,'GPI',color=c_h,horizontalalignment='left',rotation=-20,fontsize=ccfs)
 
 
 #########################################################################
-###Planet contrasts at certain separations ((sep in arcsec, contrast))
-HR8799b=np.array((1.4,8.5E-6))
-HR8799c=np.array((0.9,10**-5))
-HR8799d=np.array((0.6, 2.9E-5))
-HR8799e=np.array((0.35,3E-5))
-betaPicb=np.array((0.4,10**-4))
-HD95086b=np.array((0.6,7E-6))
-Eri51b=np.array((0.45,1E-6))
+### Self luminous directly imaged planets
+
+if include_DI_H or include_DI_extrap:
+    a_DI = ascii.read(path+'DI_table.txt')
+    a_DI['547m_contr'] = 10**(a_DI['547m_delta']/-2.5)
+    a_DI['763m_contr'] = 10**(a_DI['763m_delta']/-2.5)
+    a_DI['H_contr'] = 10**(a_DI['H_delta']/-2.5)
+    sz_di = 20
+    alpha_di = 0.7
+
+if include_DI_H:
+    plt.scatter(a_DI['Rho(as)'],a_DI['H_contr'],color=c_h, edgecolor='k', \
+        alpha=alpha_di, marker='s', s=sz_di, zorder=2, label='Known DI, H-band')
+
+if include_DI_750_extrap:
+    plt.scatter(a_DI['Rho(as)'],a_DI['763m_contr'],color=c_750, edgecolor='k', \
+        marker='d', alpha=alpha_di, s=sz_di-5, zorder=2, label='Known DI, 750nm extrap.')
+    if not include_DI_550_extrap:
+        for ct, rho in enumerate(a_DI['Rho(as)']):
+            plt.plot([rho,rho], [a_DI[ct]['763m_contr'], a_DI[ct]['H_contr']], \
+            color='lightgray', linewidth=1, linestyle=':', zorder=1)
+
+if include_DI_550_extrap:
+    for ct, rho in enumerate(a_DI['Rho(as)']):
+        plt.plot([rho,rho], [a_DI[ct]['547m_contr'], a_DI[ct]['H_contr']], \
+            color='lightgray', linewidth=1, linestyle=':', zorder=1)
+    plt.scatter(a_DI['Rho(as)'],a_DI['547m_contr'],color=c_550, edgecolor='k', \
+        marker='o', alpha=alpha_di, s=sz_di-5, zorder=2, label='Known DI, 550nm extrap.')
+
+
+#########################################################################
+### Specific planetary systems
 ProximaCenb=np.array((0.035,4E-8))
-
-####Plot self luminous planets in orange
-
-
-a_DI= ascii.read(path+'DIplanets.txt')
-arcsec_DI=a_DI['col2']
-contrast_DI=10**(-a_DI['col4']/2.5) ##Note this is in magnitudes, need to adjust to flux
-contrast_I_DI=10**(-a_DI['col3']/2.5)
-planet_name=a_DI['col1']
-
-
-#########################################################################
-#### Uncomment this for the I-band measurements of the self luminous planets.
-
-
-#plt.plot(arcsec_DI,contrast_I_DI, 'o',color='grey', mfc='none',markersize=3.5)
-#for i in range(arcsec_DI.shape[0]):
-#    plt.plot(np.array((arcsec_DI[i],arcsec_DI[i])),np.array((contrast_DI[i],contrast_I_DI[i])),'--',color='#E5E8E8',linewidth=1)
-
-
-
-color_self_luminous='red'
-plt.plot(arcsec_DI,contrast_DI, 'ro',color=color_self_luminous,markersize=markersize_points)
-
-plt.plot(ProximaCenb[0],ProximaCenb[1],marker='o',color=color_self_luminous,markersize=markersize_points) ##Add proxima
-
-###Add arrow line connecting self luminous and open circles
-
-#plt.annotate('', xy = (0.1,0.1),  xycoords = 'axes fraction', \
-#    xytext = (0.2,0.2), textcoords = 'axes fraction', fontsize = 7, \
-#    color = '#707B7C', arrowprops=dict(edgecolor='#707B7C', arrowstyle = '->'))
-
-###Plot names of planets a
-###Note, can't loop over this section because the name placement needs adjustment
-#plt.text(arcsec_DI[0],contrast_DI[0],'  '+planet_name[0],color='black',horizontalalignment='left',verticalalignment='center',fontsize=10)
-#plt.text(arcsec_DI[1],contrast_DI[1],' '+planet_name[1]+' ',color='black',horizontalalignment='right',verticalalignment='center',fontsize=10)
-#plt.text(arcsec_DI[2],contrast_DI[2],'  '+planet_name[2],color='black',horizontalalignment='left',verticalalignment='center',fontsize=10)
-#plt.text(arcsec_DI[3],contrast_DI[3],' '+planet_name[3]+' ',color='black',horizontalalignment='right',verticalalignment='center',fontsize=10)
-#plt.text(arcsec_DI[4],contrast_DI[4],'  '+planet_name[4],color='black',horizontalalignment='left',verticalalignment='center',fontsize=10)
-#plt.text(arcsec_DI[5],contrast_DI[5],' '+planet_name[5]+' ',color='black',horizontalalignment='right',verticalalignment='center',fontsize=10)
-#plt.text(arcsec_DI[6],contrast_DI[6],' '+planet_name[6],color='black',horizontalalignment='left',verticalalignment='center',fontsize=10)
+plt.plot(ProximaCenb[0],ProximaCenb[1],marker='o',color=c_h,markersize=markersize_points) ##Add proxima
 plt.text(ProximaCenb[0],ProximaCenb[1],'  Proxima Cen b',color='black',horizontalalignment='left',verticalalignment='center',fontsize=10)
 
 
@@ -223,7 +215,7 @@ plt.plot(arcsec_disk,contrast_disk,color='gray',linewidth=2) ###This is commente
 
 #########################################################################
 ########Add text stating where the CGI Baseline science requirements and CGI threshold technical requirements are
-plt.text(0.1,8*10**-10,'WFIRST CGI Baseline Exoplanet Detectability',color='black',horizontalalignment='left',verticalalignment='top',fontsize=10)
+#plt.text(0.1,8*10**-10,'WFIRST CGI Baseline Exoplanet Detectability',color='black',horizontalalignment='left',verticalalignment='top',fontsize=10)
 
 
 ######Add Technical requirement line and text
@@ -277,7 +269,7 @@ ax1.set_xticklabels(x_ticklabels)
 #ax1.set_yticklabels(y_ticklabels)
 
 ###Add grid lines
-plt.grid(b=True, which='major', color='b', linestyle='--', alpha=0.1)
+plt.grid(b=True, which='major', color='tan', linestyle='-', alpha=0.1)
 
 ####Add custom legend (probably a better way to do this?)
 plt.plot(np.array((0.035,0.15)),np.array((4*10**-4,4*10**-4)), 'k--',linewidth=1, alpha=0.5)
@@ -286,10 +278,9 @@ plt.plot(np.array((0.035,0.035)),np.array((9*10**-6,4*10**-4)), 'k--',linewidth=
 plt.plot(np.array((0.15,0.15)),np.array((9*10**-6,4*10**-4)), 'k--',linewidth=1, alpha=0.5)
 plt.plot(0.039,2*10**-4,marker='o',color='black',markersize=markersize_points)
 plt.text(0.039,2.8*10**-4,'  Known RV (Visible, \n reflected light flux ratio \n as seen at quadrature)',color='black',horizontalalignment='left',verticalalignment='top',fontsize=8)
-plt.plot(0.039,1.5*10**-5,marker='o',color=color_self_luminous,markersize=markersize_points)
-plt.text(0.039,1.5*10**-5,'  Known self-luminous (NIR)',color=color_self_luminous,horizontalalignment='left',verticalalignment='center',fontsize=8)
-#plt.text(0.037,1*10**-6,'Reflected light contrast \nas seen at quadrature',color='black',horizontalalignment='left',verticalalignment='center',fontsize=8)
 plt.text(0.037,2*10**-11,'Solar system planets as seen from 10 pc',color='black',horizontalalignment='left',verticalalignment='center',fontsize=8)
+
+plt.legend(fontsize=8)
 
 ###Add minor tick labels
 #ax1.set_yticks(y_ticks)
