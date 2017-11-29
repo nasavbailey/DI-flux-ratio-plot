@@ -22,6 +22,7 @@ include_ELT     = False
 include_HABEX   = False
 include_ACS     = False
 include_NICMOS  = True
+include_STIS    = True
 include_NIRCAM  = True
 include_ACS     = False # don't use until verified
 include_SPHERE  = True
@@ -54,13 +55,14 @@ ccc = 'darkviolet' # default contrast curve color
 cclw = 2 # default contrast curve line width
 
 if color_by_lambda:
-    c_550 = 'limegreen'
+    c_550 = 'cadetblue'
     c_750 = 'goldenrod'
     c_yjh = 'coral'
     c_k = 'firebrick'
     c_h   = 'red'
     c_l   = 'darkred'
 
+    plt.plot([1,1],[1,1],color=c_550,linewidth=cclw, label='Visible')
     plt.plot([1,1],[1,1],color=c_yjh,linewidth=cclw, label='YJH-band')
     plt.plot([1,1],[1,1],color=c_h,linewidth=cclw, label='H-band')
     plt.plot([1,1],[1,1],color=c_k,linewidth=cclw, label='K-band')
@@ -74,14 +76,20 @@ else:
     c_l   = ccc
 
 ########################################################################
-caption = ''
+# auto-generated caption. See README for how to comment datafiles.
+
+caption = '** Please see individual datafiles for full descriptions.** \n\n'
+
 def extract_short_caption(filename):
     f = open(filename,'r')
     lines = f.readlines()
     f.close()
     for l in lines:
-        if '#Short caption:' in l:
-            return l.split(':')[1].strip()
+        if '#short caption:' in l.lower():
+            return l.split('caption:')[1].strip()
+    # if no caption in text file
+    print '\n**** WARNING **** no caption for '+filename+'\n'
+    return ''
 
 
 ########################################################################
@@ -119,18 +127,31 @@ if include_HABEX:
 ### NIRCAM contrast curve
 
 if include_NIRCAM:
-    a_JWST = ascii.read(path+'jwst_nircam.txt')
+    fname = path+'jwst_nircam.txt'
+    a_JWST = ascii.read(fname)
     plt.plot(a_JWST['arcsec'],a_JWST['210_contr'],color=c_k,linewidth=cclw-0.5,linestyle='--',label='')
-    plt.text(0.9,2*10**-6,'JWST:NIRCam',color=c_k,horizontalalignment='left',rotation=-35,fontsize=ccfs)
+    plt.text(0.9,2*10**-6,'JWST NIRCam',color=c_k,horizontalalignment='left',rotation=-35,fontsize=ccfs)
+    caption += extract_short_caption(fname)+'\n'
 
 #########################################################################
 ### NICMOS contrast curve
 if include_NICMOS:
-    #a_NICMOS = ascii.read(path+'HST_NICMOS_Median.txt')
-    a_NICMOS = ascii.read(path+'HST_NICMOS_Min.txt')
-    plt.plot(a_NICMOS['Rho(as)'],a_NICMOS['F160W_contr'],color=c_h,linewidth=cclw,label='')
-    plt.text(1.7,1*10**-6,'HST:NICMOS',color=c_h,horizontalalignment='left',rotation=-20,fontsize=ccfs)
+    fname = path+'HST_NICMOS_Min.txt' #path+'HST_NICMOS_Median.txt'
+    a_NICMOS = ascii.read(fname)
+    plt.plot(a_NICMOS['Rho(as)'],a_NICMOS['F160W_contr'],color=c_h,\
+        linewidth=cclw,linestyle='-.',label='')
+    plt.text(1.7,1*10**-6,'HST NICMOS',color=c_h,horizontalalignment='left',rotation=-20,fontsize=ccfs)
+    caption += extract_short_caption(fname)+'\n'
 
+#########################################################################
+### STIS Bar5 contrast curve
+if include_STIS:
+    fname = path+'HST_STIS.txt'
+    a_STIS = ascii.read(fname)
+    plt.plot(a_STIS['Rho(as)'],a_STIS['KLIP_Contr'],color=c_550,\
+        linewidth=cclw,linestyle='-.',label='')
+    plt.text(0.2,5*10**-5,'HST STIS',color=c_550,horizontalalignment='left',rotation=-40,fontsize=ccfs)
+    caption += extract_short_caption(fname)+'\n'
 
 #########################################################################
 ### ACS contrast curve
@@ -147,26 +168,29 @@ if include_ACS:
 #########################################################################
 ### SPHERE contrast curve
 if include_SPHERE:
-    a_SPHERE = np.loadtxt(path+'SPHERE_Vigan.txt')
-    arcsec_SPHERE=a_SPHERE[:,0]
-    contrast_SPHERE=10**(-a_SPHERE[:,1]/2.5) ###Note this is in magnitudes, need to convert to flux
+    fname = path+'SPHERE_Vigan.txt'
+    a_SPHERE = ascii.read(fname)
+    a_SPHERE['Contrast'] = 10**(-0.4*a_SPHERE['delta'])
 
-    idx_yjh = arcsec_SPHERE <= 0.7 # IFS YJH
-    idx_k12 = arcsec_SPHERE >= 0.7  # IRDIS K1-K2
-    plt.plot(arcsec_SPHERE[idx_yjh], contrast_SPHERE[idx_yjh], color=c_yjh, linewidth=cclw)
-    plt.plot(arcsec_SPHERE[idx_k12], contrast_SPHERE[idx_k12], color=c_k, linewidth=cclw)
-    plt.text(0.15,1*10**-6,'SPHERE:IFS',color=c_yjh,horizontalalignment='left',rotation=-20,fontsize=ccfs)
-    plt.text(1.05,2*10**-7,'SPHERE:IRDIS',color=c_k,horizontalalignment='left',rotation=-25,fontsize=ccfs)
-
+    # manually split into IFS and IRDIS, at 0.7", as per documentation.
+    idx_yjh = a_SPHERE['Rho(as)'] <= 0.7 # IFS YJH
+    idx_k12 = a_SPHERE['Rho(as)'] >= 0.7  # IRDIS K1-K2
+    plt.plot(a_SPHERE['Rho(as)'][idx_yjh], a_SPHERE['Contrast'][idx_yjh], \
+        color=c_yjh, linewidth=cclw, label='')
+    plt.plot(a_SPHERE['Rho(as)'][idx_k12], a_SPHERE['Contrast'][idx_k12], \
+        color=c_k, linewidth=cclw, label='')
+    plt.text(0.15,1*10**-6,'SPHERE IFS',color=c_yjh,horizontalalignment='left',rotation=-20,fontsize=ccfs)
+    plt.text(1.5,8*10**-8,'SPHERE IRDIS',color=c_k,horizontalalignment='left',rotation=-25,fontsize=ccfs)
+    caption += extract_short_caption(fname)+'\n'
 
 #########################################################################
 ### GPI H-band
 if include_GPI:
-    a_GPI = ascii.read('GPIES_T-type_contrast_curve_2per.txt')
+    fname = path+'GPIES_T-type_contrast_curve_2per.txt'
+    a_GPI = ascii.read(fname)
     plt.plot(a_GPI['Rho(as)'],a_GPI['H_contr'],color=c_h,linewidth=cclw,label='')
     plt.text(0.17,1*10**-5,'GPI',color=c_h,horizontalalignment='left',rotation=-20,fontsize=ccfs)
-    caption += extract_short_caption('GPIES_T-type_contrast_curve_2per.txt')
-    print caption
+    caption += extract_short_caption(fname)+'\n'
 
 #########################################################################
 ### WFIRST
@@ -300,6 +324,6 @@ ax1.set_xticklabels(x_ticklabels_minor, minor=True)
 
 
 
-
+print caption
 plt.savefig(path+'flux_ratio_plot'+file_name_end+'.pdf')
-plt.savefig(path+'flux_ratio_plot'+file_name_end+'.jpg')
+#plt.savefig(path+'flux_ratio_plot'+file_name_end+'.jpg')
