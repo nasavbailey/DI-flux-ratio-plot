@@ -129,7 +129,7 @@ if include_HABEX:
 if include_NIRCAM:
     fname = path+'jwst_nircam.txt'
     a_JWST = ascii.read(fname)
-    plt.plot(a_JWST['arcsec'],a_JWST['210_contr'],color=c_k,linewidth=cclw-0.5,linestyle='--',label='')
+    plt.plot(a_JWST['Rho(as)'],a_JWST['210_contr'],color=c_k,linewidth=cclw-0.5,linestyle='--',label='')
     plt.text(0.9,2*10**-6,'JWST NIRCam',color=c_k,horizontalalignment='left',rotation=-35,fontsize=ccfs)
     caption += extract_short_caption(fname)+'\n'
 
@@ -225,12 +225,14 @@ plt.plot(arcsec_disk,contrast_disk,color='gray',linewidth=2) ###This is commente
 ### Self luminous directly imaged planets
 
 if include_DI_H or include_DI_extrap:
-    a_DI = ascii.read(path+'DIplanets.txt')
+    fname = path+'DIplanets.txt'
+    a_DI = ascii.read(fname)
     a_DI['547m_contr'] = 10**(a_DI['547m_delta']/-2.5)
     a_DI['763m_contr'] = 10**(a_DI['763m_delta']/-2.5)
     a_DI['H_contr'] = 10**(a_DI['H_delta']/-2.5)
     sz_di = 20
     alpha_di = 0.7
+    caption += extract_short_caption(fname)+'\n'
 
 if include_DI_H:
     plt.scatter(a_DI['Rho(as)'],a_DI['H_contr'],color=c_h, edgecolor='k', \

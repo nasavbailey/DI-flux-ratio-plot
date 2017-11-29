@@ -1,5 +1,5 @@
 #Rho(as)     F160W_contr
-#Short caption: HST NICMOS: 5-sigma post-processed [KLIP + match filter] contrast curve for F160W-band; this was the best contrast curve from the ALICE program, with typical exposure times of 2hr. (source: E. Choquet, private communication)
+#Short caption: HST NICMOS: 5-sigma post-processed [KLIP + match filter] contrast curve for F160W-band; this was the best contrast curve from the ALICE program, with typical integration times of 2hr. (source: E. Choquet, private communication)
 #Full description: From Elodie Choquet (personal comm. Nov. 2017). 5 sigma contrast curve from ALICE (HST program 7226). Typical exposure time 1200s (600-1600s range). KLIP processed w/ FMMF. This is the BEST contrast curve from the program. 
 # References
 # Please cite http://adsabs.harvard.edu/abs/2014SPIE.9143E..57C

@@ -1,5 +1,5 @@
 #Rho(as)	H_contr				
-#Short caption: GPI: 2-percentile best 5-sigma post-processed [KLIP + forward model match filter] contrast curve for H-band IFS mode, 1hr exposure time (source: B. Macintosh, private communication).
+#Short caption: GPI: 2-percentile best 5-sigma post-processed [KLIP + forward model match filter] contrast curve for H-band IFS mode, 1hr integration (source: B. Macintosh, private communication).
 #Full explanation: GPI 2%ile H-band 5 sigma contrast curve.  From set of all ~1hr H-band IFS sequences from GPIES campaign reduced with Jean-Baptiste Ruffio’s Forward Model Matched Filter code, optimized for T-type objects. At each separation, he took the 2%ile value. Provided in early 2017, private communication.
 0.177075	7.18E-06				
 0.198324	5.85E-06				
