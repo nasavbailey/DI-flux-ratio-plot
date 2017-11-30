@@ -1,6 +1,6 @@
-#Rho(as)   contrast
-#short caption: HST ACS: 5 sigma contrast curve from Arcturus observation with 1.8" occulter. (source: J. Krist, private communication)
-#full description: TBD: filter, post-processing, observing params
+#Rho(as)   F606W_contr
+#short caption: HST ACS: 5-sigma post-processed [simple image difference] contrast curve of 2x100sec Arcturus observation in F606W with 1.8" occulter. (source: J. Krist, private communication)
+#full description: The two exposures were taken 85 minutes apart, to simulate a typical 2-roll (2 orbit) ADI observation. The contrast curve is a simple difference of the images, after registration.
 #references
 #possibly http://www.stsci.edu/hst/acs/documents/handbooks/current/c06_pol3.html#375785
 1.00000  1.80115e-06

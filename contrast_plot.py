@@ -54,7 +54,7 @@ ccc = 'darkviolet' # default contrast curve color
 cclw = 2 # default contrast curve line width
 
 if color_by_lambda:
-    c_550 = 'dodgerblue'
+    c_v = 'dodgerblue'
     c_bbvis = 'cadetblue'
     c_750 = 'goldenrod'
     c_yjh = 'coral'
@@ -62,15 +62,15 @@ if color_by_lambda:
     c_h   = 'red'
     c_l   = 'darkred'
 
-    plt.plot([1,1],[1,1],color=c_550,linewidth=cclw, label='550nm')
-    plt.plot([1,1],[1,1],color=c_750,linewidth=cclw, label='750nm')
+    plt.plot([1,1],[1,1],color=c_v,linewidth=cclw, label='V/550nm')
     plt.plot([1,1],[1,1],color=c_bbvis,linewidth=cclw, label='broadband visible')
+    plt.plot([1,1],[1,1],color=c_750,linewidth=cclw, label='750nm')
     plt.plot([1,1],[1,1],color=c_yjh,linewidth=cclw, label='YJH-band')
     plt.plot([1,1],[1,1],color=c_h,linewidth=cclw, label='H-band')
     plt.plot([1,1],[1,1],color=c_k,linewidth=cclw, label='K-band')
 
 else:
-    c_550 = ccc
+    c_v = ccc
     c_750 = ccc
     c_yjh = ccc
     c_k = ccc
@@ -170,9 +170,8 @@ if include_STIS:
 if include_ACS:
     fname = path+'HST_ACS.txt'
     a_ACS = ascii.read(fname)
-    plt.plot(a_ACS['Rho(as)'],a_ACS['contrast'],color='gray',\
-        linewidth=cclw,label='')
-    plt.text(3.8,6*10**-9,'HST ACS',color=c_bbvis,horizontalalignment='right',rotation=-35,fontsize=ccfs)
+    plt.plot(a_ACS['Rho(as)'],a_ACS['F606W_contr'],color=c_v,linewidth=cclw,label='')
+    plt.text(3.8,6*10**-9,'HST ACS',color=c_v,horizontalalignment='right',rotation=-35,fontsize=ccfs)
     caption += extract_short_caption(fname)
 
 
@@ -217,24 +216,22 @@ contrast_exoplanet=a_e[:,2]
 arcsec_disk=a_d[:,1]
 contrast_disk=a_d[:,2]
 
-plt.plot(arcsec_exoplanet,contrast_exoplanet,color='black',linewidth=2)
-plt.plot(arcsec_disk,contrast_disk,color='gray',linewidth=2) ###This is commented for now, can be added later
+plt.plot(arcsec_exoplanet,contrast_exoplanet,color='black',linestyle=':',linewidth=1,label='WFIRST outdated!')
+plt.plot(arcsec_disk,contrast_disk,color='black',linestyle=':',linewidth=1) ###This is commented for now, can be added later
 #plt.text(0.1,8*10**-10,'WFIRST CGI Baseline Exoplanet Detectability',color='black',horizontalalignment='left',verticalalignment='top',fontsize=10)
-
+caption += '-- WFIRST lines are OUTDATED!\n'
 
 ######Add Technical requirement line and text
 if include_BTR_img:
-    c_btr = c_550
     plt.plot([0.23, 0.4], [0.5*5E-8, 0.5*5E-8],\
-        marker='.',color=c_btr,linewidth=cclw-0.5, alpha=0.7)
-    plt.text(0.23,3*10**-8,'BTR1',color=c_btr,horizontalalignment='left',fontsize=ccfs)
+        marker='|',color=c_v,linewidth=cclw, alpha=0.7)
+    plt.text(0.23,3*10**-8,'BTR1',color=c_v,horizontalalignment='left',fontsize=ccfs)
     caption += '-- BTR1: imaging BTR.\n'
 
 if include_BTR_disk_to_img:
-    c_btr = c_750
     plt.plot([0.25, 0.95], [0.5*5E-8, 0.5*5E-8],\
-        marker='.',color=c_btr,linewidth=cclw-0.5, alpha=0.7)
-    plt.text(0.95,3*10**-8,'BTR3',color=c_btr,horizontalalignment='right',fontsize=ccfs)
+        marker='|',color=c_750,linewidth=cclw-0.5, alpha=0.7)
+    plt.text(0.95,3*10**-8,'BTR3',color=c_750,horizontalalignment='right',fontsize=ccfs)
     caption += '-- BTR3: extended object sensitivity BTR translate to point source sensitivity.\n'
 
 #########################################################################
@@ -270,7 +267,7 @@ if include_DI_550_extrap:
     for ct, rho in enumerate(a_DI['Rho(as)']):
         plt.plot([rho,rho], [a_DI[ct]['547m_contr'], a_DI[ct]['H_contr']], \
             color='lightgray', linewidth=1, linestyle=':', zorder=1)
-    plt.scatter(a_DI['Rho(as)'],a_DI['547m_contr'],color=c_550, edgecolor='k', \
+    plt.scatter(a_DI['Rho(as)'],a_DI['547m_contr'],color=c_v, edgecolor='k', \
         marker='o', alpha=alpha_di, s=sz_di-5, zorder=2, label='DI, 550nm extrap.')
 
 
@@ -299,8 +296,8 @@ caption += '-- Solar system planets as seen from 10 pc\n'
 a_RV = np.loadtxt(path+'RVtable.txt')
 arcsec_RV=a_RV[:,0]
 contrast_RV=a_RV[:,1]
-plt.plot(arcsec_RV,contrast_RV, 'ko', markersize=markersize_points, \
-    label='Known RV, extrap.\nvisible reflected')
+plt.plot(arcsec_RV,contrast_RV, 'o', color='lightgray', markeredgecolor='k',\
+    markersize=markersize_points, label='RV, extrap. reflected\nvisible light')
 
 
 #########################################################################
@@ -314,7 +311,7 @@ plt.legend(fontsize=8)
 
 plt.grid(b=True, which='major', color='tan', linestyle='-', alpha=0.1)
 
-ax1.set_ylim(10**-11,10**-2.9)
+ax1.set_ylim(1E-11, 2E-3)
 ax1.set_xlim(0.03,4)
 ax1.set_yscale('log')
 ax1.set_xscale('log')
