@@ -16,7 +16,7 @@ from astropy.io import ascii
 # Which contrast curves to include?
 include_ELT     = False
 include_HABEX   = False
-include_ACS     = False
+include_ACS     = True
 include_NICMOS  = True
 include_STIS    = True
 include_NIRCAM  = True
@@ -133,7 +133,14 @@ if include_NIRCAM:
     fname = path+'jwst_nircam.txt'
     a_JWST = ascii.read(fname)
     plt.plot(a_JWST['Rho(as)'],a_JWST['210_contr'],color=c_k,linewidth=cclw-0.5,linestyle='--',label='')
-    plt.text(0.9,2*10**-6,'JWST NIRCam',color=c_k,horizontalalignment='left',rotation=-35,fontsize=ccfs)
+    if include_SPHERE:
+        xy=[1.6, 5E-7]
+        plt.text(xy[0],xy[1], 'JWST NIRCam', color=c_k, rotation=-25, fontsize=ccfs)
+        plt.plot([1.45,xy[0]],[3E-7,xy[1]-1E-7],'k', linewidth=0.5)
+    else:
+        plt.text(2,1E-7,'JWST NIRCam',color=c_k,\
+            horizontalalignment='left',rotation=-30,fontsize=ccfs)
+
     caption += extract_short_caption(fname)
 
 #########################################################################
@@ -142,8 +149,9 @@ if include_NICMOS:
     fname = path+'HST_NICMOS_Min.txt' #path+'HST_NICMOS_Median.txt'
     a_NICMOS = ascii.read(fname)
     plt.plot(a_NICMOS['Rho(as)'],a_NICMOS['F160W_contr'],color=c_h,\
-        linewidth=cclw,linestyle='-.',label='')
-    plt.text(1.7,1*10**-6,'HST NICMOS',color=c_h,horizontalalignment='left',rotation=-20,fontsize=ccfs)
+        linewidth=cclw,label='')
+    plt.text(max(a_NICMOS['Rho(as)']*1.1),3.5E-6,'HST NICMOS',\
+        color=c_h,horizontalalignment='right',rotation=-20,fontsize=ccfs)
     caption += extract_short_caption(fname)
 
 #########################################################################
@@ -152,7 +160,7 @@ if include_STIS:
     fname = path+'HST_STIS.txt'
     a_STIS = ascii.read(fname)
     plt.plot(a_STIS['Rho(as)'],a_STIS['KLIP_Contr'],color=c_bbvis,\
-        linewidth=cclw,linestyle='-.',label='')
+        linewidth=cclw,label='')
     plt.text(0.2,5*10**-5,'HST STIS',color=c_bbvis,horizontalalignment='left',rotation=-40,fontsize=ccfs)
     caption += extract_short_caption(fname)
 
@@ -160,12 +168,12 @@ if include_STIS:
 ### ACS contrast curve
 
 if include_ACS:
-	print "ACS data is not verified. Skipping"
-	#a_HST = np.loadtxt(path+'hst_1.txt')
-	#arcsec_HST=a_HST[:,1]
-	#contrast_HST=a_HST[:,2]
-	#plt.plot(arcsec_HST,contrast_HST,color='black',linewidth=1)
-	#plt.text(2.2,10**-8,'HST ACS',color='black',horizontalalignment='left',rotation=-30,fontsize=ccfs)
+    fname = path+'HST_ACS.txt'
+    a_ACS = ascii.read(fname)
+    plt.plot(a_ACS['Rho(as)'],a_ACS['contrast'],color='gray',\
+        linewidth=cclw,label='')
+    plt.text(3.8,6*10**-9,'HST ACS',color=c_bbvis,horizontalalignment='right',rotation=-35,fontsize=ccfs)
+    caption += extract_short_caption(fname)
 
 
 #########################################################################
@@ -182,8 +190,11 @@ if include_SPHERE:
         color=c_yjh, linewidth=cclw, label='')
     plt.plot(a_SPHERE['Rho(as)'][idx_k12], a_SPHERE['Contrast'][idx_k12], \
         color=c_k, linewidth=cclw, label='')
-    plt.text(0.18,1*10**-6,'SPHERE IFS',color=c_yjh,horizontalalignment='left',rotation=-35,fontsize=ccfs)
-    plt.text(1.5,8*10**-8,'SPHERE IRDIS',color=c_k,horizontalalignment='left',rotation=-25,fontsize=ccfs)
+    #plt.text(0.18,1*10**-6,'SPHERE IFS',color=c_yjh,horizontalalignment='left',rotation=-35,fontsize=ccfs)
+    #plt.text(3.2,1.9*10**-7,'SPHERE IRDIS',color=c_k,horizontalalignment='right',rotation=-25,fontsize=ccfs)
+    plt.text(0.14,1E-6,'SPHERE',color=c_k,horizontalalignment='left',fontsize=ccfs)
+    plt.text(0.14,5*10**-7,'IFS /',color=c_yjh,horizontalalignment='left',fontsize=ccfs)
+    plt.text(0.18,5*10**-7,'IRDIS',color=c_k,horizontalalignment='left',fontsize=ccfs)
     caption += extract_short_caption(fname)
 
 #########################################################################

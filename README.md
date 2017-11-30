@@ -12,6 +12,7 @@ Available WFIRST modes:
 Available instruments:
 * GPI IFS
 * SPHERE: IFS & IRDIS
+* HST ACS (needs documentation)
 * HST NICMOS
 * HST STIS
 * JWST NIRCam
