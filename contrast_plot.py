@@ -33,7 +33,7 @@ is_draft = True # print DRAFT on the plot?
 color_by_lambda = True # colorcode contrast curve lines by wavelength?
 
 ###Define path where to find data and where to save plot
-path = './' # leave blank if this script is in the same folder as the data (default)
+path = './' # leave blank or set to './' if this script is in the same folder as the data (default)
 
 
 ########################################################################
@@ -315,6 +315,7 @@ ax1.set_ylim(1E-11, 2E-3)
 ax1.set_xlim(0.03,4)
 ax1.set_yscale('log')
 ax1.set_xscale('log')
+
 
 ax1.set_ylabel('Flux ratio to host star')
 ax1.set_xlabel('Separation [arcsec]')
