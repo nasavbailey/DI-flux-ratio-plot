@@ -296,8 +296,13 @@ caption += '-- Solar system planets as seen from 10 pc\n'
 a_RV = np.loadtxt(path+'RVtable.txt')
 arcsec_RV=a_RV[:,0]
 contrast_RV=a_RV[:,1]
-plt.plot(arcsec_RV,contrast_RV, 'o', color='lightgray', markeredgecolor='k',\
-    markersize=markersize_points, label='RV, extrap. reflected\nvisible light')
+plt.plot(arcsec_RV,contrast_RV, 'o', color='lightgray', alpha=0.5,\
+    markersize=markersize_points, label='')
+
+tmp = ascii.read('test.txt')
+plt.scatter(tmp['amax_as'],tmp['Ip/I*_quad'],color='k',s=10,\
+label='RV, extrap.\nreflected light')
+
 
 
 #########################################################################
