@@ -79,6 +79,8 @@ else:
     c_h   = ccc
     c_l   = ccc
 
+c_pl = 'c' # color for special planetary systems (Solar System, Prox Cen, etc.)
+
 ########################################################################
 # auto-generated caption. See README for how to comment datafiles.
 
@@ -214,10 +216,10 @@ contrast_exoplanet=a_e[:,2]
 arcsec_disk=a_d[:,1]
 contrast_disk=a_d[:,2]
 
-plt.plot(arcsec_exoplanet,contrast_exoplanet,color='black',linestyle=':',linewidth=1,label='WFIRST outdated!')
-plt.plot(arcsec_disk,contrast_disk,color='black',linestyle=':',linewidth=1) ###This is commented for now, can be added later
-#plt.text(0.1,8*10**-10,'WFIRST CGI Baseline Exoplanet Detectability',color='black',horizontalalignment='left',verticalalignment='top',fontsize=10)
-caption += '-- WFIRST lines are OUTDATED!\n'
+plt.plot(arcsec_exoplanet,contrast_exoplanet,color='black',linestyle='--',\
+    linewidth=1,label='WFIRST')
+plt.plot(arcsec_disk,contrast_disk,color='black',linestyle='--',linewidth=1)
+caption += '-- WFIRST lines are pre-WEITR L3 requirements for 5-sigma, post-processed contrast.\n'
 
 ######Add Technical requirement line and text
 if include_BTR_img:
@@ -231,6 +233,8 @@ if include_BTR_disk_to_img:
         marker='|',color=c_750,linewidth=cclw-0.5, alpha=0.7)
     plt.text(0.95,3*10**-8,'BTR3',color=c_750,horizontalalignment='right',fontsize=ccfs)
     caption += '-- BTR3: extended object sensitivity BTR translate to point source sensitivity.\n'
+
+
 
 #########################################################################
 ###### -------------------- planets -------------------------  ##########
@@ -271,34 +275,60 @@ if include_DI_550_extrap:
 
 #########################################################################
 ### Specific planetary systems
-ProximaCenb=np.array((0.035,4E-8))
-plt.plot(ProximaCenb[0],ProximaCenb[1],marker='o',color=c_h,markersize=markersize_points) ##Add proxima
-plt.text(ProximaCenb[0],ProximaCenb[1],'  Proxima Cen b',color='black',horizontalalignment='left',verticalalignment='center',fontsize=10)
+# Proxima Centari b
+sma = 0.05*u.au
+flux_ratio = rlp.calc_lambert_flux_ratio(sma=sma, rp=1.3**(1./3)*u.earthRad,\
+    orb_ang=0*u.degree,albedo=0.3, inclin=0*u.degree)
+rho = (sma/1.3*u.pc).value
+plt.plot(rho,flux_ratio,marker='+', color=c_pl)
+plt.text(rho,flux_ratio,'  Proxima Cen b',color=c_pl,\
+    horizontalalignment='left',verticalalignment='center',fontsize=ccfs)
 
+# Tau Ceti f
+sma = 1.334*u.au
+flux_ratio = rlp.calc_lambert_flux_ratio(sma=sma, rp=3.9**(1./3)*u.earthRad,\
+    orb_ang=0*u.degree,albedo=0.3, inclin=0*u.degree)
+rho = (sma/3.65*u.pc).value
+plt.plot(rho,flux_ratio,marker='+', color=c_pl)
+plt.text(rho,flux_ratio,'  Tau Ceti f',color=c_pl,\
+    horizontalalignment='left',verticalalignment='center',fontsize=ccfs)
 
+# Tau Ceti e
+sma = 0.538*u.au
+flux_ratio = rlp.calc_lambert_flux_ratio(sma=sma, rp=3.9**(1./3)*u.earthRad,\
+    orb_ang=0*u.degree,albedo=0.3, inclin=0*u.degree)
+rho = (sma/3.65*u.pc).value
+plt.plot(rho,flux_ratio,marker='+', color=c_pl)
+plt.text(rho,flux_ratio,'Tau Ceti e  ',color=c_pl,\
+    horizontalalignment='right',verticalalignment='center',fontsize=ccfs)
+
+caption += '-- Other noteable planetary systems: Prox Cen b, Tau Ceti e&f. '+\
+            'At quadrature, albedo = 0.3, radius = (M/Me)^(1/3) * Re\n'
 
 #########################################################################
 ###Add Earth and Jupiter
 earthRatio = rlp.calc_lambert_flux_ratio(sma=1.*u.au, rp=1.*u.earthRad,\
-    orb_ang=0*u.degree,albedo=0.25, inclin=0*u.degree)
+    orb_ang=0*u.degree,albedo=0.3, inclin=0*u.degree)
 jupiterRatio = rlp.calc_lambert_flux_ratio(sma=5.*u.au, rp=1.*u.jupiterRad,\
     orb_ang=0*u.degree,albedo=0.5, inclin=0*u.degree)
 
-c_ss = 'c'
-plt.plot(0.1,earthRatio,marker='$\\bigoplus$',color=c_ss,markersize=10)
-plt.text(0.105,earthRatio,' Earth ',color=c_ss,\
+
+plt.plot(0.1,earthRatio,marker='$\\bigoplus$',color=c_pl,markersize=10)
+plt.text(0.1,earthRatio,'  Earth ',color=c_pl,\
     horizontalalignment='left',verticalalignment='center',fontsize=ccfs)
 
-plt.plot(0.5,jupiterRatio,marker='+',color=c_ss,markersize=markersize_points)
-plt.text(0.51,jupiterRatio,' Jupiter ',color=c_ss,\
+plt.plot(0.5,jupiterRatio,marker='+',color=c_pl,markersize=markersize_points)
+plt.text(0.5,jupiterRatio,'  Jupiter ',color=c_pl,\
 horizontalalignment='left',verticalalignment='center',fontsize=ccfs)
-caption += '-- Solar system planets at quadrature as seen from 10 pc. '+\
-            'Earth and Jupiter albedos of 0.25 and 0.5, respectively.\n'
+caption += '-- Earth & Jupiter at quadrature as seen from 10 pc. '+\
+            'Albedos of 0.3 and 0.5, respectively.\n'
+
 
 #########################################################################
 ###Add RV planets
-tmp = ascii.read(datapath+'rv_table.txt')
-plt.scatter(tmp['sma_arcsec'],tmp['Fp/F*_quad'],color='k',s=10,\
+tmp = ascii.read(datapath+'reflected_light_table.txt')
+idx_rv = tmp['pl_discmethod'] == "Radial Velocity"
+plt.scatter(tmp[idx_rv]['sma_arcsec'],tmp[idx_rv]['Fp/F*_quad'],color='k',s=10,\
 label='RV, extrap.\nreflected light')
 
 
@@ -310,7 +340,7 @@ if is_draft:
     from datetime import date
     plt.title("DRAFT  "+str(date.today()), color='red',weight='bold')
 
-plt.legend(fontsize=8)
+plt.legend(fontsize=7)
 
 plt.grid(b=True, which='major', color='tan', linestyle='-', alpha=0.1)
 
