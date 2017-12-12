@@ -15,7 +15,7 @@ from astropy.io import ascii
 
 # Which contrast curves to include?
 include_ELT     = False
-include_HABEX   = False
+include_HABEX   = True
 include_ACS     = True
 include_NICMOS  = True
 include_STIS    = True
@@ -121,9 +121,11 @@ if include_ELT:
 ### HabEx "goal" contrast curve
 
 if include_HABEX:
-    ax1.plot(np.array((.05,1.7)),np.array((10**-10,10**-10)),color='black', linestyle='--',linewidth=1)
-    plt.text(0.2,9*10**-11,'HabEx Goal',color='black',horizontalalignment='left',\
-    	verticalalignment='top',fontsize=ccfs)
+    plt.plot([0.06, 1.6],[5E-11, 5E-11],color=c_bbvis,linestyle=':',linewidth=cclw-1,label='')
+    plt.text(1.6,6E-11,'HabEx',color=c_bbvis,horizontalalignment='right',fontsize=ccfs)
+    caption += '-- HabEx: Goal 5-sigma post-processed contrast.  '+\
+                'IWA ~ 2.5 lambda/D @ 450nm; OWA ~ 32 l/D @ 1micron '+\
+                '(source: B. Mennesson, personal communication)\n'
 
 
 #########################################################################
@@ -300,7 +302,7 @@ plt.plot(arcsec_RV,contrast_RV, 'o', color='lightgray', alpha=0.5,\
     markersize=markersize_points, label='')
 
 tmp = ascii.read('test.txt')
-plt.scatter(tmp['amax_as'],tmp['Ip/I*_quad'],color='k',s=10,\
+plt.scatter(tmp['sma_arcsec'],tmp['Fp/F*_quad'],color='k',s=10,\
 label='RV, extrap.\nreflected light')
 
 
