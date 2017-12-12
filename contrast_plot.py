@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 @author: meshkat (original; July 31, 2017)
-November 2017: VPB reorganized & updated contrast curves
+November-December 2017: VPB reorganized & updated contrast curves
 """
 
 import numpy as np
@@ -10,6 +10,8 @@ import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 from matplotlib import rcParams
 from astropy.io import ascii
+import reflected_light_planets as rlp
+from astropy import units as u
 
 ### User-defined options
 
@@ -94,10 +96,6 @@ def extract_short_caption(filename):
     print '\n**** WARNING **** no caption for '+filename+'\n'
     return ''
 
-
-
-########################################################################
-### ELT
 
 
 ########################################################################
@@ -191,8 +189,6 @@ if include_SPHERE:
         color=c_yjh, linewidth=cclw, label='')
     plt.plot(a_SPHERE['Rho(as)'][idx_k12], a_SPHERE['Contrast'][idx_k12], \
         color=c_k, linewidth=cclw, label='')
-    #plt.text(0.18,1*10**-6,'SPHERE IFS',color=c_yjh,horizontalalignment='left',rotation=-35,fontsize=ccfs)
-    #plt.text(3.2,1.9*10**-7,'SPHERE IRDIS',color=c_k,horizontalalignment='right',rotation=-25,fontsize=ccfs)
     plt.text(0.14,1E-6,'SPHERE',color=c_k,horizontalalignment='left',fontsize=ccfs)
     plt.text(0.14,5*10**-7,'IFS /',color=c_yjh,horizontalalignment='left',fontsize=ccfs)
     plt.text(0.18,5*10**-7,'IRDIS',color=c_k,horizontalalignment='left',fontsize=ccfs)
@@ -283,15 +279,21 @@ plt.text(ProximaCenb[0],ProximaCenb[1],'  Proxima Cen b',color='black',horizonta
 
 #########################################################################
 ###Add Earth and Jupiter
-Earth=np.array((0.09,1*10**-10))
-Jupiter=np.array((0.51, 10**-9))
-plt.plot(Earth[0],Earth[1],marker='o',color='blue',markersize=markersize_points)
-plt.plot(Jupiter[0],Jupiter[1],marker='o',color='#FF7800',markersize=markersize_points)
-plt.text(Earth[0],Earth[1],' Earth ',color='blue',horizontalalignment='left',verticalalignment='center',fontsize=10)
-plt.text(Jupiter[0],Jupiter[1],' Jupiter ',color='#FF7800',horizontalalignment='left',verticalalignment='center',fontsize=10)
-#plt.text(0.037,2*10**-11,'Solar system planets as seen from 10 pc',\
-#    color='black',horizontalalignment='left',verticalalignment='center',fontsize=8)
-caption += '-- Solar system planets as seen from 10 pc\n'
+earthRatio = rlp.calc_lambert_flux_ratio(sma=1.*u.au, rp=1.*u.earthRad,\
+    orb_ang=0*u.degree,albedo=0.25, inclin=0*u.degree)
+jupiterRatio = rlp.calc_lambert_flux_ratio(sma=5.*u.au, rp=1.*u.jupiterRad,\
+    orb_ang=0*u.degree,albedo=0.5, inclin=0*u.degree)
+
+c_ss = 'c'
+plt.plot(0.1,earthRatio,marker='$\\bigoplus$',color=c_ss,markersize=10)
+plt.text(0.105,earthRatio,' Earth ',color=c_ss,\
+    horizontalalignment='left',verticalalignment='center',fontsize=ccfs)
+
+plt.plot(0.5,jupiterRatio,marker='+',color=c_ss,markersize=markersize_points)
+plt.text(0.51,jupiterRatio,' Jupiter ',color=c_ss,\
+horizontalalignment='left',verticalalignment='center',fontsize=ccfs)
+caption += '-- Solar system planets at quadrature as seen from 10 pc. '+\
+            'Earth and Jupiter albedos of 0.25 and 0.5, respectively.\n'
 
 #########################################################################
 ###Add RV planets

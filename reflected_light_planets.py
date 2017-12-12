@@ -134,7 +134,7 @@ def calc_xy_r_int(inclin):
     return (x,y,r,inten)
 
 
-def read_and_filter_exo_archive(fname='exo_archive_query.txt', \
+def read_and_filter_exo_archive(fname='data/exo_archive_query.txt', \
         rho_min=0.14*u.arcsec, rho_max=1.2*u.arcsec,\
         st_v_min=8.*u.mag, mp_min=0.25*u.jupiterMass):
 
@@ -249,20 +249,22 @@ def create_wfirst_reflected_light_table(fname_in='exo_archive_query.txt', \
 
 
 def demo_phase():
-    plt.figure(figsize=[8,4])
+    import matplotlib.pyplot as plt
+
+    plt.figure(figsize=[6,6])
     ax1 = plt.subplot(221)
     ax2 = plt.subplot(222)
     ax3 = plt.subplot(223)
     ax4 = plt.subplot(224)
 
-    ang = np.linspace(90,270,50)
-    for inc in np.linspace(0,90,5):
-        alpha = calc_alpha(inc,ang,out_dgr=False)
-        ax1.plot(ang, alpha*180/np.pi)
+    ang = np.linspace(90,270,50)*u.degree
+    for inc in np.linspace(0,90,5)*u.degree:
+        alpha = calc_alpha(inc,ang)
+        ax1.plot(ang, alpha)
         ax2.plot(ang, calc_lambert_phase_law(alpha), label=inc)
 
     ax1.set_xlabel('angle from ascending node [dgr]')
-    ax1.set_ylabel('alpha')
+    ax1.set_ylabel('alpha [dgr]')
     ax1.legend()
 
     ax2.set_xlabel('angle from ascending node [dgr]')
@@ -271,7 +273,6 @@ def demo_phase():
 
     (x,y,r,inten) = calc_xy_r_int(60)
     ax3.plot(r,inten,label='i=60')
-    #ax1.set_yscale('log')
     plt.legend()
 
     ax4.scatter(x,y,c=inten, vmin=0, vmax=1,label='i=60')
@@ -280,3 +281,4 @@ def demo_phase():
 
     plt.tight_layout()
     plt.savefig('demo_phase_curve.pdf')
+    print 'Saved plot called demo_phase_curve.pdf'
