@@ -34,7 +34,7 @@ color_by_lambda = True # colorcode contrast curve lines by wavelength?
 
 ###Define path where to find data and where to save plot
 path = './' # leave blank or set to './' if this script is in the same folder as the data (default)
-
+datapath = path+'data/'
 
 ########################################################################
 ### Plot setup
@@ -132,7 +132,7 @@ if include_HABEX:
 ### NIRCAM contrast curve
 
 if include_NIRCAM:
-    fname = path+'jwst_nircam.txt'
+    fname = datapath+'jwst_nircam.txt'
     a_JWST = ascii.read(fname)
     plt.plot(a_JWST['Rho(as)'],a_JWST['210_contr'],color=c_k,linewidth=cclw-0.5,linestyle='--',label='')
     if include_SPHERE:
@@ -148,7 +148,7 @@ if include_NIRCAM:
 #########################################################################
 ### NICMOS contrast curve
 if include_NICMOS:
-    fname = path+'HST_NICMOS_Min.txt' #path+'HST_NICMOS_Median.txt'
+    fname = datapath+'HST_NICMOS_Min.txt' #path+'HST_NICMOS_Median.txt'
     a_NICMOS = ascii.read(fname)
     plt.plot(a_NICMOS['Rho(as)'],a_NICMOS['F160W_contr'],color=c_h,\
         linewidth=cclw,label='')
@@ -159,7 +159,7 @@ if include_NICMOS:
 #########################################################################
 ### STIS Bar5 contrast curve
 if include_STIS:
-    fname = path+'HST_STIS.txt'
+    fname = datapath+'HST_STIS.txt'
     a_STIS = ascii.read(fname)
     plt.plot(a_STIS['Rho(as)'],a_STIS['KLIP_Contr'],color=c_bbvis,\
         linewidth=cclw,label='')
@@ -170,7 +170,7 @@ if include_STIS:
 ### ACS contrast curve
 
 if include_ACS:
-    fname = path+'HST_ACS.txt'
+    fname = datapath+'HST_ACS.txt'
     a_ACS = ascii.read(fname)
     plt.plot(a_ACS['Rho(as)'],a_ACS['F606W_contr'],color=c_v,linewidth=cclw,label='')
     plt.text(3.8,6*10**-9,'HST ACS',color=c_v,horizontalalignment='right',rotation=-35,fontsize=ccfs)
@@ -180,7 +180,7 @@ if include_ACS:
 #########################################################################
 ### SPHERE contrast curve
 if include_SPHERE:
-    fname = path+'SPHERE_Vigan.txt'
+    fname = datapath+'SPHERE_Vigan.txt'
     a_SPHERE = ascii.read(fname)
     a_SPHERE['Contrast'] = 10**(-0.4*a_SPHERE['delta'])
 
@@ -201,7 +201,7 @@ if include_SPHERE:
 #########################################################################
 ### GPI H-band
 if include_GPI:
-    fname = path+'GPIES_T-type_contrast_curve_2per.txt'
+    fname = datapath+'GPIES_T-type_contrast_curve_2per.txt'
     a_GPI = ascii.read(fname)
     plt.plot(a_GPI['Rho(as)'],a_GPI['H_contr'],color=c_h,linewidth=cclw,label='')
     plt.text(0.17,1*10**-5,'GPI',color=c_h,horizontalalignment='left',rotation=-20,fontsize=ccfs)
@@ -209,8 +209,8 @@ if include_GPI:
 
 #########################################################################
 ### WFIRST
-a_e = np.loadtxt(path+'exoplanet_mode.csv',delimiter=',')
-a_d = np.loadtxt(path+'disk_mode.csv',delimiter=',')
+a_e = np.loadtxt(datapath+'exoplanet_mode.csv',delimiter=',')
+a_d = np.loadtxt(datapath+'disk_mode.csv',delimiter=',')
 
 
 arcsec_exoplanet=a_e[:,1]
@@ -244,7 +244,7 @@ if include_BTR_disk_to_img:
 ### Self luminous directly imaged planets
 
 if include_DI_H or include_DI_extrap:
-    fname = path+'DIplanets.txt'
+    fname = datapath+'DIplanets.txt'
     a_DI = ascii.read(fname)
     a_DI['547m_contr'] = 10**(a_DI['547m_delta']/-2.5)
     a_DI['763m_contr'] = 10**(a_DI['763m_delta']/-2.5)
@@ -295,13 +295,7 @@ caption += '-- Solar system planets as seen from 10 pc\n'
 
 #########################################################################
 ###Add RV planets
-a_RV = np.loadtxt(path+'RVtable.txt')
-arcsec_RV=a_RV[:,0]
-contrast_RV=a_RV[:,1]
-plt.plot(arcsec_RV,contrast_RV, 'o', color='lightgray', alpha=0.5,\
-    markersize=markersize_points, label='')
-
-tmp = ascii.read('test.txt')
+tmp = ascii.read(datapath+'rv_table.txt')
 plt.scatter(tmp['sma_arcsec'],tmp['Fp/F*_quad'],color='k',s=10,\
 label='RV, extrap.\nreflected light')
 
