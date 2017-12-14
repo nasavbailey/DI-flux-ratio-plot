@@ -191,9 +191,9 @@ if include_SPHERE:
         color=c_yjh, linewidth=cclw, label='')
     plt.plot(a_SPHERE['Rho(as)'][idx_k12], a_SPHERE['Contrast'][idx_k12], \
         color=c_k, linewidth=cclw, label='')
-    plt.text(0.14,1E-6,'SPHERE',color=c_k,horizontalalignment='left',fontsize=ccfs)
-    plt.text(0.14,5*10**-7,'IFS /',color=c_yjh,horizontalalignment='left',fontsize=ccfs)
-    plt.text(0.18,5*10**-7,'IRDIS',color=c_k,horizontalalignment='left',fontsize=ccfs)
+    plt.text(0.2,1E-6,'VLT SPHERE',color=c_k,horizontalalignment='right',fontsize=ccfs)
+    plt.text(0.15,5*10**-7,'IFS /',color=c_yjh,horizontalalignment='right',fontsize=ccfs)
+    plt.text(0.2,5*10**-7,'IRDIS',color=c_k,horizontalalignment='right',fontsize=ccfs)
     caption += extract_short_caption(fname)
 
 #########################################################################
@@ -202,7 +202,7 @@ if include_GPI:
     fname = datapath+'GPIES_T-type_contrast_curve_2per.txt'
     a_GPI = ascii.read(fname)
     plt.plot(a_GPI['Rho(as)'],a_GPI['H_contr'],color=c_h,linewidth=cclw,label='')
-    plt.text(0.17,1*10**-5,'GPI',color=c_h,horizontalalignment='left',rotation=-20,fontsize=ccfs)
+    plt.text(0.17,1*10**-5,'Gemini GPI',color=c_h,horizontalalignment='left',rotation=-20,fontsize=ccfs)
     caption += extract_short_caption(fname)
 
 #########################################################################
