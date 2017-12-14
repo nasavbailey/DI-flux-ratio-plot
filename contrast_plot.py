@@ -54,7 +54,7 @@ ax1=fig.add_subplot(111)
 markersize_points=4
 ccfs = 8 # contrast curve font size
 ccc = 'darkviolet' # default contrast curve color
-cclw = 2 # default contrast curve line width
+cclw = 1.5 # default contrast curve line width
 
 if color_by_lambda.lower() == 'full':
     c_v = 'dodgerblue'
@@ -77,7 +77,7 @@ elif color_by_lambda.lower() == 'simple':
     c_v = 'dodgerblue'
     c_bbvis = c_v
     c_750 = 'goldenrod'
-    c_yjh = 'red'
+    c_yjh = 'firebrick'
     c_h = c_yjh
     c_k = c_yjh
     #c_l = 'darkred'
@@ -140,7 +140,7 @@ if include_ELT:
 ### HabEx "goal" contrast curve
 
 if include_HABEX:
-    plt.plot([0.06, 1.6],[5E-11, 5E-11],color=c_bbvis,linestyle='--',linewidth=cclw-1,label='')
+    plt.plot([0.06, 1.6],[5E-11, 5E-11],color=c_bbvis,linestyle='--',linewidth=cclw-0.5,label='')
     plt.text(1.6,6E-11,'HabEx',color=c_bbvis,horizontalalignment='right',fontsize=ccfs)
     caption += '-- HabEx: Goal 5-sigma post-processed contrast.  '+\
                 'IWA ~ 2.5 lambda/D @ 450nm; OWA ~ 32 l/D @ 1micron '+\
@@ -153,7 +153,7 @@ if include_HABEX:
 if include_NIRCAM:
     fname = datapath+'jwst_nircam.txt'
     a_JWST = ascii.read(fname)
-    plt.plot(a_JWST['Rho(as)'],a_JWST['210_contr'],color=c_k,linewidth=cclw-1,linestyle='--',label='')
+    plt.plot(a_JWST['Rho(as)'],a_JWST['210_contr'],color=c_k,linewidth=cclw-0.5,linestyle='--',label='')
     if include_SPHERE:
         xy=[1.6, 5E-7]
         plt.text(xy[0],xy[1], 'JWST NIRCam', color=c_k, rotation=-25, fontsize=ccfs)
@@ -236,21 +236,24 @@ arcsec_disk=a_d[:,1]
 contrast_disk=a_d[:,2]
 
 plt.plot(arcsec_exoplanet,contrast_exoplanet,color='black',linestyle='--',\
-    linewidth=1,label='WFIRST')
-plt.plot(arcsec_disk,contrast_disk,color='black',linestyle='--',linewidth=1)
+    linewidth=cclw+0.5,label='WFIRST')
+plt.plot(arcsec_disk,contrast_disk,color='black',linestyle='--',\
+    linewidth=cclw+0.5)
 caption += '-- WFIRST lines are pre-WEITR L3 requirements for 5-sigma, post-processed contrast.\n'
 
 ######Add Technical requirement line and text
 if include_BTR_img:
     plt.plot([0.23, 0.4], [0.5*5E-8, 0.5*5E-8],\
         color=c_v,linewidth=cclw+2, alpha=0.7,solid_capstyle="butt")
-    plt.text(0.23,2.5*10**-8,'BTR1 ',color=c_v,horizontalalignment='right',fontsize=ccfs)
+    plt.text(0.23,2.5*10**-8,'BTR1 ',color=c_v,horizontalalignment='right',\
+        weight='bold',fontsize=ccfs)
     caption += '-- BTR1: imaging BTR.\n'
 
 if include_BTR_disk_to_img:
     plt.plot([0.25, 0.95], [0.5*5E-8, 0.5*5E-8],\
         color=c_750,linewidth=cclw+4, alpha=0.6,solid_capstyle="butt")
-    plt.text(0.95,2.5*10**-8,' BTR3',color=c_750,horizontalalignment='left',fontsize=ccfs)
+    plt.text(0.95,2.5*10**-8,' BTR3',color=c_750,horizontalalignment='left',\
+        weight='bold',fontsize=ccfs)
     caption += '-- BTR3: extended object sensitivity BTR translate to point source sensitivity.\n'
 
 
@@ -268,8 +271,8 @@ if include_DI_H or include_DI_extrap:
     a_DI['547m_contr'] = 10**(a_DI['547m_delta']/-2.5)
     a_DI['763m_contr'] = 10**(a_DI['763m_delta']/-2.5)
     a_DI['H_contr'] = 10**(a_DI['H_delta']/-2.5)
-    sz_di = 20
-    alpha_di = 0.7
+    sz_di = 15
+    alpha_di = 1
     caption += extract_short_caption(fname)
 
 if include_DI_H:
@@ -278,7 +281,7 @@ if include_DI_H:
 
 if include_DI_750_extrap:
     plt.scatter(a_DI['Rho(as)'],a_DI['763m_contr'],color=c_750, edgecolor='k', \
-        marker='d', alpha=alpha_di, s=sz_di-5, zorder=2, label='DI, 750nm extrap.')
+        marker='d', alpha=alpha_di, s=sz_di+15, zorder=2, label='DI, 750nm extrap.')
     if not include_DI_550_extrap:
         for ct, rho in enumerate(a_DI['Rho(as)']):
             plt.plot([rho,rho], [a_DI[ct]['763m_contr'], a_DI[ct]['H_contr']], \
@@ -289,7 +292,7 @@ if include_DI_550_extrap:
         plt.plot([rho,rho], [a_DI[ct]['547m_contr'], a_DI[ct]['H_contr']], \
             color='lightgray', linewidth=1, linestyle=':', zorder=1)
     plt.scatter(a_DI['Rho(as)'],a_DI['547m_contr'],color=c_v, edgecolor='k', \
-        marker='o', alpha=alpha_di, s=sz_di-5, zorder=2, label='DI, 550nm extrap.')
+        marker='o', alpha=alpha_di, s=sz_di+15, zorder=2, label='DI, 550nm extrap.')
 
 
 #########################################################################
@@ -347,8 +350,8 @@ caption += '-- Earth & Jupiter at quadrature as seen from 10 pc. '+\
 ###Add RV planets
 tmp = ascii.read(datapath+'reflected_light_table.txt')
 idx_rv = tmp['pl_discmethod'] == "Radial Velocity"
-plt.scatter(tmp[idx_rv]['sma_arcsec'],tmp[idx_rv]['Fp/F*_quad'],color='k',s=10,\
-label='RV, extrap.\nreflected light')
+plt.scatter(tmp[idx_rv]['sma_arcsec'],tmp[idx_rv]['Fp/F*_quad'],color='k',s=30,\
+    marker='^', label='RV, extrap.\nreflected light')
 
 
 
