@@ -32,7 +32,8 @@ include_BTR_disk_to_img = True # disk mask BTR
 
 is_draft = True # print DRAFT on the plot?
 
-color_by_lambda = True # colorcode contrast curve lines by wavelength?
+ # colorcode contrast curve lines by wavelength?
+color_by_lambda = 'simple' # full, simple, none
 
 ###Define path where to find data and where to save plot
 path = './' # leave blank or set to './' if this script is in the same folder as the data (default)
@@ -55,14 +56,14 @@ ccfs = 8 # contrast curve font size
 ccc = 'darkviolet' # default contrast curve color
 cclw = 2 # default contrast curve line width
 
-if color_by_lambda:
+if color_by_lambda.lower() == 'full':
     c_v = 'dodgerblue'
     c_bbvis = 'cadetblue'
     c_750 = 'goldenrod'
     c_yjh = 'coral'
     c_k = 'firebrick'
     c_h   = 'red'
-    c_l   = 'darkred'
+    #c_l   = 'darkred'
 
     plt.plot([1,1],[1,1],color=c_v,linewidth=cclw, label='V/550nm')
     plt.plot([1,1],[1,1],color=c_bbvis,linewidth=cclw, label='broadband visible')
@@ -71,13 +72,31 @@ if color_by_lambda:
     plt.plot([1,1],[1,1],color=c_h,linewidth=cclw, label='H-band')
     plt.plot([1,1],[1,1],color=c_k,linewidth=cclw, label='K-band')
 
-else:
+
+elif color_by_lambda.lower() == 'simple':
+    c_v = 'dodgerblue'
+    c_bbvis = c_v
+    c_750 = 'goldenrod'
+    c_yjh = 'red'
+    c_h = c_yjh
+    c_k = c_yjh
+    #c_l = 'darkred'
+
+    plt.plot([1,1],[1,1],color=c_v,linewidth=cclw, label='Blue optical')
+    plt.plot([1,1],[1,1],color=c_750,linewidth=cclw, label='Red optical')
+    plt.plot([1,1],[1,1],color=c_h,linewidth=cclw, label='near IR')
+
+
+elif color_by_lambda.lower() == 'none':
     c_v = ccc
     c_750 = ccc
     c_yjh = ccc
     c_k = ccc
     c_h   = ccc
-    c_l   = ccc
+    #c_l   = ccc
+
+else:
+    raise Exception(color_by_lambda+' is not a valid option for color_by_lambda (full/simple/none)')
 
 c_pl = 'c' # color for special planetary systems (Solar System, Prox Cen, etc.)
 
@@ -121,7 +140,7 @@ if include_ELT:
 ### HabEx "goal" contrast curve
 
 if include_HABEX:
-    plt.plot([0.06, 1.6],[5E-11, 5E-11],color=c_bbvis,linestyle=':',linewidth=cclw-1,label='')
+    plt.plot([0.06, 1.6],[5E-11, 5E-11],color=c_bbvis,linestyle='--',linewidth=cclw-1,label='')
     plt.text(1.6,6E-11,'HabEx',color=c_bbvis,horizontalalignment='right',fontsize=ccfs)
     caption += '-- HabEx: Goal 5-sigma post-processed contrast.  '+\
                 'IWA ~ 2.5 lambda/D @ 450nm; OWA ~ 32 l/D @ 1micron '+\
@@ -134,7 +153,7 @@ if include_HABEX:
 if include_NIRCAM:
     fname = datapath+'jwst_nircam.txt'
     a_JWST = ascii.read(fname)
-    plt.plot(a_JWST['Rho(as)'],a_JWST['210_contr'],color=c_k,linewidth=cclw-0.5,linestyle='--',label='')
+    plt.plot(a_JWST['Rho(as)'],a_JWST['210_contr'],color=c_k,linewidth=cclw-1,linestyle='--',label='')
     if include_SPHERE:
         xy=[1.6, 5E-7]
         plt.text(xy[0],xy[1], 'JWST NIRCam', color=c_k, rotation=-25, fontsize=ccfs)
@@ -224,14 +243,14 @@ caption += '-- WFIRST lines are pre-WEITR L3 requirements for 5-sigma, post-proc
 ######Add Technical requirement line and text
 if include_BTR_img:
     plt.plot([0.23, 0.4], [0.5*5E-8, 0.5*5E-8],\
-        marker='|',color=c_v,linewidth=cclw, alpha=0.7)
-    plt.text(0.23,3*10**-8,'BTR1',color=c_v,horizontalalignment='left',fontsize=ccfs)
+        color=c_v,linewidth=cclw+2, alpha=0.7,solid_capstyle="butt")
+    plt.text(0.23,2.5*10**-8,'BTR1 ',color=c_v,horizontalalignment='right',fontsize=ccfs)
     caption += '-- BTR1: imaging BTR.\n'
 
 if include_BTR_disk_to_img:
     plt.plot([0.25, 0.95], [0.5*5E-8, 0.5*5E-8],\
-        marker='|',color=c_750,linewidth=cclw-0.5, alpha=0.7)
-    plt.text(0.95,3*10**-8,'BTR3',color=c_750,horizontalalignment='right',fontsize=ccfs)
+        color=c_750,linewidth=cclw+4, alpha=0.6,solid_capstyle="butt")
+    plt.text(0.95,2.5*10**-8,' BTR3',color=c_750,horizontalalignment='left',fontsize=ccfs)
     caption += '-- BTR3: extended object sensitivity BTR translate to point source sensitivity.\n'
 
 
