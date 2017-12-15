@@ -46,6 +46,7 @@ rcParams.update({'figure.autolayout': True})
 #rcParams.update({'font.family':'Times New Roman'})
 rcParams.update({'font.size': 12})
 rcParams['mathtext.fontset'] = 'stix'
+rcParams['lines.solid_capstyle'] = 'butt' #don't increase line length when increasing width
 
 fig=plt.figure()#figsize=[7,4.5]
 ax1=fig.add_subplot(111)
@@ -55,6 +56,7 @@ markersize_points=4
 ccfs = 8 # contrast curve font size
 ccc = 'darkviolet' # default contrast curve color
 cclw = 1.5 # default contrast curve line width
+c_pl = 'c' # color for special planetary systems (Solar System, Prox Cen, etc.)
 
 if color_by_lambda.lower() == 'full':
     c_v = 'dodgerblue'
@@ -65,13 +67,16 @@ if color_by_lambda.lower() == 'full':
     c_h   = 'red'
     #c_l   = 'darkred'
 
-    plt.plot([1,1],[1,1],color=c_v,linewidth=cclw, label='V/550nm')
-    plt.plot([1,1],[1,1],color=c_bbvis,linewidth=cclw, label='broadband visible')
-    plt.plot([1,1],[1,1],color=c_750,linewidth=cclw, label='750nm')
-    plt.plot([1,1],[1,1],color=c_yjh,linewidth=cclw, label='YJH-band')
-    plt.plot([1,1],[1,1],color=c_h,linewidth=cclw, label='H-band')
-    plt.plot([1,1],[1,1],color=c_k,linewidth=cclw, label='K-band')
+    line1, = plt.plot([1,1],[1,1],color=c_v,linewidth=cclw, label='V/550nm')
+    line2, = plt.plot([1,1],[1,1],color=c_bbvis,linewidth=cclw, label='broadband visible')
+    line3, = plt.plot([1,1],[1,1],color=c_750,linewidth=cclw, label='750nm')
+    line4, = plt.plot([1,1],[1,1],color=c_yjh,linewidth=cclw, label='YJH-band')
+    line5, = plt.plot([1,1],[1,1],color=c_h,linewidth=cclw, label='H-band')
+    line6, = plt.plot([1,1],[1,1],color=c_k,linewidth=cclw, label='K-band')
 
+    first_legend = plt.legend(handles=[line1, line2, line3, line4, line5, line6], \
+        loc='upper right', fontsize=7, title='Bandpass')
+    first_legend.get_title().set_fontsize('8')
 
 elif color_by_lambda.lower() == 'simple':
     c_v = 'dodgerblue'
@@ -82,9 +87,13 @@ elif color_by_lambda.lower() == 'simple':
     c_k = c_yjh
     #c_l = 'darkred'
 
-    plt.plot([1,1],[1,1],color=c_v,linewidth=cclw, label='Blue optical')
-    plt.plot([1,1],[1,1],color=c_750,linewidth=cclw, label='Red optical')
-    plt.plot([1,1],[1,1],color=c_h,linewidth=cclw, label='near IR')
+    line1, = plt.plot([1,1],[1,1],color=c_v,linewidth=cclw, label='Blue optical')
+    line2, = plt.plot([1,1],[1,1],color=c_750,linewidth=cclw, label='Red optical')
+    line3, = plt.plot([1,1],[1,1],color=c_h,linewidth=cclw, label='near IR')
+
+    first_legend = plt.legend(handles=[line1, line2, line3], \
+        loc='upper right', fontsize=7, title='Bandpass')
+    first_legend.get_title().set_fontsize('8')
 
 
 elif color_by_lambda.lower() == 'none':
@@ -98,7 +107,8 @@ elif color_by_lambda.lower() == 'none':
 else:
     raise Exception(color_by_lambda+' is not a valid option for color_by_lambda (full/simple/none)')
 
-c_pl = 'c' # color for special planetary systems (Solar System, Prox Cen, etc.)
+#ax = plt.gca().add_artist(first_legend)
+
 
 ########################################################################
 # auto-generated caption. See README for how to comment datafiles.
@@ -211,8 +221,8 @@ if include_SPHERE:
     plt.plot(a_SPHERE['Rho(as)'][idx_k12], a_SPHERE['Contrast'][idx_k12], \
         color=c_k, linewidth=cclw, label='')
     plt.text(0.2,1E-6,'VLT SPHERE',color=c_k,horizontalalignment='right',fontsize=ccfs)
-    plt.text(0.15,5*10**-7,'IFS /',color=c_yjh,horizontalalignment='right',fontsize=ccfs)
-    plt.text(0.2,5*10**-7,'IRDIS',color=c_k,horizontalalignment='right',fontsize=ccfs)
+    plt.text(0.14,5*10**-7,'IFS /',color=c_yjh,horizontalalignment='right',fontsize=ccfs)
+    plt.text(0.14,5*10**-7,' IRDIS',color=c_k,horizontalalignment='left',fontsize=ccfs)
     caption += extract_short_caption(fname)
 
 #########################################################################
@@ -243,15 +253,13 @@ caption += '-- WFIRST lines are pre-WEITR L3 requirements for 5-sigma, post-proc
 
 ######Add Technical requirement line and text
 if include_BTR_img:
-    plt.plot([0.23, 0.4], [0.5*5E-8, 0.5*5E-8],\
-        color=c_v,linewidth=cclw+2, alpha=0.7,solid_capstyle="butt")
+    plt.plot([0.23, 0.4], [0.5*5E-8, 0.5*5E-8], color=c_v, linewidth=cclw+2, alpha=0.7)
     plt.text(0.23,2.5*10**-8,'BTR1 ',color=c_v,horizontalalignment='right',\
         weight='bold',fontsize=ccfs)
     caption += '-- BTR1: imaging BTR.\n'
 
 if include_BTR_disk_to_img:
-    plt.plot([0.25, 0.95], [0.5*5E-8, 0.5*5E-8],\
-        color=c_750,linewidth=cclw+4, alpha=0.6,solid_capstyle="butt")
+    plt.plot([0.25, 0.95], [0.5*5E-8, 0.5*5E-8], color=c_750, linewidth=cclw+4, alpha=0.6)
     plt.text(0.95,2.5*10**-8,' BTR3',color=c_750,horizontalalignment='left',\
         weight='bold',fontsize=ccfs)
     caption += '-- BTR3: extended object sensitivity BTR translate to point source sensitivity.\n'
