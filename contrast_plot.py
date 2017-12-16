@@ -112,13 +112,16 @@ else:
 caption = '** This short caption is auto-generated. DO NOT EDIT. **\n' + \
         'Please see individual datafiles for full descriptions. \n\n'
 
+if color_by_lambda.lower() != 'none':
+    caption += 'Lines and points are color coded by wavelength of observation.\n\n'
+
 def extract_short_caption(filename):
     f = open(filename,'r')
     lines = f.readlines()
     f.close()
     for l in lines:
         if '#short caption:' in l.lower():
-            return '-- '+l.split('caption:')[1].strip()+'\n'
+            return '-- '+l.split('caption:')[1].strip()+'\n\n'
     # if no caption in text file
     print '\n**** WARNING **** no caption for '+filename+'\n'
     return ''
@@ -150,7 +153,7 @@ if include_HABEX:
     ax1.text(1.6,6E-11,'HabEx goal',color=c_bbvis,horizontalalignment='right',fontsize=ccfs)
     caption += '-- HabEx: Goal 5-sigma post-processed contrast.  '+\
                 'IWA ~ 2.5 lambda/D @ 450nm; OWA ~ 32 l/D @ 1micron '+\
-                '(source: B. Mennesson, personal communication)\n'
+                '(source: B. Mennesson, personal communication)\n\n'
 
 
 #########################################################################
@@ -243,7 +246,7 @@ contrast_disk=a_d[:,2]
 
 ax1.plot(arcsec_exoplanet,contrast_exoplanet,color=c_v, linewidth=cclw+2)
 ax1.plot(arcsec_disk,contrast_disk,color=c_750, linewidth=cclw+2)
-caption += '-- WFIRST lines are pre-WEITR L3 requirements for 5-sigma, post-processed contrast.\n'
+caption += '-- WFIRST contrast curves are pre-WEITR L3 requirements for 5-sigma, post-processed contrast.\n\n'
 ax1.text(1.3, 2E-9, 'WFIRST', color='k', horizontalalignment='left',fontsize=ccfs, weight='bold')
 
 ######Add Technical requirement line and text
@@ -251,13 +254,13 @@ if include_BTR_img:
     ax1.plot([0.23, 0.4], [0.5*5E-8, 0.5*5E-8], color=c_v, linewidth=cclw+2, alpha=0.7)
     ax1.text(0.23,2.5*10**-8,'BTR1 ',color=c_v,horizontalalignment='right',\
         weight='bold',fontsize=ccfs)
-    caption += '-- BTR1: imaging BTR.\n'
+    caption += '-- BTR1: imaging BTR.\n\n'
 
 if include_BTR_disk_to_img:
     ax1.plot([0.25, 0.95], [0.5*5E-8, 0.5*5E-8], color=c_750, linewidth=cclw+4, alpha=0.6)
     ax1.text(0.95,2.5*10**-8,' BTR3',color=c_750,horizontalalignment='left',\
         weight='bold',fontsize=ccfs)
-    caption += '-- BTR3: extended object sensitivity BTR translate to point source sensitivity.\n'
+    caption += '-- BTR3: extended object sensitivity BTR translate to point source sensitivity.\n\n'
 
 
 
@@ -310,9 +313,12 @@ if include_special_systems:
     #ax1.plot(rho,flux_ratio,marker='^', color=c_pl)
     #ax1.text(rho,flux_ratio,'  Proxima Cen b',color=c_pl,\
     #    horizontalalignment='left',verticalalignment='center',fontsize=ccfs)
+    #caption += '-- Prox Cen b: At quadrature, albedo = 0.3, radius = (M/Me)^(1/3) * Re, circular orbit.\n\n'
+
 
     # Tau Ceti
     tc_dist = 3.65*u.pc
+    # make a separate upper x axis for physical separation of this system
     ax3 = ax1.twiny()
     ax3.set_ylim(ylim)
     ax3.set_xlim(xlim * tc_dist.value)
@@ -339,7 +345,7 @@ if include_special_systems:
     ax3.text(sma.value,flux_ratio,'Tau Ceti e  ',color=c_pl,\
         horizontalalignment='right',verticalalignment='center',fontsize=ccfs)
 
-    caption += '-- Tau Ceti e&f. At quadrature, albedo = 0.3, radius = (M/Me)^(1/3) * Re, circular orbits.\n'
+    caption += '-- Tau Ceti e&f. At quadrature, albedo = 0.3, radius = (M/Me)^(1/3) * Re, circular orbits.\n\n'
 
     # Earth
     earthRatio = rlp.calc_lambert_flux_ratio(sma=1.*u.au, rp=1.*u.earthRad,\
@@ -356,7 +362,7 @@ if include_special_systems:
     ax1.text(0.5,jupiterRatio,'  Jupiter ',color=c_pl,\
     horizontalalignment='left',verticalalignment='center',fontsize=ccfs)
     caption += '-- Earth & Jupiter at quadrature as seen from 10 pc. '+\
-                'Albedos of 0.3 and 0.5, respectively.\n'
+                'Albedos of 0.3 and 0.5, respectively.\n\n'
 
 
 

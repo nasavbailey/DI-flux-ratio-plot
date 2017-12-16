@@ -1,6 +1,5 @@
 #Pixel	Rho(as)	ADI_Contr	KLIP_Contr	Photon_Limit
-#short caption: HST STIS: Bar5 coronagraph 5-sigma post-processed [KLIP] contrast curve; 162sec exposure. Photon noise is a significant contributor beyond 0.7”. (source: STIS handbook)
-#full description: HST STIS Bar5 coronagraph 5 sigma KLIP-processed contrast curve. 9 roll angles, with 9 dithers per roll angle. No filter (~200-1030nm broadband). Target = HD 38393. Exposure time = 810*.2sec = 2.7 minutes => moderately photon limited at large angles. Assuming photon adds in quadrature with speckle residuals to produce the KLIP contrast, the photon noise is >50% the magnitude of the speckle noise beyond ~0.7”.  
+#short caption: HST STIS: Bar5 coronagraph 5-sigma post-processed [KLIP] contrast curve; 162sec exposure. Photon noise is a significant contributor beyond 0.7”. (source: STIS handbook) This program observed HD 38393 at 9 roll angles with 9 dithers per roll angle. No filter was used, so the bandpass is ~200-1030nm. Total exposure time = 810*.2sec = 2.7 minutes, and is therefore moderately photon limited at large angles. Assuming photon noise adds in quadrature with speckle residuals to produce the KLIP contrast, the photon noise is >50% the magnitude of the speckle noise beyond ~0.7”.  
 #References:
 #http://www.stsci.edu/hst/stis/strategies/pushing/coronagraphy_bar5
 #http://adsabs.harvard.edu/abs/2017arXiv170910125R

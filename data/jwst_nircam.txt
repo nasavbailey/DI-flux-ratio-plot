@@ -1,6 +1,5 @@
 #Rho(as) 210_contr
-#short caption: JWST NIRCAM: simulated 5-sigma post-processed [roll-subtraction] contrast curve for F210M-band, 2hr integration. (source: Beichmann+2010)
-#Full description: 5 sigma post-processed [roll-subtraction] contrast curve for F210M-band. 2x1hr rolls (+5/-5dgr), 10mas pointing uncertainty, 10nm differential WFE. Presumably no margins.
+#short caption: JWST NIRCAM: simulated 5-sigma post-processed [roll-subtraction] contrast curve for F210M-band. The model observation consists of 2x1hr rolls (+5/-5dgr), with a 10mas pointing uncertainty and a 10nm differential WFE. MUFs are uncertain, but current practice is to use the standard observatory MUFs and MUF=1 is for the instrument. (source: Beichmann+2010)
 #References:
 #Beichman et al. 2010: http://adsabs.harvard.edu/abs/2010PASP..122..162B
 #https://jwst-docs.stsci.edu/display/JTI/NIRCam+Coronagraphic+Imaging
