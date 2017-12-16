@@ -303,7 +303,7 @@ plt.text(rho,flux_ratio,'Tau Ceti e  ',color=c_pl,\
     horizontalalignment='right',verticalalignment='center',fontsize=ccfs)
 
 caption += '-- Other noteable planetary systems: Prox Cen b, Tau Ceti e&f. '+\
-            'At quadrature, albedo = 0.3, radius = (M/Me)^(1/3) * Re\n'
+            'At quadrature, albedo = 0.3, radius = (M/Me)^(1/3) * Re, circular orbits.\n'
 
 #########################################################################
 ###Add Earth and Jupiter
@@ -326,11 +326,12 @@ caption += '-- Earth & Jupiter at quadrature as seen from 10 pc. '+\
 
 #########################################################################
 ###Add RV planets
-tmp = ascii.read(datapath+'reflected_light_table.txt')
+fname = datapath+'reflected_light_table.txt'
+tmp = ascii.read(fname)
 idx_rv = tmp['pl_discmethod'] == "Radial Velocity"
 plt.scatter(tmp[idx_rv]['sma_arcsec'],tmp[idx_rv]['Fp/F*_quad'],color='k',s=10,\
 label='RV, extrap.\nreflected light')
-
+caption += extract_short_caption(fname)
 
 
 #########################################################################
