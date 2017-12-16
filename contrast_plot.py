@@ -59,7 +59,7 @@ xlim = np.array([0.03,4])
 markersize_points=4
 ccfs = 8 # contrast curve font size
 ccc = 'darkviolet' # default contrast curve color
-cclw = 1.5 # default contrast curve line width
+cclw = 1 # default contrast curve line width
 c_pl = 'c' # color for special planetary systems (Solar System, Prox Cen, etc.)
 
 # placeholder line to make a legend entry for contrast curves
@@ -146,8 +146,8 @@ if include_ELT:
 ### HabEx "goal" contrast curve
 
 if include_HABEX:
-    ax1.plot([0.06, 1.6],[5E-11, 5E-11],color=c_bbvis,linestyle='--',linewidth=cclw-0.5,label='')
-    ax1.text(1.6,6E-11,'HabEx',color=c_bbvis,horizontalalignment='right',fontsize=ccfs)
+    ax1.plot([0.06, 1.6],[5E-11, 5E-11],color=c_bbvis,linestyle='--',linewidth=cclw,label='')
+    ax1.text(1.6,6E-11,'HabEx goal',color=c_bbvis,horizontalalignment='right',fontsize=ccfs)
     caption += '-- HabEx: Goal 5-sigma post-processed contrast.  '+\
                 'IWA ~ 2.5 lambda/D @ 450nm; OWA ~ 32 l/D @ 1micron '+\
                 '(source: B. Mennesson, personal communication)\n'
@@ -159,7 +159,7 @@ if include_HABEX:
 if include_NIRCAM:
     fname = datapath+'jwst_nircam.txt'
     a_JWST = ascii.read(fname)
-    ax1.plot(a_JWST['Rho(as)'],a_JWST['210_contr'],color=c_k,linewidth=cclw-0.5,linestyle='--',label='')
+    ax1.plot(a_JWST['Rho(as)'],a_JWST['210_contr'],color=c_k,linewidth=cclw,linestyle='--',label='')
     if include_SPHERE:
         xy=[1.6, 5E-7]
         ax1.text(xy[0],xy[1], 'JWST NIRCam', color=c_k, rotation=-25, fontsize=ccfs)
@@ -241,11 +241,10 @@ contrast_exoplanet=a_e[:,2]
 arcsec_disk=a_d[:,1]
 contrast_disk=a_d[:,2]
 
-ax1.plot(arcsec_exoplanet,contrast_exoplanet,color='black',linestyle='--',\
-    linewidth=cclw+0.5, label='WFIRST old L3')
-ax1.plot(arcsec_disk,contrast_disk,color='black',linestyle='--',\
-    linewidth=cclw+0.5)
+ax1.plot(arcsec_exoplanet,contrast_exoplanet,color=c_v, linewidth=cclw+2)
+ax1.plot(arcsec_disk,contrast_disk,color=c_750, linewidth=cclw+2)
 caption += '-- WFIRST lines are pre-WEITR L3 requirements for 5-sigma, post-processed contrast.\n'
+ax1.text(1.3, 2E-9, 'WFIRST', color='k', horizontalalignment='left',fontsize=ccfs, weight='bold')
 
 ######Add Technical requirement line and text
 if include_BTR_img:
