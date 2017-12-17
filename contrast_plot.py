@@ -318,6 +318,7 @@ if include_special_systems:
 
     # Tau Ceti
     tc_dist = 3.65*u.pc
+    albedo = 0.35
     # make a separate upper x axis for physical separation of this system
     ax3 = ax1.twiny()
     ax3.set_ylim(ylim)
@@ -329,7 +330,7 @@ if include_special_systems:
     # Tau Ceti f
     sma = 1.334*u.au
     flux_ratio = rlp.calc_lambert_flux_ratio(sma=sma, rp=3.9**(1./3)*u.earthRad,\
-        orb_ang=0*u.degree,albedo=0.3, inclin=0*u.degree)
+        orb_ang=0*u.degree,albedo=albedo, inclin=0*u.degree)
     rho = (sma/tc_dist).value
     ax3.plot(sma, flux_ratio,marker='^', color=c_pl)
     ax3.text(sma.value,flux_ratio,'  Tau Ceti f',color=c_pl,\
@@ -338,20 +339,21 @@ if include_special_systems:
     # Tau Ceti e
     sma = 0.538*u.au
     flux_ratio = rlp.calc_lambert_flux_ratio(sma=sma, rp=3.9**(1./3)*u.earthRad,\
-        orb_ang=0*u.degree,albedo=0.3, inclin=0*u.degree)
+        orb_ang=0*u.degree,albedo=albedo, inclin=0*u.degree)
     rho = (sma/tc_dist).value
     #ax1.plot(rho,flux_ratio,marker='^', color=c_pl)
     ax3.plot(sma, flux_ratio,marker='^', color=c_pl)
     ax3.text(sma.value,flux_ratio,'Tau Ceti e  ',color=c_pl,\
         horizontalalignment='right',verticalalignment='center',fontsize=ccfs)
 
-    caption += '-- Tau Ceti e&f. At quadrature, albedo = 0.3, radius = (M/Me)^(1/3) * Re, circular orbits.\n\n'
+    caption += '-- Tau Ceti e&f. At quadrature, albedo = ' + str(albedo) +\
+        ', radius = (M/Me)^(1/3) * Re, circular orbits.\n\n'
 
     # Earth
     earthRatio = rlp.calc_lambert_flux_ratio(sma=1.*u.au, rp=1.*u.earthRad,\
-        orb_ang=0*u.degree,albedo=0.3, inclin=0*u.degree)
+        orb_ang=0*u.degree,albedo=0.367, inclin=0*u.degree)
     jupiterRatio = rlp.calc_lambert_flux_ratio(sma=5.*u.au, rp=1.*u.jupiterRad,\
-        orb_ang=0*u.degree,albedo=0.5, inclin=0*u.degree)
+        orb_ang=0*u.degree,albedo=0.52, inclin=0*u.degree)
 
     # Jupiter
     ax1.plot(0.1,earthRatio,marker='$\\bigoplus$',color=c_pl,markersize=10)
@@ -362,7 +364,8 @@ if include_special_systems:
     ax1.text(0.5,jupiterRatio,'  Jupiter ',color=c_pl,\
     horizontalalignment='left',verticalalignment='center',fontsize=ccfs)
     caption += '-- Earth & Jupiter at quadrature as seen from 10 pc. '+\
-                'Albedos of 0.3 and 0.5, respectively.\n\n'
+                'Albedos of 0.367 and 0.52, respectively. (Traub & Oppenheimer, '+\
+                'Direct Imaging chapter of Seager Exoplanets textbook, Table 3)\n\n'
 
 
 
