@@ -53,7 +53,7 @@ Lines labeled BTR# are WFIRST Baseline Technical Requirements.
 Black triangular points are estimated reflected light contrast ratios for known gas giant radial velocity-detected (RV) planets at quadrature, with assumed geometric albedo of 0.5.
 Red squares are H-band contrasts of known self-luminous directly-imaged (DI) planets.
 Dotted lines connect each DI planet’s known H-band contrast to its predicted contrast at 750nm (yellow diamonds) or 550nm (blue circles), based on COND or BT-Settl planet evolutionary models.
-Cyan points represent the Earth and Jupiter at 10pc as well as super-Earths Tau Ceti e and f; refer to the upper x-axis for corresponding physical separation.
+Cyan points represent the Earth and Jupiter at 10pc as well as super-Earths Tau Ceti e and f.
 
 
 
