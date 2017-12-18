@@ -34,7 +34,7 @@ include_special_systems = True # include, Tau Ceti and Solar System?
 is_draft = True # print DRAFT on the plot?
 
  # colorcode contrast curve lines by wavelength?
-color_by_lambda = 'simple' # full, simple, none
+color_by_lambda = 'full' # full, simple, none
 
 ###Define path where to find data and where to save plot
 path = './' # leave blank or set to './' if this script is in the same folder as the data (default)
@@ -112,13 +112,16 @@ else:
 caption = '** This short caption is auto-generated. DO NOT EDIT. **\n' + \
         'Please see individual datafiles for full descriptions. \n\n'
 
+if color_by_lambda.lower() != 'none':
+    caption += 'Lines and points are color coded by wavelength of observation.\n\n'
+
 def extract_short_caption(filename):
     f = open(filename,'r')
     lines = f.readlines()
     f.close()
     for l in lines:
         if '#short caption:' in l.lower():
-            return '-- '+l.split('caption:')[1].strip()+'\n'
+            return '-- '+l.split('caption:')[1].strip()+'\n\n'
     # if no caption in text file
     print '\n**** WARNING **** no caption for '+filename+'\n'
     return ''
@@ -150,7 +153,7 @@ if include_HABEX:
     ax1.text(1.6,6E-11,'HabEx goal',color=c_bbvis,horizontalalignment='right',fontsize=ccfs)
     caption += '-- HabEx: Goal 5-sigma post-processed contrast.  '+\
                 'IWA ~ 2.5 lambda/D @ 450nm; OWA ~ 32 l/D @ 1micron '+\
-                '(source: B. Mennesson, personal communication)\n'
+                '(source: B. Mennesson, personal communication)\n\n'
 
 
 #########################################################################
@@ -243,7 +246,7 @@ contrast_disk=a_d[:,2]
 
 ax1.plot(arcsec_exoplanet,contrast_exoplanet,color=c_v, linewidth=cclw+2)
 ax1.plot(arcsec_disk,contrast_disk,color=c_750, linewidth=cclw+2)
-caption += '-- WFIRST lines are pre-WEITR L3 requirements for 5-sigma, post-processed contrast.\n'
+caption += '-- WFIRST contrast curves are pre-WEITR L3 requirements for 5-sigma, post-processed contrast.\n\n'
 ax1.text(1.3, 2E-9, 'WFIRST', color='k', horizontalalignment='left',fontsize=ccfs, weight='bold')
 
 ######Add Technical requirement line and text
@@ -251,13 +254,13 @@ if include_BTR_img:
     ax1.plot([0.23, 0.4], [0.5*5E-8, 0.5*5E-8], color=c_v, linewidth=cclw+2, alpha=0.7)
     ax1.text(0.23,2.5*10**-8,'BTR1 ',color=c_v,horizontalalignment='right',\
         weight='bold',fontsize=ccfs)
-    caption += '-- BTR1: imaging BTR.\n'
+    caption += '-- BTR1: imaging BTR.\n\n'
 
 if include_BTR_disk_to_img:
     ax1.plot([0.25, 0.95], [0.5*5E-8, 0.5*5E-8], color=c_750, linewidth=cclw+4, alpha=0.6)
     ax1.text(0.95,2.5*10**-8,' BTR3',color=c_750,horizontalalignment='left',\
         weight='bold',fontsize=ccfs)
-    caption += '-- BTR3: extended object sensitivity BTR translate to point source sensitivity.\n'
+    caption += '-- BTR3: extended object sensitivity BTR translate to point source sensitivity.\n\n'
 
 
 
@@ -310,9 +313,13 @@ if include_special_systems:
     #ax1.plot(rho,flux_ratio,marker='^', color=c_pl)
     #ax1.text(rho,flux_ratio,'  Proxima Cen b',color=c_pl,\
     #    horizontalalignment='left',verticalalignment='center',fontsize=ccfs)
+    #caption += '-- Prox Cen b: At quadrature, albedo = 0.3, radius = (M/Me)^(1/3) * Re, circular orbit.\n\n'
+
 
     # Tau Ceti
     tc_dist = 3.65*u.pc
+    albedo = 0.35
+    # make a separate upper x axis for physical separation of this system
     ax3 = ax1.twiny()
     ax3.set_ylim(ylim)
     ax3.set_xlim(xlim * tc_dist.value)
@@ -323,7 +330,7 @@ if include_special_systems:
     # Tau Ceti f
     sma = 1.334*u.au
     flux_ratio = rlp.calc_lambert_flux_ratio(sma=sma, rp=3.9**(1./3)*u.earthRad,\
-        orb_ang=0*u.degree,albedo=0.3, inclin=0*u.degree)
+        orb_ang=0*u.degree,albedo=albedo, inclin=0*u.degree)
     rho = (sma/tc_dist).value
     ax3.plot(sma, flux_ratio,marker='^', color=c_pl)
     ax3.text(sma.value,flux_ratio,'  Tau Ceti f',color=c_pl,\
@@ -332,21 +339,21 @@ if include_special_systems:
     # Tau Ceti e
     sma = 0.538*u.au
     flux_ratio = rlp.calc_lambert_flux_ratio(sma=sma, rp=3.9**(1./3)*u.earthRad,\
-        orb_ang=0*u.degree,albedo=0.3, inclin=0*u.degree)
+        orb_ang=0*u.degree,albedo=albedo, inclin=0*u.degree)
     rho = (sma/tc_dist).value
     #ax1.plot(rho,flux_ratio,marker='^', color=c_pl)
     ax3.plot(sma, flux_ratio,marker='^', color=c_pl)
     ax3.text(sma.value,flux_ratio,'Tau Ceti e  ',color=c_pl,\
         horizontalalignment='right',verticalalignment='center',fontsize=ccfs)
 
-    caption += '-- Other noteable planetary systems: Prox Cen b, Tau Ceti e&f. '+\
-                'At quadrature, albedo = 0.3, radius = (M/Me)^(1/3) * Re\n'
+    caption += '-- Tau Ceti e&f. At quadrature, albedo = ' + str(albedo) +\
+        ', radius = (M/Me)^(1/3) * Re, circular orbits.\n\n'
 
     # Earth
     earthRatio = rlp.calc_lambert_flux_ratio(sma=1.*u.au, rp=1.*u.earthRad,\
-        orb_ang=0*u.degree,albedo=0.3, inclin=0*u.degree)
+        orb_ang=0*u.degree,albedo=0.367, inclin=0*u.degree)
     jupiterRatio = rlp.calc_lambert_flux_ratio(sma=5.*u.au, rp=1.*u.jupiterRad,\
-        orb_ang=0*u.degree,albedo=0.5, inclin=0*u.degree)
+        orb_ang=0*u.degree,albedo=0.52, inclin=0*u.degree)
 
     # Jupiter
     ax1.plot(0.1,earthRatio,marker='$\\bigoplus$',color=c_pl,markersize=10)
@@ -357,18 +364,20 @@ if include_special_systems:
     ax1.text(0.5,jupiterRatio,'  Jupiter ',color=c_pl,\
     horizontalalignment='left',verticalalignment='center',fontsize=ccfs)
     caption += '-- Earth & Jupiter at quadrature as seen from 10 pc. '+\
-                'Albedos of 0.3 and 0.5, respectively.\n'
+                'Albedos of 0.367 and 0.52, respectively. (Traub & Oppenheimer, '+\
+                'Direct Imaging chapter of Seager Exoplanets textbook, Table 3)\n\n'
 
 
 
 
 #########################################################################
 ###Add RV planets
-tmp = ascii.read(datapath+'reflected_light_table.txt')
+fname = datapath+'reflected_light_table.txt'
+tmp = ascii.read(fname)
 idx_rv = tmp['pl_discmethod'] == "Radial Velocity"
 ax1.scatter(tmp[idx_rv]['sma_arcsec'],tmp[idx_rv]['Fp/F*_quad'],color='k',s=30,\
     marker='^', label='RV, reflected light')
-
+caption += extract_short_caption(fname)
 
 
 #########################################################################
@@ -412,7 +421,7 @@ ax1.xaxis.set_major_formatter(ticker.FormatStrFormatter('%.1f'))
 
 plt.tight_layout()
 
-f = open(path+'caption.txt','w') #open and overwrite existing
+f = open(path+'auto_caption.txt','w') #open and overwrite existing
 f.write(caption)
 f.close()
 plt.savefig(path+'flux_ratio_plot.pdf')
