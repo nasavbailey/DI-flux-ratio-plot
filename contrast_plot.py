@@ -63,7 +63,7 @@ cclw = 1 # default contrast curve line width
 c_pl = 'c' # color for special planetary systems (Solar System, Prox Cen, etc.)
 
 # placeholder line to make a legend entry for contrast curves
-ax1.plot([1,1],[1,1],'k',linewidth=cclw, label='5$\sigma$ post-processed\ndetection limits')
+ax1.plot([1,1],[1,1],'k',linewidth=cclw, label='5$\mathdefault{\sigma}$ post-processed\ndetection limits')
 
 if color_by_lambda.lower() == 'full':
     c_v = 'dodgerblue'
@@ -280,7 +280,7 @@ if include_DI_H or include_DI_extrap:
 
 if include_DI_H:
     ax1.scatter(a_DI['Rho(as)'],a_DI['H_contr'],color=c_h, edgecolor='k', \
-        alpha=alpha_di, marker='s', s=sz_di, zorder=2, label='DI, H-band')
+        alpha=alpha_di, marker='s', s=sz_di, zorder=2, label='DI, 1.6 $\mathdefault{\mu} $m')
 
 if include_DI_750_extrap:
     ax1.scatter(a_DI['Rho(as)'],a_DI['763m_contr'],color=c_750, edgecolor='k', \
