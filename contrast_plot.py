@@ -34,7 +34,7 @@ include_special_systems = True # include, Tau Ceti and Solar System?
 is_draft = True # print DRAFT on the plot?
 
  # colorcode contrast curve lines by wavelength?
-color_by_lambda = 'full' # full, simple, none
+color_by_lambda = 'simple' # full, simple, none
 
 ###Define path where to find data and where to save plot
 path = './' # leave blank or set to './' if this script is in the same folder as the data (default)
@@ -63,7 +63,9 @@ cclw = 1 # default contrast curve line width
 c_pl = 'c' # color for special planetary systems (Solar System, Prox Cen, etc.)
 
 # placeholder line to make a legend entry for contrast curves
-ax1.plot([1,1],[1,1],'k',linewidth=cclw, label='5$\mathdefault{\sigma}$ post-processed\ndetection limits')
+#ax1.plot([1,1],[1,1],'k',linewidth=cclw, label='5$\mathdefault{\sigma}$ post-processed\ndetection limits')
+ax1.text(xlim[1]*.9, ylim[1]*.5, 'contrast curves are 5$\mathdefault{\sigma}$ post-processed detection limits',\
+    color='k',horizontalalignment='right', verticalalignment='top',fontsize=ccfs)
 
 if color_by_lambda.lower() == 'full':
     c_v = 'dodgerblue'
@@ -84,7 +86,7 @@ if color_by_lambda.lower() == 'full':
 elif color_by_lambda.lower() == 'simple':
     c_v = 'dodgerblue'
     c_bbvis = c_v
-    c_750 = 'goldenrod'
+    c_750 = 'orange'
     c_yjh = 'firebrick'
     c_h = c_yjh
     c_k = c_yjh
@@ -247,17 +249,17 @@ contrast_disk=a_d[:,2]
 ax1.plot(arcsec_exoplanet,contrast_exoplanet,color=c_v, linewidth=cclw+2)
 ax1.plot(arcsec_disk,contrast_disk,color=c_750, linewidth=cclw+2)
 caption += '-- WFIRST contrast curves are pre-WEITR L3 requirements for 5-sigma, post-processed contrast.\n\n'
-ax1.text(1.3, 2E-9, 'WFIRST', color='k', horizontalalignment='left',fontsize=ccfs, weight='bold')
+ax1.text(1.3, 2E-9, 'WFIRST\nCGI', color='k', horizontalalignment='left',fontsize=ccfs, weight='bold')
 
 ######Add Technical requirement line and text
 if include_BTR_img:
-    ax1.plot([0.23, 0.4], [0.5*5E-8, 0.5*5E-8], color=c_v, linewidth=cclw+2, alpha=0.7)
+    ax1.plot([0.23, 0.4], [0.5*5E-8, 0.5*5E-8], color=c_v, linewidth=cclw+4, alpha=0.7)
     ax1.text(0.23,2.5*10**-8,'BTR1 ',color=c_v,horizontalalignment='right',\
         weight='bold',fontsize=ccfs)
     caption += '-- BTR1: imaging BTR.\n\n'
 
 if include_BTR_disk_to_img:
-    ax1.plot([0.25, 0.95], [0.5*5E-8, 0.5*5E-8], color=c_750, linewidth=cclw+4, alpha=0.6)
+    ax1.plot([0.25, 0.95], [0.5*5E-8, 0.5*5E-8], color=c_750, linewidth=cclw+2, linestyle='--')
     ax1.text(0.95,2.5*10**-8,' BTR3',color=c_750,horizontalalignment='left',\
         weight='bold',fontsize=ccfs)
     caption += '-- BTR3: extended object sensitivity BTR translate to point source sensitivity.\n\n'
@@ -287,7 +289,7 @@ if include_DI_H:
 
 if include_DI_750_extrap:
     ax1.scatter(a_DI['Rho(as)'],a_DI['763m_contr'],color=c_750, edgecolor='k', \
-        marker='d', alpha=alpha_di, s=sz_di+15, zorder=2, label='DI, 750nm extrap.')
+        marker='d', alpha=alpha_di, s=sz_di+15, zorder=2, label='DI, 750nm pred.')
     if not include_DI_550_extrap:
         for ct, rho in enumerate(a_DI['Rho(as)']):
             ax1.plot([rho,rho], [a_DI[ct]['763m_contr'], a_DI[ct]['H_contr']], \
@@ -298,7 +300,7 @@ if include_DI_550_extrap:
         ax1.plot([rho,rho], [a_DI[ct]['547m_contr'], a_DI[ct]['H_contr']], \
             color='lightgray', linewidth=1, linestyle=':', zorder=1)
     ax1.scatter(a_DI['Rho(as)'],a_DI['547m_contr'],color=c_v, edgecolor='k', \
-        marker='o', alpha=alpha_di, s=sz_di+15, zorder=2, label='DI, 550nm extrap.')
+        marker='o', alpha=alpha_di, s=sz_di+15, zorder=2, label='DI, 550nm pred.')
 
 
 #########################################################################
@@ -386,7 +388,7 @@ caption += extract_short_caption(fname)
 if is_draft:
     from datetime import date
     #plt.title("DRAFT  "+str(date.today()), color='red',weight='bold', loc='left')
-    ax1.text(xlim[1]*.9, ylim[1]*.5, "DRAFT  "+str(date.today()), \
+    ax1.text(xlim[1]*.9, ylim[1]*.2, "DRAFT  "+str(date.today()), \
         horizontalalignment='right',verticalalignment='top',color='red',weight='bold')
 
 ax1.legend(fontsize=7, loc='upper left')
