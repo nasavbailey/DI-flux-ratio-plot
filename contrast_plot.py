@@ -29,7 +29,7 @@ include_DI_750_extrap = True # COND/BT-Settl model extrapolations to ~750nm
 include_DI_550_extrap = True # COND/BT-Settl model extrapolations to ~550nm
 include_BTR_img = True # imaging BTR
 include_BTR_disk_to_img = True # disk mask BTR
-include_special_systems = False # include, Tau Ceti and Solar System?
+include_special_systems = True # include, Tau Ceti and Solar System?
 
 is_draft = True # print DRAFT on the plot?
 
@@ -95,7 +95,7 @@ elif color_by_lambda.lower() == 'simple':
 
     line1, = ax2.plot([1,1],[1,1],color=c_v,linewidth=cclw+1, label='Blue optical')
     line2, = ax2.plot([1,1],[1,1],color=c_750,linewidth=cclw+1, label='Red optical')
-    line3, = ax2.plot([1,1],[1,1],color=c_h,linewidth=cclw+1, label='near IR')
+    line3, = ax2.plot([1,1],[1,1],color=c_h,linewidth=cclw+1, label='Near IR')
 
 elif color_by_lambda.lower() == 'none':
     c_v = ccc
@@ -232,7 +232,7 @@ if include_SPHERE:
 if include_GPI:
     fname = datapath+'GPIES_T-type_contrast_curve_2per.txt'
     a_GPI = ascii.read(fname)
-    ax1.plot(a_GPI['Rho(as)'],a_GPI['H_contr'],color=c_h,linewidth=cclw,label='')
+    ax1.plot(a_GPI['Rho(as)'],a_GPI['H_contr_60min'],color=c_h,linewidth=cclw,label='')
     ax1.text(0.17,1*10**-5,'Gemini GPI',color=c_h,horizontalalignment='left',rotation=-20,fontsize=ccfs)
     caption += extract_short_caption(fname)
 
@@ -413,6 +413,8 @@ ax1.xaxis.set_major_formatter(ticker.FormatStrFormatter('%.1g'))
 
 ax2.set_ylim(ylim)
 ax2.set_xlim(xlim)
+#ax2.set_yscale('log')
+#ax2.set_xscale('log')
 ax2.set_yticklabels([])
 ax2.yaxis.set_ticks_position('none')
 
