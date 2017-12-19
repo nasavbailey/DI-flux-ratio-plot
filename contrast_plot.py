@@ -17,7 +17,7 @@ from astropy import units as u
 
 # Which contrast curves to include?
 include_ELT     = False
-include_HABEX   = True
+include_HABEX   = False
 include_ACS     = True
 include_NICMOS  = True
 include_STIS    = True
