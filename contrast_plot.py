@@ -29,7 +29,7 @@ include_DI_750_extrap = True # COND/BT-Settl model extrapolations to ~750nm
 include_DI_550_extrap = True # COND/BT-Settl model extrapolations to ~550nm
 include_BTR_img = True # imaging BTR
 include_BTR_disk_to_img = True # disk mask BTR
-include_special_systems = True # include, Tau Ceti and Solar System?
+include_special_systems = False # include, Tau Ceti and Solar System?
 
 is_draft = True # print DRAFT on the plot?
 
@@ -48,24 +48,25 @@ rcParams.update({'figure.autolayout': True})
 rcParams.update({'font.size': 12})
 rcParams['mathtext.fontset'] = 'stix'
 rcParams['lines.solid_capstyle'] = 'butt' #don't increase line length when increasing width
+rcParams['patch.linewidth'] = 0.5  # make marker edge linewidths narrower for scatter
 
-fig=plt.figure()#figsize=[7,4.5]
+fig=plt.figure(figsize=[6,5])#
 ax1 = fig.add_subplot(111)
 ax2 = ax1.twinx()
 
-ylim = np.array([1E-11, 2E-3])
-xlim = np.array([0.03,4])
+ylim = np.array([1E-11, 1E-3])
+xlim = np.array([0.07,5])
 
-markersize_points=4
+rv_markersize = 35
+di_markersize = 15
 ccfs = 8 # contrast curve font size
 ccc = 'darkviolet' # default contrast curve color
 cclw = 1 # default contrast curve line width
 c_pl = 'c' # color for special planetary systems (Solar System, Prox Cen, etc.)
 
-# placeholder line to make a legend entry for contrast curves
-#ax1.plot([1,1],[1,1],'k',linewidth=cclw, label='5$\mathdefault{\sigma}$ post-processed\ndetection limits')
-ax1.text(xlim[1]*.9, ylim[1]*.5, 'contrast curves are 5$\mathdefault{\sigma}$ post-processed detection limits',\
-    color='k',horizontalalignment='right', verticalalignment='top',fontsize=ccfs)
+# text about contrast curves
+ax1.text(xlim[0], ylim[0]*1.1, ' Contrast curves are \n 5$\mathdefault{\sigma}$ post-processed detection limits.',\
+    color='k',horizontalalignment='left', verticalalignment='bottom',fontsize=ccfs-1)
 
 if color_by_lambda.lower() == 'full':
     c_v = 'dodgerblue'
@@ -76,12 +77,12 @@ if color_by_lambda.lower() == 'full':
     c_h   = 'red'
     #c_l   = 'darkred'
 
-    line1, = ax2.plot([1,1],[1,1],color=c_v,linewidth=cclw, label='V/550nm')
-    line2, = ax2.plot([1,1],[1,1],color=c_bbvis,linewidth=cclw, label='broadband visible')
-    line3, = ax2.plot([1,1],[1,1],color=c_750,linewidth=cclw, label='750nm')
-    line4, = ax2.plot([1,1],[1,1],color=c_yjh,linewidth=cclw, label='YJH-band')
-    line5, = ax2.plot([1,1],[1,1],color=c_h,linewidth=cclw, label='H-band')
-    line6, = ax2.plot([1,1],[1,1],color=c_k,linewidth=cclw, label='K-band')
+    line1, = ax2.plot([1,1],[1,1],color=c_v,linewidth=cclw+1, label='V/550nm')
+    line2, = ax2.plot([1,1],[1,1],color=c_bbvis,linewidth=cclw+1, label='broadband\nvisible')
+    line3, = ax2.plot([1,1],[1,1],color=c_750,linewidth=cclw+1, label='750nm')
+    line4, = ax2.plot([1,1],[1,1],color=c_yjh,linewidth=cclw+1, label='YJH-band')
+    line5, = ax2.plot([1,1],[1,1],color=c_h,linewidth=cclw+1, label='H-band')
+    line6, = ax2.plot([1,1],[1,1],color=c_k,linewidth=cclw+1, label='K-band')
 
 elif color_by_lambda.lower() == 'simple':
     c_v = 'dodgerblue'
@@ -92,9 +93,9 @@ elif color_by_lambda.lower() == 'simple':
     c_k = c_yjh
     #c_l = 'darkred'
 
-    line1, = ax2.plot([1,1],[1,1],color=c_v,linewidth=cclw, label='Blue optical')
-    line2, = ax2.plot([1,1],[1,1],color=c_750,linewidth=cclw, label='Red optical')
-    line3, = ax2.plot([1,1],[1,1],color=c_h,linewidth=cclw, label='near IR')
+    line1, = ax2.plot([1,1],[1,1],color=c_v,linewidth=cclw+1, label='Blue optical')
+    line2, = ax2.plot([1,1],[1,1],color=c_750,linewidth=cclw+1, label='Red optical')
+    line3, = ax2.plot([1,1],[1,1],color=c_h,linewidth=cclw+1, label='near IR')
 
 elif color_by_lambda.lower() == 'none':
     c_v = ccc
@@ -249,19 +250,20 @@ contrast_disk=a_d[:,2]
 ax1.plot(arcsec_exoplanet,contrast_exoplanet,color=c_v, linewidth=cclw+2)
 ax1.plot(arcsec_disk,contrast_disk,color=c_750, linewidth=cclw+2)
 caption += '-- WFIRST contrast curves are pre-WEITR L3 requirements for 5-sigma, post-processed contrast.\n\n'
-ax1.text(1.3, 2E-9, 'WFIRST\nCGI', color='k', horizontalalignment='left',fontsize=ccfs, weight='bold')
+ax1.text(1.3, 2E-9, 'WFIRST\nCGI', color='k', horizontalalignment='left',\
+    fontsize=ccfs+1, weight='bold')
 
 ######Add Technical requirement line and text
 if include_BTR_img:
-    ax1.plot([0.23, 0.4], [0.5*5E-8, 0.5*5E-8], color=c_v, linewidth=cclw+4, alpha=0.7)
+    ax1.plot([0.23, 0.4], [0.5*5E-8, 0.5*5E-8], color=c_v, linewidth=cclw+5)
     ax1.text(0.23,2.5*10**-8,'BTR1 ',color=c_v,horizontalalignment='right',\
-        weight='bold',fontsize=ccfs)
+        weight='bold',fontsize=ccfs+1)
     caption += '-- BTR1: imaging BTR.\n\n'
 
 if include_BTR_disk_to_img:
     ax1.plot([0.25, 0.95], [0.5*5E-8, 0.5*5E-8], color=c_750, linewidth=cclw+2, linestyle='--')
     ax1.text(0.95,2.5*10**-8,' BTR3',color=c_750,horizontalalignment='left',\
-        weight='bold',fontsize=ccfs)
+        weight='bold',fontsize=ccfs+1)
     caption += '-- BTR3: extended object sensitivity BTR translate to point source sensitivity.\n\n'
 
 
@@ -279,17 +281,16 @@ if include_DI_H or include_DI_extrap:
     a_DI['547m_contr'] = 10**(a_DI['547m_delta']/-2.5)
     a_DI['763m_contr'] = 10**(a_DI['763m_delta']/-2.5)
     a_DI['H_contr'] = 10**(a_DI['H_delta']/-2.5)
-    sz_di = 15
-    alpha_di = 1
+    alpha_di = 0.7
     caption += extract_short_caption(fname)
 
 if include_DI_H:
     ax1.scatter(a_DI['Rho(as)'],a_DI['H_contr'],color=c_h, edgecolor='k', \
-        alpha=alpha_di, marker='s', s=sz_di, zorder=2, label='DI, 1.6 $\mathdefault{\mu} $m')
+        alpha=alpha_di, marker='s', s=di_markersize, zorder=2, label='DI, 1.6 $\mathdefault{\mu} $m')
 
 if include_DI_750_extrap:
     ax1.scatter(a_DI['Rho(as)'],a_DI['763m_contr'],color=c_750, edgecolor='k', \
-        marker='d', alpha=alpha_di, s=sz_di+15, zorder=2, label='DI, 750nm pred.')
+        marker='d', alpha=alpha_di, s=di_markersize+15, zorder=2, label='DI, 750nm pred.')
     if not include_DI_550_extrap:
         for ct, rho in enumerate(a_DI['Rho(as)']):
             ax1.plot([rho,rho], [a_DI[ct]['763m_contr'], a_DI[ct]['H_contr']], \
@@ -300,7 +301,7 @@ if include_DI_550_extrap:
         ax1.plot([rho,rho], [a_DI[ct]['547m_contr'], a_DI[ct]['H_contr']], \
             color='lightgray', linewidth=1, linestyle=':', zorder=1)
     ax1.scatter(a_DI['Rho(as)'],a_DI['547m_contr'],color=c_v, edgecolor='k', \
-        marker='o', alpha=alpha_di, s=sz_di+15, zorder=2, label='DI, 550nm pred.')
+        marker='o', alpha=alpha_di, s=di_markersize+15, zorder=2, label='DI, 550nm pred.')
 
 
 #########################################################################
@@ -334,7 +335,7 @@ if include_special_systems:
     flux_ratio = rlp.calc_lambert_flux_ratio(sma=sma, rp=3.9**(1./3)*u.earthRad,\
         orb_ang=0*u.degree,albedo=albedo, inclin=0*u.degree)
     rho = (sma/tc_dist).value
-    ax3.plot(sma, flux_ratio,marker='^', color=c_pl)
+    ax3.scatter(sma, flux_ratio,marker='^', color=c_pl, edgecolor='k')
     ax3.text(sma.value,flux_ratio,'  Tau Ceti f',color=c_pl,\
         horizontalalignment='left',verticalalignment='center',fontsize=ccfs)
 
@@ -344,30 +345,34 @@ if include_special_systems:
         orb_ang=0*u.degree,albedo=albedo, inclin=0*u.degree)
     rho = (sma/tc_dist).value
     #ax1.plot(rho,flux_ratio,marker='^', color=c_pl)
-    ax3.plot(sma, flux_ratio,marker='^', color=c_pl)
+    ax3.scatter(sma, flux_ratio,marker='^', color=c_pl, edgecolor='k')
     ax3.text(sma.value,flux_ratio,'Tau Ceti e  ',color=c_pl,\
         horizontalalignment='right',verticalalignment='center',fontsize=ccfs)
 
     caption += '-- Tau Ceti e&f. At quadrature, albedo = ' + str(albedo) +\
         ', radius = (M/Me)^(1/3) * Re, circular orbits.\n\n'
 
-    # Earth
+    # Earth & Jupiter
     earthRatio = rlp.calc_lambert_flux_ratio(sma=1.*u.au, rp=1.*u.earthRad,\
         orb_ang=0*u.degree,albedo=0.367, inclin=0*u.degree)
     jupiterRatio = rlp.calc_lambert_flux_ratio(sma=5.*u.au, rp=1.*u.jupiterRad,\
         orb_ang=0*u.degree,albedo=0.52, inclin=0*u.degree)
 
-    # Jupiter
-    ax1.plot(0.1,earthRatio,marker='$\\bigoplus$',color=c_pl,markersize=10)
+    ax1.scatter(0.1,earthRatio,marker='$\\bigoplus$',color=c_pl, s=rv_markersize)
     ax1.text(0.1,earthRatio,'  Earth ',color=c_pl,\
         horizontalalignment='left',verticalalignment='center',fontsize=ccfs)
 
-    ax1.plot(0.5,jupiterRatio,marker='v',color=c_pl,markersize=markersize_points)
+    ax1.scatter(0.5,jupiterRatio,marker='v',color=c_pl,  edgecolor='k', s=rv_markersize)
     ax1.text(0.5,jupiterRatio,'  Jupiter ',color=c_pl,\
     horizontalalignment='left',verticalalignment='center',fontsize=ccfs)
     caption += '-- Earth & Jupiter at quadrature as seen from 10 pc. '+\
                 'Albedos of 0.367 and 0.52, respectively. (Traub & Oppenheimer, '+\
                 'Direct Imaging chapter of Seager Exoplanets textbook, Table 3)\n\n'
+
+    ax1.text(xlim[1], ylim[0]*1.1, 'Solar System as seen from 10pc. ',\
+    color='k',horizontalalignment='right', verticalalignment='bottom',fontsize=ccfs-1)
+
+
 
 
 
@@ -377,8 +382,8 @@ if include_special_systems:
 fname = datapath+'reflected_light_table.txt'
 tmp = ascii.read(fname)
 idx_rv = tmp['pl_discmethod'] == "Radial Velocity"
-ax1.scatter(tmp[idx_rv]['sma_arcsec'],tmp[idx_rv]['Fp/F*_quad'],color='k',s=30,\
-    marker='^', label='RV, reflected light')
+ax1.scatter(tmp[idx_rv]['sma_arcsec'],tmp[idx_rv]['Fp/F*_quad'],s=rv_markersize,\
+    color='k', marker='^', label='RV, reflected light')
 caption += extract_short_caption(fname)
 
 
@@ -387,13 +392,12 @@ caption += extract_short_caption(fname)
 
 if is_draft:
     from datetime import date
-    #plt.title("DRAFT  "+str(date.today()), color='red',weight='bold', loc='left')
-    ax1.text(xlim[1]*.9, ylim[1]*.2, "DRAFT  "+str(date.today()), \
-        horizontalalignment='right',verticalalignment='top',color='red',weight='bold')
+    ax1.text(xlim[1], ylim[0]*2, "DRAFT  "+str(date.today()) + ' ', \
+        horizontalalignment='right',verticalalignment='bottom',color='red',weight='bold')
 
-ax1.legend(fontsize=7, loc='upper left')
+ax1.legend(fontsize=7, loc='upper right')
 
-second_legend = ax2.legend(loc='center left', fontsize=7, title='Bandpass')
+second_legend = ax2.legend(loc='upper left', fontsize=7, title='Bandpass')
 second_legend.get_title().set_fontsize(8)
 
 ax1.grid(b=True, which='major', color='tan', linestyle='-', alpha=0.1)
@@ -402,6 +406,10 @@ ax1.set_ylim(ylim)
 ax1.set_xlim(xlim)
 ax1.set_yscale('log')
 ax1.set_xscale('log')
+ax1.set_xticks([0.05, 0.1, 0.5, 1, 5])
+
+# write x axis in scalar notation instead of powers of 10
+ax1.xaxis.set_major_formatter(ticker.FormatStrFormatter('%.1g'))
 
 ax2.set_ylim(ylim)
 ax2.set_xlim(xlim)
@@ -412,14 +420,6 @@ ax1.set_ylabel('Contrast: Flux ratio to host star')
 ax1.set_xlabel('Separation [arcsec]')
 
 
-###To include minor tick labels include the following (note this is not an elegant solution...)
-#x_ticks_minor=np.array((0.03,0.04,0.05,0.06,0.07,0.08,0.09,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0,2.0,3.0))
-#x_ticklabels_minor=np.array((0.03,'','','','','','','','','','','','','','','','','',''))
-#ax1.set_xticks(x_ticks_minor, minor = True)
-#ax1.set_xticklabels(x_ticklabels_minor, minor=True)
-
-# write x axis in scalar notation instead of powers of 10
-ax1.xaxis.set_major_formatter(ticker.FormatStrFormatter('%.1f'))
 
 plt.tight_layout()
 
