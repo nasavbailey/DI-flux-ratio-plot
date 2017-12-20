@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 @author: meshkat (original; July 31, 2017)
-November-December 2017: VPB reorganized & updated contrast curves
+November-December 2017: VPB reorganized & updated detection limit curves
 """
 
 import numpy as np
@@ -15,7 +15,7 @@ from astropy import units as u
 
 ### User-defined options
 
-# Which contrast curves to include?
+# Which plot elements to include?
 include_ELT     = False
 include_HABEX   = False
 include_ACS     = True
@@ -33,7 +33,7 @@ include_special_systems = True # include, Tau Ceti and Solar System?
 
 is_draft = True # print DRAFT on the plot?
 
- # colorcode contrast curve lines by wavelength?
+ # colorcode detection limit curve lines by wavelength?
 color_by_lambda = 'simple' # full, simple, none
 
 ###Define path where to find data and where to save plot
@@ -59,13 +59,13 @@ xlim = np.array([0.07,5])
 
 rv_markersize = 35
 di_markersize = 15
-ccfs = 8 # contrast curve font size
-ccc = 'darkviolet' # default contrast curve color
-cclw = 1 # default contrast curve line width
+ccfs = 8 # instrument curve font size
+ccc = 'darkviolet' # default instrument curve color
+cclw = 1 # default instrument curve line width
 c_pl = 'c' # color for special planetary systems (Solar System, Prox Cen, etc.)
 
-# text about contrast curves
-ax1.text(xlim[0], ylim[0]*1.1, ' Contrast curves are \n 5$\mathdefault{\sigma}$ post-processed detection limits.',\
+# text about detection limit curves
+ax1.text(xlim[0], ylim[0]*1.1, ' Instrument curves are \n 5$\mathdefault{\sigma}$ post-processed detection limits.',\
     color='k',horizontalalignment='left', verticalalignment='bottom',fontsize=ccfs-1)
 
 if color_by_lambda.lower() == 'full':
@@ -149,7 +149,7 @@ if include_ELT:
 
 
 #########################################################################
-### HabEx "goal" contrast curve
+### HabEx "goal" detection limit
 
 if include_HABEX:
     ax1.plot([0.06, 1.6],[5E-11, 5E-11],color=c_bbvis,linestyle='--',linewidth=cclw,label='')
@@ -160,7 +160,7 @@ if include_HABEX:
 
 
 #########################################################################
-### NIRCAM contrast curve
+### NIRCAM detection limit
 
 if include_NIRCAM:
     fname = datapath+'jwst_nircam.txt'
@@ -177,18 +177,19 @@ if include_NIRCAM:
     caption += extract_short_caption(fname)
 
 #########################################################################
-### NICMOS contrast curve
+### NICMOS detection limit
 if include_NICMOS:
     fname = datapath+'HST_NICMOS_Min.txt' #path+'HST_NICMOS_Median.txt'
     a_NICMOS = ascii.read(fname)
     ax1.plot(a_NICMOS['Rho(as)'],a_NICMOS['F160W_contr'],color=c_h,\
         linewidth=cclw,label='')
-    ax1.text(max(a_NICMOS['Rho(as)']*1.1),3.5E-6,'HST NICMOS',\
-        color=c_h,horizontalalignment='right',rotation=-20,fontsize=ccfs)
+    ax1.text(max(a_NICMOS['Rho(as)']*1.1), min(a_NICMOS['F160W_contr']), 'HST NICMOS',\
+        color=c_h,horizontalalignment='right', verticalalignment='bottom', \
+        rotation=-20,fontsize=ccfs)
     caption += extract_short_caption(fname)
 
 #########################################################################
-### STIS Bar5 contrast curve
+### STIS Bar5 detection limit
 if include_STIS:
     fname = datapath+'HST_STIS.txt'
     a_STIS = ascii.read(fname)
@@ -198,7 +199,7 @@ if include_STIS:
     caption += extract_short_caption(fname)
 
 #########################################################################
-### ACS contrast curve
+### ACS detection limit
 
 if include_ACS:
     fname = datapath+'HST_ACS.txt'
@@ -209,7 +210,7 @@ if include_ACS:
 
 
 #########################################################################
-### SPHERE contrast curve
+### SPHERE detection limit
 if include_SPHERE:
     fname = datapath+'SPHERE_Vigan.txt'
     a_SPHERE = ascii.read(fname)
@@ -233,7 +234,7 @@ if include_GPI:
     fname = datapath+'GPIES_T-type_contrast_curve_2per.txt'
     a_GPI = ascii.read(fname)
     ax1.plot(a_GPI['Rho(as)'],a_GPI['H_contr_60min'],color=c_h,linewidth=cclw,label='')
-    ax1.text(0.17,1*10**-5,'Gemini GPI',color=c_h,horizontalalignment='left',rotation=-20,fontsize=ccfs)
+    ax1.text(0.17,0.8*10**-5,'Gemini GPI',color=c_h,horizontalalignment='left',rotation=-24,fontsize=ccfs)
     caption += extract_short_caption(fname)
 
 #########################################################################
@@ -249,7 +250,7 @@ contrast_disk=a_d[:,2]
 
 ax1.plot(arcsec_exoplanet,contrast_exoplanet,color=c_v, linewidth=cclw+2)
 ax1.plot(arcsec_disk,contrast_disk,color=c_750, linewidth=cclw+2)
-caption += '-- WFIRST contrast curves are pre-WEITR L3 requirements for 5-sigma, post-processed contrast.\n\n'
+caption += '-- WFIRST curves are pre-WEITR L3 requirements for 5-sigma, post-processed detection limits.\n\n'
 ax1.text(1.3, 2E-9, 'WFIRST\nCGI', color='k', horizontalalignment='left',\
     fontsize=ccfs+1, weight='bold')
 
