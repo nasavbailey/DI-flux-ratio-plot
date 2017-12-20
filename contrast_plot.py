@@ -353,8 +353,9 @@ if include_special_systems:
         ', radius = (M/Me)^(1/3) * Re, circular orbits.\n\n'
 
     # Earth & Jupiter
-    earthRatio = rlp.calc_lambert_flux_ratio(sma=1.*u.au, rp=1.*u.earthRad,\
-        orb_ang=0*u.degree,albedo=0.367, inclin=0*u.degree)
+    #earthRatio = rlp.calc_lambert_flux_ratio(sma=1.*u.au, rp=1.*u.earthRad,\
+    #    orb_ang=0*u.degree,albedo=0.367, inclin=0*u.degree)
+    earthRatio = 1.0E-10 # use the "standard" value
     jupiterRatio = rlp.calc_lambert_flux_ratio(sma=5.*u.au, rp=1.*u.jupiterRad,\
         orb_ang=0*u.degree,albedo=0.52, inclin=0*u.degree)
 
