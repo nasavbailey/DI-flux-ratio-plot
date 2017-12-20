@@ -418,7 +418,7 @@ ax2.set_xlim(xlim)
 ax2.set_yticklabels([])
 ax2.yaxis.set_ticks_position('none')
 
-ax1.set_ylabel('Contrast: Flux ratio to host star')
+ax1.set_ylabel('Flux ratio to host star')
 ax1.set_xlabel('Separation [arcsec]')
 
 
