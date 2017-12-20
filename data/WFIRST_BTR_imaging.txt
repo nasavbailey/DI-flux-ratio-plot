@@ -1,0 +1,10 @@
+#Rho(as) Band1_contr_snr5
+#Short caption: WFIRST imaging BTR: WFIRST shall be able to measure the brightness of an astrophysical point source with an SNR of 10 within 10 hours (TBR) of integration time on the target in CGI Band 1, assuming a background flux less than or equal to the solar zodiacal dust.  It shall be able to make this measurement for objects with a source-to-star flux ratio of 1e-7 (TBR) between 0.16 and 0.45 arcsec and a source-to-star flux ratio of 5e-8 (TBR) at a separation between 0.21 and 0.4 arcsec (TBR) from a V <= 5 mag star with a stellar radius of <=0.4 milliarcseconds (TBR).
+#References
+#PLRA draft 20 Dec 2017
+0.16	0.5E-7
+0.21	0.5E-7
+0.21	2.5E-8
+0.40	2.5E-8
+0.40	0.5E-7
+0.45	0.5E-7

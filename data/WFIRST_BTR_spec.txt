@@ -1,0 +1,9 @@
+#Rho(as) Band3_contr_snr5
+#Short caption: [TECH 2] WFIRST shall be able to measure spectra of an astrophysical point source with R = 50 (TBR) or greater spectral resolution, with a wavelength accuracy of 5 nm or smaller, and achieve an SNR of 10 or greater within 100 hours (TBR) of integration time on the target for a spectral resolution element in CGI band 3, assuming a scattered light background equal to the solar zodiacal dust.  It shall be able to make this measurement for objects with a source-to-star flux ratio of 1e-7 (TBR) between 0.21 and 0.60 arcsec and a source-star flux ratio of 5e-8 (TBR) at a separation between 0.27 and 0.53 arcsec from a V<=5 mag star with a stellar radius of <=0.4 milliarcseconds (TBR).
+#References: PLRA draft 20 Dec 2017 [TECH 2]
+0.21	0.5E-7
+0.27	0.5E-7
+0.27	2.5E-8
+0.53	2.5E-8
+0.53	0.5E-7
+0.60	0.5E-7

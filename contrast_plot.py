@@ -28,6 +28,7 @@ include_DI_H    = True # real H-band contrasts of known directly imaged planets
 include_DI_750_extrap = True # COND/BT-Settl model extrapolations to ~750nm
 include_DI_550_extrap = True # COND/BT-Settl model extrapolations to ~550nm
 include_BTR_img = True # imaging BTR
+include_BTR_spec = True # spectroscopy BTR
 include_BTR_disk_to_img = True # disk mask BTR
 include_special_systems = True # include, Tau Ceti and Solar System?
 
@@ -71,35 +72,39 @@ ax1.text(xlim[0], ylim[0]*1.1, ' Instrument curves are \n 5$\mathdefault{\sigma}
 if color_by_lambda.lower() == 'full':
     c_v = 'dodgerblue'
     c_bbvis = 'cadetblue'
-    c_750 = 'goldenrod'
+    c_band3 = 'goldenrod'
+    c_band4 = 'orange'
     c_yjh = 'coral'
     c_k = 'firebrick'
     c_h   = 'red'
     #c_l   = 'darkred'
 
-    line1, = ax2.plot([1,1],[1,1],color=c_v,linewidth=cclw+1, label='V/550nm')
-    line2, = ax2.plot([1,1],[1,1],color=c_bbvis,linewidth=cclw+1, label='broadband\nvisible')
-    line3, = ax2.plot([1,1],[1,1],color=c_750,linewidth=cclw+1, label='750nm')
-    line4, = ax2.plot([1,1],[1,1],color=c_yjh,linewidth=cclw+1, label='YJH-band')
-    line5, = ax2.plot([1,1],[1,1],color=c_h,linewidth=cclw+1, label='H-band')
-    line6, = ax2.plot([1,1],[1,1],color=c_k,linewidth=cclw+1, label='K-band')
+    ax2.plot([1,1],[1,1],color=c_v,linewidth=cclw+2, label='< 650 nm')
+    ax2.plot([1,1],[1,1],color=c_bbvis,linewidth=cclw+2, label='broadband\nvisible')
+    ax2.plot([1,1],[1,1],color=c_band3,linewidth=cclw+2, label='CGI Band 3')
+    ax2.plot([1,1],[1,1],color=c_band4,linewidth=cclw+2, label='CGI Band 4')
+    ax2.plot([1,1],[1,1],color=c_yjh,linewidth=cclw+2, label='YJH-band')
+    ax2.plot([1,1],[1,1],color=c_h,linewidth=cclw+2, label='H-band')
+    ax2.plot([1,1],[1,1],color=c_k,linewidth=cclw+2, label='K-band')
 
 elif color_by_lambda.lower() == 'simple':
     c_v = 'dodgerblue'
     c_bbvis = c_v
-    c_750 = 'orange'
+    c_band3 = 'orange'
+    c_band4 = 'tomato'
     c_yjh = 'firebrick'
     c_h = c_yjh
     c_k = c_yjh
     #c_l = 'darkred'
 
-    line1, = ax2.plot([1,1],[1,1],color=c_v,linewidth=cclw+1, label='Blue optical')
-    line2, = ax2.plot([1,1],[1,1],color=c_750,linewidth=cclw+1, label='Red optical')
-    line3, = ax2.plot([1,1],[1,1],color=c_h,linewidth=cclw+1, label='Near IR')
+    ax2.plot([1,1],[1,1],color=c_v,linewidth=cclw+2, label='< 650 nm')
+    ax2.plot([1,1],[1,1],color=c_band3,linewidth=cclw+2, label='650 - 800nm')
+    ax2.plot([1,1],[1,1],color=c_band4,linewidth=cclw+2, label='800 - 1000nm')
+    ax2.plot([1,1],[1,1],color=c_h,linewidth=cclw+2, label='> 1000 nm')
 
 elif color_by_lambda.lower() == 'none':
     c_v = ccc
-    c_750 = ccc
+    c_band3 = ccc
     c_yjh = ccc
     c_k = ccc
     c_h   = ccc
@@ -249,24 +254,42 @@ arcsec_disk=a_d[:,1]
 contrast_disk=a_d[:,2]
 
 ax1.plot(arcsec_exoplanet,contrast_exoplanet,color=c_v, linewidth=cclw+2)
-ax1.plot(arcsec_disk,contrast_disk,color=c_750, linewidth=cclw+2)
+ax1.plot(arcsec_disk,contrast_disk, color=c_band4, linewidth=cclw+2)
 caption += '-- WFIRST curves are pre-WEITR L3 requirements for 5-sigma, post-processed detection limits.\n\n'
 ax1.text(1.3, 2E-9, 'WFIRST\nCGI', color='k', horizontalalignment='left',\
     fontsize=ccfs+1, weight='bold')
 
 ######Add Technical requirement line and text
 if include_BTR_img:
-    ax1.plot([0.23, 0.4], [0.5*5E-8, 0.5*5E-8], color=c_v, linewidth=cclw+5)
-    ax1.text(0.23,2.5*10**-8,'BTR1 ',color=c_v,horizontalalignment='right',\
-        weight='bold',fontsize=ccfs+1)
-    caption += '-- BTR1: imaging BTR.\n\n'
+    fname = datapath+'WFIRST_BTR_imaging.txt'
+    btr_img = ascii.read(fname)
+    ax1.plot(btr_img['Rho(as)'], btr_img['Band1_contr_snr5'], color=c_v, linewidth=cclw+4, label='')
+    ax1.text(btr_img['Rho(as)'][0], btr_img['Band1_contr_snr5'][0], 'img \n BTR ', color=c_v,\
+        horizontalalignment='right', verticalalignment='center', weight='bold', fontsize=ccfs+1)
+    caption += extract_short_caption(fname)
 
 if include_BTR_disk_to_img:
-    ax1.plot([0.25, 0.95], [0.5*5E-8, 0.5*5E-8], color=c_750, linewidth=cclw+2, linestyle='--')
-    ax1.text(0.95,2.5*10**-8,' BTR3',color=c_750,horizontalalignment='left',\
-        weight='bold',fontsize=ccfs+1)
-    caption += '-- BTR3: extended object sensitivity BTR translate to point source sensitivity.\n\n'
+    fname = datapath+'WFIRST_BTR_disk.txt'
+    btr_disk = ascii.read(fname)
+    ax1.plot(btr_disk['Rho(as)'], btr_disk['Band4_pt_contr_snr5'], color=c_band4, linewidth=cclw+4, label='')
+    ax1.text(0.9*btr_disk['Rho(as)'][-1], 1.1*btr_disk['Band4_pt_contr_snr5'][-1], 'disk\n BTR', color=c_band4,\
+        horizontalalignment='right', verticalalignment='center', weight='bold', fontsize=ccfs+1)
+    caption += '-- WFIRST extended source (disk) BTR translated to point source flux ratio\n'
+    caption += extract_short_caption(fname)
 
+if include_BTR_spec:
+    import matplotlib.patheffects as path_effects
+    fname = datapath+'WFIRST_BTR_spec.txt'
+    btr_img = ascii.read(fname)
+    if include_BTR_disk_to_img:  # draw a shadow under the line to make it easier to see if overlapping other BTR
+        p = [path_effects.SimpleLineShadow(offset=(1, -1)), path_effects.Normal()]
+    else:
+        p = [path_effects.Normal()]
+    ax1.plot(btr_img['Rho(as)'], btr_img['Band3_contr_snr5'], color=c_band3, \
+        linewidth=cclw+2, label='', path_effects=p)
+    ax1.text(btr_img['Rho(as)'][0], btr_img['Band3_contr_snr5'][0], 'spec \n BTR ', color=c_band3,\
+        horizontalalignment='left', verticalalignment='bottom', weight='bold', fontsize=ccfs+1)
+    caption += extract_short_caption(fname)
 
 
 #########################################################################
@@ -290,7 +313,7 @@ if include_DI_H:
         alpha=alpha_di, marker='s', s=di_markersize, zorder=2, label='DI, 1.6 $\mathdefault{\mu} $m')
 
 if include_DI_750_extrap:
-    ax1.scatter(a_DI['Rho(as)'],a_DI['763m_contr'],color=c_750, edgecolor='k', \
+    ax1.scatter(a_DI['Rho(as)'],a_DI['763m_contr'],color=c_band3, edgecolor='k', \
         marker='d', alpha=alpha_di, s=di_markersize+15, zorder=2, label='DI, 750nm pred.')
     if not include_DI_550_extrap:
         for ct, rho in enumerate(a_DI['Rho(as)']):
