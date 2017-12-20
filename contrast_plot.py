@@ -358,6 +358,9 @@ if include_special_systems:
     earthRatio = 1.0E-10 # use the "standard" value
     jupiterRatio = rlp.calc_lambert_flux_ratio(sma=5.*u.au, rp=1.*u.jupiterRad,\
         orb_ang=0*u.degree,albedo=0.52, inclin=0*u.degree)
+    caption += '-- Earth (==1E-10) & Jupiter (albedo=0.52) at quadrature as seen from 10 pc. '+\
+                '(Jupiter albedo: Traub & Oppenheimer, '+\
+                'Direct Imaging chapter of Seager Exoplanets textbook, Table 3)\n\n'
 
     ax1.scatter(0.1,earthRatio,marker='$\\bigoplus$',color=c_pl, s=rv_markersize)
     ax1.text(0.1,earthRatio,'  Earth ',color=c_pl,\
@@ -366,9 +369,6 @@ if include_special_systems:
     ax1.scatter(0.5,jupiterRatio,marker='v',color=c_pl,  edgecolor='k', s=rv_markersize)
     ax1.text(0.5,jupiterRatio,'  Jupiter ',color=c_pl,\
     horizontalalignment='left',verticalalignment='center',fontsize=ccfs)
-    caption += '-- Earth & Jupiter at quadrature as seen from 10 pc. '+\
-                'Albedos of 0.367 and 0.52, respectively. (Traub & Oppenheimer, '+\
-                'Direct Imaging chapter of Seager Exoplanets textbook, Table 3)\n\n'
 
     ax1.text(xlim[1], ylim[0]*1.1, 'Solar System as seen from 10pc. ',\
     color='k',horizontalalignment='right', verticalalignment='bottom',fontsize=ccfs-1)
