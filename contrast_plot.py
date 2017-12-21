@@ -28,7 +28,7 @@ include_DI_H    = True # real H-band contrasts of known directly imaged planets
 include_DI_750_extrap = True # COND/BT-Settl model extrapolations to ~750nm
 include_DI_550_extrap = True # COND/BT-Settl model extrapolations to ~550nm
 include_BTR_img = True # imaging BTR
-include_BTR_spec = True # spectroscopy BTR
+include_BTR_spec = False # spectroscopy BTR
 include_BTR_disk_to_img = True # disk mask BTR
 include_special_systems = True # include, Tau Ceti and Solar System?
 
@@ -61,7 +61,7 @@ xlim = np.array([0.07,5])
 rv_markersize = 35
 di_markersize = 15
 ccfs = 8 # instrument curve font size
-ccc = 'darkviolet' # default instrument curve color
+ccc = 'k' # default instrument curve color
 cclw = 1 # default instrument curve line width
 c_pl = 'c' # color for special planetary systems (Solar System, Prox Cen, etc.)
 
@@ -104,7 +104,9 @@ elif color_by_lambda.lower() == 'simple':
 
 elif color_by_lambda.lower() == 'none':
     c_v = ccc
+    c_bbvis = ccc
     c_band3 = ccc
+    c_band4 = ccc
     c_yjh = ccc
     c_k = ccc
     c_h   = ccc
@@ -210,7 +212,7 @@ if include_ACS:
     fname = datapath+'HST_ACS.txt'
     a_ACS = ascii.read(fname)
     ax1.plot(a_ACS['Rho(as)'],a_ACS['F606W_contr'],color=c_v,linewidth=cclw,label='')
-    ax1.text(3.8,6*10**-9,'HST ACS',color=c_v,horizontalalignment='right',rotation=-35,fontsize=ccfs)
+    ax1.text(4,6*10**-9,'HST ACS',color=c_v,horizontalalignment='right',rotation=-35,fontsize=ccfs)
     caption += extract_short_caption(fname)
 
 
@@ -408,7 +410,7 @@ fname = datapath+'reflected_light_table.txt'
 tmp = ascii.read(fname)
 idx_rv = tmp['pl_discmethod'] == "Radial Velocity"
 ax1.scatter(tmp[idx_rv]['sma_arcsec'],tmp[idx_rv]['Fp/F*_quad'],s=rv_markersize,\
-    color='k', marker='^', label='RV, reflected light')
+    color='dimgray', edgecolor='k', marker='^', label='RV, reflected light')
 caption += extract_short_caption(fname)
 
 
@@ -422,26 +424,26 @@ if is_draft:
 
 ax1.legend(fontsize=7, loc='upper right')
 
-second_legend = ax2.legend(loc='upper left', fontsize=7, title='Bandpass')
-second_legend.get_title().set_fontsize(8)
-
 ax1.grid(b=True, which='major', color='tan', linestyle='-', alpha=0.1)
 
-ax1.set_ylim(ylim)
-ax1.set_xlim(xlim)
 ax1.set_yscale('log')
 ax1.set_xscale('log')
 ax1.set_xticks([0.05, 0.1, 0.5, 1, 5])
+ax1.set_ylim(ylim)
+ax1.set_xlim(xlim)
 
 # write x axis in scalar notation instead of powers of 10
 ax1.xaxis.set_major_formatter(ticker.FormatStrFormatter('%.1g'))
 
-ax2.set_ylim(ylim)
-ax2.set_xlim(xlim)
-#ax2.set_yscale('log')
-#ax2.set_xscale('log')
-ax2.set_yticklabels([])
-ax2.yaxis.set_ticks_position('none')
+if color_by_lambda.lower() != 'none':
+    second_legend = ax2.legend(loc='upper left', fontsize=7, title='Bandpass')
+    second_legend.get_title().set_fontsize(8)
+    ax2.set_ylim(ylim)
+    ax2.set_xlim(xlim)
+    #ax2.set_yscale('log')
+    #ax2.set_xscale('log')
+    ax2.set_yticklabels([])
+    ax2.yaxis.set_ticks_position('none')
 
 ax1.set_ylabel('Flux ratio to host star')
 ax1.set_xlabel('Separation [arcsec]')
