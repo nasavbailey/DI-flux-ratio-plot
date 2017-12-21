@@ -255,11 +255,11 @@ contrast_exoplanet=a_e[:,2]
 arcsec_disk=a_d[:,1]
 contrast_disk=a_d[:,2]
 
-ax1.plot(arcsec_exoplanet,contrast_exoplanet,color=c_v, linewidth=cclw+2)
-ax1.plot(arcsec_disk,contrast_disk, color=c_band4, linewidth=cclw+2)
+ax1.plot(arcsec_exoplanet,contrast_exoplanet,color='m', linewidth=cclw+2)
+ax1.plot(arcsec_disk,contrast_disk, color='m', linewidth=cclw+2)
 caption += '-- WFIRST curves are pre-WEITR L3 requirements for 5-sigma, post-processed detection limits.\n\n'
-ax1.text(1.3, 2E-9, 'WFIRST\nCGI', color='k', horizontalalignment='left',\
-    fontsize=ccfs+1, weight='bold')
+ax1.text(1.3, 2E-9, 'WFIRST\nCGI\npre-WEITR', color='m', horizontalalignment='left',\
+    verticalalignment='center', fontsize=ccfs+1, weight='bold')
 
 ######Add Technical requirement line and text
 if include_BTR_img:
