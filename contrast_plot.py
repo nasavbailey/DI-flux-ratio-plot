@@ -47,7 +47,7 @@ datapath = path+'data/'
 rcParams.update({'figure.autolayout': True})
 #rcParams.update({'font.family':'Times New Roman'})
 rcParams.update({'font.size': 12})
-rcParams['mathtext.fontset'] = 'stix'
+rcParams['mathtext.fontset'] = 'stixsans' #'stix'
 rcParams['lines.solid_capstyle'] = 'butt' #don't increase line length when increasing width
 rcParams['patch.linewidth'] = 0.5  # make marker edge linewidths narrower for scatter
 
