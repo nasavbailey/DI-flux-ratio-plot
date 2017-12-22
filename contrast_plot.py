@@ -28,7 +28,7 @@ include_DI_H    = True # real H-band contrasts of known directly imaged planets
 include_DI_750_extrap = True # COND/BT-Settl model extrapolations to ~750nm
 include_DI_550_extrap = True # COND/BT-Settl model extrapolations to ~550nm
 include_BTR_img = True # imaging BTR
-include_BTR_spec = False # spectroscopy BTR
+include_BTR_spec = True # spectroscopy BTR
 include_BTR_disk_to_img = True # disk mask BTR
 include_special_systems = True # include, Tau Ceti and Solar System?
 
@@ -255,8 +255,8 @@ contrast_exoplanet=a_e[:,2]
 arcsec_disk=a_d[:,1]
 contrast_disk=a_d[:,2]
 
-ax1.plot(arcsec_exoplanet,contrast_exoplanet,color='m', linewidth=cclw+2)
-ax1.plot(arcsec_disk,contrast_disk, color='m', linewidth=cclw+2)
+ax1.plot(arcsec_exoplanet,contrast_exoplanet,color='m', linewidth=cclw+4)
+ax1.plot(arcsec_disk,contrast_disk, color='m', linewidth=cclw+4)
 caption += '-- WFIRST curves are pre-WEITR L3 requirements for 5-sigma, post-processed detection limits.\n\n'
 ax1.text(1.3, 2E-9, 'WFIRST\nCGI\npre-WEITR', color='m', horizontalalignment='left',\
     verticalalignment='center', fontsize=ccfs+1, weight='bold')
@@ -400,17 +400,13 @@ if include_special_systems:
     color='k',horizontalalignment='right', verticalalignment='bottom',fontsize=ccfs-1)
 
 
-
-
-
-
 #########################################################################
 ###Add RV planets
 fname = datapath+'reflected_light_table.txt'
 tmp = ascii.read(fname)
 idx_rv = tmp['pl_discmethod'] == "Radial Velocity"
 ax1.scatter(tmp[idx_rv]['sma_arcsec'],tmp[idx_rv]['Fp/F*_quad'],s=rv_markersize,\
-    color='dimgray', edgecolor='k', marker='^', label='RV, reflected light')
+    color='dimgray', edgecolor='k', marker='^', label='RV, reflected light', zorder=5)
 caption += extract_short_caption(fname)
 
 
