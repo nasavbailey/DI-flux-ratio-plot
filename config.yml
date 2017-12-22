@@ -1,0 +1,38 @@
+# Turn on/off various plotted quantities
+ELT :   False
+HABEX : False
+ACS :   True
+NICMOS: True
+STIS:   True
+NIRCAM: True
+SPHERE: True
+GPI:    True
+
+DI_H:       True # known H-band contrasts of directly imaged planets
+DI_B1_pred: True # predicted Band 1 from self-luminous, directly imaged planets
+DI_B3_pred: True # predicted Band 3 from self-luminous, directly imaged planets
+RV_pred:    True # predicted reflected light from Jovian planets
+special:    True # Solar System & Tau Ceti
+
+BTR_img:    True # imaging BTR
+BTR_spec:   True # spectroscopy BTR
+BTR_disk:   True # extended surface brightness BTR, translated to contrast in 1FWHM aperture
+
+# plotting parameters
+color_by_lambda:  'simple'  # [ full / simple / none ] color code by  bandpass
+is_draft:    True  # print DRAFT & date on plot
+
+math_font:   'stixsans' # 'stix' (times), 'stixsans' (sans-serif), 'cm' (default latex)
+plot_font_size:  12  # font size for axis labels / title, etc.
+legend_font_size: 8  # font size for legend text
+label_font_size:  8  # font size for detection limit curve labels
+
+wfirst_linewidth: 4 # line width for WFIRST BTRs and detection limit curves
+other_linewidth:  1 # line width for other instruments' detection limit curves
+
+rv_markersize:      35 # reflected light RV marker size
+di_markersize:      15 # self-luminous planets marker size
+marker_edge_width:  0.5  # width of borders on scatter plot markers
+
+xlim:   [0.07, 5] # x axis limits [arcsec]
+ylim:   [1E-11, 1E-3] # y axis limits [flux ratio]
