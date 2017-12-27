@@ -1,4 +1,5 @@
 *.pdf
+*.jpg
 auto_caption.txt
 *.pyc
 *~

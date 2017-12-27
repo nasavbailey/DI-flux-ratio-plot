@@ -1,10 +1,12 @@
-# Turn on/off various plotted quantities
+path: '.'  # Use '.' to run from script directory. Hardcode to run from elsewhere.
+
+# Turn on/off various plotted quantities (True=on; False=off)
 ELT :   False
 HABEX : False
-ACS :   True
+NIRCAM: True
 NICMOS: True
 STIS:   True
-NIRCAM: True
+ACS :   True
 SPHERE: True
 GPI:    True
 
@@ -19,20 +21,29 @@ BTR_spec:   True # spectroscopy BTR
 BTR_disk:   True # extended surface brightness BTR, translated to contrast in 1FWHM aperture
 
 # plotting parameters
-color_by_lambda:  'simple'  # [ full / simple / none ] color code by  bandpass
+fig_width:  6 # inches
+fig_height: 5 # inches
+save_pdf:   True # output PDF?
+save_jpg:   True # output JPG?
+jpg_dpi:    200
+
+color_by_lambda:  'none'  # [ full / simple / none ] color code by  bandpass
 is_draft:    True  # print DRAFT & date on plot
 
 math_font:   'stixsans' # 'stix' (times), 'stixsans' (sans-serif), 'cm' (default latex)
 plot_font_size:  12  # font size for axis labels / title, etc.
-legend_font_size: 8  # font size for legend text
+legend_font_size: 7  # font size for legend text
 label_font_size:  8  # font size for detection limit curve labels
 
 wfirst_linewidth: 4 # line width for WFIRST BTRs and detection limit curves
 other_linewidth:  1 # line width for other instruments' detection limit curves
 
 rv_markersize:      35 # reflected light RV marker size
-di_markersize:      15 # self-luminous planets marker size
+di_markersize:      30 # self-luminous planets marker size
 marker_edge_width:  0.5  # width of borders on scatter plot markers
 
-xlim:   [0.07, 5] # x axis limits [arcsec]
-ylim:   [1E-11, 1E-3] # y axis limits [flux ratio]
+# plot x and y limits
+x0: 0.07
+x1: 5
+y0: 1E-11
+y1: 1E-3
