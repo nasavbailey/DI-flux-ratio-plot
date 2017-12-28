@@ -13,13 +13,22 @@ from astropy.io import ascii
 import reflected_light_planets as rlp
 from astropy import units as u
 import yaml
+from glob import glob
+from datetime import date
+import os
 
 ### import YAML file of user-defined options
-with open('config.yml','r') as f:
+cfglist = glob('*yml')
+if len(cfglist) > 1:
+    raise Exception(('Mulitple YAML config files present: %s.\nMove all but desired config file to another folder.')%flist)
+if len(cfglist) == 0:
+    raise Exception('No .yml config files present. Place your .yml file in the same directory as plot_flux_ratio.py.')
+with open(cfglist[0],'r') as f:
     cfg = yaml.load(f)
+    cfgname = cfglist[0].split('.yml')[0]
 
 ###Define path where to find data and where to save plot
-datapath = cfg['path'] + '/data/'
+datapath = './data/'
 
 ########################################################################
 ### Plot setup
@@ -99,7 +108,9 @@ ax1.text(xlim[0], ylim[0]*1.1, ' Instrument curves are \n 5$\mathdefault{\sigma}
 # auto-generated caption. See README for how to comment datafiles.
 # auto-generated caption
 caption = '** This short caption is auto-generated. DO NOT EDIT. **\n' + \
-        'Please see individual datafiles for full descriptions. \n\n'
+        'Please see individual datafiles for full descriptions. \n'
+caption += 'This file was generated on %s\n'%str(date.today())
+caption += 'Config file used = %s\n\n'%cfglist[0]
 
 if cfg['color_by_lambda'].lower() != 'none':
     caption += 'Lines and points are color coded by wavelength of observation.\n\n'
@@ -251,7 +262,7 @@ contrast_disk=a_d[:,2]
 
 ax1.plot(arcsec_exoplanet,contrast_exoplanet,color='m', linewidth=lw2)
 ax1.plot(arcsec_disk,contrast_disk, color='m', linewidth=lw2)
-caption += '-- WFIRST curves are pre-WEITR L3 requirements for 5-sigma, post-processed detection limits.\n\n'
+caption += '-- WFIRST detection limits are pre-WEITR L3 requirements for 5-sigma, post-processed detection limits.\n\n'
 ax1.text(1.3, 2E-9, 'WFIRST\nCGI\npre-WEITR', color='m', horizontalalignment='left',\
     verticalalignment='center', fontsize=ccfs+1, weight='bold')
 
@@ -270,7 +281,6 @@ if cfg['BTR_disk']:
     ax1.plot(btr_disk['Rho(as)'], btr_disk['Band4_pt_contr_snr5'], color=c_band4, linewidth=lw2, label='')
     ax1.text(0.9*btr_disk['Rho(as)'][-1], 1.1*btr_disk['Band4_pt_contr_snr5'][-1], 'disk\n BTR', color=c_band4,\
         horizontalalignment='right', verticalalignment='center', weight='bold', fontsize=ccfs+1)
-    caption += '-- WFIRST extended source (disk) BTR translated to point source flux ratio\n'
     caption += extract_short_caption(fname)
 
 if cfg['BTR_spec']:
@@ -412,7 +422,6 @@ if cfg['RV_pred']:
 ###Plot axes, tick mark ajdusting, legend, etc.
 
 if cfg['is_draft']:
-    from datetime import date
     ax1.text(xlim[1], ylim[0]*2, "DRAFT  "+str(date.today()) + ' ', \
         horizontalalignment='right',verticalalignment='bottom',color='red',weight='bold')
 
@@ -446,10 +455,16 @@ ax1.set_xlabel('Separation [arcsec]')
 
 plt.tight_layout()
 
-with open(cfg['path'] + '/auto_caption.txt','w') as f:
+try:
+    os.stat('./output')
+except:
+    os.mkdir('./output')
+
+
+with open('./output/auto_caption_'+cfgname+'.txt','w') as f:
     f.write(caption)
 
 if cfg['save_pdf']:
-    plt.savefig(cfg['path'] + '/flux_ratio.pdf')
+    plt.savefig('./output/flux_ratio_'+cfgname+'.pdf')
 if cfg['save_jpg']:
-    plt.savefig(cfg['path'] + '/flux_ratio.jpg', dpi=cfg['jpg_dpi'])
+    plt.savefig('./output/flux_ratio_'+cfgname+'.jpg', dpi=cfg['jpg_dpi'])

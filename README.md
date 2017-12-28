@@ -8,8 +8,17 @@ This contains the python code to plot the flux ratio vs separation plot. It also
 * numpy
 * yaml
 
-## Plot options
-To customize what is plotted, edit the file "config.yml"
+## quickstart
+Copy `example_files/default.yaml`  to the same directory as plot_flux_ratio.py.
+`python plot_flux_ratio.py`
+Figure & auto-generated caption will be placed in "output" folder.
+
+## Customizing your plot
+
+### YAML file
+To customize what is plotted, place a YAML configuration file in the same directory as the script reflected_light_planets.py. An example YAML file is already present. Other examples are in the "example_files" directory.  The name of the config file will be appended to the plot & caption filenames, so it's highly recommended to give your config file a descriptive name.
+
+### Plot options
 
 Available WFIRST modes:
 * planet imaging BTR

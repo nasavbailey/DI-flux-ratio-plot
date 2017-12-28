@@ -1,6 +1,8 @@
 *.pdf
 *.jpg
-auto_caption.txt
+auto_caption*.txt
 *.pyc
 *~
 *#
+output
+/*.yml

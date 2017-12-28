@@ -1,5 +1,3 @@
-path: '.'  # Use '.' to run from script directory. Hardcode to run from elsewhere.
-
 # Turn on/off various plotted quantities (True=on; False=off)
 ELT :   False
 HABEX : False
@@ -16,18 +14,18 @@ DI_B3_pred: True # predicted Band 3 from self-luminous, directly imaged planets
 RV_pred:    True # predicted reflected light from Jovian planets
 special:    True # Solar System & Tau Ceti
 
-BTR_img:    True # imaging BTR
-BTR_spec:   True # spectroscopy BTR
-BTR_disk:   True # extended surface brightness BTR, translated to contrast in 1FWHM aperture
+BTR_img:    False # imaging BTR
+BTR_spec:   False # spectroscopy BTR
+BTR_disk:   False # extended surface brightness BTR, translated to contrast in 1FWHM aperture
 
 # plotting parameters
 fig_width:  6 # inches
 fig_height: 5 # inches
 save_pdf:   True # output PDF?
-save_jpg:   True # output JPG?
+save_jpg:   False # output JPG?
 jpg_dpi:    200
 
-color_by_lambda:  'none'  # [ full / simple / none ] color code by  bandpass
+color_by_lambda:  'simple'  # [ full / simple / none ] color code by  bandpass
 is_draft:    True  # print DRAFT & date on plot
 
 math_font:   'stixsans' # 'stix' (times), 'stixsans' (sans-serif), 'cm' (default latex)
