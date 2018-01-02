@@ -61,13 +61,21 @@ if cfg['color_by_lambda'].lower() == 'full':
     c_pl = 'c'
 
     ax2 = ax1.twinx()
-    ax2.plot([1,1],[1,1],color=c_v,linewidth=lw1+2, label='< 650 nm')
-    ax2.plot([1,1],[1,1],color=c_bbvis,linewidth=lw1+2, label='broadband\nvisible')
-    ax2.plot([1,1],[1,1],color=c_band3,linewidth=lw1+2, label='CGI Band 3')
-    ax2.plot([1,1],[1,1],color=c_band4,linewidth=lw1+2, label='CGI Band 4')
-    ax2.plot([1,1],[1,1],color=c_yjh,linewidth=lw1+2, label='YJH-band')
-    ax2.plot([1,1],[1,1],color=c_h,linewidth=lw1+2, label='H-band')
-    ax2.plot([1,1],[1,1],color=c_k,linewidth=lw1+2, label='K-band')
+
+    if cfg['ACS'] or cfg['BTR_img'] or cfg['DI_B1_pred']:
+        ax2.plot([1,1],[1,1],color=c_v,linewidth=lw1+2, label='< 650 nm')
+    if cfg['STIS']:
+        ax2.plot([1,1],[1,1],color=c_bbvis,linewidth=lw1+2, label='broadband\nvisible')
+    if cfg['BTR_spec'] or cfg['DI_B3_pred']:
+        ax2.plot([1,1],[1,1],color=c_band3,linewidth=lw1+2, label='CGI Band 3')
+    if cfg['BTR_disk']:
+        ax2.plot([1,1],[1,1],color=c_band4,linewidth=lw1+2, label='CGI Band 4')
+    if cfg['SPHERE']:
+        ax2.plot([1,1],[1,1],color=c_yjh,linewidth=lw1+2, label='YJH-band')
+    if cfg['GPI'] or cfg['NICMOS'] or cfg['D_H']:
+        ax2.plot([1,1],[1,1],color=c_h,linewidth=lw1+2, label='H-band')
+    if cfg['SPHERE'] or cfg['NIRCAM']:
+        ax2.plot([1,1],[1,1],color=c_k,linewidth=lw1+2, label='K-band')
 
 elif cfg['color_by_lambda'].lower() == 'simple':
     c_v = 'dodgerblue'
@@ -80,10 +88,33 @@ elif cfg['color_by_lambda'].lower() == 'simple':
     c_pl = 'c'
 
     ax2 = ax1.twinx()
-    ax2.plot([1,1],[1,1],color=c_v,linewidth=lw1+2, label='< 650 nm')
-    ax2.plot([1,1],[1,1],color=c_band3,linewidth=lw1+2, label='650 - 800nm')
-    ax2.plot([1,1],[1,1],color=c_band4,linewidth=lw1+2, label='800 - 1000nm')
-    ax2.plot([1,1],[1,1],color=c_h,linewidth=lw1+2, label='> 1000 nm')
+    if cfg['HABEX'] or cfg['ACS'] or cfg['STIS'] or cfg['DI_B1_pred']:
+        ax2.plot([1,1],[1,1],color=c_v,linewidth=lw1+2, label='< 650 nm')
+    if cfg['DI_B3_pred'] or cfg['BTR_spec']:
+        ax2.plot([1,1],[1,1],color=c_band3,linewidth=lw1+2, label='650 - 800nm')
+    if cfg['BTR_disk']:
+        ax2.plot([1,1],[1,1],color=c_band4,linewidth=lw1+2, label='800 - 1000nm')
+    if cfg['GPI'] or cfg['SPHERE'] or cfg['NIRCAM'] or cfg['NICMOS'] or cfg['D_H']:
+        ax2.plot([1,1],[1,1],color=c_h,linewidth=lw1+2, label='> 1000 nm')
+
+
+elif cfg['color_by_lambda'].lower() == 'minimal':
+    c_v = 'dodgerblue'
+    c_bbvis = c_v
+    c_band3 = c_v
+    c_band4 = c_v
+    c_yjh = 'firebrick'
+    c_h = c_yjh
+    c_k = c_yjh
+    c_pl = 'c'
+
+    ax2 = ax1.twinx()
+    if cfg['HABEX'] or cfg['ACS'] or cfg['STIS'] or cfg['DI_B1_pred'] or \
+    cfg['DI_B3_pred'] or cfg['BTR_spec'] or  cfg['BTR_disk']:
+        ax2.plot([1,1],[1,1],color=c_band4,linewidth=lw1+2, label='< 1000 nm')
+    if cfg['GPI'] or cfg['SPHERE'] or cfg['NIRCAM'] or cfg['NICMOS']:
+        ax2.plot([1,1],[1,1],color=c_h,linewidth=lw1+2, label='> 1000 nm')
+
 
 elif cfg['color_by_lambda'].lower() == 'none':
     ccc = 'k'
@@ -152,7 +183,7 @@ if cfg['ELT']:
 ### HabEx "goal" detection limit
 
 if cfg['HABEX']:
-    ax1.plot([0.06, 1.6],[5E-11, 5E-11],color=c_bbvis,linestyle='--',linewidth=lw1,label='')
+    ax1.plot([0.06, 1.65],[5E-11, 5E-11],color=c_bbvis,linestyle='--',linewidth=lw1,label='')
     ax1.text(1.6,6E-11,'HabEx goal',color=c_bbvis,horizontalalignment='right',fontsize=ccfs)
     caption += '-- HabEx: Goal 5-sigma post-processed contrast.  '+\
                 'IWA ~ 2.5 lambda/D @ 450nm; OWA ~ 32 l/D @ 1micron '+\

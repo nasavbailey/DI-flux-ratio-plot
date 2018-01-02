@@ -27,7 +27,7 @@ save_pdf:   True # output PDF?
 save_jpg:   False # output JPG?
 jpg_dpi:    200
 
-color_by_lambda:  'simple'  # [ full / simple / none ] color code by  bandpass
+color_by_lambda:  'simple'  # [ full / simple / minimal / none ] color code by  bandpass
 is_draft:    True  # print DRAFT & date on plot
 
 math_font:   'stixsans' # 'stix' (times), 'stixsans' (sans-serif), 'cm' (default latex)
