@@ -262,8 +262,8 @@ contrast_disk=a_d[:,2]
 
 ax1.plot(arcsec_exoplanet,contrast_exoplanet,color='m', linewidth=lw2)
 ax1.plot(arcsec_disk,contrast_disk, color='m', linewidth=lw2)
-caption += '-- WFIRST detection limits are pre-WEITR L3 requirements for 5-sigma, post-processed detection limits.\n\n'
-ax1.text(1.3, 2E-9, 'WFIRST\nCGI\npre-WEITR', color='m', horizontalalignment='left',\
+caption += '-- WFIRST detection limits are pre-WIETR L3 requirements for 5-sigma, post-processed detection limits.\n\n'
+ax1.text(1.3, 2E-9, 'WFIRST\nCGI\npre-WIETR', color='m', horizontalalignment='left',\
     verticalalignment='center', fontsize=ccfs+1, weight='bold')
 
 ######Add Technical requirement line and text
@@ -338,19 +338,20 @@ if cfg['DI_B1_pred']:
 #########################################################################
 ### Specific planetary systems
 
-if cfg['special']:
+if cfg['Prox_Cen']:
+    albedo = 0.35
+    sma = 0.05*u.au
+    flux_ratio = rlp.calc_lambert_flux_ratio(sma=sma, rp=1.3**(1./3)*u.earthRad,\
+        orb_ang=0*u.degree, albedo=albedo, inclin=0*u.degree)
+    rho = (sma/1.3*u.pc).value
+    ax1.scatter(rho,flux_ratio,marker='^', color=c_pl)
+    ax1.text(rho,flux_ratio,'  Proxima Cen b',color=c_pl,\
+        horizontalalignment='left',verticalalignment='center',fontsize=ccfs)
+    caption += '-- Proxima Cen b. At quadrature, albedo = ' + str(albedo) +\
+        ', radius = (M/Me)^(1/3) * Re, circular orbits.\n\n'
 
-    # Proxima Centari b
-    #sma = 0.05*u.au
-    #flux_ratio = rlp.calc_lambert_flux_ratio(sma=sma, rp=1.3**(1./3)*u.earthRad,\
-    #    orb_ang=0*u.degree,albedo=0.3, inclin=0*u.degree)
-    #rho = (sma/1.3*u.pc).value
-    #ax1.plot(rho,flux_ratio,marker='^', color=c_pl)
-    #ax1.text(rho,flux_ratio,'  Proxima Cen b',color=c_pl,\
-    #    horizontalalignment='left',verticalalignment='center',fontsize=ccfs)
-    #caption += '-- Prox Cen b: At quadrature, albedo = 0.3, radius = (M/Me)^(1/3) * Re, circular orbit.\n\n'
 
-
+if cfg['Tau_Ceti']:
     # Tau Ceti
     tc_dist = 3.65*u.pc
     albedo = 0.35
@@ -384,6 +385,8 @@ if cfg['special']:
     caption += '-- Tau Ceti e&f. At quadrature, albedo = ' + str(albedo) +\
         ', radius = (M/Me)^(1/3) * Re, circular orbits.\n\n'
 
+
+if cfg['solar_system']:
     # Earth & Jupiter
     #earthRatio = rlp.calc_lambert_flux_ratio(sma=1.*u.au, rp=1.*u.earthRad,\
     #    orb_ang=0*u.degree,albedo=0.367, inclin=0*u.degree)

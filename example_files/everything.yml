@@ -12,7 +12,9 @@ DI_H:       True # known H-band contrasts of directly imaged planets
 DI_B1_pred: True # predicted Band 1 from self-luminous, directly imaged planets
 DI_B3_pred: True # predicted Band 3 from self-luminous, directly imaged planets
 RV_pred:    True # predicted reflected light from Jovian planets
-special:    True # Solar System & Tau Ceti
+solar_system: True # Earth & Jupiter
+Tau_Ceti:    False # Tau Ceti e & f
+Prox_Cen:   False # Proxima Centauri b
 
 BTR_img:    True # imaging BTR
 BTR_spec:   True # spectroscopy BTR
