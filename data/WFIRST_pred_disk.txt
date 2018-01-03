@@ -1,0 +1,4 @@
+#Rho(as) Band4_contr_snr5
+#Short caption: WFIRST disk imaging Band 3, translated to point source sensitivity. 
+#References: pre-WIETR L3 (holdover from original chart)
+0.403	2.50E-090.496	2.50E-090.527	2.10E-090.713	2.10E-090.744	2.00E-090.868	2.00E-090.899	1.90E-091.084	1.90E-091.115	1.80E-091.146	1.80E-091.177	1.90E-091.208	2.50E-091.239	2.50E-09

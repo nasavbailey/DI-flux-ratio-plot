@@ -1,0 +1,4 @@
+#Rho(as) Band3_contr_snr5
+#Short caption: WFIRST spectroscopy Band 3
+#References: WFIRST_CGI_performance_25.xls
+0.205	5.3E-090.265	3.2E-090.324	3.2E-090.384	3.1E-090.443	3.0E-090.503	3.0E-090.562	4.4E-09

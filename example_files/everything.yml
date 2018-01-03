@@ -1,5 +1,5 @@
 # Turn on/off various plotted quantities (True=on; False=off)
-ELT :   True
+ELT :   False # very rough estimate!
 HABEX : True
 NIRCAM: True
 NICMOS: True
@@ -13,12 +13,15 @@ DI_B1_pred: True # predicted Band 1 from self-luminous, directly imaged planets
 DI_B3_pred: True # predicted Band 3 from self-luminous, directly imaged planets
 RV_pred:    True # predicted reflected light from Jovian planets
 solar_system: True # Earth & Jupiter
-Tau_Ceti:    False # Tau Ceti e & f
+Tau_Ceti:    True # Tau Ceti e & f
 Prox_Cen:   False # Proxima Centauri b
 
-BTR_img:    True # imaging BTR
-BTR_spec:   True # spectroscopy BTR
-BTR_disk:   True # extended surface brightness BTR, translated to contrast in 1FWHM aperture
+req_img:    True # imaging requirement
+req_spec:   True # spectroscopy requirement
+req_disk:   True # extended surface brightness requirement, translated to contrast in 1 resolution element
+pred_img:    True # prediction for imaging
+pred_disk:   True # prediction for extended source detection limit
+pred_spec:   True # prediction for spectroscopy detection limit
 
 # plotting parameters
 fig_width:  6 # inches

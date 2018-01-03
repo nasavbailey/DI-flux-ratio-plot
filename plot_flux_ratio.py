@@ -62,13 +62,13 @@ if cfg['color_by_lambda'].lower() == 'full':
 
     ax2 = ax1.twinx()
 
-    if cfg['ACS'] or cfg['BTR_img'] or cfg['DI_B1_pred']:
+    if cfg['ACS'] or cfg['req_img'] or cfg['DI_B1_pred']:
         ax2.plot([1,1],[1,1],color=c_v,linewidth=lw1+2, label='< 650 nm')
     if cfg['STIS']:
         ax2.plot([1,1],[1,1],color=c_bbvis,linewidth=lw1+2, label='broadband\nvisible')
-    if cfg['BTR_spec'] or cfg['DI_B3_pred']:
+    if cfg['req_spec'] or cfg['CBE_spec'] or cfg['DI_B3_pred']:
         ax2.plot([1,1],[1,1],color=c_band3,linewidth=lw1+2, label='CGI Band 3')
-    if cfg['BTR_disk']:
+    if cfg['req_disk']:
         ax2.plot([1,1],[1,1],color=c_band4,linewidth=lw1+2, label='CGI Band 4')
     if cfg['SPHERE']:
         ax2.plot([1,1],[1,1],color=c_yjh,linewidth=lw1+2, label='YJH-band')
@@ -90,9 +90,9 @@ elif cfg['color_by_lambda'].lower() == 'simple':
     ax2 = ax1.twinx()
     if cfg['HABEX'] or cfg['ACS'] or cfg['STIS'] or cfg['DI_B1_pred']:
         ax2.plot([1,1],[1,1],color=c_v,linewidth=lw1+2, label='< 650 nm')
-    if cfg['DI_B3_pred'] or cfg['BTR_spec']:
+    if cfg['DI_B3_pred'] or cfg['req_spec'] or cfg['CBE_spec']:
         ax2.plot([1,1],[1,1],color=c_band3,linewidth=lw1+2, label='650 - 800nm')
-    if cfg['BTR_disk']:
+    if cfg['req_disk']:
         ax2.plot([1,1],[1,1],color=c_band4,linewidth=lw1+2, label='800 - 1000nm')
     if cfg['GPI'] or cfg['SPHERE'] or cfg['NIRCAM'] or cfg['NICMOS'] or cfg['D_H']:
         ax2.plot([1,1],[1,1],color=c_h,linewidth=lw1+2, label='> 1000 nm')
@@ -110,7 +110,7 @@ elif cfg['color_by_lambda'].lower() == 'minimal':
 
     ax2 = ax1.twinx()
     if cfg['HABEX'] or cfg['ACS'] or cfg['STIS'] or cfg['DI_B1_pred'] or \
-    cfg['DI_B3_pred'] or cfg['BTR_spec'] or  cfg['BTR_disk']:
+    cfg['DI_B3_pred'] or cfg['req_spec'] or cfg['CBE_spec'] or  cfg['req_disk']:
         ax2.plot([1,1],[1,1],color=c_band4,linewidth=lw1+2, label='< 1000 nm')
     if cfg['GPI'] or cfg['SPHERE'] or cfg['NIRCAM'] or cfg['NICMOS']:
         ax2.plot([1,1],[1,1],color=c_h,linewidth=lw1+2, label='> 1000 nm')
@@ -283,49 +283,85 @@ if cfg['GPI']:
 #########################################################################
 ### WFIRST
 
-a_e = np.loadtxt(datapath+'exoplanet_mode.csv',delimiter=',')
-a_d = np.loadtxt(datapath+'disk_mode.csv',delimiter=',')
 
-arcsec_exoplanet=a_e[:,1]
-contrast_exoplanet=a_e[:,2]
-arcsec_disk=a_d[:,1]
-contrast_disk=a_d[:,2]
+## CBEs
 
-ax1.plot(arcsec_exoplanet,contrast_exoplanet,color='m', linewidth=lw2)
-ax1.plot(arcsec_disk,contrast_disk, color='m', linewidth=lw2)
-caption += '-- WFIRST detection limits are pre-WIETR L3 requirements for 5-sigma, post-processed detection limits.\n\n'
-ax1.text(1.3, 2E-9, 'WFIRST\nCGI\npre-WIETR', color='m', horizontalalignment='left',\
-    verticalalignment='center', fontsize=ccfs+1, weight='bold')
+if cfg['pred_img']:
+    fname = datapath+'WFIRST_pred_imaging.txt'
+    dat = ascii.read(fname)
+    ax1.plot(dat['Rho(as)'], dat['Band1_contr_snr5'], color=c_v, linewidth=lw2, label='')
+    ax1.text(dat['Rho(as)'][0], dat['Band1_contr_snr5'][0], 'WFIRST  \nCGI pred.  ', color='darkblue',\
+        horizontalalignment='right', verticalalignment='center', weight='bold', fontsize=ccfs+1)
+    if not cfg['req_img']:
+        ax1.text(dat['Rho(as)'][-1], 1.1*dat['Band1_contr_snr5'][-1], 'img', color=c_v,\
+            horizontalalignment='right', verticalalignment='bottom', fontsize=ccfs+1)
+    caption += extract_short_caption(fname)
 
-######Add Technical requirement line and text
-if cfg['BTR_img']:
-    fname = datapath+'WFIRST_BTR_imaging.txt'
-    btr_img = ascii.read(fname)
-    ax1.plot(btr_img['Rho(as)'], btr_img['Band1_contr_snr5'], color=c_v, linewidth=lw2, label='')
-    ax1.text(btr_img['Rho(as)'][0], btr_img['Band1_contr_snr5'][0], 'img \n BTR ', color=c_v,\
+
+if cfg['pred_spec']:
+    fname = datapath+'WFIRST_pred_spec.txt'
+    dat = ascii.read(fname)
+    ax1.plot(dat['Rho(as)'], dat['Band3_contr_snr5'], color=c_band3, linewidth=lw2, label='')
+    if not (cfg['pred_img'] or cfg['pred_disk']):
+        ax1.text(dat['Rho(as)'][-1], dat['Band3_contr_snr5'][-1], ' WFIRST\n CGI pred.', color=c_band3,\
+            horizontalalignment='left', verticalalignment='center', weight='bold', fontsize=ccfs+1)
+    if not cfg['req_spec']:
+        ax1.text(dat['Rho(as)'][-1], 1.1*dat['Band3_contr_snr5'][-1], 'spec', color=c_band3,\
+            horizontalalignment='left', verticalalignment='center', fontsize=ccfs+1)
+    caption += extract_short_caption(fname)
+
+if cfg['pred_disk']:
+    fname = datapath+'WFIRST_pred_disk.txt'
+    dat = ascii.read(fname)
+    ax1.plot(dat['Rho(as)'], dat['Band4_contr_snr5'], color=c_band4, linewidth=lw2, label='')
+    caption += '-- WFIRST "disk" requirement: **pre-WIETR** L3 requirements for 5-sigma, post-processed detection limits.\n\n'
+    if not cfg['pred_img']:
+        ax1.text(1.3, 2E-9, 'WFIRST\nCGI pred.', color='darkred', horizontalalignment='left',\
+            verticalalignment='center', fontsize=ccfs+1, weight='bold')
+    if not cfg['req_disk']:
+        ax1.text(dat['Rho(as)'][-1], 1.1*dat['Band4_contr_snr5'][-1], ' disk', color=c_band4,\
+            horizontalalignment='left', verticalalignment='center', fontsize=ccfs+1)
+
+
+
+## BTRs
+
+if cfg['req_img']:
+    fname = datapath+'WFIRST_req_imaging.txt'
+    dat = ascii.read(fname)
+    ax1.plot(dat['Rho(as)'], dat['Band1_contr_snr5'], color=c_v, linewidth=lw2, label='')
+    ax1.text(dat['Rho(as)'][0], 1.1*dat['Band1_contr_snr5'][0], 'img', color=c_v,\
+        horizontalalignment='left', verticalalignment='bottom', fontsize=ccfs+1)
+    ax1.text(dat['Rho(as)'][0], dat['Band1_contr_snr5'][0], 'WFIRST \nCGI req. ', color='darkblue',\
         horizontalalignment='right', verticalalignment='center', weight='bold', fontsize=ccfs+1)
     caption += extract_short_caption(fname)
 
-if cfg['BTR_disk']:
-    fname = datapath+'WFIRST_BTR_disk.txt'
-    btr_disk = ascii.read(fname)
-    ax1.plot(btr_disk['Rho(as)'], btr_disk['Band4_pt_contr_snr5'], color=c_band4, linewidth=lw2, label='')
-    ax1.text(0.9*btr_disk['Rho(as)'][-1], 1.1*btr_disk['Band4_pt_contr_snr5'][-1], 'disk\n BTR', color=c_band4,\
-        horizontalalignment='right', verticalalignment='center', weight='bold', fontsize=ccfs+1)
+if cfg['req_disk']:
+    fname = datapath+'WFIRST_req_disk.txt'
+    dat = ascii.read(fname)
+    ax1.plot(dat['Rho(as)'], dat['Band4_pt_contr_snr5'], color=c_band4, linewidth=lw2, label='')
+    ax1.text(dat['Rho(as)'][-3], 1.1*dat['Band4_pt_contr_snr5'][-3], 'disk ', color=c_band4,\
+        horizontalalignment='right', verticalalignment='bottom', fontsize=ccfs+1)
+    if not (cfg['req_img'] or cfg['req_spec']):
+        ax1.text(dat['Rho(as)'][0], dat['Band4_pt_contr_snr5'][0], ' WFIRST \n CGI req. ', color='darkblue',\
+            horizontalalignment='right', verticalalignment='center', weight='bold', fontsize=ccfs+1)
     caption += extract_short_caption(fname)
 
-if cfg['BTR_spec']:
+if cfg['req_spec']:
     import matplotlib.patheffects as path_effects
-    fname = datapath+'WFIRST_BTR_spec.txt'
-    btr_img = ascii.read(fname)
-    if cfg['BTR_disk']:  # draw a shadow under the line to make it easier to see if overlapping other BTR
+    fname = datapath+'WFIRST_req_spec.txt'
+    dat = ascii.read(fname)
+    if cfg['req_disk']:  # draw a shadow under the line to make it easier to see if overlapping other req line
         p = [path_effects.SimpleLineShadow(offset=(1, -1)), path_effects.Normal()]
     else:
         p = [path_effects.Normal()]
-    ax1.plot(btr_img['Rho(as)'], btr_img['Band3_contr_snr5'], color=c_band3, \
-        linewidth=lw1+2, label='', path_effects=p)
-    ax1.text(btr_img['Rho(as)'][0], btr_img['Band3_contr_snr5'][0], 'spec \n BTR ', color=c_band3,\
-        horizontalalignment='left', verticalalignment='bottom', weight='bold', fontsize=ccfs+1)
+    ax1.plot(dat['Rho(as)'], dat['Band3_contr_snr5'], color=c_band3, linewidth=lw2-0.5, \
+        label='', path_effects=p)
+    ax1.text(dat['Rho(as)'][0], 1.1*dat['Band3_contr_snr5'][0], 'spec', color=c_band3,\
+        horizontalalignment='left', verticalalignment='bottom', fontsize=ccfs+1)
+    if not cfg['req_img']:
+        ax1.text(dat['Rho(as)'][0], dat['Band3_contr_snr5'][0], ' WFIRST  \n CGI req.  ', color='darkblue',\
+            horizontalalignment='right', verticalalignment='center', weight='bold', fontsize=ccfs+1)
     caption += extract_short_caption(fname)
 
 
@@ -348,11 +384,11 @@ if cfg['DI_H'] or cfg['DI_B1_pred'] or cfg['DI_B3_pred']:
 
 if cfg['DI_H']:
     ax1.scatter(a_DI['Rho(as)'],a_DI['H_contr'],color=c_h, edgecolor='k', \
-        alpha=alpha_di, marker='s', s=cfg['di_markersize']-15, zorder=2, label='DI, 1.6 $\mathdefault{\mu} $m')
+        alpha=alpha_di, marker='s', s=cfg['di_markersize']-15, zorder=2, label='directly imaged, 1.6$\mathdefault{\mu} $m obs.')
 
 if cfg['DI_B3_pred']:
     ax1.scatter(a_DI['Rho(as)'],a_DI['763m_contr'],color=c_band3, edgecolor='k', \
-        marker='d', alpha=alpha_di, s=cfg['di_markersize'], zorder=2, label='DI, 750nm pred.')
+        marker='d', alpha=alpha_di, s=cfg['di_markersize'], zorder=2, label='directly imaged, 750nm pred.')
     if not cfg['DI_B1_pred']:
         for ct, rho in enumerate(a_DI['Rho(as)']):
             ax1.plot([rho,rho], [a_DI[ct]['763m_contr'], a_DI[ct]['H_contr']], \
@@ -363,7 +399,7 @@ if cfg['DI_B1_pred']:
         ax1.plot([rho,rho], [a_DI[ct]['547m_contr'], a_DI[ct]['H_contr']], \
             color='lightgray', linewidth=1, linestyle=':', zorder=1)
     ax1.scatter(a_DI['Rho(as)'],a_DI['547m_contr'],color=c_v, edgecolor='k', \
-        marker='o', alpha=alpha_di, s=cfg['di_markersize'], zorder=2, label='DI, 550nm pred.')
+        marker='o', alpha=alpha_di, s=cfg['di_markersize'], zorder=2, label='directly imaged, 550nm pred.')
 
 
 #########################################################################
@@ -429,15 +465,15 @@ if cfg['solar_system']:
                 'Direct Imaging chapter of Seager Exoplanets textbook, Table 3)\n\n'
 
     ax1.scatter(0.1,earthRatio,marker='$\\bigoplus$',color=c_pl, s=cfg['rv_markersize'], zorder=5)
-    ax1.text(0.1,earthRatio,'  Earth ',color=c_pl,\
+    ax1.text(0.1,earthRatio,'  Earth at 10pc',color=c_pl,\
         horizontalalignment='left',verticalalignment='center',fontsize=ccfs)
 
     ax1.scatter(0.5,jupiterRatio,marker='v',color=c_pl,  edgecolor='k', s=cfg['rv_markersize'], zorder=5)
-    ax1.text(0.5,jupiterRatio,'  Jupiter ',color=c_pl,\
-    horizontalalignment='left',verticalalignment='center',fontsize=ccfs)
+    ax1.text(0.5,jupiterRatio,' Jupiter at 10pc',color=c_pl,\
+    horizontalalignment='left',verticalalignment='top',fontsize=ccfs)
 
-    ax1.text(xlim[1], ylim[0]*1.1, 'Solar System as seen from 10pc. ',\
-    color='k',horizontalalignment='right', verticalalignment='bottom',fontsize=ccfs-1)
+#    ax1.text(xlim[1], ylim[0]*1.1, 'Solar System as seen from 10pc. ',\
+#    color='k',horizontalalignment='right', verticalalignment='bottom',fontsize=ccfs-1)
 
 
 #########################################################################
