@@ -66,7 +66,7 @@ if cfg['color_by_lambda'].lower() == 'full':
         ax2.plot([1,1],[1,1],color=c_v,linewidth=lw1+2, label='< 650 nm')
     if cfg['STIS']:
         ax2.plot([1,1],[1,1],color=c_bbvis,linewidth=lw1+2, label='broadband\nvisible')
-    if cfg['req_spec'] or cfg['CBE_spec'] or cfg['DI_B3_pred']:
+    if cfg['req_spec'] or cfg['pred_spec'] or cfg['DI_B3_pred']:
         ax2.plot([1,1],[1,1],color=c_band3,linewidth=lw1+2, label='CGI Band 3')
     if cfg['req_disk']:
         ax2.plot([1,1],[1,1],color=c_band4,linewidth=lw1+2, label='CGI Band 4')
@@ -90,9 +90,9 @@ elif cfg['color_by_lambda'].lower() == 'simple':
     ax2 = ax1.twinx()
     if cfg['HABEX'] or cfg['ACS'] or cfg['STIS'] or cfg['DI_B1_pred']:
         ax2.plot([1,1],[1,1],color=c_v,linewidth=lw1+2, label='< 650 nm')
-    if cfg['DI_B3_pred'] or cfg['req_spec'] or cfg['CBE_spec']:
+    if cfg['DI_B3_pred'] or cfg['req_spec'] or cfg['pred_spec']:
         ax2.plot([1,1],[1,1],color=c_band3,linewidth=lw1+2, label='650 - 800nm')
-    if cfg['req_disk']:
+    if cfg['req_disk'] or cfg['pred_disk']:
         ax2.plot([1,1],[1,1],color=c_band4,linewidth=lw1+2, label='800 - 1000nm')
     if cfg['GPI'] or cfg['SPHERE'] or cfg['NIRCAM'] or cfg['NICMOS'] or cfg['D_H']:
         ax2.plot([1,1],[1,1],color=c_h,linewidth=lw1+2, label='> 1000 nm')
@@ -110,7 +110,7 @@ elif cfg['color_by_lambda'].lower() == 'minimal':
 
     ax2 = ax1.twinx()
     if cfg['HABEX'] or cfg['ACS'] or cfg['STIS'] or cfg['DI_B1_pred'] or \
-    cfg['DI_B3_pred'] or cfg['req_spec'] or cfg['CBE_spec'] or  cfg['req_disk']:
+    cfg['DI_B3_pred'] or cfg['req_spec'] or cfg['pred_spec'] or  cfg['req_disk']:
         ax2.plot([1,1],[1,1],color=c_band4,linewidth=lw1+2, label='< 1000 nm')
     if cfg['GPI'] or cfg['SPHERE'] or cfg['NIRCAM'] or cfg['NICMOS']:
         ax2.plot([1,1],[1,1],color=c_h,linewidth=lw1+2, label='> 1000 nm')
@@ -284,7 +284,7 @@ if cfg['GPI']:
 ### WFIRST
 
 
-## CBEs
+## predictions
 
 if cfg['pred_img']:
     fname = datapath+'WFIRST_pred_imaging.txt'
