@@ -314,13 +314,13 @@ if cfg['pred_disk']:
     fname = datapath+'WFIRST_pred_disk.txt'
     dat = ascii.read(fname)
     ax1.plot(dat['Rho(as)'], dat['Band4_contr_snr5'], color=c_band4, linewidth=lw2, label='')
-    caption += '-- WFIRST "disk" requirement: **pre-WIETR** L3 requirements for 5-sigma, post-processed detection limits.\n\n'
     if not cfg['pred_img']:
         ax1.text(1.3, 2E-9, 'WFIRST\nCGI pred.', color='darkred', horizontalalignment='left',\
             verticalalignment='center', fontsize=ccfs+1, weight='bold')
     if not cfg['req_disk']:
         ax1.text(dat['Rho(as)'][-1], 1.1*dat['Band4_contr_snr5'][-1], ' disk', color=c_band4,\
             horizontalalignment='left', verticalalignment='center', fontsize=ccfs+1)
+    caption += extract_short_caption(fname)
 
 
 
