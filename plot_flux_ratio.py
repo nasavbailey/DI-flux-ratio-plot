@@ -132,8 +132,10 @@ else:
 
 
 # text about detection limit curves
-ax1.text(xlim[0], ylim[0]*1.1, ' Instrument curves are \n 5$\mathdefault{\sigma}$ post-processed detection limits.',\
-    color='k',horizontalalignment='left', verticalalignment='bottom',fontsize=ccfs-1)
+ax1.text(xlim[-1], ylim[0]*1.1, \
+    ' Instrument curves are 5$\mathdefault{\sigma}$ post-processed detection limits. ',\
+    horizontalalignment='right', verticalalignment='bottom',\
+    fontsize=ccfs+1, color='k', weight='bold')#, backgroundcolor='white')
 
 ########################################################################
 # auto-generated caption. See README for how to comment datafiles.
@@ -293,8 +295,13 @@ if cfg['pred_img']:
     ax1.text(dat['Rho(as)'][0], dat['Band1_contr_snr5'][0], 'WFIRST  \nCGI pred.  ', color='darkblue',\
         horizontalalignment='right', verticalalignment='center', weight='bold', fontsize=ccfs+1)
     if not cfg['req_img']:
-        ax1.text(dat['Rho(as)'][-1], 1.1*dat['Band1_contr_snr5'][-1], 'img', color=c_v,\
-            horizontalalignment='right', verticalalignment='bottom', fontsize=ccfs+1)
+        if cfg['exp_t']:
+            ax1.text(dat['Rho(as)'][-1], 1.2*dat['Band1_contr_snr5'][-1], \
+                'img, 50hr', color=c_v,\
+                horizontalalignment='right', verticalalignment='bottom', fontsize=ccfs+1)
+        else:
+            ax1.text(dat['Rho(as)'][-1], 1.1*dat['Band1_contr_snr5'][-1], 'img', color=c_v,\
+                horizontalalignment='right', verticalalignment='bottom', fontsize=ccfs+1)
     caption += extract_short_caption(fname)
 
 
@@ -306,8 +313,14 @@ if cfg['pred_spec']:
         ax1.text(dat['Rho(as)'][-1], dat['Band3_contr_snr5'][-1], ' WFIRST\n CGI pred.', color=c_band3,\
             horizontalalignment='left', verticalalignment='center', weight='bold', fontsize=ccfs+1)
     if not cfg['req_spec']:
-        ax1.text(dat['Rho(as)'][-1], 1.1*dat['Band3_contr_snr5'][-1], 'spec', color=c_band3,\
-            horizontalalignment='left', verticalalignment='center', fontsize=ccfs+1)
+        if cfg['exp_t']:
+            ax1.text(dat['Rho(as)'][-1], 1.1*dat['Band3_contr_snr5'][-1], \
+            'spec, 400hr', color=c_band3,\
+                horizontalalignment='left', verticalalignment='center', fontsize=ccfs+1)
+        else:
+            ax1.text(dat['Rho(as)'][-1], 1.1*dat['Band3_contr_snr5'][-1], \
+            'spec', color=c_band3,\
+                horizontalalignment='left', verticalalignment='center', fontsize=ccfs+1)
     caption += extract_short_caption(fname)
 
 if cfg['pred_disk']:
@@ -384,11 +397,13 @@ if cfg['DI_H'] or cfg['DI_B1_pred'] or cfg['DI_B3_pred']:
 
 if cfg['DI_H']:
     ax1.scatter(a_DI['Rho(as)'],a_DI['H_contr'],color=c_h, edgecolor='k', \
-        alpha=alpha_di, marker='s', s=cfg['di_markersize']-15, zorder=2, label='directly imaged, 1.6$\mathdefault{\mu} $m obs.')
+        alpha=alpha_di, marker='s', s=cfg['di_markersize']-15, zorder=2,\
+        label='directly imaged, 1.6$\mathdefault{\mu} $m observed')
 
 if cfg['DI_B3_pred']:
     ax1.scatter(a_DI['Rho(as)'],a_DI['763m_contr'],color=c_band3, edgecolor='k', \
-        marker='d', alpha=alpha_di, s=cfg['di_markersize'], zorder=2, label='directly imaged, 750nm pred.')
+        marker='d', alpha=alpha_di, s=cfg['di_markersize'], zorder=2, \
+        label='directly imaged, 750nm predicted')
     if not cfg['DI_B1_pred']:
         for ct, rho in enumerate(a_DI['Rho(as)']):
             ax1.plot([rho,rho], [a_DI[ct]['763m_contr'], a_DI[ct]['H_contr']], \
@@ -399,7 +414,8 @@ if cfg['DI_B1_pred']:
         ax1.plot([rho,rho], [a_DI[ct]['547m_contr'], a_DI[ct]['H_contr']], \
             color='lightgray', linewidth=1, linestyle=':', zorder=1)
     ax1.scatter(a_DI['Rho(as)'],a_DI['547m_contr'],color=c_v, edgecolor='k', \
-        marker='o', alpha=alpha_di, s=cfg['di_markersize'], zorder=2, label='directly imaged, 550nm pred.')
+        marker='o', alpha=alpha_di, s=cfg['di_markersize'], zorder=2, \
+        label='directly imaged, 550nm predicted')
 
 
 #########################################################################
@@ -428,7 +444,7 @@ if cfg['Tau_Ceti']:
     ax3.set_xlim(xlim * tc_dist.value)
     ax3.set_xscale('log')
     ax3.xaxis.set_major_formatter(ticker.FormatStrFormatter('%.1f'))
-    ax3.set_xlabel('Semi-major axis for Tau Ceti (au)')
+    ax3.set_xlabel('Semi-major axis for Tau Ceti (d=%.3g pc) [au] '%tc_dist.value)
 
     # Tau Ceti f
     sma = 1.334*u.au
@@ -484,7 +500,7 @@ if cfg['RV_pred']:
     tmp = ascii.read(fname)
     idx_rv = tmp['pl_discmethod'] == "Radial Velocity"
     ax1.scatter(tmp[idx_rv]['sma_arcsec'], tmp[idx_rv]['Fp/F*_quad'], s=cfg['rv_markersize'],\
-        color='dimgray', edgecolor='k', marker='^', label='RV, reflected light', zorder=5)
+        color='dimgray', edgecolor='k', marker='^', label='RV, reflected light, predicted', zorder=5)
     caption += extract_short_caption(fname)
 
 
@@ -495,7 +511,9 @@ if cfg['is_draft']:
     ax1.text(xlim[1], ylim[0]*2, "DRAFT  "+str(date.today()) + ' ', \
         horizontalalignment='right',verticalalignment='bottom',color='red',weight='bold')
 
-ax1.legend(fontsize=cfg['legend_font_size'], loc='upper right')
+first_legend = ax1.legend(fontsize=cfg['legend_font_size'], loc='upper right', \
+    title='Known Exoplanets')
+first_legend.get_title().set_fontsize(8)
 
 ax1.grid(b=True, which='major', color='tan', linestyle='-', alpha=0.1)
 
@@ -509,7 +527,7 @@ ax1.set_xlim(xlim)
 ax1.xaxis.set_major_formatter(ticker.FormatStrFormatter('%.1g'))
 
 if cfg['color_by_lambda'].lower() != 'none':
-    second_legend = ax2.legend(loc='upper left', fontsize=cfg['legend_font_size'], title='Bandpass')
+    second_legend = ax2.legend(loc='upper left', fontsize=cfg['legend_font_size'], title='Wavelength')
     second_legend.get_title().set_fontsize(8)
     ax2.set_ylim(ylim)
     ax2.set_xlim(xlim)
