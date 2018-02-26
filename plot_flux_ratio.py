@@ -294,12 +294,17 @@ if cfg['pred_img']:
     ax1.plot(dat['Rho(as)'], dat['Band1_contr_snr5'], color=c_v, linewidth=lw2, label='')
     ax1.text(dat['Rho(as)'][0], dat['Band1_contr_snr5'][0], 'WFIRST  \nCGI pred.  ', color='darkblue',\
         horizontalalignment='right', verticalalignment='center', weight='bold', fontsize=ccfs+1)
-    if not cfg['req_img']:
-        if cfg['exp_t']:
+    if cfg['exp_t']:
+        if not cfg['req_img']:
             ax1.text(dat['Rho(as)'][-1], 1.2*dat['Band1_contr_snr5'][-1], \
-                'img, 50hr', color=c_v,\
-                horizontalalignment='right', verticalalignment='bottom', fontsize=ccfs+1)
+            'img, 50hr', color=c_v,\
+            horizontalalignment='right', verticalalignment='bottom', fontsize=ccfs+1)
         else:
+            ax1.text(dat['Rho(as)'][-1], 1.2*dat['Band1_contr_snr5'][-1], \
+            '50hr', color=c_v,\
+            horizontalalignment='right', verticalalignment='bottom', fontsize=ccfs+1)
+    else:
+        if not cfg['req_img']:
             ax1.text(dat['Rho(as)'][-1], 1.1*dat['Band1_contr_snr5'][-1], 'img', color=c_v,\
                 horizontalalignment='right', verticalalignment='bottom', fontsize=ccfs+1)
     caption += extract_short_caption(fname)
@@ -312,15 +317,20 @@ if cfg['pred_spec']:
     if not (cfg['pred_img'] or cfg['pred_disk']):
         ax1.text(dat['Rho(as)'][-1], dat['Band3_contr_snr5'][-1], ' WFIRST\n CGI pred.', color=c_band3,\
             horizontalalignment='left', verticalalignment='center', weight='bold', fontsize=ccfs+1)
-    if not cfg['req_spec']:
-        if cfg['exp_t']:
+    if cfg['exp_t']:
+        if not cfg['req_spec']:
             ax1.text(dat['Rho(as)'][-1], 1.1*dat['Band3_contr_snr5'][-1], \
             'spec, 400hr', color=c_band3,\
-                horizontalalignment='left', verticalalignment='center', fontsize=ccfs+1)
+            horizontalalignment='left', verticalalignment='center', fontsize=ccfs+1)
         else:
             ax1.text(dat['Rho(as)'][-1], 1.1*dat['Band3_contr_snr5'][-1], \
+            '400hr', color=c_band3,\
+            horizontalalignment='left', verticalalignment='center', fontsize=ccfs+1)
+    else:
+        if not cfg['req_spec']:
+            ax1.text(dat['Rho(as)'][-1], 1.1*dat['Band3_contr_snr5'][-1], \
             'spec', color=c_band3,\
-                horizontalalignment='left', verticalalignment='center', fontsize=ccfs+1)
+            horizontalalignment='left', verticalalignment='center', fontsize=ccfs+1)
     caption += extract_short_caption(fname)
 
 if cfg['pred_disk']:

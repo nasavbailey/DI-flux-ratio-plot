@@ -22,6 +22,7 @@ req_disk:   True # extended surface brightness requirement, translated to contra
 pred_img:    True # prediction for imaging
 pred_disk:   True # prediction for extended source detection limit
 pred_spec:   True # prediction for spectroscopy detection limit
+exp_t:      True # print exposure times for predictions
 
 # plotting parameters
 fig_width:  6 # inches
