@@ -30,6 +30,9 @@ with open(cfglist[0],'r') as f:
 ###Define path where to find data and where to save plot
 datapath = './data/'
 
+### hardcoded constants
+d_tel = 2.4 * u.m
+
 ########################################################################
 ### Plot setup
 
@@ -291,47 +294,55 @@ if cfg['GPI']:
 if cfg['pred_img']:
     fname = datapath+'WFIRST_pred_imaging.txt'
     dat = ascii.read(fname)
-    ax1.plot(dat['Rho(as)'], dat['Band1_contr_snr5'], color=c_v, linewidth=lw2, label='')
-    ax1.text(dat['Rho(as)'][0], dat['Band1_contr_snr5'][0], 'WFIRST  \nCGI pred.  ', color='darkblue',\
-        horizontalalignment='right', verticalalignment='center', weight='bold', fontsize=ccfs+1)
+    dat['lambda'].unit = u.nm
+    dat['Rho(as)'] = dat['l/D'] * (dat['lambda'] / d_tel).decompose()*206265
+    dat['contr_snr5'] = dat['contr_snr10'] / 2.
+    ax1.plot(dat['Rho(as)'], dat['contr_snr5'], color=c_v, linewidth=lw2, label='')
+    ax1.text(dat['Rho(as)'][0], dat['contr_snr5'][-1], 'WFIRST  \nCGI pred.  ', color='darkblue',\
+        horizontalalignment='right', verticalalignment='top', weight='bold', fontsize=ccfs+1)
     if cfg['exp_t']:
         if not cfg['req_img']:
-            ax1.text(dat['Rho(as)'][-1], 1.2*dat['Band1_contr_snr5'][-1], \
-            'img, 50hr', color=c_v,\
-            horizontalalignment='right', verticalalignment='bottom', fontsize=ccfs+1)
+            ax1.text(dat['Rho(as)'][0], 0.9*dat['contr_snr5'][-1], \
+            'img, %ghr'%(dat['t_int_hr'][0]), color=c_v,\
+            horizontalalignment='left', verticalalignment='top', fontsize=ccfs+1)
         else:
-            ax1.text(dat['Rho(as)'][-1], 1.2*dat['Band1_contr_snr5'][-1], \
-            '50hr', color=c_v,\
-            horizontalalignment='right', verticalalignment='bottom', fontsize=ccfs+1)
+            ax1.text(dat['Rho(as)'][0], 0.9*dat['contr_snr5'][-1], \
+            '%ghr'%(dat['t_int_hr'][0],), color=c_v,\
+            horizontalalignment='left', verticalalignment='top', fontsize=ccfs+1)
     else:
         if not cfg['req_img']:
-            ax1.text(dat['Rho(as)'][-1], 1.1*dat['Band1_contr_snr5'][-1], 'img', color=c_v,\
-                horizontalalignment='right', verticalalignment='bottom', fontsize=ccfs+1)
+            ax1.text(dat['Rho(as)'][0], 0.9*dat['contr_snr5'][-1], 'img', color=c_v,\
+                horizontalalignment='left', verticalalignment='top', fontsize=ccfs+1)
     caption += extract_short_caption(fname)
 
 
 if cfg['pred_spec']:
     fname = datapath+'WFIRST_pred_spec.txt'
     dat = ascii.read(fname)
-    ax1.plot(dat['Rho(as)'], dat['Band3_contr_snr5'], color=c_band3, linewidth=lw2, label='')
+    dat['lambda'].unit = u.nm
+    dat['Rho(as)'] = dat['l/D'] * (dat['lambda'] / d_tel).decompose()*206265
+    dat['contr_snr5'] = dat['contr_snr10'] / 2.
+    ax1.plot(dat['Rho(as)'], dat['contr_snr5'], color=c_band3, linewidth=lw2, label='')
     if not (cfg['pred_img'] or cfg['pred_disk']):
-        ax1.text(dat['Rho(as)'][-1], dat['Band3_contr_snr5'][-1], ' WFIRST\n CGI pred.', color=c_band3,\
+        ax1.text(dat['Rho(as)'][-1], dat['contr_snr5'][-1], ' WFIRST\n CGI pred.', color=c_band3,\
             horizontalalignment='left', verticalalignment='center', weight='bold', fontsize=ccfs+1)
     if cfg['exp_t']:
         if not cfg['req_spec']:
-            ax1.text(dat['Rho(as)'][-1], 1.1*dat['Band3_contr_snr5'][-1], \
-            'spec, 400hr', color=c_band3,\
-            horizontalalignment='left', verticalalignment='center', fontsize=ccfs+1)
+            ax1.text(dat['Rho(as)'][0], 1.1*dat['contr_snr5'][0], \
+            'spec, %ghr'%(dat['t_int_hr'][0]), color=c_band3,\
+            horizontalalignment='left', verticalalignment='bottom', fontsize=ccfs+1, zorder=6)
         else:
-            ax1.text(dat['Rho(as)'][-1], 1.1*dat['Band3_contr_snr5'][-1], \
-            '400hr', color=c_band3,\
-            horizontalalignment='left', verticalalignment='center', fontsize=ccfs+1)
+            ax1.text(dat['Rho(as)'][0], 1.1*dat['contr_snr5'][0], \
+            '%ghr'%(dat['t_int_hr'][0]), color=c_band3,\
+            horizontalalignment='left', verticalalignment='bottom', fontsize=ccfs+1, zorder=6)
     else:
         if not cfg['req_spec']:
-            ax1.text(dat['Rho(as)'][-1], 1.1*dat['Band3_contr_snr5'][-1], \
+            ax1.text(dat['Rho(as)'][0], 1.1*dat['contr_snr5'][0], \
             'spec', color=c_band3,\
-            horizontalalignment='left', verticalalignment='center', fontsize=ccfs+1)
+            horizontalalignment='left', verticalalignment='bottom', fontsize=ccfs+1, zorder=6)
     caption += extract_short_caption(fname)
+
+
 
 if cfg['pred_disk']:
     fname = datapath+'WFIRST_pred_disk.txt'
@@ -341,7 +352,7 @@ if cfg['pred_disk']:
         ax1.text(1.3, 2E-9, 'WFIRST\nCGI pred.', color='darkred', horizontalalignment='left',\
             verticalalignment='center', fontsize=ccfs+1, weight='bold')
     if not cfg['req_disk']:
-        ax1.text(dat['Rho(as)'][-1], 1.1*dat['Band4_contr_snr5'][-1], ' disk', color=c_band4,\
+        ax1.text(dat['Rho(as)'][-1], 1.1*dat['Band4_contr_snr5'][-1], ' img,\n disk', color=c_band4,\
             horizontalalignment='left', verticalalignment='center', fontsize=ccfs+1)
     caption += extract_short_caption(fname)
 
