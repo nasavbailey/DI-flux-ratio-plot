@@ -352,7 +352,7 @@ if cfg['pred_disk']:
         ax1.text(1.3, 2E-9, 'WFIRST\nCGI pred.', color='darkred', horizontalalignment='left',\
             verticalalignment='center', fontsize=ccfs+1, weight='bold')
     if not cfg['req_disk']:
-        ax1.text(dat['Rho(as)'][-1], 1.1*dat['Band4_contr_snr5'][-1], ' img,\n disk', color=c_band4,\
+        ax1.text(dat['Rho(as)'][-1], 1.1*dat['Band4_contr_snr5'][-1], ' img, 100hr', color=c_band4,\
             horizontalalignment='left', verticalalignment='center', fontsize=ccfs+1)
     caption += extract_short_caption(fname)
 

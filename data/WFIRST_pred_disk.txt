@@ -1,5 +1,5 @@
 #Rho(as) Band4_contr_snr5
-#Short caption: WFIRST CGI disk imaging prediction: **pre-WIETR** L3 post-processed sensitivity requirement for Band 3 imaging with the SPC "disk" mask. The new baseline configuration pairs the SPC disk mask with Band 4, rather than Band 3; it is assumed that the flux ratio requirements as well as the IWA and OWA in units of lambda/D remain the same.
-#References: pre-WIETR L3 (holdover from original chart)
-0.50  2.5e-9
-1.42  2.5e-9
+#Short caption: WFIRST CGI imaging prediction for Band 4 imaging with the SPC "disk" mask.  Placeholder until new calcs from Brian/Bijan.
+#References: placeholder until new calcs from Brian/Bijan
+0.50  6e-10
+1.42  6e-10
