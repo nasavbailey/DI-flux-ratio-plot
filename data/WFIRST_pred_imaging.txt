@@ -1,10 +1,10 @@
-#Rho(as) Band1_contr_snr5
-#Short caption: WFIRST CGI imaging prediction: Simulated 5-sigma post-processed [RDI+fpp=2] contrast curve for Band 1 imaging with the HLC coronagraph. The model observation consists of a 50hr sequence of target & reference star with MUFs=1 and no margins. (source: B. Nemati, Dec 2017, WFIRST_CGI_performance_25.xls)
-#References: WFIRST_CGI_performance_25.xls
-0.155	6.0E-09
-0.2	4.2E-09
-0.245	3.8E-09
-0.29	3.6E-09
-0.335	3.5E-09
-0.38	3.4E-09
-0.425	3.3E-09
+#l/D contr_snr5  lambda t_int_hr  fpp
+#Short caption: WFIRST CGI imaging prediction: Modeled 5-sigma post-processed [RDI+fpp=2] contrast curve for Band 1 imaging of a V=5 star with the HLC coronagraph. The model observation use MUFs=1 and no margins. Integration time is  100hr. (source: B. Nemati, Mar 2018, 20180308 Nemati Updated CGI Planet Sensitivity and Yield.pptx)
+#References: 20180308 Nemati Updated CGI Planet Sensitivity and Yield.pptx
+3.1	1.5E-09	575	100	2
+3.6	1.2E-09	575	100	2
+4.2	9.3E-10	575	100	2
+5.0	6.4E-10	575	100	2
+6.0	6.1E-10	575	100	2
+7.0	5.7E-10	575	100	2
+7.9	5.7E-10	575	100	2

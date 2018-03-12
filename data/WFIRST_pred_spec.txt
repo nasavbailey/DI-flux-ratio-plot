@@ -1,10 +1,10 @@
-#Rho(as) Band3_contr_snr5
-#Short caption: WFIRST CGI spectroscopy prediction: Simulated 5-sigma post-processed [RDI+fpp=2] contrast curve for Band 3 spectroscopy with the SPC bowtie. The model observation consists of a 400hr sequence of target & reference star with MUFs=1 and no margins. (source: B. Nemati, Dec 2017, WFIRST_CGI_performance_25.xls)
-#References: WFIRST_CGI_performance_25.xls
-0.205	5.3E-09
-0.265	3.2E-09
-0.324	3.2E-09
-0.384	3.1E-09
-0.443	3.0E-09
-0.503	3.0E-09
-0.562	4.4E-09
+#l/D contr_snr10  lambda t_int_hr  fpp
+#Short caption: WFIRST CGI spectroscopy prediction: Modeled 10-sigma post-processed [RDI+fpp=2] contrast curve for Band 3 spectroscopy with the SPC bowtie. The model observation use MUFs=1 and no margins. Integration time is  400hr. (source: B. Nemati, Mar 2018, 20180308 Nemati Updated CGI Planet Sensitivity and Yield)
+#References: 20180308 Nemati Updated CGI Planet Sensitivity and Yield
+3.1	6.8E-09	760	400	2
+3.6	5.4E-09	760	400	2
+4.2	4.1E-09	760	400	2
+5.0	4.2E-09	760	400	2
+6.0	4.1E-09	760	400	2
+7.0	4.1E-09	760	400	2
+7.9	4.5E-09	760	400	2
