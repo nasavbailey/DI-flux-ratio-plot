@@ -463,8 +463,12 @@ if cfg['Tau_Ceti']:
     ax3.set_ylim(ylim)
     ax3.set_xlim(xlim * tc_dist.value)
     ax3.set_xscale('log')
-    ax3.xaxis.set_major_formatter(ticker.FormatStrFormatter('%.1f'))
-    ax3.set_xlabel('Semi-major axis for Tau Ceti (d=%.3g pc) [au] '%tc_dist.value)
+    if cfg['Tau_Ceti_axis']:
+        ax3.xaxis.set_major_formatter(ticker.FormatStrFormatter('%.1f'))
+        ax3.set_xlabel('Semi-major axis for Tau Ceti (d=%.3g pc) [au] '%tc_dist.value)
+    else:
+        ax3.set_xticks([])
+        ax3.xaxis.set_ticks_position('none')
 
     # Tau Ceti f
     sma = 1.334*u.au
