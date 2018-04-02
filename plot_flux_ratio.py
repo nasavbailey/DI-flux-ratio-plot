@@ -75,7 +75,7 @@ if cfg['color_by_lambda'].lower() == 'full':
         ax2.plot([1,1],[1,1],color=c_band4,linewidth=lw1+2, label='CGI Band 4')
     if cfg['SPHERE']:
         ax2.plot([1,1],[1,1],color=c_yjh,linewidth=lw1+2, label='YJH-band')
-    if cfg['GPI'] or cfg['NICMOS'] or cfg['D_H']:
+    if cfg['GPI'] or cfg['NICMOS'] or cfg['DI_H']:
         ax2.plot([1,1],[1,1],color=c_h,linewidth=lw1+2, label='H-band')
     if cfg['SPHERE'] or cfg['NIRCAM']:
         ax2.plot([1,1],[1,1],color=c_k,linewidth=lw1+2, label='K-band')
@@ -97,7 +97,7 @@ elif cfg['color_by_lambda'].lower() == 'simple':
         ax2.plot([1,1],[1,1],color=c_band3,linewidth=lw1+2, label='650 - 800nm')
     if cfg['req_disk'] or cfg['pred_disk']:
         ax2.plot([1,1],[1,1],color=c_band4,linewidth=lw1+2, label='800 - 1000nm')
-    if cfg['GPI'] or cfg['SPHERE'] or cfg['NIRCAM'] or cfg['NICMOS'] or cfg['D_H']:
+    if cfg['GPI'] or cfg['SPHERE'] or cfg['NIRCAM'] or cfg['NICMOS'] or cfg['DI_H']:
         ax2.plot([1,1],[1,1],color=c_h,linewidth=lw1+2, label='> 1000 nm')
 
 
@@ -135,7 +135,9 @@ else:
 
 
 # text about detection limit curves
-ax1.text(xlim[-1], ylim[0]*1.1, \
+if cfg['ELT'] or cfg['HABEX'] or cfg['NIRCAM'] or cfg['NICMOS'] or cfg['STIS'] \
+    or cfg['ACS'] or cfg['SPHERE'] or cfg['GPI']:
+    ax1.text(xlim[-1], ylim[0]*1.1, \
     ' Instrument curves are 5$\mathdefault{\sigma}$ post-processed detection limits. ',\
     horizontalalignment='right', verticalalignment='bottom',\
     fontsize=ccfs+1, color='k', weight='bold')#, backgroundcolor='white')
