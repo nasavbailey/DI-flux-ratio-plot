@@ -582,3 +582,5 @@ if cfg['save_pdf']:
     plt.savefig('./output/flux_ratio_'+cfgname+'.pdf')
 if cfg['save_jpg']:
     plt.savefig('./output/flux_ratio_'+cfgname+'.jpg', dpi=cfg['jpg_dpi'])
+if cfg['save_png']:
+    plt.savefig('./output/flux_ratio_'+cfgname+'.png', dpi=cfg['png_dpi'])
