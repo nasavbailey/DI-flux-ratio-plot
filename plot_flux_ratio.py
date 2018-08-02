@@ -254,6 +254,30 @@ if cfg['ACS']:
 
 
 #########################################################################
+### MagAO detection limit
+
+if cfg['MagAO']:
+    fname = datapath+'magao_ip_alphacen_5sigma.txt'
+    a_MagAO_ip = ascii.read(fname)
+    a_MagAO_ip['ip_Contrast'] = a_MagAO_ip['ip_contr_60min']
+    ax1.plot(a_MagAO_ip['Rho(as)'], a_MagAO_ip['ip_Contrast'], \
+        color=c_band4,linewidth=lw1,label='')
+    ax1.plot([ a_MagAO_ip['Rho(as)'][-1], 1.7], \
+        [0.9*a_MagAO_ip['ip_Contrast'][-1], 2E-8], 'k', linewidth=0.5)
+    ax1.text(1.7, 2E-8,'Magellan VisAO',color=c_band4, horizontalalignment='left', \
+        verticalalignment='top',rotation=-35,fontsize=ccfs)
+
+    fname = datapath+'magao_Ys_betapic_5sigma.txt'
+    a_MagAO_ys = ascii.read(fname)
+    a_MagAO_ys['Ys_Contrast'] = a_MagAO_ys['Ys_contr_60min']
+    ax1.plot(a_MagAO_ys['Rho(as)'], a_MagAO_ys['Ys_Contrast'], \
+        color=c_yjh,linewidth=lw1,label='')
+    ax1.text(1.7, 3.5E-7,'Magellan VisAO',color=c_yjh, horizontalalignment='left', \
+        verticalalignment='bottom',rotation=-12,fontsize=ccfs)
+
+
+
+#########################################################################
 ### SPHERE detection limit
 
 if cfg['SPHERE']:
