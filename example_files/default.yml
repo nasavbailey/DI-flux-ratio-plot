@@ -7,6 +7,7 @@ STIS:   True
 ACS :   True
 SPHERE: True
 GPI:    True
+MagAO:  True
 
 DI_H:       True # known H-band contrasts of directly imaged planets
 DI_B1_pred: True # predicted Band 1 from self-luminous, directly imaged planets
@@ -31,6 +32,9 @@ fig_height: 5.5 # inches
 save_pdf:   True # output PDF?
 save_jpg:   True # output JPG?
 jpg_dpi:    200
+save_png:   False # output PNG?
+png_dpi:    200
+
 
 color_by_lambda:  'simple'  # [ full / simple / minimal / none ] color code by  bandpass
 is_draft:    False  # print DRAFT & date on plot

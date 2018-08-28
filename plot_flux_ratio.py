@@ -205,9 +205,10 @@ if cfg['NIRCAM']:
     a_JWST = ascii.read(fname)
     ax1.plot(a_JWST['Rho(as)'],a_JWST['210_contr'],color=c_k,linewidth=lw1,linestyle='--',label='')
     if cfg['SPHERE']:
-        xy=[1.6, 5E-7]
-        ax1.text(xy[0],xy[1], 'JWST NIRCam', color=c_k, rotation=-25, fontsize=ccfs)
-        ax1.plot([1.45,xy[0]],[3E-7,xy[1]-1E-7],'k', linewidth=0.5)
+        xy=[4, 3E-8]
+        ax1.text(xy[0],xy[1], 'JWST NIRCam', color=c_k, rotation=-30, fontsize=ccfs, \
+            verticalalignment='bottom', horizontalalignment='right')
+        ax1.plot([xy[0]*0.95,xy[0]],[xy[1],1.1E-8],'k', linewidth=0.5)
     else:
         ax1.text(2,1E-7,'JWST NIRCam',color=c_k,\
             horizontalalignment='left',rotation=-30,fontsize=ccfs)
@@ -253,6 +254,30 @@ if cfg['ACS']:
 
 
 #########################################################################
+### MagAO detection limit
+
+if cfg['MagAO']:
+    fname = datapath+'magao_ip_alphacen_5sigma.txt'
+    a_MagAO_ip = ascii.read(fname)
+    a_MagAO_ip['ip_Contrast'] = a_MagAO_ip['ip_contr_60min']
+    ax1.plot(a_MagAO_ip['Rho(as)'], a_MagAO_ip['ip_Contrast'], \
+        color=c_band4,linewidth=lw1,label='')
+    ax1.plot([ a_MagAO_ip['Rho(as)'][-1], 1.7], \
+        [0.9*a_MagAO_ip['ip_Contrast'][-1], 2E-8], 'k', linewidth=0.5)
+    ax1.text(1.7, 2E-8,'Magellan VisAO',color=c_band4, horizontalalignment='left', \
+        verticalalignment='top',rotation=-35,fontsize=ccfs)
+
+    fname = datapath+'magao_Ys_betapic_5sigma.txt'
+    a_MagAO_ys = ascii.read(fname)
+    a_MagAO_ys['Ys_Contrast'] = a_MagAO_ys['Ys_contr_60min']
+    ax1.plot(a_MagAO_ys['Rho(as)'], a_MagAO_ys['Ys_Contrast'], \
+        color=c_yjh,linewidth=lw1,label='')
+    ax1.text(1.7, 3.5E-7,'Magellan VisAO',color=c_yjh, horizontalalignment='left', \
+        verticalalignment='bottom',rotation=-12,fontsize=ccfs)
+
+
+
+#########################################################################
 ### SPHERE detection limit
 
 if cfg['SPHERE']:
@@ -267,11 +292,11 @@ if cfg['SPHERE']:
         color=c_yjh, linewidth=lw1, label='')
     ax1.plot(a_SPHERE['Rho(as)'][idx_k12], a_SPHERE['Contrast'][idx_k12], \
         color=c_k, linewidth=lw1, label='')
-    ax1.text(0.22, 1E-6, 'VLT SPHERE', color=c_k, horizontalalignment='right', \
+    ax1.text(0.19, 2.5E-6, 'VLT SPHERE', color=c_k, horizontalalignment='right', \
         verticalalignment='top', fontsize=ccfs)
-    ax1.text(0.16, 5*10**-7, 'IFS /', color=c_yjh, horizontalalignment='right', \
+    ax1.text(0.14, 1.3*10**-6, 'IFS /', color=c_yjh, horizontalalignment='right', \
         verticalalignment='top', fontsize=ccfs)
-    ax1.text(0.16, 5*10**-7, ' IRDIS', color=c_k, horizontalalignment='left', \
+    ax1.text(0.14, 1.3*10**-6, ' IRDIS', color=c_k, horizontalalignment='left', \
         verticalalignment='top', fontsize=ccfs)
     caption += extract_short_caption(fname)
 
@@ -280,10 +305,10 @@ if cfg['SPHERE']:
 ### GPI H-band
 
 if cfg['GPI']:
-    fname = datapath+'GPIES_T-type_contrast_curve_2per.txt'
+    fname = datapath+'GPI_Sirius_Ltype.txt'
     a_GPI = ascii.read(fname)
-    ax1.plot(a_GPI['Rho(as)'],a_GPI['H_contr_60min'],color=c_h,linewidth=lw1,label='')
-    ax1.text(0.17,0.8*10**-5,'Gemini GPI',color=c_h,horizontalalignment='left',rotation=-24,fontsize=ccfs)
+    ax1.plot(a_GPI['Rho(as)'],a_GPI['H_contr_60min_Ltype'],color=c_h,linewidth=lw1,label='')
+    ax1.text(0.15,1.1*10**-5,'Gemini GPI',color=c_h,horizontalalignment='left',rotation=-24,fontsize=ccfs)
     caption += extract_short_caption(fname)
 
 
@@ -582,3 +607,5 @@ if cfg['save_pdf']:
     plt.savefig('./output/flux_ratio_'+cfgname+'.pdf')
 if cfg['save_jpg']:
     plt.savefig('./output/flux_ratio_'+cfgname+'.jpg', dpi=cfg['jpg_dpi'])
+if cfg['save_png']:
+    plt.savefig('./output/flux_ratio_'+cfgname+'.png', dpi=cfg['png_dpi'])

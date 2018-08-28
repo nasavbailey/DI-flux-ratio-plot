@@ -1,0 +1,13 @@
+#Rho(as)  ip_contr_440min  ip_contr_60min
+#Short caption: MagAO 5-sigma post-processed [KLIP] detection limit curve for i' imaging observation of alpha Cen, 440min integration. 60 minute values are scaled by sqrt(t) from the original 440min value. (source: J. Males, personal communication)   
+0.7119   6.60E-07          1.79E-06
+0.7910   3.90E-07          1.06E-06
+0.8701   3.07E-07          8.31E-07
+0.9492   2.16E-07          5.85E-07
+1.0283   1.43E-07          3.88E-07
+1.1074   1.19E-07          3.23E-07
+1.1865   9.20E-08          2.49E-07
+1.2656   6.72E-08          1.82E-07
+1.3447   5.08E-08          1.38E-07
+1.4238   4.65E-08          1.26E-07
+1.5029   2.98E-08          8.08E-08
