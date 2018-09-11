@@ -180,8 +180,8 @@ if cfg['ELT']:
     ax1.plot(range_x, optimistic_y, color='pink', linestyle='--', linewidth=lw1)
     ax1.fill_between(range_x, pessimistic_y, optimistic_y, color='pink', alpha='0.2')
 
-    ax1.text(0.08, 1E-8, 'ELT goal', color='coral', horizontalalignment='left',\
-        verticalalignment='top', rotation=-8, fontsize=ccfs)
+    ax1.text(0.08, 5E-8, 'ELT goal', color='coral', horizontalalignment='left',\
+        verticalalignment='top', fontsize=ccfs)
 
     caption += '-- ELT goal: Possible range of near-IR post-processed detection limits for ' + \
                 'next generation extremely large telescopes. \n\n'
