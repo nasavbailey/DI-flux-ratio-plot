@@ -1,5 +1,0 @@
-#Rho(as) Band4_contr_snr5
-#Short caption: WFIRST CGI imaging prediction for Band 4 imaging with the SPC "disk" mask.  Placeholder until new calcs from Brian/Bijan. Rough calculations show performance should be equal or better than the best HLC values.
-#References: placeholder until new calcs from Brian/Bijan
-0.50  6e-10
-1.42  6e-10
