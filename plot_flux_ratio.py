@@ -71,7 +71,7 @@ if cfg['color_by_lambda'].lower() == 'full':
         ax2.plot([1,1],[1,1],color=c_bbvis,linewidth=lw1+2, label='broadband\nvisible')
     if cfg['req_spec'] or cfg['pred_spec'] or cfg['DI_B3_pred']:
         ax2.plot([1,1],[1,1],color=c_band3,linewidth=lw1+2, label='CGI Band 3')
-    if cfg['req_disk']:
+    if cfg['req_wide_img']:
         ax2.plot([1,1],[1,1],color=c_band4,linewidth=lw1+2, label='CGI Band 4')
     if cfg['SPHERE']:
         ax2.plot([1,1],[1,1],color=c_yjh,linewidth=lw1+2, label='YJH-band')
@@ -95,7 +95,7 @@ elif cfg['color_by_lambda'].lower() == 'simple':
         ax2.plot([1,1],[1,1],color=c_v,linewidth=lw1+2, label='< 650 nm')
     if cfg['DI_B3_pred'] or cfg['req_spec'] or cfg['pred_spec']:
         ax2.plot([1,1],[1,1],color=c_band3,linewidth=lw1+2, label='650 - 800nm')
-    if cfg['req_disk'] or cfg['pred_disk']:
+    if cfg['req_wide_img'] or cfg['pred_wide_img']:
         ax2.plot([1,1],[1,1],color=c_band4,linewidth=lw1+2, label='800 - 1000nm')
     if cfg['GPI'] or cfg['SPHERE'] or cfg['NIRCAM'] or cfg['NICMOS'] or cfg['DI_H']:
         ax2.plot([1,1],[1,1],color=c_h,linewidth=lw1+2, label='> 1000 nm')
@@ -113,7 +113,7 @@ elif cfg['color_by_lambda'].lower() == 'minimal':
 
     ax2 = ax1.twinx()
     if cfg['HABEX'] or cfg['ACS'] or cfg['STIS'] or cfg['DI_B1_pred'] or \
-    cfg['DI_B3_pred'] or cfg['req_spec'] or cfg['pred_spec'] or  cfg['req_disk']:
+    cfg['DI_B3_pred'] or cfg['req_spec'] or cfg['pred_spec'] or  cfg['req_wide_img']:
         ax2.plot([1,1],[1,1],color=c_band4,linewidth=lw1+2, label='< 1000 nm')
     if cfg['GPI'] or cfg['SPHERE'] or cfg['NIRCAM'] or cfg['NICMOS']:
         ax2.plot([1,1],[1,1],color=c_h,linewidth=lw1+2, label='> 1000 nm')
@@ -349,8 +349,8 @@ if cfg['pred_spec']:
     dat['Rho(as)'] = dat['l/D'] * (dat['lambda'] / d_tel).decompose()*206265
     dat['contr_snr5'] = dat['contr_snr10'] / 2.
     ax1.plot(dat['Rho(as)'], dat['contr_snr5'], color=c_band3, linewidth=lw2, label='')
-    if not (cfg['pred_img'] or cfg['pred_disk']):
-        ax1.text(dat['Rho(as)'][-1], dat['contr_snr5'][-1], ' WFIRST\n CGI pred.', color=c_band3,\
+    if not (cfg['pred_img']):
+        ax1.text(dat['Rho(as)'][-1], dat['contr_snr5'][-1], ' WFIRST\n CGI pred.', color='darkblue',\
             horizontalalignment='left', verticalalignment='center', weight='bold', fontsize=ccfs+1)
     if cfg['exp_t']:
         if not cfg['req_spec']:
@@ -369,18 +369,30 @@ if cfg['pred_spec']:
     caption += extract_short_caption(fname)
 
 
-
-if cfg['pred_disk']:
-    fname = datapath+'WFIRST_pred_disk.txt'
+if cfg['pred_wide_img']:
+    fname = datapath+'WFIRST_pred_wideFOVimaging.txt'
     dat = ascii.read(fname)
-    ax1.plot(dat['Rho(as)'], dat['Band4_contr_snr5'], color=c_band4, linewidth=lw2, label='')
-    if not cfg['pred_img']:
-        ax1.text(1.3, 2E-9, 'WFIRST\nCGI pred.', color='darkred', horizontalalignment='left',\
-            verticalalignment='center', fontsize=ccfs+1, weight='bold')
-    if not cfg['req_disk']:
-        ax1.text(dat['Rho(as)'][-1], 1.1*dat['Band4_contr_snr5'][-1], ' img, 100hr', color=c_band4,\
-            horizontalalignment='left', verticalalignment='center', fontsize=ccfs+1, weight='bold')
+    dat['lambda'].unit = u.nm
+    dat['Rho(as)'] = dat['l/D'] * (dat['lambda'] / d_tel).decompose()*206265
+    ax1.plot(dat['Rho(as)'], dat['contr_snr5'], color=c_band4, linewidth=lw2, label='')
+    if not (cfg['pred_img'] or cfg['pred_spec']):
+        ax1.text(dat['Rho(as)'][-1], dat['contr_snr5'][-1], ' WFIRST\n CGI pred.', color='darkblue',\
+            horizontalalignment='left', verticalalignment='bottom', weight='bold', fontsize=ccfs+1)
+    if cfg['exp_t']:
+        if not cfg['req_wide_img']:
+            ax1.text(dat['Rho(as)'][-1], 0.8*dat['contr_snr5'][-1], \
+            'img, %ghr'%(dat['t_int_hr'][0]), color=c_band4, weight='bold',\
+            horizontalalignment='center', verticalalignment='top', fontsize=ccfs+1)
+        else:
+            ax1.text(dat['Rho(as)'][-1], 0.8*dat['contr_snr5'][-1], \
+            '%ghr'%(dat['t_int_hr'][0],), color=c_band4, weight='bold',\
+            horizontalalignment='right', verticalalignment='top', fontsize=ccfs+1)
+    else:
+        if not cfg['req_wide_img']:
+            ax1.text(dat['Rho(as)'][-1], 0.8*dat['contr_snr5'][-1], 'img', color=c_band4, weight='bold',\
+                horizontalalignment='right', verticalalignment='top', fontsize=ccfs+1)
     caption += extract_short_caption(fname)
+
 
 
 
@@ -396,11 +408,11 @@ if cfg['req_img']:
         horizontalalignment='right', verticalalignment='center', weight='bold', fontsize=ccfs+1)
     caption += extract_short_caption(fname)
 
-if cfg['req_disk']:
-    fname = datapath+'WFIRST_req_disk.txt'
+if cfg['req_wide_img']:
+    fname = datapath+'WFIRST_req_wideFOVimaging.txt'
     dat = ascii.read(fname)
     ax1.plot(dat['Rho(as)'], dat['Band4_pt_contr_snr5'], color=c_band4, linewidth=lw2, label='')
-    ax1.text(dat['Rho(as)'][-3], 1.1*dat['Band4_pt_contr_snr5'][-3], 'disk ', color=c_band4,\
+    ax1.text(dat['Rho(as)'][-3], 1.1*dat['Band4_pt_contr_snr5'][-3], 'img ', color=c_band4,\
         horizontalalignment='right', verticalalignment='bottom', fontsize=ccfs+1)
     if not (cfg['req_img'] or cfg['req_spec']):
         ax1.text(dat['Rho(as)'][0], dat['Band4_pt_contr_snr5'][0], ' WFIRST \n CGI req. ', color='darkblue',\
@@ -411,7 +423,7 @@ if cfg['req_spec']:
     import matplotlib.patheffects as path_effects
     fname = datapath+'WFIRST_req_spec.txt'
     dat = ascii.read(fname)
-    if cfg['req_disk']:  # draw a shadow under the line to make it easier to see if overlapping other req line
+    if cfg['req_wide_img']:  # draw a shadow under the line to make it easier to see if overlapping other req line
         p = [path_effects.SimpleLineShadow(offset=(1, -1)), path_effects.Normal()]
     else:
         p = [path_effects.Normal()]

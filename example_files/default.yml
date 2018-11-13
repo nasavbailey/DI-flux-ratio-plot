@@ -20,9 +20,9 @@ Prox_Cen:   False # Proxima Centauri b
 
 req_img:    False # imaging requirement
 req_spec:   False # spectroscopy requirement
-req_disk:   False # extended surface brightness requirement, translated to contrast in 1 resolution element
+req_wide_img:   False # extended surface brightness requirement, translated to contrast in 1 resolution element
 pred_img:    True # prediction for imaging
-pred_disk:   True # prediction for extended source detection limit
+pred_wide_img:   True # prediction for extended source detection limit
 pred_spec:   True # prediction for spectroscopy detection limit
 exp_t:       True # print exposures times used for predictions?
 
