@@ -324,21 +324,21 @@ if cfg['pred_img']:
     dat['lambda'].unit = u.nm
     dat['Rho(as)'] = dat['l/D'] * (dat['lambda'] / d_tel).decompose()*206265
     ax1.plot(dat['Rho(as)'], dat['contr_snr5'], color=c_v, linewidth=lw2, label='')
-    ax1.text(dat['Rho(as)'][0], 1.5*dat['contr_snr5'][0], 'WFIRST  \nCGI pred.  ', color='darkblue',\
+    ax1.text(dat['Rho(as)'][0], 1.5*dat['contr_snr5'][-1], 'WFIRST  \nCGI pred.  ', color='darkblue',\
         horizontalalignment='right', verticalalignment='bottom', weight='bold', fontsize=ccfs+1)
     if cfg['exp_t']:
         if not cfg['req_img']:
-            ax1.text(dat['Rho(as)'][0], 0.9*dat['contr_snr5'][-1], \
+            ax1.text(dat['Rho(as)'][-1], 0.8*dat['contr_snr5'][-1], \
             'img, %ghr'%(dat['t_int_hr'][0]), color=c_v, weight='bold',\
-            horizontalalignment='left', verticalalignment='top', fontsize=ccfs+1)
+            horizontalalignment='right', verticalalignment='top', fontsize=ccfs+1)
         else:
-            ax1.text(dat['Rho(as)'][0], 0.9*dat['contr_snr5'][-1], \
+            ax1.text(dat['Rho(as)'][-1], 0.8*dat['contr_snr5'][-1], \
             '%ghr'%(dat['t_int_hr'][0],), color=c_v, weight='bold',\
-            horizontalalignment='left', verticalalignment='top', fontsize=ccfs+1)
+            horizontalalignment='right', verticalalignment='top', fontsize=ccfs+1)
     else:
         if not cfg['req_img']:
-            ax1.text(dat['Rho(as)'][0], 0.9*dat['contr_snr5'][-1], 'img', color=c_v, weight='bold',\
-                horizontalalignment='left', verticalalignment='top', fontsize=ccfs+1)
+            ax1.text(dat['Rho(as)'][-1], 0.8*dat['contr_snr5'][-1], 'img', color=c_v, weight='bold',\
+                horizontalalignment='right', verticalalignment='top', fontsize=ccfs+1)
     caption += extract_short_caption(fname)
 
 
@@ -559,11 +559,23 @@ if cfg['solar_system']:
 ###Add RV planets
 
 if cfg['RV_pred']:
-    fname = datapath+'reflected_light_table.txt'
+    #fname = datapath+'reflected_light_table.txt'
+    fname = datapath+'reflected_light_table_plandb.txt'
     tmp = ascii.read(fname)
     idx_rv = tmp['pl_discmethod'] == "Radial Velocity"
-    ax1.scatter(tmp[idx_rv]['sma_arcsec'], tmp[idx_rv]['Fp/F*_quad'], s=cfg['rv_markersize'],\
+    idx_img = tmp['pl_discmethod'] == 'Imaging'
+    idx5 = tmp['st_optmag'] <= 5
+    idx6 = (tmp['st_optmag'] > 5) & (tmp['st_optmag'] <= 6)
+    ax1.scatter(tmp[idx_rv & idx5]['WA']/1000., \
+        10**(-0.4*tmp[idx_rv & idx5]['dMag_300C_730NM']), \
+        s=cfg['rv_markersize'],\
         color='dimgray', edgecolor='k', marker='^', label='RV, reflected light, predicted', zorder=5)
+    ax1.scatter(tmp[idx_rv & idx6]['WA']/1000., \
+        10**(-0.4*tmp[idx_rv & idx6]['dMag_300C_730NM']), \
+        s=cfg['rv_markersize'],\
+        color='silver', edgecolor='k', marker='^', label='', zorder=5)
+#    ax1.scatter(tmp[idx_rv]['sma_arcsec'], tmp[idx_rv]['Fp/F*_quad'], s=cfg['rv_markersize'],\
+#        color='dimgray', edgecolor='k', marker='^', label='RV, reflected light, predicted', zorder=5)
     caption += extract_short_caption(fname)
 
 
