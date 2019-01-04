@@ -12,7 +12,7 @@ MagAO:  True
 DI_H:       True # known H-band contrasts of directly imaged planets
 DI_B1_pred: True # predicted Band 1 from self-luminous, directly imaged planets
 DI_B3_pred: True # predicted Band 3 from self-luminous, directly imaged planets
-RV_pred:    True # predicted reflected light from Jovian planets
+RV_pred:    'None' # [None, IMD, simple] predicted reflected light from known RV planets from either a simple Lambertian or the Imaging Mission Database
 solar_system: True # Earth & Jupiter
 Tau_Ceti:    True # Tau Ceti e & f data points
 Tau_Ceti_axis: False # Tau Ceti e top y axis & label

@@ -1,4 +1,6 @@
-pl_name,st_optmag,st_spstr,st_dist,dMag_300C_575NM,dMag_300C_660NM,dMag_300C_730NM,dMag_300C_825NM,r,WA,t,pl_discmethod
+#pl_name,st_optmag,st_spstr,st_dist,dMag_300C_575NM,dMag_300C_660NM,dMag_300C_730NM,dMag_300C_825NM,r,WA,t,pl_discmethod
+#Short caption: Reflected light planets around V < 6 host stars, as predicted in the Imaging Mission Database. Values taken at the time of maximum elongation during the tech demo phase (18mo starting 1/1/2026), assuming an edge-on orbit. See https://plandb.sioslab.com/about.php for use policy and references.
+#References: see https://plandb.sioslab.com/about.php 
 HD 192310 c,5.73,K3 V,8.8,22.4,22.6,22.8,23.0,1.32,142.6,,Radial Velocity
 HD 154345 b,6.76,G8 V,18.29,23.1,23.2,23.2,23.3,4.07,149.5,528.0,Radial Velocity
 psi 1 Dra B b,5.699,G0 V,22.16,22.1,22.1,22.2,22.2,3.60,151.5,409.3,Radial Velocity

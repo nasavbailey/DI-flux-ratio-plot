@@ -558,9 +558,8 @@ if cfg['solar_system']:
 #########################################################################
 ###Add RV planets
 
-if cfg['RV_pred']:
-    #fname = datapath+'reflected_light_table.txt'
-    fname = datapath+'reflected_light_table_plandb.txt'
+if cfg['RV_pred'].upper() == 'IMD':
+    fname = datapath+'reflected_light_table_imd.txt'
     tmp = ascii.read(fname)
     idx_rv = tmp['pl_discmethod'] == "Radial Velocity"
     idx_img = tmp['pl_discmethod'] == 'Imaging'
@@ -574,9 +573,19 @@ if cfg['RV_pred']:
         10**(-0.4*tmp[idx_rv & idx6]['dMag_300C_730NM']), \
         s=cfg['rv_markersize'],\
         color='silver', edgecolor='k', marker='^', label='', zorder=5)
-#    ax1.scatter(tmp[idx_rv]['sma_arcsec'], tmp[idx_rv]['Fp/F*_quad'], s=cfg['rv_markersize'],\
-#        color='dimgray', edgecolor='k', marker='^', label='RV, reflected light, predicted', zorder=5)
     caption += extract_short_caption(fname)
+elif cfg['RV_pred'].lower() == 'simple':
+    fname = datapath+'reflected_light_table_simple.txt'
+    tmp = ascii.read(fname)
+    idx_rv = tmp['pl_discmethod'] == "Radial Velocity"
+    ax1.scatter(tmp[idx_rv]['sma_arcsec'], tmp[idx_rv]['Fp/F*_quad'], s=cfg['rv_markersize'],\
+        color='dimgray', edgecolor='k', marker='^', label='RV, reflected light, predicted', zorder=5)
+    caption += extract_short_caption(fname)
+elif cfg['RV_pred'].lower() == 'none':
+    pass
+else:
+    raise Exception(cfg['RV_pred']+' is not a valid option for RV_pred (none/imd/simple)')
+
 
 
 #########################################################################
