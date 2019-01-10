@@ -429,7 +429,8 @@ if cfg['req_spec'] is True:
         p = [path_effects.Normal()]
     ax1.plot(dat['Rho(as)'], dat['Band3_contr_snr5'], color=c_band3, linewidth=lw2-0.5, \
         label='', path_effects=p)
-    ax1.text(dat['Rho(as)'][0], 1.1*dat['Band3_contr_snr5'][0], 'spec', color=c_band3, weight='bold',\
+    ax1.text(1.1*dat['Rho(as)'][0], 1.1*dat['Band3_contr_snr5'][0], 'spec', \
+        color=c_band3, weight='bold',\
         horizontalalignment='left', verticalalignment='bottom', fontsize=ccfs+1)
     if not cfg['req_img']:
         ax1.text(dat['Rho(as)'][0], dat['Band3_contr_snr5'][0], ' WFIRST  \n CGI req.  ', color='darkblue',\
