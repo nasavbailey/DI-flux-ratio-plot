@@ -1,6 +1,4 @@
 # Turn on/off various plotted quantities (True=on; False=off)
-ELT :   False # very rough estimate!
-HABEX : True
 NIRCAM: True
 NICMOS: True
 STIS:   True
@@ -8,6 +6,8 @@ ACS :   True
 SPHERE: True
 GPI:    True
 MagAO:  True
+ELT :   False
+HABEX : False
 
 DI_H:       True # known H-band contrasts of directly imaged planets
 DI_B1_pred: True # predicted Band 1 from self-luminous, directly imaged planets
@@ -37,7 +37,7 @@ png_dpi:    200
 
 
 color_by_lambda:  'simple'  # [ full / simple / minimal / none ] color code by  bandpass
-is_draft:    True  # print DRAFT & date on plot
+timestamp:    True  # print date on plot
 
 math_font:   'stixsans' # 'stix' (times), 'stixsans' (sans-serif), 'cm' (default latex)
 plot_font_size:  12  # font size for axis labels / title, etc.

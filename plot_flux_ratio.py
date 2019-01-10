@@ -137,8 +137,8 @@ else:
 # text about detection limit curves
 if cfg['ELT'] or cfg['HABEX'] or cfg['NIRCAM'] or cfg['NICMOS'] or cfg['STIS'] \
     or cfg['ACS'] or cfg['SPHERE'] or cfg['GPI']:
-    ax1.text(xlim[-1], ylim[0]*1.1, \
-    ' Instrument curves are 5$\mathdefault{\sigma}$ post-processed detection limits. ',\
+    ax1.text(0.95*xlim[-1], ylim[0]*1.1, \
+    ' Instrument curves are 5$\mathdefault{\sigma}$ post-processed detection limits.',\
     horizontalalignment='right', verticalalignment='bottom',\
     fontsize=ccfs+1, color='k', weight='bold')#, backgroundcolor='white')
 
@@ -176,11 +176,11 @@ if cfg['ELT']:
     range_x = np.array((0.03, 1))
     pessimistic_y = np.array((1E-5, 1E-8))
     optimistic_y=np.array((1E-8, 1E-9))
-    ax1.plot(range_x, pessimistic_y, color='pink', linestyle='--', linewidth=lw1)
-    ax1.plot(range_x, optimistic_y, color='pink', linestyle='--', linewidth=lw1)
-    ax1.fill_between(range_x, pessimistic_y, optimistic_y, color='pink', alpha='0.2')
+    ax1.plot(range_x, pessimistic_y, color=c_h, linestyle='--', linewidth=lw1, alpha=0.5)
+    ax1.plot(range_x, optimistic_y, color=c_h, linestyle='--', linewidth=lw1, alpha=0.5)
+    ax1.fill_between(range_x, pessimistic_y, optimistic_y, color=c_h, alpha=0.1)
 
-    ax1.text(0.08, 5E-8, 'ELT goal', color='coral', horizontalalignment='left',\
+    ax1.text(0.08, 3E-7, 'ELT goal', color=c_h, horizontalalignment='left',\
         verticalalignment='top', fontsize=ccfs)
 
     caption += '-- ELT goal: Possible range of near-IR post-processed detection limits for ' + \
@@ -189,7 +189,7 @@ if cfg['ELT']:
 #########################################################################
 ### HabEx "goal" detection limit
 
-if cfg['HABEX']:
+if cfg['HABEX'] is True:
     ax1.plot([0.06, 1.65],[5E-11, 5E-11],color=c_bbvis,linestyle='--',linewidth=lw1,label='')
     ax1.text(1.6,6E-11,'HabEx goal',color=c_bbvis,horizontalalignment='right',fontsize=ccfs)
     caption += '-- HabEx: Goal 5-sigma post-processed contrast.  '+\
@@ -200,7 +200,7 @@ if cfg['HABEX']:
 #########################################################################
 ### NIRCAM detection limit
 
-if cfg['NIRCAM']:
+if cfg['NIRCAM'] is True:
     fname = datapath+'jwst_nircam.txt'
     a_JWST = ascii.read(fname)
     ax1.plot(a_JWST['Rho(as)'],a_JWST['210_contr'],color=c_k,linewidth=lw1,linestyle='--',label='')
@@ -219,7 +219,7 @@ if cfg['NIRCAM']:
 #########################################################################
 ### NICMOS detection limit
 
-if cfg['NICMOS']:
+if cfg['NICMOS'] is True:
     fname = datapath+'HST_NICMOS_Min.txt' #path+'HST_NICMOS_Median.txt'
     a_NICMOS = ascii.read(fname)
     ax1.plot(a_NICMOS['Rho(as)'],a_NICMOS['F160W_contr'],color=c_h,\
@@ -233,7 +233,7 @@ if cfg['NICMOS']:
 #########################################################################
 ### STIS Bar5 detection limit
 
-if cfg['STIS']:
+if cfg['STIS'] is True:
     fname = datapath+'HST_STIS.txt'
     a_STIS = ascii.read(fname)
     ax1.plot(a_STIS['Rho(as)'],a_STIS['KLIP_Contr'],color=c_bbvis,\
@@ -245,7 +245,7 @@ if cfg['STIS']:
 #########################################################################
 ### ACS detection limit
 
-if cfg['ACS']:
+if cfg['ACS'] is True:
     fname = datapath+'HST_ACS.txt'
     a_ACS = ascii.read(fname)
     ax1.plot(a_ACS['Rho(as)'],a_ACS['F606W_contr'],color=c_v,linewidth=lw1,label='')
@@ -256,7 +256,7 @@ if cfg['ACS']:
 #########################################################################
 ### MagAO detection limit
 
-if cfg['MagAO']:
+if cfg['MagAO'] is True:
     fname = datapath+'magao_ip_alphacen_5sigma.txt'
     a_MagAO_ip = ascii.read(fname)
     a_MagAO_ip['ip_Contrast'] = a_MagAO_ip['ip_contr_60min']
@@ -272,7 +272,7 @@ if cfg['MagAO']:
     a_MagAO_ys['Ys_Contrast'] = a_MagAO_ys['Ys_contr_60min']
     ax1.plot(a_MagAO_ys['Rho(as)'], a_MagAO_ys['Ys_Contrast'], \
         color=c_yjh,linewidth=lw1,label='')
-    ax1.text(1.7, 3.5E-7,'Magellan VisAO',color=c_yjh, horizontalalignment='left', \
+    ax1.text(1.7, 3E-7,'Magellan VisAO',color=c_yjh, horizontalalignment='left', \
         verticalalignment='bottom',rotation=-12,fontsize=ccfs)
 
 
@@ -280,7 +280,7 @@ if cfg['MagAO']:
 #########################################################################
 ### SPHERE detection limit
 
-if cfg['SPHERE']:
+if cfg['SPHERE'] is True:
     fname = datapath+'SPHERE_Vigan.txt'
     a_SPHERE = ascii.read(fname)
     a_SPHERE['Contrast'] = 10**(-0.4*a_SPHERE['delta'])
@@ -294,9 +294,9 @@ if cfg['SPHERE']:
         color=c_k, linewidth=lw1, label='')
     ax1.text(0.19, 2.5E-6, 'VLT SPHERE', color=c_k, horizontalalignment='right', \
         verticalalignment='top', fontsize=ccfs)
-    ax1.text(0.14, 1.3*10**-6, 'IFS /', color=c_yjh, horizontalalignment='right', \
+    ax1.text(0.13, 1.3*10**-6, 'IFS /', color=c_yjh, horizontalalignment='right', \
         verticalalignment='top', fontsize=ccfs)
-    ax1.text(0.14, 1.3*10**-6, ' IRDIS', color=c_k, horizontalalignment='left', \
+    ax1.text(0.13, 1.3*10**-6, ' IRDIS', color=c_k, horizontalalignment='left', \
         verticalalignment='top', fontsize=ccfs)
     caption += extract_short_caption(fname)
 
@@ -304,11 +304,11 @@ if cfg['SPHERE']:
 #########################################################################
 ### GPI H-band
 
-if cfg['GPI']:
+if cfg['GPI'] is True:
     fname = datapath+'GPI_Sirius_Ltype.txt'
     a_GPI = ascii.read(fname)
     ax1.plot(a_GPI['Rho(as)'],a_GPI['H_contr_60min_Ltype'],color=c_h,linewidth=lw1,label='')
-    ax1.text(0.15,1.1*10**-5,'Gemini GPI',color=c_h,horizontalalignment='left',rotation=-24,fontsize=ccfs)
+    ax1.text(0.15,1.1*10**-5,'Gemini GPI',color=c_h,horizontalalignment='left',rotation=-26,fontsize=ccfs)
     caption += extract_short_caption(fname)
 
 
@@ -318,7 +318,7 @@ if cfg['GPI']:
 
 ## predictions
 
-if cfg['pred_img']:
+if cfg['pred_img'] is True:
     fname = datapath+'WFIRST_pred_imaging.txt'
     dat = ascii.read(fname)
     dat['lambda'].unit = u.nm
@@ -326,8 +326,8 @@ if cfg['pred_img']:
     ax1.plot(dat['Rho(as)'], dat['contr_snr5'], color=c_v, linewidth=lw2, label='')
     ax1.text(dat['Rho(as)'][0], 1.5*dat['contr_snr5'][0], 'WFIRST  \nCGI pred.  ', color='darkblue',\
         horizontalalignment='right', verticalalignment='bottom', weight='bold', fontsize=ccfs+1)
-    if cfg['exp_t']:
-        if not cfg['req_img']:
+    if cfg['exp_t'] is True:
+        if cfg['req_img'] is False:
             ax1.text(dat['Rho(as)'][0], 0.9*dat['contr_snr5'][-1], \
             'img, %ghr'%(dat['t_int_hr'][0]), color=c_v, weight='bold',\
             horizontalalignment='left', verticalalignment='top', fontsize=ccfs+1)
@@ -336,24 +336,24 @@ if cfg['pred_img']:
             '%ghr'%(dat['t_int_hr'][0],), color=c_v, weight='bold',\
             horizontalalignment='left', verticalalignment='top', fontsize=ccfs+1)
     else:
-        if not cfg['req_img']:
+        if cfg['req_img'] is False:
             ax1.text(dat['Rho(as)'][0], 0.9*dat['contr_snr5'][-1], 'img', color=c_v, weight='bold',\
                 horizontalalignment='left', verticalalignment='top', fontsize=ccfs+1)
     caption += extract_short_caption(fname)
 
 
-if cfg['pred_spec']:
+if cfg['pred_spec'] is True:
     fname = datapath+'WFIRST_pred_spec.txt'
     dat = ascii.read(fname)
     dat['lambda'].unit = u.nm
     dat['Rho(as)'] = dat['l/D'] * (dat['lambda'] / d_tel).decompose()*206265
     dat['contr_snr5'] = dat['contr_snr10'] / 2.
     ax1.plot(dat['Rho(as)'], dat['contr_snr5'], color=c_band3, linewidth=lw2, label='')
-    if not (cfg['pred_img']):
+    if cfg['pred_img'] is False:
         ax1.text(dat['Rho(as)'][-1], dat['contr_snr5'][-1], ' WFIRST\n CGI pred.', color='darkblue',\
             horizontalalignment='left', verticalalignment='center', weight='bold', fontsize=ccfs+1)
-    if cfg['exp_t']:
-        if not cfg['req_spec']:
+    if cfg['exp_t'] is True:
+        if cfg['req_spec'] is False:
             ax1.text(dat['Rho(as)'][0], 1.1*dat['contr_snr5'][0], \
             'spec, %ghr'%(dat['t_int_hr'][0]), color=c_band3, weight='bold',\
             horizontalalignment='left', verticalalignment='bottom', fontsize=ccfs+1, zorder=6)
@@ -362,24 +362,24 @@ if cfg['pred_spec']:
             '%ghr'%(dat['t_int_hr'][0]), color=c_band3, weight='bold',\
             horizontalalignment='left', verticalalignment='bottom', fontsize=ccfs+1, zorder=6)
     else:
-        if not cfg['req_spec']:
+        if cfg['req_spec'] is False:
             ax1.text(dat['Rho(as)'][0], 1.1*dat['contr_snr5'][0], \
             'spec', color=c_band3, weight='bold',\
             horizontalalignment='left', verticalalignment='bottom', fontsize=ccfs+1, zorder=6)
     caption += extract_short_caption(fname)
 
 
-if cfg['pred_wide_img']:
+if cfg['pred_wide_img'] is True:
     fname = datapath+'WFIRST_pred_wideFOVimaging.txt'
     dat = ascii.read(fname)
     dat['lambda'].unit = u.nm
     dat['Rho(as)'] = dat['l/D'] * (dat['lambda'] / d_tel).decompose()*206265
     ax1.plot(dat['Rho(as)'], dat['contr_snr5'], color=c_band4, linewidth=lw2, label='')
-    if not (cfg['pred_img'] or cfg['pred_spec']):
+    if (cfg['pred_img'] is False) and (cfg['pred_spec'] is False):
         ax1.text(dat['Rho(as)'][-1], dat['contr_snr5'][-1], ' WFIRST\n CGI pred.', color='darkblue',\
             horizontalalignment='left', verticalalignment='bottom', weight='bold', fontsize=ccfs+1)
-    if cfg['exp_t']:
-        if not cfg['req_wide_img']:
+    if cfg['exp_t'] is True:
+        if cfg['req_wide_img'] is False:
             ax1.text(dat['Rho(as)'][-1], 0.8*dat['contr_snr5'][-1], \
             'img, %ghr'%(dat['t_int_hr'][0]), color=c_band4, weight='bold',\
             horizontalalignment='center', verticalalignment='top', fontsize=ccfs+1)
@@ -388,7 +388,7 @@ if cfg['pred_wide_img']:
             '%ghr'%(dat['t_int_hr'][0],), color=c_band4, weight='bold',\
             horizontalalignment='right', verticalalignment='top', fontsize=ccfs+1)
     else:
-        if not cfg['req_wide_img']:
+        if cfg['req_wide_img'] is False:
             ax1.text(dat['Rho(as)'][-1], 0.8*dat['contr_snr5'][-1], 'img', color=c_band4, weight='bold',\
                 horizontalalignment='right', verticalalignment='top', fontsize=ccfs+1)
     caption += extract_short_caption(fname)
@@ -398,28 +398,28 @@ if cfg['pred_wide_img']:
 
 ## BTRs
 
-if cfg['req_img']:
+if cfg['req_img'] is True:
     fname = datapath+'WFIRST_req_imaging.txt'
     dat = ascii.read(fname)
     ax1.plot(dat['Rho(as)'], dat['Band1_contr_snr5'], color=c_v, linewidth=lw2, label='')
-    ax1.text(dat['Rho(as)'][0], 1.1*dat['Band1_contr_snr5'][0], 'img', color=c_v,\
+    ax1.text(dat['Rho(as)'][0], 1.1*dat['Band1_contr_snr5'][0], 'img', color=c_v, weight='bold',\
         horizontalalignment='left', verticalalignment='bottom', fontsize=ccfs+1)
-    ax1.text(dat['Rho(as)'][0], dat['Band1_contr_snr5'][0], 'WFIRST \nCGI req. ', color='darkblue',\
+    ax1.text(dat['Rho(as)'][0], dat['Band1_contr_snr5'][0], 'WFIRST  \nCGI req.  ', color='darkblue',\
         horizontalalignment='right', verticalalignment='center', weight='bold', fontsize=ccfs+1)
     caption += extract_short_caption(fname)
 
-if cfg['req_wide_img']:
+if cfg['req_wide_img'] is True:
     fname = datapath+'WFIRST_req_wideFOVimaging.txt'
     dat = ascii.read(fname)
     ax1.plot(dat['Rho(as)'], dat['Band4_pt_contr_snr5'], color=c_band4, linewidth=lw2, label='')
-    ax1.text(dat['Rho(as)'][-3], 1.1*dat['Band4_pt_contr_snr5'][-3], 'img ', color=c_band4,\
+    ax1.text(dat['Rho(as)'][-3], 1.1*dat['Band4_pt_contr_snr5'][-3], 'img ', color=c_band4, weight='bold',\
         horizontalalignment='right', verticalalignment='bottom', fontsize=ccfs+1)
     if not (cfg['req_img'] or cfg['req_spec']):
-        ax1.text(dat['Rho(as)'][0], dat['Band4_pt_contr_snr5'][0], ' WFIRST \n CGI req. ', color='darkblue',\
+        ax1.text(dat['Rho(as)'][0], dat['Band4_pt_contr_snr5'][0], ' WFIRST  \n CGI req.  ', color='darkblue',\
             horizontalalignment='right', verticalalignment='center', weight='bold', fontsize=ccfs+1)
     caption += extract_short_caption(fname)
 
-if cfg['req_spec']:
+if cfg['req_spec'] is True:
     import matplotlib.patheffects as path_effects
     fname = datapath+'WFIRST_req_spec.txt'
     dat = ascii.read(fname)
@@ -429,7 +429,7 @@ if cfg['req_spec']:
         p = [path_effects.Normal()]
     ax1.plot(dat['Rho(as)'], dat['Band3_contr_snr5'], color=c_band3, linewidth=lw2-0.5, \
         label='', path_effects=p)
-    ax1.text(dat['Rho(as)'][0], 1.1*dat['Band3_contr_snr5'][0], 'spec', color=c_band3,\
+    ax1.text(dat['Rho(as)'][0], 1.1*dat['Band3_contr_snr5'][0], 'spec', color=c_band3, weight='bold',\
         horizontalalignment='left', verticalalignment='bottom', fontsize=ccfs+1)
     if not cfg['req_img']:
         ax1.text(dat['Rho(as)'][0], dat['Band3_contr_snr5'][0], ' WFIRST  \n CGI req.  ', color='darkblue',\
@@ -454,12 +454,12 @@ if cfg['DI_H'] or cfg['DI_B1_pred'] or cfg['DI_B3_pred']:
     alpha_di = 0.7
     caption += extract_short_caption(fname)
 
-if cfg['DI_H']:
+if cfg['DI_H'] is True:
     ax1.scatter(a_DI['Rho(as)'],a_DI['H_contr'],color=c_h, edgecolor='k', \
         alpha=alpha_di, marker='s', s=cfg['di_markersize']-15, zorder=2,\
         label='directly imaged, 1.6$\mathdefault{\mu} $m observed')
 
-if cfg['DI_B3_pred']:
+if cfg['DI_B3_pred'] is True:
     ax1.scatter(a_DI['Rho(as)'],a_DI['763m_contr'],color=c_band3, edgecolor='k', \
         marker='d', alpha=alpha_di, s=cfg['di_markersize'], zorder=2, \
         label='directly imaged, 750nm predicted')
@@ -468,7 +468,7 @@ if cfg['DI_B3_pred']:
             ax1.plot([rho,rho], [a_DI[ct]['763m_contr'], a_DI[ct]['H_contr']], \
             color='lightgray', linewidth=1, linestyle=':', zorder=1)
 
-if cfg['DI_B1_pred']:
+if cfg['DI_B1_pred'] is True:
     for ct, rho in enumerate(a_DI['Rho(as)']):
         ax1.plot([rho,rho], [a_DI[ct]['547m_contr'], a_DI[ct]['H_contr']], \
             color='lightgray', linewidth=1, linestyle=':', zorder=1)
@@ -480,7 +480,7 @@ if cfg['DI_B1_pred']:
 #########################################################################
 ### Specific planetary systems
 
-if cfg['Prox_Cen']:
+if cfg['Prox_Cen'] is True:
     albedo = 0.35
     sma = 0.05*u.au
     flux_ratio = rlp.calc_lambert_flux_ratio(sma=sma, rp=1.3**(1./3)*u.earthRad,\
@@ -493,7 +493,7 @@ if cfg['Prox_Cen']:
         ', radius = (M/Me)^(1/3) * Re, circular orbits.\n\n'
 
 
-if cfg['Tau_Ceti']:
+if cfg['Tau_Ceti'] is True:
     # Tau Ceti
     tc_dist = 3.65*u.pc
     albedo = 0.35
@@ -532,7 +532,7 @@ if cfg['Tau_Ceti']:
         ', radius = (M/Me)^(1/3) * Re, circular orbits.\n\n'
 
 
-if cfg['solar_system']:
+if cfg['solar_system'] is True:
     # Earth & Jupiter
     #earthRatio = rlp.calc_lambert_flux_ratio(sma=1.*u.au, rp=1.*u.earthRad,\
     #    orb_ang=0*u.degree,albedo=0.367, inclin=0*u.degree)
@@ -558,7 +558,7 @@ if cfg['solar_system']:
 #########################################################################
 ###Add RV planets
 
-if cfg['RV_pred']:
+if cfg['RV_pred'] is True:
     fname = datapath+'reflected_light_table.txt'
     tmp = ascii.read(fname)
     idx_rv = tmp['pl_discmethod'] == "Radial Velocity"
@@ -570,9 +570,9 @@ if cfg['RV_pred']:
 #########################################################################
 ###Plot axes, tick mark ajdusting, legend, etc.
 
-if cfg['is_draft']:
-    ax1.text(xlim[1], ylim[0]*2, "DRAFT  "+str(date.today()) + ' ', \
-        horizontalalignment='right',verticalalignment='bottom',color='red',weight='bold')
+if cfg['timestamp'] is True:
+    ax1.text(0.95*xlim[1], ylim[0]*2, "Generated "+str(date.today()) + '.', \
+        horizontalalignment='right',verticalalignment='bottom',fontsize=ccfs+1, color='darkgray')
 
 first_legend = ax1.legend(fontsize=cfg['legend_font_size'], loc='upper right', \
     title='Known Exoplanets')
@@ -615,9 +615,9 @@ except:
 with open('./output/auto_caption_'+cfgname+'.txt','w') as f:
     f.write(caption)
 
-if cfg['save_pdf']:
+if cfg['save_pdf'] is True:
     plt.savefig('./output/flux_ratio_'+cfgname+'.pdf')
-if cfg['save_jpg']:
+if cfg['save_jpg'] is True:
     plt.savefig('./output/flux_ratio_'+cfgname+'.jpg', dpi=cfg['jpg_dpi'])
-if cfg['save_png']:
+if cfg['save_png'] is True:
     plt.savefig('./output/flux_ratio_'+cfgname+'.png', dpi=cfg['png_dpi'])

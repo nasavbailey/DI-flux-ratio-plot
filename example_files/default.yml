@@ -1,6 +1,4 @@
 # Turn on/off various plotted quantities (True=on; False=off)
-ELT :   False # very rough estimate!
-HABEX : False
 NIRCAM: True
 NICMOS: True
 STIS:   True
@@ -8,21 +6,23 @@ ACS :   True
 SPHERE: True
 GPI:    True
 MagAO:  True
+ELT :   False
+HABEX : False
 
 DI_H:       True # known H-band contrasts of directly imaged planets
-DI_B1_pred: True # predicted Band 1 from self-luminous, directly imaged planets
+DI_B1_pred: False # predicted Band 1 from self-luminous, directly imaged planets
 DI_B3_pred: True # predicted Band 3 from self-luminous, directly imaged planets
 RV_pred:    True # predicted reflected light from Jovian planets
 solar_system: True # Earth & Jupiter
-Tau_Ceti:    True # Tau Ceti e & f data points
+Tau_Ceti:    False # Tau Ceti e & f data points
 Tau_Ceti_axis: False # Tau Ceti e top y axis & label
 Prox_Cen:   False # Proxima Centauri b
 
 req_img:    False # imaging requirement
 req_spec:   False # spectroscopy requirement
-req_wide_img:   False # extended surface brightness requirement, translated to contrast in 1 resolution element
+req_wide_img: False # extended surface brightness requirement, translated to contrast in 1 resolution element
 pred_img:    True # prediction for imaging
-pred_wide_img:   True # prediction for extended source detection limit
+pred_wide_img: True # prediction for extended source detection limit
 pred_spec:   True # prediction for spectroscopy detection limit
 exp_t:       True # print exposures times used for predictions?
 
@@ -30,14 +30,14 @@ exp_t:       True # print exposures times used for predictions?
 fig_width:  6 # inches
 fig_height: 5.5 # inches
 save_pdf:   True # output PDF?
-save_jpg:   True # output JPG?
+save_jpg:   False # output JPG?
 jpg_dpi:    200
-save_png:   False # output PNG?
-png_dpi:    200
+save_png:   True # output PNG?
+png_dpi:    300
 
 
 color_by_lambda:  'simple'  # [ full / simple / minimal / none ] color code by  bandpass
-is_draft:    False  # print DRAFT & date on plot
+timestamp:    True  # print date on plot
 
 math_font:   'stixsans' # 'stix' (times), 'stixsans' (sans-serif), 'cm' (default latex)
 plot_font_size:  13  # font size for axis labels / title, etc.
