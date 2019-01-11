@@ -21,7 +21,7 @@ For individual planets, “flux ratio” is the ratio of the planet flux to the 
 
 #### Simple Lambertian model
 
-The reflected light planets include of all radial velocity-detected planets from the NASA Exoplanet Archive with projected semi-major axis of 0.14” - 1.2”, $M sin(i) > 0.25 M_{Jup}$, and host star Vmag < 8.0.
+The reflected light planets include of all radial velocity-detected planets from the NASA Exoplanet Archive with projected semi-major axis of 0.14” - 1.2”, $M sin(i) > 0.25 M_{Jup}$, and host star Vmag < 7.
 Note that CGI is required to achieve optimal performance only for Vmag < 5.
 The flux ratio was calculated using a Lambertian model with the following assumptions: radius = 1 $R_{Jup}$, geometric albedo = 0.5, and planet viewed at quadrature.
 The flux ratios for the Super-Earths Tau Ceti e and f assume: Lambertian model, radius = $( M / M_E )^{1/3}  R_E$, Earth-like geometric albedo = 0.35, and viewed at quadrature.
