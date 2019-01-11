@@ -1,36 +1,32 @@
-#                pl_hostname , pl_letter , sma_arcsec , Fp/F*_quad ,   pl_discmethod
-#Short caption: Reflected light planets: All planets from NASA exoplanet archive with a semi-major axis of 0.14-1.2 arcsec, mass > 0.25 Mjup, and host star V mag < 8.00. Lambertian flux ratio assumes: radius = 1 Rjup, geometric albedo = 0.5 planet, circular orbit, inclination = 90.0, and angle of 0.0 degrees from the ascending node.
+#pl_hostname , pl_letter , sma_arcsec , Fp/F*_quad , st_optmag ,                st_spstr ,   pl_discmethod
+#Short caption: All planets from NASA exoplanet archive with a semi-major axis of 0.12-1.4 arcsec, mass > 0.25 Mjup, and host star V mag < 7.00. Lambertian flux ratio assumes: radius = 1 Rjup, geometric albedo = 0.5, circular orbit, inclination = 90.0, and angle of 0.0 degrees from the ascending node.
 #References:
 #Lambertian phase curve from Traub & Oppenheimer: Direct Imaging of Exoplanets, equation 15, pg 116 of Seager Exoplanets textbook.
-                   HD_34445 ,         g ,       0.14 ,    9.0e-10 , Radial Velocity
-                    gam_Cep ,         b ,       0.15 ,    8.6e-09 , Radial Velocity
-                     47_UMa ,         b ,       0.15 ,    8.2e-09 , Radial Velocity
-                     14_Her ,         b ,       0.15 ,    4.7e-09 , Radial Velocity
-                   HD_62509 ,         b ,       0.16 ,    1.4e-08 , Radial Velocity
-                   HD_39091 ,         b ,       0.19 ,    3.2e-09 , Radial Velocity
-                    ups_And ,         d ,       0.19 ,    5.8e-09 , Radial Velocity
-                   HD_87883 ,         b ,       0.20 ,    2.8e-09 , Radial Velocity
-                psi_1_Dra_B ,         b ,       0.20 ,    1.9e-09 , Radial Velocity
-                  HD_219077 ,         b ,       0.21 ,    9.4e-10 , Radial Velocity
-                  HD_154345 ,         b ,       0.23 ,    2.1e-09 , Radial Velocity
-                  HD_150706 ,         b ,       0.25 ,    8.1e-10 , Radial Velocity
-                  HD_114613 ,         b ,       0.25 ,    1.4e-09 , Radial Velocity
-                  HD_190360 ,         b ,       0.25 ,    2.3e-09 , Radial Velocity
-                     47_UMa ,         c ,       0.26 ,    2.8e-09 , Radial Velocity
-                  HD_134987 ,         c ,       0.26 ,    1.1e-09 , Radial Velocity
-                     HD_142 ,         c ,       0.27 ,    7.9e-10 , Radial Velocity
-                  HD_217107 ,         c ,       0.27 ,    1.3e-09 , Radial Velocity
-                  HD_160691 ,         c ,       0.34 ,    1.3e-09 , Radial Velocity
-                     55_Cnc ,         d ,       0.44 ,    1.2e-09 , Radial Velocity
-                     51_Eri ,         b ,       0.45 ,    2.1e-10 ,         Imaging
-                  HD_219134 ,         h ,       0.47 ,    3.8e-09 , Radial Velocity
-                    HR_2562 ,         b ,       0.60 ,    8.8e-11 ,         Imaging
-                   HD_95086 ,         b ,       0.61 ,    1.2e-11 ,         Imaging
-                    HR_8799 ,         d ,       0.61 ,    6.3e-11 ,         Imaging
-WISEP_J121756.91+162640.2_A ,         b ,       0.79 ,    5.7e-10 ,         Imaging
-                     47_UMa ,         d ,       0.82 ,    2.7e-10 , Radial Velocity
-                  HIP_65426 ,         b ,       0.83 ,    4.3e-12 ,         Imaging
-                    HR_8799 ,         c ,       0.96 ,    2.5e-11 ,         Imaging
-                    eps_Eri ,         b ,       1.06 ,    3.2e-09 , Radial Velocity
-                    kap_And ,         b ,       1.06 ,    1.2e-11 ,         Imaging
-                  ROXs_42_B ,         b ,       1.16 ,    1.5e-12 ,         Imaging
+  HD_196067 ,         b ,       0.13 ,    1.4e-09 ,      6.03 ,                    G1 V , Radial Velocity
+     nu_Oph ,         c ,       0.14 ,    9.8e-10 ,      3.34 ,                  K1 III , Radial Velocity
+    gam_Cep ,         b ,       0.15 ,    8.6e-09 ,      3.21 ,                   K1 IV , Radial Velocity
+     47_UMa ,         b ,       0.15 ,    8.2e-09 ,      5.05 ,                    G0 V , Radial Velocity
+   HD_62509 ,         b ,       0.16 ,    1.4e-08 ,      1.14 ,                  K0 III , Radial Velocity
+     14_Her ,         b ,       0.16 ,    4.2e-09 ,      6.61 ,                    K0 V , Radial Velocity
+   HD_39091 ,         b ,       0.17 ,    3.8e-09 ,      5.67 ,                    G0 V , Radial Velocity
+    ups_And ,         d ,       0.19 ,    5.8e-09 ,       4.1 ,                    F8 V , Radial Velocity
+psi_1_Dra_B ,         b ,       0.20 ,    1.9e-09 ,     5.699 ,                    G0 V , Radial Velocity
+  HD_219077 ,         b ,       0.21 ,    9.4e-10 ,      6.12 ,                    G8 V , Radial Velocity
+  HD_154345 ,         b ,       0.23 ,    2.1e-09 ,      6.76 ,                    G8 V , Radial Velocity
+  HD_190360 ,         b ,       0.25 ,    2.3e-09 ,      5.73 ,                   G6 IV , Radial Velocity
+     HD_142 ,         c ,       0.26 ,    7.9e-10 ,       5.7 ,                   G1 IV , Radial Velocity
+     47_UMa ,         c ,       0.26 ,    2.8e-09 ,      5.05 ,                    G0 V , Radial Velocity
+  HD_134987 ,         c ,       0.26 ,    1.1e-09 ,      6.45 ,                    G5 V , Radial Velocity
+  HD_114613 ,         b ,       0.26 ,    1.3e-09 ,      4.85 ,                   G4 IV , Radial Velocity
+  HD_217107 ,         c ,       0.27 ,    1.3e-09 ,      6.16 ,                   G8 IV , Radial Velocity
+  HD_160691 ,         c ,       0.34 ,    1.3e-09 ,      5.15 ,                    G5 V , Radial Velocity
+     55_Cnc ,         d ,       0.44 ,    1.2e-09 ,      5.96 ,                    G8 V , Radial Velocity
+     51_Eri ,         b ,       0.45 ,    2.1e-10 ,      5.23 ,                   F0 IV ,         Imaging
+  HD_219134 ,         h ,       0.47 ,    3.8e-09 ,      5.57 ,                    K3 V , Radial Velocity
+    HR_2562 ,         b ,       0.60 ,    8.8e-11 ,      6.11 ,                    F5 V ,         Imaging
+    HR_8799 ,         d ,       0.61 ,    6.3e-11 ,     5.953 , F0+ V ({lambda} Boo)... ,         Imaging
+  HIP_65426 ,         b ,       0.83 ,    4.3e-12 ,     6.982 ,                    A2 V ,         Imaging
+     47_UMa ,         d ,       0.84 ,    2.7e-10 ,      5.05 ,                    G0 V , Radial Velocity
+    HR_8799 ,         c ,       0.96 ,    2.5e-11 ,     5.953 , F0+ V ({lambda} Boo)... ,         Imaging
+    eps_Eri ,         b ,       1.06 ,    3.2e-09 ,      3.82 ,                    K2 V , Radial Velocity
+    kap_And ,         b ,       1.10 ,    1.2e-11 ,      4.14 ,                   B9 IV ,         Imaging

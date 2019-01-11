@@ -1,9 +1,9 @@
 #Rho(as) Band3_contr_snr5
-#Short caption: WFIRST CGI spectroscopy L2 [TECH 2]: WFIRST CGI shall be able to measure spectra of an astrophysical point source with R = 50 or greater spectral resolution with a wavelength accuracy of 5 nm or smaller (TBR) to an SNR of 10 within 100 hours of integration time on the target in CGI Filter Band 3 for an object with a source-to-star flux ratio as faint as 1e-7 at separations from 0.21 arcsec to 0.27 arscec, 5e-8 at separations from 0.27 arcsec to 0.53 arcsec, and 1e-7 at separations from 0.53 arcsec to 0.60 arcsec.
-#References: L2 reqs from github; Jan 26, 2018 version [TECH 2]
-0.21	0.5E-7
-0.27	0.5E-7
-0.27	2.5E-8
-0.53	2.5E-8
-0.53	0.5E-7
-0.60	0.5E-7
+#Short caption: WFIRST CGI spectroscopy L2 [TECH 2]: WFIRST CGI shall be able to measure spectra of an astrophysical point source with R = 50 or greater spectral resolution with a wavelength accuracy of 2 nm or smaller to an SNR of 10 within 100 hours of integration time on the target in CGI Filter Band 3 for an object with a source-to-star flux ratio as faint as 1e-7 at separations from 0.20 arcsec to 0.26 arscec, 5e-8 at separations from 0.26 arcsec to 0.51 arcsec, and 1e-7 at separations from 0.51 arcsec to 0.57 arcsec.
+#References: L2 requirement CGI-TECH-2
+0.20	0.5E-7
+0.26	0.5E-7
+0.26	2.5E-8
+0.51	2.5E-8
+0.51	0.5E-7
+0.57	0.5E-7
