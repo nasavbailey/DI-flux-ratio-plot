@@ -11,13 +11,13 @@ This contains the python code to plot the flux ratio vs separation plot. It also
 
 ## quickstart
 
-See the `documentation` folder for an example plot and a complete description of the data and calculations.
-
 If you would like to contribute to this repo, please [fork it](https://help.github.com/articles/fork-a-repo/). Otherwise, simply download or clone and you're ready to go.
 
 Copy `example_files/default.yaml`  to the same directory as `plot_flux_ratio.py`.
 Run `python plot_flux_ratio.py`
 Your figure and an auto-generated description will be created in the "output" folder.
+
+**Read the docs!** See the `documentation` folder for an example plot and a complete description of the data and calculations.
 
 
 ## Customizing your plot
@@ -65,7 +65,7 @@ data21	data22
 ...
 ```
 
-### Submitting new data or features
+## Submitting new data or features
 
 Thanks for your help! Before you submit a pull request please:
 * Ensure that the script still runs with doc.yml and default.yml
