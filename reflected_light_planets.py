@@ -135,7 +135,7 @@ def calc_xy_r_int(inclin):
 
 
 def read_and_filter_exo_archive(fname='data/exo_archive_query.txt', \
-        rho_min=0.14*u.arcsec, rho_max=1.2*u.arcsec,\
+        rho_min=0.1*u.arcsec, rho_max=1.5*u.arcsec,\
         st_v_min=8.*u.mag, mp_min=0.25*u.jupiterMass):
 
     # make sure there are no conflicting units
@@ -146,10 +146,14 @@ def read_and_filter_exo_archive(fname='data/exo_archive_query.txt', \
 
     dat = ascii.read(fname)
 
+    # remove rows with missing important values
+    filter_cols = ['st_dist','st_optmag', 'pl_orbsmax','pl_bmassj']
+    for f in filter_cols:
+        dat = dat[~dat[f].mask]
+
     # manually assign b/c table units were (non-standard) "mags" not "mag"
     # Must be done before converting to QTable
-    dat['st_vj'].unit = u.mag
-    dat['st_ic'].unit = u.mag
+    dat['st_optmag'].unit = u.mag
 
     dat = QTable(dat)
 
@@ -162,19 +166,12 @@ def read_and_filter_exo_archive(fname='data/exo_archive_query.txt', \
     dat.rename_column('pl_orbincl','orb_incl')
     dat.rename_column('pl_orbeccen','eccen')
     dat.rename_column('pl_bmassj','pl_massj')
-    dat.rename_column('st_vj','st_v_johnson')
-    dat.rename_column('st_ic','st_i_cousins')
-
-    # remove rows with missing important values
-    filter_cols = ['st_dist','st_v_johnson', 'sma_au','pl_massj']
-    for f in filter_cols:
-        dat = dat[~dat[f].mask]
 
     # replace spaces with _ in star names
     dat['pl_hostname'] = [x.replace(' ','_') for x in dat['pl_hostname']]
 
     #keep only stars brighter than st_v_min in V
-    dat = dat[dat['st_v_johnson'] < st_v_min]
+    dat = dat[dat['st_optmag'] < st_v_min]
 
     #keep only planets larger than mp_min*Mj
     dat = dat[dat['pl_massj'] > mp_min]
@@ -191,10 +188,10 @@ def read_and_filter_exo_archive(fname='data/exo_archive_query.txt', \
 
 
 
-def create_wfirst_reflected_light_table(fname_in='exo_archive_query.txt', \
+def create_wfirst_reflected_light_table(fname_in='data/exo_archive_query.txt', \
         fname_out = 'test.txt', \
-        rho_min=0.14*u.arcsec, rho_max=1.2*u.arcsec,\
-        st_v_min=8.*u.mag, mp_min=0.25*u.jupiterMass, rp=1.0*u.jupiterRad,\
+        rho_min=0.12*u.arcsec, rho_max=1.45*u.arcsec,\
+        st_v_min=7.*u.mag, mp_min=0.25*u.jupiterMass, rp=1.0*u.jupiterRad,\
         albedo=0.5, orb_ang=0*u.degree, inclin=90*u.degree):
 
 
@@ -207,7 +204,7 @@ def create_wfirst_reflected_light_table(fname_in='exo_archive_query.txt', \
     orb_ang = unit_check_convert(orb_ang, u.degree)
 
     # read the NASA exoplanet archive table & select appropriate systems
-    dat = read_and_filter_exo_archive(rho_min=rho_min, rho_max=rho_max,\
+    dat = read_and_filter_exo_archive(fname=fname_in,rho_min=rho_min, rho_max=rho_max,\
             st_v_min=st_v_min, mp_min=mp_min)
 
     # Calculate the Lambertian flux ratio
@@ -219,7 +216,7 @@ def create_wfirst_reflected_light_table(fname_in='exo_archive_query.txt', \
     # create header comments / description
     comments = ('#Short caption: All planets from NASA exoplanet archive with a '+ \
         'semi-major axis of %.2f-%.2g arcsec, mass > %.2f Mjup, and host star V mag < %.2f. '+\
-        'Lambertian flux ratio assumes: radius = %.1g Rjup, geometric albedo = %.2g planet, '+\
+        'Lambertian flux ratio assumes: radius = %.1g Rjup, geometric albedo = %.2g, '+\
         'circular orbit, inclination = %.1f, and angle of %.1f degrees from the ascending node.\n' )% \
         (rho_min.value, rho_max.value, mp_min.value, st_v_min.value, rp.value, albedo, \
         inclin.to(u.degree).value, orb_ang.to(u.degree).value)
@@ -229,7 +226,7 @@ def create_wfirst_reflected_light_table(fname_in='exo_archive_query.txt', \
     #print comments
 
     #write out with astropy tables to format the body correctly
-    t2 = dat['pl_hostname','pl_letter','sma_arcsec','Fp/F*_quad','pl_discmethod']
+    t2 = dat['pl_hostname','pl_letter','sma_arcsec','Fp/F*_quad','st_optmag','st_spstr','pl_discmethod']
     ascii.write(t2,fname_out,\
             format='fixed_width', comment='#',delimiter=',',bookend=False,overwrite=True)
 

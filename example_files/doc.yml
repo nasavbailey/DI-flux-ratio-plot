@@ -1,6 +1,4 @@
 # Turn on/off various plotted quantities (True=on; False=off)
-ELT :   False # very rough estimate!
-HABEX : True
 NIRCAM: True
 NICMOS: True
 STIS:   True
@@ -8,6 +6,8 @@ ACS :   True
 SPHERE: True
 GPI:    True
 MagAO:  True
+ELT :   False
+HABEX : False
 
 DI_H:       True # known H-band contrasts of directly imaged planets
 DI_B1_pred: True # predicted Band 1 from self-luminous, directly imaged planets
@@ -15,7 +15,7 @@ DI_B3_pred: True # predicted Band 3 from self-luminous, directly imaged planets
 RV_pred:    'None' # [None, IMD, simple] predicted reflected light from known RV planets from either a simple Lambertian or the Imaging Mission Database
 solar_system: True # Earth & Jupiter
 Tau_Ceti:    True # Tau Ceti e & f data points
-Tau_Ceti_axis: False # Tau Ceti e top y axis & label
+Tau_Ceti_axis: True # Tau Ceti e top y axis & label
 Prox_Cen:   False # Proxima Centauri b
 
 req_img:    True # imaging requirement
@@ -24,35 +24,35 @@ req_wide_img: True # extended surface brightness requirement, translated to cont
 pred_img:    True # prediction for imaging
 pred_wide_img: True # prediction for extended source detection limit
 pred_spec:   True # prediction for spectroscopy detection limit
-exp_t:      True # print exposure times for predictions
+exp_t:       True # print exposures times used for predictions?
 
 # plotting parameters
 fig_width:  6 # inches
-fig_height: 5 # inches
-save_pdf:   True # output PDF?
-save_jpg:   True # output JPG?
+fig_height: 5.5 # inches
+save_pdf:   False # output PDF?
+save_jpg:   False # output JPG?
 jpg_dpi:    200
-save_png:   False # output PNG?
+save_png:   True # output PNG?
 png_dpi:    200
 
 
 color_by_lambda:  'simple'  # [ full / simple / minimal / none ] color code by  bandpass
-is_draft:    True  # print DRAFT & date on plot
+timestamp:    True  # print date on plot
 
 math_font:   'stixsans' # 'stix' (times), 'stixsans' (sans-serif), 'cm' (default latex)
-plot_font_size:  12  # font size for axis labels / title, etc.
-legend_font_size: 7  # font size for legend text
-label_font_size:  8  # font size for detection limit curve labels
+plot_font_size:  13  # font size for axis labels / title, etc.
+legend_font_size: 7.5  # font size for legend text
+label_font_size:  9  # font size for detection limit curve labels
 
 wfirst_linewidth: 4 # line width for WFIRST BTRs and detection limit curves
 other_linewidth:  1 # line width for other instruments' detection limit curves
 
-rv_markersize:      35 # reflected light RV marker size
-di_markersize:      30 # self-luminous planets marker size
+rv_markersize:      50 # reflected light RV marker size
+di_markersize:      40 # self-luminous planets marker size
 marker_edge_width:  0.5  # width of borders on scatter plot markers
 
 # plot x and y limits
 x0: 0.07
 x1: 5
 y0: 1E-11
-y1: 1E-3
+y1: 4E-3

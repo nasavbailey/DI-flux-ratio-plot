@@ -1,6 +1,6 @@
 #Rho(as) Band1_contr_snr5
 #Short caption: WFIRST CGI point source imaging L2 [TECH 1]: WFIRST CGI shall be able to measure the brightness of an astrophysical point source to an SNR of 10 or greater within 10 hours of integration time on the target in CGI Filter Band 1 for an object with a source-to-star flux ratio as faint as 1e-7 at separations from 0.16 arcsec to 0.21 arcsec, 5e-8 at separations from 0.21 arcsec to 0.4 arcsec, and 1e-7 at separations from 0.4 arcsec to 0.45 arcsec.
-#References: L2 reqs from github; Jan 26, 2018 version [TECH 1]
+#References: L2 requirement CGI-TECH-1
 0.16	0.5E-7
 0.21	0.5E-7
 0.21	2.5E-8
