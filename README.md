@@ -72,3 +72,15 @@ Thanks for your help! Before you submit a pull request please:
 * If your changes affect flux_ratio_doc.png, place your new version in the Documentation folder.
 * Update description.md, if necessary.
 * Update the short caption header in any changed data files.
+
+
+## License and acknowledgements
+Government sponsorship acknowledged. This work was carried out in part at the Jet Propulsion Laboratory, California Institute of Technology, under a contract with the National Aeronautics and Space Administration.
+
+Copyright 2019 California Institute of Technology.
+
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License in the LICENSE file or at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
