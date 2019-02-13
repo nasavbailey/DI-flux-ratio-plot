@@ -238,7 +238,7 @@ if cfg['STIS'] is True:
     a_STIS = ascii.read(fname)
     ax1.plot(a_STIS['Rho(as)'],a_STIS['KLIP_Contr'],color=c_bbvis,\
         linewidth=lw1,label='')
-    ax1.text(0.2,5*10**-5,'HST STIS',color=c_bbvis,horizontalalignment='left',rotation=-40,fontsize=ccfs)
+    ax1.text(0.2,5*10**-5,'HST STIS',color=c_bbvis,horizontalalignment='left',rotation=-39,fontsize=ccfs)
     caption += extract_short_caption(fname)
 
 
@@ -256,7 +256,7 @@ if cfg['ACS'] is True:
 #########################################################################
 ### MagAO detection limit
 
-if cfg['MagAO'] is True:
+if cfg['MagAO'] is True and cfg['generic ground-based'] is False:
     fname = datapath+'magao_ip_alphacen_5sigma.txt'
     a_MagAO_ip = ascii.read(fname)
     a_MagAO_ip['ip_Contrast'] = a_MagAO_ip['ip_contr_60min']
@@ -280,7 +280,7 @@ if cfg['MagAO'] is True:
 #########################################################################
 ### SPHERE detection limit
 
-if cfg['SPHERE'] is True:
+if cfg['SPHERE'] is True and cfg['generic ground-based'] is False:
     fname = datapath+'SPHERE_Vigan.txt'
     a_SPHERE = ascii.read(fname)
     a_SPHERE['Contrast'] = 10**(-0.4*a_SPHERE['delta'])
@@ -304,11 +304,15 @@ if cfg['SPHERE'] is True:
 #########################################################################
 ### GPI H-band
 
-if cfg['GPI'] is True:
+if cfg['GPI'] is True or cfg['generic ground-based'] is True:
     fname = datapath+'GPI_Sirius_Ltype.txt'
     a_GPI = ascii.read(fname)
     ax1.plot(a_GPI['Rho(as)'],a_GPI['H_contr_60min_Ltype'],color=c_h,linewidth=lw1,label='')
-    ax1.text(0.15,1.1*10**-5,'Gemini GPI',color=c_h,horizontalalignment='left',rotation=-26,fontsize=ccfs)
+    if cfg['GPI'] is True:
+        txt = 'Gemini GPI'
+    if cfg['generic ground-based'] is True:
+        txt = 'Ground-based'
+    ax1.text(0.15,1.1*10**-5,txt,color=c_h,horizontalalignment='left',rotation=-26,fontsize=ccfs)
     caption += extract_short_caption(fname)
 
 
@@ -324,7 +328,7 @@ if cfg['pred_img'] is True:
     dat['lambda'].unit = u.nm
     dat['Rho(as)'] = dat['l/D'] * (dat['lambda'] / d_tel).decompose()*206265
     ax1.plot(dat['Rho(as)'], dat['contr_snr5'], color=c_v, linewidth=lw2, label='')
-    ax1.text(dat['Rho(as)'][0], 1.5*dat['contr_snr5'][-1], 'WFIRST  \nCGI pred.  ', color='darkblue',\
+    ax1.text(dat['Rho(as)'][0], 2.*dat['contr_snr5'][-1], 'WFIRST  \nCGI pred.  ', color='darkblue',\
         horizontalalignment='right', verticalalignment='bottom', weight='bold', fontsize=ccfs+1)
     if cfg['exp_t'] is True:
         if cfg['req_img'] is False:
@@ -452,7 +456,7 @@ if cfg['DI_H'] or cfg['DI_B1_pred'] or cfg['DI_B3_pred']:
     a_DI['547m_contr'] = 10**(a_DI['547m_delta']/-2.5)
     a_DI['763m_contr'] = 10**(a_DI['763m_delta']/-2.5)
     a_DI['H_contr'] = 10**(a_DI['H_delta']/-2.5)
-    alpha_di = 0.7
+    alpha_di = 1 # Windows machines have trouble with alpha<1 in PDF format
     caption += extract_short_caption(fname)
 
 if cfg['DI_H'] is True:
@@ -568,8 +572,8 @@ if cfg['RV_pred'].upper() == 'IMD':
     idx6 = (tmp['st_optmag'] > 5) & (tmp['st_optmag'] <= 6)
     ax1.scatter(tmp[idx_rv & idx5]['WA']/1000., \
         10**(-0.4*tmp[idx_rv & idx5]['dMag_300C_730NM']), \
-        s=cfg['rv_markersize'],\
-        color='dimgray', edgecolor='k', marker='^', label='RV, reflected light, predicted', zorder=5)
+        s=cfg['rv_markersize'], color='dimgray', \
+        edgecolor='k', marker='^', label='RV, reflected light, predicted', zorder=5)
     ax1.scatter(tmp[idx_rv & idx6]['WA']/1000., \
         10**(-0.4*tmp[idx_rv & idx6]['dMag_300C_730NM']), \
         s=cfg['rv_markersize'],\
