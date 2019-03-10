@@ -384,16 +384,16 @@ if cfg['pred_wide_img'] is True:
             horizontalalignment='left', verticalalignment='bottom', weight='bold', fontsize=ccfs+1)
     if cfg['exp_t'] is True:
         if cfg['req_wide_img'] is False:
-            ax1.text(dat['Rho(as)'][-1], 0.8*dat['contr_snr5'][-1], \
+            ax1.text(dat['Rho(as)'][-1], 0.8*dat['contr_snr5'][-3], \
             'img, %ghr'%(dat['t_int_hr'][0]), color=c_band4, weight='bold',\
             horizontalalignment='center', verticalalignment='top', fontsize=ccfs+1)
         else:
-            ax1.text(dat['Rho(as)'][-1], 0.8*dat['contr_snr5'][-1], \
+            ax1.text(dat['Rho(as)'][-1], 0.8*dat['contr_snr5'][-3], \
             '%ghr'%(dat['t_int_hr'][0],), color=c_band4, weight='bold',\
             horizontalalignment='right', verticalalignment='top', fontsize=ccfs+1)
     else:
         if cfg['req_wide_img'] is False:
-            ax1.text(dat['Rho(as)'][-1], 0.8*dat['contr_snr5'][-1], 'img', color=c_band4, weight='bold',\
+            ax1.text(dat['Rho(as)'][-1], 0.8*dat['contr_snr5'][-3], 'img', color=c_band4, weight='bold',\
                 horizontalalignment='right', verticalalignment='top', fontsize=ccfs+1)
     caption += extract_short_caption(fname)
 
