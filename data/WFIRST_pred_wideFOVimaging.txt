@@ -1,10 +1,10 @@
-#l/D   contr_snr5  lambda  t_int_hr  fpp
-#Short caption: WFIRST CGI wide field of view imaging prediction: Modeled 5-sigma post-processed [RDI+fpp=2] contrast curve for Band 4 imaging of a V=5 star with the SPC wide FOV coronagraph. The model observation use MUFs=1 and no margins. Integration time is  100hr. (source: B. Nemati)
-#References: WFIRST_CGI_performance.pptx from Oct 23 2018
-5.9	1.1E-9	825	100	2
-8.3	5.1E-10	825	100	2
-10.6	5.0E-10	825	100	2
-13.0	5.0E-10	825	100	2
-15.3	5.0E-10	825	100	2
-17.7	5.1E-10	825	100	2
-20.0	5.0E-10 825	100	2
+#l/D   contr_snr5  lambda  t_int_hr  fpp SNR
+#Short caption: WFIRST CGI wide FOV imaging prediction: Modeled 5-sigma post-processed [RDI+fpp=2] contrast curve for Band 4 imaging of a V=5 star with the SPC wide FOV coronagraph. The model observation use MUFs=1 and no margins and component performance estimates for 21mo into mission. Integration time is  100hr. (source: B. Nemati, Feb 8, 2019 spreadsheet)
+#References: 20190208 B. Nemati spreadsheet
+6.0	1.7E-9	825	100	2	5
+7.0	9.0E-10	825	100	2	5
+8.0	7.6E-10	825	100	2	5
+13.0	7.4E-10	825	100	2	5
+18.0	7.8E-10	825	100	2	5
+19.0	9.3E-10	825	100	2	5
+19.8	1.4E-9 	825	100	2	5
