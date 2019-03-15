@@ -1,9 +1,5 @@
 #!/usr/bin/env python2
 # -*- coding: utf-8 -*-
-"""
-@author: meshkat (original; July 31, 2017)
-November-December 2017: VPB reorganized & updated detection limit curves
-"""
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -24,7 +20,7 @@ if len(cfglist) > 1:
 if len(cfglist) == 0:
     raise Exception('No .yml config files present. Place your .yml file in the same directory as plot_flux_ratio.py.')
 with open(cfglist[0],'r') as f:
-    cfg = yaml.load(f)
+    cfg = yaml.safe_load(f)
     cfgname = cfglist[0].split('.yml')[0]
 
 ###Define path where to find data and where to save plot
