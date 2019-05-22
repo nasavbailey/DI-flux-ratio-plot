@@ -8,6 +8,8 @@ This contains the python code to plot the flux ratio vs separation plot. It also
 * numpy
 * yaml
 
+_Note:_ this code is only tested with miniconda + [astroconda](https://astroconda.readthedocs.io/). 
+
 
 ## quickstart
 
