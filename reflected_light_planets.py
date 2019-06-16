@@ -32,7 +32,7 @@ def unit_check_convert(var, myunit):
     if var.unit == myunit:
         return var
     else:
-        print "...Converting [%s] to [%s]" % (str(var.unit), str(myunit))
+        print("...Converting [%s] to [%s]" % (str(var.unit), str(myunit)))
         return var.to(myunit)
 
 
@@ -240,7 +240,7 @@ def create_wfirst_reflected_light_table(fname_in='data/exo_archive_query.txt', \
     f.write(('').join(lines[1:]))
     f.close()
 
-    print 'File written to '+fname_out
+    print('File written to '+fname_out)
 
     return
 
@@ -278,4 +278,4 @@ def demo_phase():
 
     plt.tight_layout()
     plt.savefig('demo_phase_curve.pdf')
-    print 'Saved plot called demo_phase_curve.pdf'
+    print('Saved plot called demo_phase_curve.pdf')

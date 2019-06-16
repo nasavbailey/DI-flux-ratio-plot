@@ -157,7 +157,7 @@ def extract_short_caption(filename):
         if '#short caption:' in l.lower():
             return '-- '+l.split('caption:')[1].strip()+'\n\n'
     # if no caption in text file
-    print '\n**** WARNING **** no caption for '+filename+'\n'
+    print('\n**** WARNING **** no caption for '+filename+'\n')
     return ''
 
 
@@ -324,16 +324,16 @@ if cfg['pred_img'] is True:
         horizontalalignment='right', verticalalignment='bottom', weight='bold', fontsize=ccfs+1)
     if cfg['exp_t'] is True:
         if cfg['req_img'] is False:
-            ax1.text(dat['Rho(as)'][0], 0.9*dat['contr_snr5'][-1], \
+            ax1.text(dat['Rho(as)'][0], 0.9*dat['contr_snr5'][-3], \
             'img, %ghr'%(dat['t_int_hr'][0]), color=c_v, weight='bold',\
             horizontalalignment='left', verticalalignment='top', fontsize=ccfs+1)
         else:
-            ax1.text(dat['Rho(as)'][0], 0.9*dat['contr_snr5'][-1], \
+            ax1.text(dat['Rho(as)'][0], 0.9*dat['contr_snr5'][-3], \
             '%ghr'%(dat['t_int_hr'][0],), color=c_v, weight='bold',\
             horizontalalignment='left', verticalalignment='top', fontsize=ccfs+1)
     else:
         if cfg['req_img'] is False:
-            ax1.text(dat['Rho(as)'][0], 0.9*dat['contr_snr5'][-1], 'img', color=c_v, weight='bold',\
+            ax1.text(dat['Rho(as)'][0], 0.9*dat['contr_snr5'][-3], 'img', color=c_v, weight='bold',\
                 horizontalalignment='left', verticalalignment='top', fontsize=ccfs+1)
     caption += extract_short_caption(fname)
 
