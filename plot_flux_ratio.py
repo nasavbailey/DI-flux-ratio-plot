@@ -157,7 +157,7 @@ def extract_short_caption(filename):
         if '#short caption:' in l.lower():
             return '-- '+l.split('caption:')[1].strip()+'\n\n'
     # if no caption in text file
-    print '\n**** WARNING **** no caption for '+filename+'\n'
+    print('\n**** WARNING **** no caption for '+filename+'\n')
     return ''
 
 
@@ -324,21 +324,21 @@ if cfg['pred_img'] is True:
     dat['lambda'].unit = u.nm
     dat['Rho(as)'] = dat['l/D'] * (dat['lambda'] / d_tel).decompose()*206265
     ax1.plot(dat['Rho(as)'], dat['contr_snr5'], color=c_v, linewidth=lw2, label='')
-    ax1.text(dat['Rho(as)'][0], 2.*dat['contr_snr5'][-1], 'WFIRST  \nCGI pred.  ', color='darkblue',\
+    ax1.text(dat['Rho(as)'][0], 1.5*dat['contr_snr5'][0], 'WFIRST  \nCGI pred.  ', color='darkblue',\
         horizontalalignment='right', verticalalignment='bottom', weight='bold', fontsize=ccfs+1)
     if cfg['exp_t'] is True:
         if cfg['req_img'] is False:
-            ax1.text(dat['Rho(as)'][-1], 0.8*dat['contr_snr5'][-1], \
+            ax1.text(dat['Rho(as)'][0], 0.9*dat['contr_snr5'][-3], \
             'img, %ghr'%(dat['t_int_hr'][0]), color=c_v, weight='bold',\
-            horizontalalignment='right', verticalalignment='top', fontsize=ccfs+1)
+            horizontalalignment='left', verticalalignment='top', fontsize=ccfs+1)
         else:
-            ax1.text(dat['Rho(as)'][-1], 0.8*dat['contr_snr5'][-1], \
+            ax1.text(dat['Rho(as)'][0], 0.9*dat['contr_snr5'][-3], \
             '%ghr'%(dat['t_int_hr'][0],), color=c_v, weight='bold',\
-            horizontalalignment='right', verticalalignment='top', fontsize=ccfs+1)
+            horizontalalignment='left', verticalalignment='top', fontsize=ccfs+1)
     else:
         if cfg['req_img'] is False:
-            ax1.text(dat['Rho(as)'][-1], 0.8*dat['contr_snr5'][-1], 'img', color=c_v, weight='bold',\
-                horizontalalignment='right', verticalalignment='top', fontsize=ccfs+1)
+            ax1.text(dat['Rho(as)'][0], 0.9*dat['contr_snr5'][-3], 'img', color=c_v, weight='bold',\
+                horizontalalignment='left', verticalalignment='top', fontsize=ccfs+1)
     caption += extract_short_caption(fname)
 
 
