@@ -46,7 +46,7 @@ Available instruments:
 
 Available planets:
 * known self-luminious directly imaged planets: measured H-band contrasts & predictions for CGI bandpasses.
-* known RV planets: predicted reflected light brightness
+* known RV planets: predicted reflected light brightness using either a simple 0.5 albedo model or predictions from the Imaging Mission Database
 * Earth & Jupiter at 10pc
 * Tau Ceti e & f
 

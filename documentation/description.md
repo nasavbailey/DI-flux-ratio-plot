@@ -8,7 +8,7 @@ The Coronagraph Instrument (CGI) for NASA’s Wide Field Infrared Survey Telesco
 
 ![](flux_ratio_doc.png)
 
-_Figure 1:_ Predicted WFIRST performance in the context of known planets and existing and planned high-contrast instruments. The y-axis indicates the flux ratio between a planet and its host star (for individual planets) or between the star and the dimmest source detectable at 5$\sigma$ after post-processing (for instrument performance curves). The lower x-axis is projected separation in arcseconds, and the upper x-axis is the corresponding physical separation for the Tau Ceti system. Points and lines are color-coded by wavelength of observation. Solid and dashed lines are 5-sigma point source detection limits versus separation from the host star; these limits are calculated from post-processed data. The predicted performance for the future observatory, JWST, is plotted as a dashed line. Lines labeled "CGI req" are WFIRST level 2 requirements. Lines labeled "CGI pred." are current best performance predictions. Black triangular points are estimated reflected light flux ratios for known gas giant radial velocity-detected (RV) planets at quadrature, with assumed geometric albedos of 0.5. Red squares are 1.6$\mu m$ flux ratios of known self-luminous directly-imaged (DI) planets. Dotted lines connect each DI planet’s known 1.6$\mu m$ flux ratio to its predicted flux ratio at 750nm (yellow diamonds) or 550nm (blue circles), based on COND or BT-Settl planet evolutionary models. Cyan points represent the reflected light flux ratios of Earth and Jupiter at 10pc as well as super-Earths Tau Ceti e and f.
+_Figure 1:_ Predicted WFIRST performance in the context of known planets and existing and planned high-contrast instruments. The y-axis indicates the flux ratio between a planet and its host star (for individual planets) or between the star and the dimmest source detectable at 5$\sigma$ after post-processing (for instrument performance curves). The lower x-axis is projected separation in arcseconds, and the upper x-axis is the corresponding physical separation for the Tau Ceti system. Points and lines are color-coded by wavelength of observation. Solid and dashed lines are 5-sigma point source detection limits versus separation from the host star; these limits are calculated from post-processed data. The predicted performance for the future observatory, JWST, is plotted as a dashed line. Lines labeled "CGI req" are WFIRST level 2 requirements. Lines labeled "CGI pred." are current best performance predictions. Triangular points are estimated reflected light flux ratios for known gas giant radial velocity-detected (RV). Red squares are 1.6$\mu m$ flux ratios of known self-luminous directly-imaged (DI) planets. Dotted lines connect each DI planet’s measured 1.6$\mu m$ flux ratio to its predicted flux ratio at 750nm (yellow diamonds) or 550nm (blue circles), based on COND or BT-Settl planet evolutionary models. Cyan points represent the reflected light flux ratios of Earth and Jupiter at 10pc as well as super-Earths Tau Ceti e and f.
 
 ## Flux Ratio
 
@@ -18,6 +18,8 @@ For individual planets, “flux ratio” is the ratio of the planet flux to the 
 ## Known planets
 
 ### RV-detected planets in reflected light
+
+Two options are available for flux ratio predictions.
 
 #### Simple Lambertian model
 
@@ -29,6 +31,29 @@ The flux ratio for Earth is fixed at 1E-10. The flux ratio for Jupiter assumes a
 _Caveat:_ Orbital eccentricity is ignored; all planets are placed a a separation equal to their semi-major axis.
 
 References: Equations 14 & 15 and table 3 of Traub & Oppenheimer (p. 116 of the Seager “Exoplanets” textbook).
+
+
+#### Imaging Mission Database model
+
+The Imaging Mission Database (IMD; plandb.sioslab.com) provides calculated flux ratios at quadrature for known RV planets in the WFIRST CGI bandpasses. The IMD draws the mass and orbit properties of known radial velocity exoplanets from the NExScI Exoplanet archive. If the planet radius has not been measured directly, IMD calculates it with a modified version of the Forecaster model to predict planet radius (not to exceed 1 Jupiter radius for cold planets). It uses Batalha2018 models to predict phase curves; the nearest neighbor grid is selected for stellar metallicity and orbit semi-major axis. We assume clouds with $f_{sed} = 3$.  Dark gray triangles signify V < 5 host stars; light grey triangles signify 5 < V < 6 host stars.
+
+See https://plandb.sioslab.com/about.php for acknowledgement and citation information.  As of March 2020, the following are required:
+
+The publication/presentation must include the following statement of acknowledgement: "This research has made use of the Imaging Mission Database, which is operated by the Space Imaging and Optical Systems Lab at Cornell University. The database includes content from the NASA Exoplanet Archive, which is operated by the California Institute of Technology, under contract with the National Aeronautics and Space Administration under the Exoplanet Exploration Program, and from the SIMBAD database, operated at CDS, Strasbourg, France "
+
+Any manuscript/poster must cite the following works:
+
+* Wenger et al. (2000) "The SIMBAD astronomical database."
+* Batalha et al. (2018) "Color Classification of Extrasolar Giant Planets: Prospects and Cautions."
+* Turnbull M. (2015) "ExoCat-1: The Nearby Stellar Systems Catalog for Exoplanet Imaging Missions"
+
+The authors of any paper submitted for peer reviewed journal publication must extend an invitation of authorship to the people listed below. Such opt-in requests must be acknowledged in a timely fashion (no more than one month after the first email/contact) and it is up to the paper first author to determine the appropriate author order. Authors of conference proceedings papers, presentations, and posters do not need to extend authorship invitations, but must still conform to the first two stipulations.
+
+* Dmitry Savransky (ds264@cornell.edu)
+* Nikole Lewis (nkl35@cornell.edu)
+* Bruce Macintosh (bmacintosh@stanford.edu)
+* Natasha Batalha (nbatalha@ucsc.edu)
+* Mark Marley (Mark.S.Marley@nasa.gov)
 
 
 ### Directly imaged self-luminous planets

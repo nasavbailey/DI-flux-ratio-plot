@@ -3,6 +3,7 @@ NIRCAM: True
 NICMOS: True
 STIS:   True
 ACS :   True
+generic ground-based: True # just show one ground-based curve? Overrides others.
 SPHERE: True
 GPI:    True
 MagAO:  True
@@ -12,7 +13,7 @@ HABEX : False
 DI_H:       True # known H-band contrasts of directly imaged planets
 DI_B1_pred: False # predicted Band 1 from self-luminous, directly imaged planets
 DI_B3_pred: True # predicted Band 3 from self-luminous, directly imaged planets
-RV_pred:    'None' # [None, IMD, simple] predicted reflected light from known RV planets from either a simple Lambertian or the Imaging Mission Database
+RV_pred:    'IMD' # [None, IMD, simple] predicted reflected light from known RV planets from either a simple Lambertian or the Imaging Mission Database
 solar_system: True # Earth & Jupiter
 Tau_Ceti:    False # Tau Ceti e & f data points
 Tau_Ceti_axis: False # Tau Ceti e top y axis & label

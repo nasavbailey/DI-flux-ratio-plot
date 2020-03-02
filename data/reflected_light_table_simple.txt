@@ -1,5 +1,5 @@
 #pl_hostname , pl_letter , sma_arcsec , Fp/F*_quad , st_optmag ,                st_spstr ,   pl_discmethod
-#Short caption: All planets from NASA exoplanet archive with a semi-major axis of 0.12-1.4 arcsec, mass > 0.25 Mjup, and host star V mag < 7.00. Lambertian flux ratio assumes: radius = 1 Rjup, geometric albedo = 0.5, circular orbit, inclination = 90.0, and angle of 0.0 degrees from the ascending node.
+#Short caption: RV: All planets from NASA exoplanet archive with a semi-major axis of 0.12-1.4 arcsec, mass > 0.25 Mjup, and host star V mag < 7.00. Lambertian flux ratio assumes: radius = 1 Rjup, geometric albedo = 0.5, circular orbit, inclination = 90.0, and angle of 0.0 degrees from the ascending node.
 #References:
 #Lambertian phase curve from Traub & Oppenheimer: Direct Imaging of Exoplanets, equation 15, pg 116 of Seager Exoplanets textbook.
   HD_196067 ,         b ,       0.13 ,    1.4e-09 ,      6.03 ,                    G1 V , Radial Velocity
