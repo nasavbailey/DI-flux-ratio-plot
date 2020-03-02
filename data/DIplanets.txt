@@ -3,7 +3,7 @@
 #References:
 #https://phoenix.ens-lyon.fr/Grids/AMES-Cond/
 #https://phoenix.ens-lyon.fr/Grids/BT-Cond/
-51_eri_b	26.313	19.625	14.22	0.4547	166.5
+51_eri_b	26.313	21	14.22	0.4547	166.5
 HD_95086_b	25.488	19.423	13.63	0.62	147.2
 HR_8799_b	24.263	18.275	12.57	1.72	65.1
 HR_8799_c	22.833	17.445	11.84	0.964	325.9
