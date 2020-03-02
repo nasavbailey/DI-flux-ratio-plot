@@ -30,15 +30,15 @@ To customize what is plotted, place a YAML configuration file in the same direct
 ### Plot options
 
 Available WFIRST modes:
-* narrow FOV imaging requirement
-* wide FOV imaging requirement
-* spectroscopy requirement
+* imaging requirement (PLRA L1 TTTR5)
 * imaging & spectroscopy perfomance predictions
+* Obsolete requirements (Phase B) are available for reference only. 
 
 Available instruments:
 * Gemini GPI IFS
 * VLT SPHERE: IFS & IRDIS
 * Magellan VisAO
+* generic ground-based (supersedes the above)
 * HST ACS
 * HST NICMOS
 * HST STIS

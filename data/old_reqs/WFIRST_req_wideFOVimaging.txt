@@ -1,0 +1,9 @@
+#Rho(as) Band4_pt_contr_snr5
+#Short caption: *OBSOLETE* CGI extended source L2 [TECH 3]. Removed from MRD Feb. 2020, but kept here for historical completeness. "WFIRST CGI shall be able to measure the brightness around a star as faint as V = 5 mag with an SNR of 10 or greater within 24 hours of integration time on the target in CGI Filter Band 4 for an extended source with an integrated surface brightness per resolution element equivalent to a source-to-star flux ratio as faint as 1e-7 at separations from 0.47 arcsec to 0.54 arcsec, 5e-8 at separations from 0.54 arcsec to 1.36 arcsec, and 1e-7 at separations from 1.36 arcsec to 1.44 arcsec."
+#References: OLD Phase B L2 requirement CGI-TECH-3. Removed February 2020.
+0.47	0.5E-7
+0.54	0.5E-7
+0.54	2.5E-8
+1.36	2.5E-8
+1.36	0.5E-7
+1.44	0.5E-7

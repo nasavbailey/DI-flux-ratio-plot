@@ -1,0 +1,5 @@
+#l/D 	contr  lambda SNR
+#Short caption: WFIRST CGI L1 requirement (TTR5): WFIRST shall be able to measure (using CGI), with SNR >= 5, the brightness of an astrophysical point source located between 6 and 9 lambda/D from an adjacent star with a VAB magnitude <= 5, with a flux ratio >= 1·10^-7; the bandpass shall have a central wavelength <= 600 nm and a bandwidth >= 10%.
+#References: KDP-C PLRA, Feb. 2020
+6.0	1E-07	575	5
+9.0	1E-07	575	5

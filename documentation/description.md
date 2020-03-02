@@ -8,7 +8,7 @@ The Coronagraph Instrument (CGI) for NASA’s Wide Field Infrared Survey Telesco
 
 ![](flux_ratio_doc.png)
 
-_Figure 1:_ Predicted WFIRST performance in the context of known planets and existing and planned high-contrast instruments. The y-axis indicates the flux ratio between a planet and its host star (for individual planets) or between the star and the dimmest source detectable at 5$\sigma$ after post-processing (for instrument performance curves). The lower x-axis is projected separation in arcseconds, and the upper x-axis is the corresponding physical separation for the Tau Ceti system. Points and lines are color-coded by wavelength of observation. Solid and dashed lines are 5-sigma point source detection limits versus separation from the host star; these limits are calculated from post-processed data. The predicted performance for the future observatory, JWST, is plotted as a dashed line. Lines labeled "CGI req" are WFIRST level 2 requirements. Lines labeled "CGI pred." are current best performance predictions. Triangular points are estimated reflected light flux ratios for known gas giant radial velocity-detected (RV). Red squares are 1.6$\mu m$ flux ratios of known self-luminous directly-imaged (DI) planets. Dotted lines connect each DI planet’s measured 1.6$\mu m$ flux ratio to its predicted flux ratio at 750nm (yellow diamonds) or 550nm (blue circles), based on COND or BT-Settl planet evolutionary models. Cyan points represent the reflected light flux ratios of Earth and Jupiter at 10pc as well as super-Earths Tau Ceti e and f.
+_Figure 1:_ Predicted WFIRST performance in the context of known planets and existing and planned high-contrast instruments. The y-axis indicates the flux ratio between a planet and its host star (for individual planets) or between the star and the dimmest source detectable at 5$\sigma$ after post-processing (for instrument performance curves). The lower x-axis is projected separation in arcseconds, and the upper x-axis is the corresponding physical separation for the Tau Ceti system. Points and lines are color-coded by wavelength of observation. Solid and dashed lines are 5-sigma point source detection limits versus separation from the host star; these limits are calculated from post-processed data. The predicted performance for the future observatory, JWST, is plotted as a dashed line. Line labeled "WFIRST CGI req" is the Level 1 preformance  requirement. Lines labeled "WFIRST CGI pred." are current best performance predictions. Triangular points are estimated reflected light flux ratios for known gas giant radial velocity-detected (RV). Red squares are 1.6$\mu m$ flux ratios of known self-luminous directly-imaged (DI) planets. Dotted lines connect each DI planet’s measured 1.6$\mu m$ flux ratio to its predicted flux ratio at 750nm (yellow diamonds) or 550nm (blue circles), based on COND or BT-Settl planet evolutionary models. Cyan points represent the reflected light flux ratios of Earth and Jupiter at 10pc as well as super-Earths Tau Ceti e and f.
 
 ## Flux Ratio
 
@@ -64,18 +64,14 @@ Models are available at https://phoenix.ens-lyon.fr/Grids/
 
 ## WFIRST CGI mission concept predicted detection limits
 
-### CGI requirements, labeled “req” in the figure
-* **Description**: Level 2 requirements for narrow FOV imaging, spectroscopy, and wide FOV imaging. All requirements are written for SNR=10 detections; the plotted curves are divided by 2 to yield SNR=5.
-* **Bandpass**:
-    * narrow FOV imaging : 575nm / 10% BW
-    * spectroscopy : 730nm / 15% BW
-    * wide FOV imaging : 825nm / 10% BW
-* **Integration time:**
-    * narrow FOV imaging : 10hr
-    * spectroscopy : 100hr
-    * wide FOV imaging : 24hr
-* **Post-processing**: The requirements are written for post-processed data; no method is specified.
-* **Reference**: L2 requirements. CGI-TECH-1, 2, 3
+### CGI requirement, labeled “CGI req.” in the figure
+
+* **Description**: Level 1 requirement (Threshold Technology Requirement 5). WFIRST shall be able to measure (using CGI), with SNR >= 5, the brightness of an astrophysical point source located between 6 and 9 lambda/D from an adjacent star with a $V_{AB}$ magnitude <= 5, with a flux ratio >= $1 10^{-7}$; the bandpass shall have a central wavelength <= 600 nm and a bandwidth >= 10%.
+* **Bandpass:** 575nm / 10% BW, Hybrid Lyot coronagraph
+* **Integration time:** Not specified
+* **Post-processing:** The requirements are written for post-processed data; no method is specified.
+* **Reference:** KDP-C PLRA, Feb. 2020
+
 
 
 ### Performance predictions :
@@ -87,8 +83,27 @@ Models are available at https://phoenix.ens-lyon.fr/Grids/
 * **Integration time:**
     * imaging : 100hr
     * spectroscopy : 400hr.
-    * **Post-processing:** Reference PSF subtraction, plus an assumed additional factor of 2 improvement on the residual speckle component from the application of more sophisticated post-processing techniques.
-    * **Reference:** B. Kern & B. Nemati, personal communication
+* **Post-processing:** Reference PSF subtraction, plus an assumed additional factor of 2 improvement on the residual speckle component from the application of more sophisticated post-processing techniques.
+* **Reference:** B. Kern & B. Nemati, personal communication
+    
+    
+### Old CGI Tech Demo requirements. 
+
+Labeled "old L2 req." in figure if enabled.
+
+* **Description**: OLD (Phase B) Level 2 requirements for narrow FOV imaging, spectroscopy, and wide FOV imaging. Removed from Mission Requirements Document in February 2020, but kept here for historical completeness. All requirements were written for SNR=10 detections; the plotted curves are divided by 2 to yield SNR=5.
+* **Bandpass**:
+    * narrow FOV imaging : 575nm / 10% BW
+    * spectroscopy : 730nm / 15% BW
+    * wide FOV imaging : 825nm / 10% BW
+* **Integration time:**
+    * narrow FOV imaging : 10hr
+    * spectroscopy : 100hr
+    * wide FOV imaging : 24hr
+* **Post-processing**: The requirements are written for post-processed data; no method is specified.
+* **Reference**: OLD (Phase B) L2 requirements CGI-TECH-1, 2, 3. Removed from Mission Requirements Document in February 2020.
+
+
 
 ## Other Instruments
 
