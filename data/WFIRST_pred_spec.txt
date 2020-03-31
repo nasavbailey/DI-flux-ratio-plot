@@ -1,10 +1,10 @@
 #l/D 	contr_snr10  lambda t_int_hr  fpp	SNR
-#Short caption: WFIRST CGI spectroscopy prediction: Modeled 10-sigma post-processed [RDI+fpp=2] contrast curve for Band 3 spectroscopy with the SPC bowtie. The model observation use MUFs=1 and no margins and component performance estimates for 21mo into mission. Integration time is  400hr. V=5 star. (source: B. Nemati, Feb 8, 2019 spreadsheet)
+#Short caption: WFIRST CGI spectroscopy prediction: Modeled 10-sigma post-processed [RDI+fpp=2] contrast curve for Band 3 spectroscopy with the SPC bowtie, based on OS9. The model observation use MUFs=1 and no margins and component performance estimates for 21mo into mission. Integration time is  400hr. V=5 star. (source: B. Nemati, March 16, 2020 per. comm.)
 #References: 20190208 B. Nemati spreadsheet
-2.7	1.1E-08	730	400	2	10
-3.0	9.0E-09	730	400	2	10
-3.5	5.5E-09	730	400	2	10
-4.0	4.3E-09	730	400	2	10
-7.8	4.3E-09	730	400	2	10
-8.3	5.6E-09	730	400	2	10
-8.8	8.5E-09	730	400	2	10
+3.0	4.5E-09	730	400	2	10
+3.5	3.8E-09	730	400	2	10
+4.0	2.8E-09	730	400	2	10
+6.0	2.8E-09	730	400	2	10
+7.0	2.8E-09	730	400	2	10
+8.0	3.4E-09	730	400	2	10
+9.0	5.6E-09	730	400	2	10

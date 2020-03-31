@@ -327,12 +327,12 @@ if cfg['pred_img'] is True:
     ax1.text(dat['Rho(as)'][0], 1.5*dat['contr_snr5'][0], 'WFIRST  \nCGI pred.  ', color='darkblue',\
         horizontalalignment='right', verticalalignment='bottom', weight='bold', fontsize=ccfs+1)
     if cfg['exp_t'] is True:
-        ax1.text(dat['Rho(as)'][1], 0.9*dat['contr_snr5'][-3], \
+        ax1.text(dat['Rho(as)'][0], 0.8*dat['contr_snr5'][0], \
         'img, %ghr'%(dat['t_int_hr'][0]), color=c_v, weight='bold',\
-        horizontalalignment='left', verticalalignment='top', fontsize=ccfs+1)
+        horizontalalignment='right', verticalalignment='top', fontsize=ccfs+1)
     else:
         ax1.text(dat['Rho(as)'][0], 0.8*dat['contr_snr5'][0], 'img', color=c_v, weight='bold',\
-            horizontalalignment='left', verticalalignment='top', fontsize=ccfs+1)
+            horizontalalignment='right', verticalalignment='top', fontsize=ccfs+1)
     caption += extract_short_caption(fname)
 
 

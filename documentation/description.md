@@ -78,7 +78,7 @@ Lacy models are described at https://ui.adsabs.harvard.edu/abs/2019arXiv19111058
 
 
 ### Performance predictions :
-* **Description**: Model-predicted 5$\sigma$ final detection limits for a V=5 star in the three official observing modes. Model uncertainty factors (MUFs) for observatory and CGI set to unity. No performance margins. 3mK thermal stability of the deformable mirrors.
+* **Description**: Model-predicted 5$\sigma$ final detection limits for a V=5 star in the three official observing modes. Model uncertainty factors (MUFs) for observatory and CGI set to unity. No performance margins. 
 * **Bandpass:**
     * narrow FOV imaging : 575nm / 10% BW, Hybrid Lyot coronagraph
     * spectroscopy : R=50 spectroscopy, 730nm / 15% BW, Shaped Pupil bowtie coronagraph.
@@ -87,7 +87,7 @@ Lacy models are described at https://ui.adsabs.harvard.edu/abs/2019arXiv19111058
     * imaging : 100hr
     * spectroscopy : 400hr.
 * **Post-processing:** Reference PSF subtraction, plus an assumed additional factor of 2 improvement on the residual speckle component from the application of more sophisticated post-processing techniques.
-* **Reference:** B. Kern & B. Nemati, personal communication
+* **Reference:** B. Kern & B. Nemati, personal communication, March 16, 2020. Based on OS9 simulations.
     
     
 ### Old CGI Tech Demo requirements. 
