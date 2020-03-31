@@ -58,9 +58,12 @@ The authors of any paper submitted for peer reviewed journal publication must ex
 
 ### Directly imaged self-luminous planets
 
-Selected known self-luminous Directly Imaged (DI) exoplanets with measured H-band flux ratios are plotted. We use evolutionary models to predict the colors of these planets at approximately 550nm and 750nm. For those planets with effective temperatures <=1200K, we use AMES-COND models; for the remainder, we use BT-Settl. We assume log(g)=4.0 for all planets. We use NextGen stellar models to predict the colors of the host stars at the same wavelengths. From the star and planet color information, we then calculate the expected flux ratio of the planets. For expediency, we use WFC3 filters that approximate WFIRST bands: F547M (12%) and F763M (11%), because WFC3 colors were pre-calculated for each of the three model grids.
+Selected known self-luminous Directly Imaged (DI) exoplanets with measured H-band flux ratios are plotted. Where available, predictions from B. Lacy were used. Otherwise, for those planets with effective temperatures <=1200K, we use AMES-COND models; for the remainder, we use BT-Settl. For all COND/BT values, we assume log(g)=4.0, and we use NextGen stellar models to predict the colors of the host stars at the same wavelengths. From the star and planet color information, we then calculate the expected flux ratio of the planets. For expediency, for COND/BT values, we use WFC3 filters that approximate WFIRST bands: F547M (12%) and F763M (11%), because WFC3 colors were pre-calculated for each of the three model grids.
 
 Models are available at https://phoenix.ens-lyon.fr/Grids/
+
+Lacy models are described at https://ui.adsabs.harvard.edu/abs/2019arXiv191110585L/abstract
+
 
 ## WFIRST CGI mission concept predicted detection limits
 

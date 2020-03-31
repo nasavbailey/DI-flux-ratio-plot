@@ -445,8 +445,8 @@ if cfg['old_L2req_spec'] is True:
 if cfg['DI_H'] or cfg['DI_B1_pred'] or cfg['DI_B3_pred']:
     fname = datapath+'DIplanets.txt'
     a_DI = ascii.read(fname)
-    a_DI['547m_contr'] = 10**(a_DI['547m_delta']/-2.5)
-    a_DI['763m_contr'] = 10**(a_DI['763m_delta']/-2.5)
+    a_DI['B1_contr'] = 10**(a_DI['B1_delta']/-2.5)
+    a_DI['B3_contr'] = 10**(a_DI['B3_delta']/-2.5)
     a_DI['H_contr'] = 10**(a_DI['H_delta']/-2.5)
     alpha_di = 1 # Windows machines have trouble with alpha<1 in PDF format
     caption += extract_short_caption(fname)
@@ -457,19 +457,19 @@ if cfg['DI_H'] is True:
         label='directly imaged, 1.6$\mathdefault{\mu} $m observed')
 
 if cfg['DI_B3_pred'] is True:
-    ax1.scatter(a_DI['Rho(as)'],a_DI['763m_contr'],color=c_band3, edgecolor='k', \
+    ax1.scatter(a_DI['Rho(as)'],a_DI['B3_contr'],color=c_band3, edgecolor='k', \
         marker='d', alpha=alpha_di, s=cfg['di_markersize'], zorder=2, \
         label='directly imaged, 750nm predicted')
     if not cfg['DI_B1_pred']:
         for ct, rho in enumerate(a_DI['Rho(as)']):
-            ax1.plot([rho,rho], [a_DI[ct]['763m_contr'], a_DI[ct]['H_contr']], \
+            ax1.plot([rho,rho], [a_DI[ct]['B3_contr'], a_DI[ct]['H_contr']], \
             color='lightgray', linewidth=1, linestyle=':', zorder=1)
 
 if cfg['DI_B1_pred'] is True:
     for ct, rho in enumerate(a_DI['Rho(as)']):
-        ax1.plot([rho,rho], [a_DI[ct]['547m_contr'], a_DI[ct]['H_contr']], \
+        ax1.plot([rho,rho], [a_DI[ct]['B1_contr'], a_DI[ct]['H_contr']], \
             color='lightgray', linewidth=1, linestyle=':', zorder=1)
-    ax1.scatter(a_DI['Rho(as)'],a_DI['547m_contr'],color=c_v, edgecolor='k', \
+    ax1.scatter(a_DI['Rho(as)'],a_DI['B1_contr'],color=c_v, edgecolor='k', \
         marker='o', alpha=alpha_di, s=cfg['di_markersize'], zorder=2, \
         label='directly imaged, 550nm predicted')
 
