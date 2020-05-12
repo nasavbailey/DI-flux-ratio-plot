@@ -1,9 +1,14 @@
 #l/D 	contr_snr5  lambda t_int_hr  fpp SNR
-#Short caption: WFIRST CGI narrow FOV imaging prediction: Modeled 5-sigma post-processed [RDI+fpp=2] contrast curve for Band 1 imaging of a V=5 star with the HLC coronagraph, based on OS9. The model observation use MUFs=1 and no margins and component performance estimates for 21mo into mission. Integration time is  10hr. (source: B. Nemati, March 16, 2020 per. comm.)
-3.0	5.1E-09	575	10	2	5
-3.5	4.8E-09	575	10	2	5
-4.0	3.1E-09	575	10	2	5
-6.0	2.0E-09	575	10	2	5
-7.0	2.0E-09	575	10	2	5
-8.0	1.8E-09	575	10	2	5
-9.0	1.8E-09	575	10	2	5
+#Short caption: WFIRST CGI narrow FOV imaging prediction: Modeled 5-sigma post-processed [RDI&fpp=2] contrast curve for Band 1 imaging of a V=5 star with the HLC coronagraph, based on OS9. The model observation use MUFs=1 for instrument and observatory with no margins, and component performance estimates for 21mo into mission. Integration time is  100hr. (source: B. Nemati spreadsheet, May 8, 2020 version)
+3.0	4.73E-09	575	100	2	5
+3.7	4.66E-09	575	100	2	5
+4.3	2.83E-09	575	100	2	5
+5.0	1.71E-09	575	100	2	5
+5.7	1.70E-09	575	100	2	5
+6.3	1.71E-09	575	100	2	5
+7.0	1.72E-09	575	100	2	5
+7.7	1.73E-09	575	100	2	5
+8.3	1.43E-09	575	100	2	5
+9.0	1.44E-09	575	100	2	5
+
+
