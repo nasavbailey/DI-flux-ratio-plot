@@ -1,16 +1,16 @@
 #pl_hostname , pl_letter , sma_arcsec , Fp/F*_quad , st_optmag ,                st_spstr ,   pl_discmethod
-#Short caption: RV: All planets from NASA exoplanet archive with a semi-major axis of 0.12-1.4 arcsec, mass > 0.25 Mjup, and host star V mag < 7.00. Lambertian flux ratio assumes: radius = 1 Rjup, geometric albedo = 0.5, circular orbit, inclination = 90.0, and angle of 0.0 degrees from the ascending node.
+#Short caption: RV: All planets from NASA exoplanet archive with a semi-major axis of 0.12-1.4 arcsec, mass > 0.25 Mjup, and host star V mag < 7.00. Lambertian flux ratio assumes: radius = 1 Rjup, geometric albedo = 0.5, circular orbit, inclination = 90.0, and angle of 0.0 degrees from the ascending node. Commented lines are planets that would meet criteria, but whose host stars are known binaries and/or too large angular diameter.
 #References:
 #Lambertian phase curve from Traub & Oppenheimer: Direct Imaging of Exoplanets, equation 15, pg 116 of Seager Exoplanets textbook.
   HD_196067 ,         b ,       0.13 ,    1.4e-09 ,      6.03 ,                    G1 V , Radial Velocity
-     nu_Oph ,         c ,       0.14 ,    9.8e-10 ,      3.34 ,                  K1 III , Radial Velocity
-    gam_Cep ,         b ,       0.15 ,    8.6e-09 ,      3.21 ,                   K1 IV , Radial Velocity
+#     nu_Oph ,         c ,       0.14 ,    9.8e-10 ,      3.34 ,                  K1 III , Radial Velocity
+#    gam_Cep ,         b ,       0.15 ,    8.6e-09 ,      3.21 ,                   K1 IV , Radial Velocity
      47_UMa ,         b ,       0.15 ,    8.2e-09 ,      5.05 ,                    G0 V , Radial Velocity
-   HD_62509 ,         b ,       0.16 ,    1.4e-08 ,      1.14 ,                  K0 III , Radial Velocity
+#   HD_62509 ,         b ,       0.16 ,    1.4e-08 ,      1.14 ,                  K0 III , Radial Velocity
      14_Her ,         b ,       0.16 ,    4.2e-09 ,      6.61 ,                    K0 V , Radial Velocity
    HD_39091 ,         b ,       0.17 ,    3.8e-09 ,      5.67 ,                    G0 V , Radial Velocity
     ups_And ,         d ,       0.19 ,    5.8e-09 ,       4.1 ,                    F8 V , Radial Velocity
-psi_1_Dra_B ,         b ,       0.20 ,    1.9e-09 ,     5.699 ,                    G0 V , Radial Velocity
+#psi_1_Dra_B ,         b ,       0.20 ,    1.9e-09 ,     5.699 ,                    G0 V , Radial Velocity
   HD_219077 ,         b ,       0.21 ,    9.4e-10 ,      6.12 ,                    G8 V , Radial Velocity
   HD_154345 ,         b ,       0.23 ,    2.1e-09 ,      6.76 ,                    G8 V , Radial Velocity
   HD_190360 ,         b ,       0.25 ,    2.3e-09 ,      5.73 ,                   G6 IV , Radial Velocity
