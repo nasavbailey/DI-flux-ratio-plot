@@ -1,14 +1,14 @@
-# WFIRST CGI performance in context
+# Roman CGI performance in context
 
 [comment]: # (Edits and additions welcome! If applicable, also update [1] the repository README, [2] the short caption header of the corresponding data files, [3] use doc.yml to update flux_ratio_doc.png)
 
 [comment]: # (This .md file is compatible with the Pandoc PDF generator. Pandoc PDF uses LaTeX, so please do not use characters that are not recognized by LaTeX. Write any symbols as they'd appear in LaTeX. eg: use $\sigma$ ΝΟΤ σ. Unfortunately, Github doesn't include a math interpreter, so you'll just see the verbatim text online.)
 
-The Coronagraph Instrument (CGI) for NASA’s Wide Field Infrared Survey Telescope (WFIRST) will constitute a dramatic step forward for high-contrast imaging, integral field spectroscopy, and polarimetry of exoplanets and circumstellar disks, aiming to improve upon the sensitivity of current direct imaging facilities by two orders of magnitude or more. Furthermore, CGI will serve as a pathfinder for future terrestrial planet-imaging missions by demonstrating wavefront control, coronagraphy, and spectral retrieval in a new contrast regime, and by validating instrument and telescope models at unprecedented levels of precision. In this document, we present a “WFIRST in context” plot and describe the data and assumptions used to generate it.
+The Coronagraph Instrument (CGI) for NASA’s Wide Field Infrared Survey Telescope (Roman) will constitute a dramatic step forward for high-contrast imaging, integral field spectroscopy, and polarimetry of exoplanets and circumstellar disks, aiming to improve upon the sensitivity of current direct imaging facilities by two orders of magnitude or more. Furthermore, CGI will serve as a pathfinder for future terrestrial planet-imaging missions by demonstrating wavefront control, coronagraphy, and spectral retrieval in a new contrast regime, and by validating instrument and telescope models at unprecedented levels of precision. In this document, we present a “Roman in context” plot and describe the data and assumptions used to generate it.
 
 ![](flux_ratio_doc.png)
 
-_Figure 1:_ Predicted WFIRST performance in the context of known planets and existing and planned high-contrast instruments. The y-axis indicates the flux ratio between a planet and its host star (for individual planets) or between the star and the dimmest source detectable at 5$\sigma$ after post-processing (for instrument performance curves). The lower x-axis is projected separation in arcseconds, and the upper x-axis is the corresponding physical separation for the Tau Ceti system. Points and lines are color-coded by wavelength of observation. Solid and dashed lines are 5-sigma point source detection limits versus separation from the host star; these limits are calculated from post-processed data. The predicted performance for the future observatory, JWST, is plotted as a dashed line. Line labeled "WFIRST CGI req" is the Level 1 preformance  requirement. Lines labeled "WFIRST CGI pred." are current best performance predictions. Triangular points are estimated reflected light flux ratios for known gas giant radial velocity-detected (RV). Red squares are 1.6$\mu m$ flux ratios of known self-luminous directly-imaged (DI) planets. Dotted lines connect each DI planet’s measured 1.6$\mu m$ flux ratio to its predicted flux ratio at 750nm (yellow diamonds) or 550nm (blue circles), based on COND or BT-Settl planet evolutionary models. Cyan points represent the reflected light flux ratios of Earth and Jupiter at 10pc as well as super-Earths Tau Ceti e and f.
+_Figure 1:_ Predicted Roman performance in the context of known planets and existing and planned high-contrast instruments. The y-axis indicates the flux ratio between a planet and its host star (for individual planets) or between the star and the dimmest source detectable at 5$\sigma$ after post-processing (for instrument performance curves). The lower x-axis is projected separation in arcseconds, and the upper x-axis is the corresponding physical separation for the Tau Ceti system. Points and lines are color-coded by wavelength of observation. Solid and dashed lines are 5-sigma point source detection limits versus separation from the host star; these limits are calculated from post-processed data. The predicted performance for the future observatory, JWST, is plotted as a dashed line. Line labeled "Roman CGI req" is the Level 1 preformance  requirement. Lines labeled "Roman CGI pred." are current best performance predictions. Triangular points are estimated reflected light flux ratios for known gas giant radial velocity-detected (RV). Red squares are 1.6$\mu m$ flux ratios of known self-luminous directly-imaged (DI) planets. Dotted lines connect each DI planet’s measured 1.6$\mu m$ flux ratio to its predicted flux ratio at 750nm (yellow diamonds) or 550nm (blue circles), based on COND or BT-Settl planet evolutionary models. Cyan points represent the reflected light flux ratios of Earth and Jupiter at 10pc as well as super-Earths Tau Ceti e and f.
 
 ## Flux Ratio
 
@@ -35,7 +35,7 @@ References: Equations 14 & 15 and table 3 of Traub & Oppenheimer (p. 116 of the 
 
 #### Imaging Mission Database model
 
-The Imaging Mission Database (IMD; plandb.sioslab.com) provides calculated flux ratios at quadrature for known RV planets in the WFIRST CGI bandpasses. The IMD draws the mass and orbit properties of known radial velocity exoplanets from the NExScI Exoplanet archive. If the planet radius has not been measured directly, IMD calculates it with a modified version of the Forecaster model to predict planet radius (not to exceed 1 Jupiter radius for cold planets). It uses Batalha2018 models to predict phase curves; the nearest neighbor grid is selected for stellar metallicity and orbit semi-major axis. We assume clouds with $f_{sed} = 3$.  Dark gray triangles signify V < 5 host stars; light grey triangles signify 5 < V < 6 host stars.
+The Imaging Mission Database (IMD; plandb.sioslab.com) provides calculated flux ratios at quadrature for known RV planets in the Roman CGI bandpasses. The IMD draws the mass and orbit properties of known radial velocity exoplanets from the NExScI Exoplanet archive. If the planet radius has not been measured directly, IMD calculates it with a modified version of the Forecaster model to predict planet radius (not to exceed 1 Jupiter radius for cold planets). It uses Batalha2018 models to predict phase curves; the nearest neighbor grid is selected for stellar metallicity and orbit semi-major axis. We assume clouds with $f_{sed} = 3$.  Dark gray triangles signify V < 5 host stars; light grey triangles signify 5 < V < 6 host stars.
 
 See https://plandb.sioslab.com/about.php for acknowledgement and citation information.  As of March 2020, the following are required:
 
@@ -58,18 +58,18 @@ The authors of any paper submitted for peer reviewed journal publication must ex
 
 ### Directly imaged self-luminous planets
 
-Selected known self-luminous Directly Imaged (DI) exoplanets with measured H-band flux ratios are plotted. Where available, predictions from B. Lacy were used. Otherwise, for those planets with effective temperatures <=1200K, we use AMES-COND models; for the remainder, we use BT-Settl. For all COND/BT values, we assume log(g)=4.0, and we use NextGen stellar models to predict the colors of the host stars at the same wavelengths. From the star and planet color information, we then calculate the expected flux ratio of the planets. For expediency, for COND/BT values, we use WFC3 filters that approximate WFIRST bands: F547M (12%) and F763M (11%), because WFC3 colors were pre-calculated for each of the three model grids.
+Selected known self-luminous Directly Imaged (DI) exoplanets with measured H-band flux ratios are plotted. Where available, predictions from B. Lacy were used. Otherwise, for those planets with effective temperatures <=1200K, we use AMES-COND models; for the remainder, we use BT-Settl. For all COND/BT values, we assume log(g)=4.0, and we use NextGen stellar models to predict the colors of the host stars at the same wavelengths. From the star and planet color information, we then calculate the expected flux ratio of the planets. For expediency, for COND/BT values, we use WFC3 filters that approximate Roman bands: F547M (12%) and F763M (11%), because WFC3 colors were pre-calculated for each of the three model grids.
 
 Models are available at https://phoenix.ens-lyon.fr/Grids/
 
 Lacy models are described at https://ui.adsabs.harvard.edu/abs/2019arXiv191110585L/abstract
 
 
-## WFIRST CGI mission concept predicted detection limits
+## Roman CGI mission concept predicted detection limits
 
 ### CGI requirement, labeled “CGI req.” in the figure
 
-* **Description**: Level 1 requirement (Threshold Technology Requirement 5). WFIRST shall be able to measure (using CGI), with SNR >= 5, the brightness of an astrophysical point source located between 6 and 9 lambda/D from an adjacent star with a $V_{AB}$ magnitude <= 5, with a flux ratio >= $1 10^{-7}$; the bandpass shall have a central wavelength <= 600 nm and a bandwidth >= 10%.
+* **Description**: Level 1 requirement (Threshold Technology Requirement 5). Roman shall be able to measure (using CGI), with SNR >= 5, the brightness of an astrophysical point source located between 6 and 9 lambda/D from an adjacent star with a $V_{AB}$ magnitude <= 5, with a flux ratio >= $1 10^{-7}$; the bandpass shall have a central wavelength <= 600 nm and a bandwidth >= 10%.
 * **Bandpass:** 575nm / 10% BW, Hybrid Lyot coronagraph
 * **Integration time:** Not specified
 * **Post-processing:** The requirements are written for post-processed data; no method is specified.
@@ -87,10 +87,10 @@ Lacy models are described at https://ui.adsabs.harvard.edu/abs/2019arXiv19111058
     * imaging : 100hr
     * spectroscopy : 400hr.
 * **Post-processing:** Reference PSF subtraction, with an assumed additional factor of 2 improvement over the basic-RDI residual speckle component, from the application of more sophisticated post-processing techniques.
-* **Reference:** B. Kern & B. Nemati spreadsheet, personal communication. 
-    
-    
-### Old CGI Tech Demo requirements. 
+* **Reference:** B. Kern & B. Nemati spreadsheet, personal communication.
+
+
+### Old CGI Tech Demo requirements.
 
 Labeled "old L2 req." in figure if enabled.
 

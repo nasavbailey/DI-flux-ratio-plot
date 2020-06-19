@@ -5,6 +5,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 from matplotlib import rcParams
+import matplotlib.patheffects as PathEffects
 from astropy.io import ascii
 import reflected_light_planets as rlp
 from astropy import units as u
@@ -46,7 +47,7 @@ ylim = np.array([float(cfg['y0']), float(cfg['y1'])])
 
 ccfs = cfg['label_font_size']
 lw1 = cfg['other_linewidth']
-lw2 = cfg['wfirst_linewidth']
+lw2 = cfg['roman_linewidth']
 
 
 if cfg['color_by_lambda'].lower() == 'full':
@@ -234,7 +235,7 @@ if cfg['STIS'] is True:
     a_STIS = ascii.read(fname)
     ax1.plot(a_STIS['Rho(as)'],a_STIS['KLIP_Contr'],color=c_bbvis,\
         linewidth=lw1,label='')
-    ax1.text(0.2,5*10**-5,'HST STIS',color=c_bbvis,horizontalalignment='left',rotation=-39,fontsize=ccfs)
+    ax1.text(0.2,5*10**-5.2,'HST STIS',color=c_bbvis,horizontalalignment='left',va='center',rotation=-39,fontsize=ccfs)
     caption += extract_short_caption(fname)
 
 
@@ -308,86 +309,89 @@ if cfg['GPI'] is True or cfg['generic ground-based'] is True:
         txt = 'Gemini GPI'
     if cfg['generic ground-based'] is True:
         txt = 'Ground-based'
-    ax1.text(0.15,1.1*10**-5,txt,color=c_h,horizontalalignment='left',rotation=-26,fontsize=ccfs)
+    ax1.text(0.15,1.1*10**-4.8,txt,color=c_h,horizontalalignment='left',va='top',rotation=-26,fontsize=ccfs)
     caption += extract_short_caption(fname)
 
 
 #########################################################################
-### WFIRST
+### Roman
 
 
 ## predictions
 
 if cfg['pred_img'] is True:
-    fname = datapath+'WFIRST_pred_imaging.txt'
+    fname = datapath+'Roman_pred_imaging.txt'
     dat = ascii.read(fname)
     dat['lambda'].unit = u.nm
     dat['Rho(as)'] = dat['l/D'] * (dat['lambda'] / d_tel).decompose()*206265
     ax1.plot(dat['Rho(as)'], dat['contr_snr5'], color=c_v, linewidth=lw2, label='')
-    ax1.text(dat['Rho(as)'][0], 1.5*dat['contr_snr5'][0], 'WFIRST  \nCGI pred.  ', color='darkblue',\
+    ax1.text(dat['Rho(as)'][0], 1.5*dat['contr_snr5'][0], 'Roman  \nCGI pred.  ', color='darkblue',\
         horizontalalignment='right', verticalalignment='bottom', weight='bold', fontsize=ccfs+1)
     if cfg['exp_t'] is True:
-        ax1.text(dat['Rho(as)'][0], 0.8*dat['contr_snr5'][0], \
+        txt = ax1.text(dat['Rho(as)'][0], 0.8*dat['contr_snr5'][0], \
         'img, %ghr'%(dat['t_int_hr'][0]), color=c_v, weight='bold',\
         horizontalalignment='right', verticalalignment='top', fontsize=ccfs+1)
     else:
-        ax1.text(dat['Rho(as)'][0], 0.8*dat['contr_snr5'][0], 'img', color=c_v, weight='bold',\
+        txt = ax1.text(dat['Rho(as)'][0], 0.8*dat['contr_snr5'][0], 'img', color=c_v, weight='bold',\
             horizontalalignment='right', verticalalignment='top', fontsize=ccfs+1)
+    txt.set_path_effects([PathEffects.withStroke(linewidth=1, foreground='k')])
     caption += extract_short_caption(fname)
 
 
 if cfg['pred_spec'] is True:
-    fname = datapath+'WFIRST_pred_spec.txt'
+    fname = datapath+'Roman_pred_spec.txt'
     dat = ascii.read(fname)
     dat['lambda'].unit = u.nm
     dat['Rho(as)'] = dat['l/D'] * (dat['lambda'] / d_tel).decompose()*206265
     dat['contr_snr5'] = dat['contr_snr10'] / 2.
     ax1.plot(dat['Rho(as)'], dat['contr_snr5'], color=c_band3, linewidth=lw2, label='')
     if cfg['pred_img'] is False:
-        ax1.text(dat['Rho(as)'][-1], dat['contr_snr5'][-1], ' WFIRST\n CGI pred.', color='darkblue',\
+        ax1.text(dat['Rho(as)'][-1], dat['contr_snr5'][-1], ' Roman\n CGI pred.', color='darkblue',\
             horizontalalignment='left', verticalalignment='center', weight='bold', fontsize=ccfs+1)
     if cfg['exp_t'] is True:
-        ax1.text(dat['Rho(as)'][0], 1.1*dat['contr_snr5'][0], \
+        txt = ax1.text(dat['Rho(as)'][0], 0.5*dat['contr_snr5'][0], \
         'spec, %ghr'%(dat['t_int_hr'][0]), color=c_band3, weight='bold',\
-        horizontalalignment='left', verticalalignment='bottom', fontsize=ccfs+1, zorder=6)
+        horizontalalignment='left', verticalalignment='top', fontsize=ccfs+1, zorder=6)
     else:
-        ax1.text(dat['Rho(as)'][0], 1.1*dat['contr_snr5'][0], \
+        txt = ax1.text(dat['Rho(as)'][0], 0.5*dat['contr_snr5'][0], \
         'spec', color=c_band3, weight='bold',\
-        horizontalalignment='left', verticalalignment='bottom', fontsize=ccfs+1, zorder=6)
+        horizontalalignment='left', verticalalignment='top', fontsize=ccfs+1, zorder=6)
+    txt.set_path_effects([PathEffects.withStroke(linewidth=1, foreground='k')])
     caption += extract_short_caption(fname)
 
 
 if cfg['pred_wide_img'] is True:
-    fname = datapath+'WFIRST_pred_wideFOVimaging.txt'
+    fname = datapath+'Roman_pred_wideFOVimaging.txt'
     dat = ascii.read(fname)
     dat['lambda'].unit = u.nm
     dat['Rho(as)'] = dat['l/D'] * (dat['lambda'] / d_tel).decompose()*206265
     ax1.plot(dat['Rho(as)'], dat['contr_snr5'], color=c_band4, linewidth=lw2, label='')
     if (cfg['pred_img'] is False) and (cfg['pred_spec'] is False):
-        ax1.text(dat['Rho(as)'][-1], dat['contr_snr5'][-1], ' WFIRST\n CGI pred.', color='darkblue',\
+        ax1.text(dat['Rho(as)'][-1], dat['contr_snr5'][-1], ' Roman\n CGI pred.', color='darkblue',\
             horizontalalignment='left', verticalalignment='bottom', weight='bold', fontsize=ccfs+1)
     if cfg['exp_t'] is True:
-        ax1.text(dat['Rho(as)'][-1], 0.8*dat['contr_snr5'][-3], \
+        txt = ax1.text(dat['Rho(as)'][-1], 0.8*dat['contr_snr5'][-3], \
         'img, %ghr'%(dat['t_int_hr'][0]), color=c_band4, weight='bold',\
         horizontalalignment='center', verticalalignment='top', fontsize=ccfs+1)
     else:
-        ax1.text(dat['Rho(as)'][-1], 0.8*dat['contr_snr5'][-3], \
+        txt = ax1.text(dat['Rho(as)'][-1], 0.8*dat['contr_snr5'][-3], \
         'img', color=c_band4, weight='bold',\
         horizontalalignment='right', verticalalignment='top', fontsize=ccfs+1)
+    txt.set_path_effects([PathEffects.withStroke(linewidth=1, foreground='k')])
     caption += extract_short_caption(fname)
 
 
 ## L1 requirement TTR 5
 
 if cfg['req'] is True:
-    fname = datapath+'WFIRST_req_TTR5.txt'
+    fname = datapath+'Roman_req_TTR5.txt'
     dat = ascii.read(fname)
     dat['lambda'].unit = u.nm
     dat['Rho(as)'] = dat['l/D'] * (dat['lambda'] / d_tel).decompose()*206265
     ax1.plot(dat['Rho(as)'], dat['contr'], color=c_v, linewidth=lw2, label='')
     ax1.text(dat['Rho(as)'][0], 1.1*dat['contr'][0], 'img', color=c_v, weight='bold',\
         horizontalalignment='left', verticalalignment='bottom', fontsize=ccfs+1)
-    ax1.text(dat['Rho(as)'][0], dat['contr'][0], 'WFIRST CGI req.  ', color='darkblue',\
+    ax1.text(dat['Rho(as)'][0], dat['contr'][0], 'Roman CGI req.  ', color='darkblue',\
         horizontalalignment='right', verticalalignment='bottom', weight='bold', fontsize=ccfs+1)
     caption += extract_short_caption(fname)
 
@@ -395,7 +399,7 @@ if cfg['req'] is True:
 ## Old BTRs
 
 if cfg['old_L2req_img'] is True:
-    fname = datapath+'old_reqs/WFIRST_req_imaging.txt'
+    fname = datapath+'old_reqs/Roman_req_imaging.txt'
     dat = ascii.read(fname)
     ax1.plot(dat['Rho(as)'], dat['Band1_contr_snr5'], color=c_v, linewidth=lw2, label='')
     ax1.text(dat['Rho(as)'][0], 1.1*dat['Band1_contr_snr5'][0], 'img', color=c_v, weight='bold',\
@@ -405,7 +409,7 @@ if cfg['old_L2req_img'] is True:
     caption += extract_short_caption(fname)
 
 if cfg['old_L2req_wide_img'] is True:
-    fname = datapath+'old_reqs/WFIRST_req_wideFOVimaging.txt'
+    fname = datapath+'old_reqs/Roman_req_wideFOVimaging.txt'
     dat = ascii.read(fname)
     ax1.plot(dat['Rho(as)'], dat['Band4_pt_contr_snr5'], color=c_band4, linewidth=lw2, label='')
     ax1.text(dat['Rho(as)'][-3], 1.1*dat['Band4_pt_contr_snr5'][-3], 'img ', color=c_band4, weight='bold',\
@@ -417,7 +421,7 @@ if cfg['old_L2req_wide_img'] is True:
 
 if cfg['old_L2req_spec'] is True:
     import matplotlib.patheffects as path_effects
-    fname = datapath+'/old_reqs/WFIRST_req_spec.txt'
+    fname = datapath+'/old_reqs/Roman_req_spec.txt'
     dat = ascii.read(fname)
     if cfg['old_L2req_wide_img']:  # draw a shadow under the line to make it easier to see if overlapping other req line
         p = [path_effects.SimpleLineShadow(offset=(1, -1)), path_effects.Normal()]
