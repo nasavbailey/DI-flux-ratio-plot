@@ -1,9 +1,12 @@
 #l/D 	contr_snr10  lambda t_int_hr  fpp	SNR
-#Short caption: Roman CGI spectroscopy prediction: Modeled 10-sigma post-processed [RDI+fpp=2] contrast curve for Band 3 spectroscopy with the SPC bowtie, based on OS9. The model observation use MUFs=1 and no margins and component performance estimates for 21mo into mission. Integration time is  400hr. V=5 star. (source: B. Nemati, March 16, 2020 per. comm.)
-3.0	4.5E-09	730	400	2	10
-3.5	3.8E-09	730	400	2	10
-4.0	2.8E-09	730	400	2	10
-6.0	2.8E-09	730	400	2	10
-7.0	2.8E-09	730	400	2	10
-8.0	3.4E-09	730	400	2	10
-9.0	5.6E-09	730	400	2	10
+#Short caption: Roman CGI spectroscopy prediction: Modeled 5-sigma post-processed [RDI+fpp=2] contrast curve for Band 3 spectroscopy with the SPC bowtie, based on OS9. The model observation use MUFs=1 and no margins and component performance estimates for 21mo into mission. Integration time is  400hr. V=5 star. (source: B. Nemati spreadsheet, July 16, 2020 version)
+3.0	2.9E-09	730	400	2	5
+3.7	2.3E-09	730	400	2	5
+4.3	2.0E-09	730	400	2	5
+5.0	1.9E-09	730	400	2	5
+5.7	1.9E-09	730	400	2	5
+6.3	1.9E-09	730	400	2	5
+7.0	1.9E-09	730	400	2	5
+7.7	1.9E-09	730	400	2	5
+8.3	3.0E-09	730	400	2	5
+9.0	4.2E-09	730	400	2	5

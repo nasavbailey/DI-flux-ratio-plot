@@ -78,7 +78,7 @@ Lacy models are described at https://ui.adsabs.harvard.edu/abs/2019arXiv19111058
 
 
 ### Performance predictions :
-* **Description**: Model-predicted 5$\sigma$ final detection limits for a V=5 star in the three official observing modes. Model uncertainty factors (MUFs) for observatory and CGI set to unity. No performance margins. Narrow FOV imaging and spectroscopy predictions incorporate results from OS9 (spring 2020). Wide FOV imaging uses OS6 results (spring 2019), because OS9 results are not yet available for this mode.
+* **Description**: Model-predicted 5$\sigma$ final detection limits for a V=5 star in the three official observing modes. Model uncertainty factors (MUFs) for observatory and CGI set to unity. No performance margins. Narrow FOV imaging and spectroscopy predictions incorporate results from OS9 (July 2020). Wide FOV imaging uses OS6 results (spring 2019), because OS9 results are not yet available for this mode.
 * **Bandpass:**
     * narrow FOV imaging : 575nm / 10% BW, Hybrid Lyot coronagraph.
     * spectroscopy : R=50 spectroscopy, 730nm / 15% BW, Shaped Pupil bowtie coronagraph.

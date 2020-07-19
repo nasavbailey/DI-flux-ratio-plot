@@ -52,7 +52,7 @@ plot_font_size:  13  # font size for axis labels / title, etc.
 legend_font_size: 7.5  # font size for legend text
 label_font_size:  9  # font size for detection limit curve labels
 
-wfirst_linewidth: 4 # line width for WFIRST BTRs and detection limit curves
+roman_linewidth: 4 # line width for WFIRST BTRs and detection limit curves
 other_linewidth:  1 # line width for other instruments' detection limit curves
 
 rv_markersize:      50 # reflected light RV marker size
