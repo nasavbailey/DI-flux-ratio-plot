@@ -323,6 +323,7 @@ if cfg['pred_img'] is True:
     fname = datapath+'Roman_pred_imaging.txt'
     dat = ascii.read(fname)
     dat['lambda'].unit = u.nm
+    dat['contr_snr5'] = dat['contr']*5/dat['SNR']
     dat['Rho(as)'] = dat['l/D'] * (dat['lambda'] / d_tel).decompose()*206265
     ax1.plot(dat['Rho(as)'], dat['contr_snr5'], color=c_v, linewidth=lw2, label='')
     ax1.text(dat['Rho(as)'][0], 1.5*dat['contr_snr5'][0], 'Roman  \nCGI pred.  ', color='darkblue',\
@@ -343,15 +344,15 @@ if cfg['pred_spec'] is True:
     dat = ascii.read(fname)
     dat['lambda'].unit = u.nm
     dat['Rho(as)'] = dat['l/D'] * (dat['lambda'] / d_tel).decompose()*206265
-    dat['contr_snr5'] = dat['contr_snr10'] / 2.
+    dat['contr_snr5'] = dat['contr']*5/dat['SNR']
     ax1.plot(dat['Rho(as)'], dat['contr_snr5'], color=c_band3, linewidth=lw2, label='')
     if cfg['pred_img'] is False:
         ax1.text(dat['Rho(as)'][-1], dat['contr_snr5'][-1], ' Roman\n CGI pred.', color='darkblue',\
             horizontalalignment='left', verticalalignment='center', weight='bold', fontsize=ccfs+1)
     if cfg['exp_t'] is True:
-        txt = ax1.text(dat['Rho(as)'][0], 0.5*dat['contr_snr5'][0], \
+        txt = ax1.text(dat['Rho(as)'][-1], 1.5*dat['contr_snr5'][0], \
         'spec, %ghr'%(dat['t_int_hr'][0]), color=c_band3, weight='bold',\
-        horizontalalignment='left', verticalalignment='top', fontsize=ccfs+1, zorder=6)
+        horizontalalignment='right', verticalalignment='bottom', fontsize=ccfs+1, zorder=6)
     else:
         txt = ax1.text(dat['Rho(as)'][0], 0.5*dat['contr_snr5'][0], \
         'spec', color=c_band3, weight='bold',\
@@ -364,6 +365,7 @@ if cfg['pred_wide_img'] is True:
     fname = datapath+'Roman_pred_wideFOVimaging.txt'
     dat = ascii.read(fname)
     dat['lambda'].unit = u.nm
+    dat['contr_snr5'] = dat['contr']*5/dat['SNR']
     dat['Rho(as)'] = dat['l/D'] * (dat['lambda'] / d_tel).decompose()*206265
     ax1.plot(dat['Rho(as)'], dat['contr_snr5'], color=c_band4, linewidth=lw2, label='')
     if (cfg['pred_img'] is False) and (cfg['pred_spec'] is False):

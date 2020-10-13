@@ -1,12 +1,22 @@
-#l/D 	contr_snr5  lambda t_int_hr  fpp SNR
-#Short caption: Roman CGI narrow FOV imaging prediction: Modeled 5-sigma post-processed [RDI&fpp=2] contrast curve for Band 1 imaging of a V=5 star with the HLC coronagraph, based on OS9. The model observation use MUFs=1 for instrument and observatory with no margins, and component performance estimates for 21mo into mission. Integration time is  100hr. (source: B. Nemati spreadsheet, July 16, 2020 version)
-3.0	4.9E-09	575	100	2	5
-3.7	4.9E-09	575	100	2	5
-4.3	2.9E-09	575	100	2	5
-5.0	1.5E-09	575	100	2	5
-5.7	1.5E-09	575	100	2	5
-6.3	1.5E-09	575	100	2	5
-7.0	1.5E-09	575	100	2	5
-7.7	1.5E-09	575	100	2	5
-8.3	1.3E-09	575	100	2	5
-9.0	1.3E-09	575	100	2	5
+#l/D 	contr    	lambda t_int_hr  fpp 	SNR
+#Short caption: Roman CGI narrow FOV imaging prediction: Modeled 5-sigma post-processed [RDI&fpp=2] contrast curve for Band 1 imaging of a V=5 star with the HLC coronagraph, based on OS9. The model observation use MUFs=1 for instrument and observatory with no margins, and component performance estimates for 21mo into mission. Integration time is  100hr. Updates include: 9/30 CS tables, bench warping and DM temperature stability, coating reflectivity. 100hr approaches the 'infinite time' limit (source: B. Nemati spreadsheet, Oct 1, 2020 version)
+3.10	4.90E-09	575	100	2	5
+3.72	4.96E-09	575	100	2	5
+4.34	2.94E-09	575	100	2	5
+4.97	2.92E-09	575	100	2	5
+5.59	1.61E-09	575	100	2	5
+6.21	1.63E-09	575	100	2	5
+6.83	1.63E-09	575	100	2	5
+7.46	1.57E-09	575	100	2	5
+8.08	1.34E-09	575	100	2	5
+8.70	1.34E-09	575	100	2	5
+#3.10	5.88E-09	575	10	2	5
+#3.72	5.57E-09	575	10	2	5
+#4.34	3.59E-09	575	10	2	5
+#4.97	3.52E-09	575	10	2	5
+#5.59	2.29E-09	575	10	2	5
+#6.21	2.27E-09	575	10	2	5
+#6.83	2.25E-09	575	10	2	5
+#7.46	2.20E-09	575	10	2	5
+#8.08	2.02E-09	575	10	2	5
+#8.70	2.02E-09	575	10	2	5
