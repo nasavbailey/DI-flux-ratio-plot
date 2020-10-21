@@ -207,7 +207,7 @@ if cfg['NIRCAM'] is True:
             verticalalignment='bottom', horizontalalignment='right')
         ax1.plot([xy[0]*0.95,xy[0]],[xy[1],1.1E-8],'k', linewidth=0.5)
     else:
-        ax1.text(2,1E-7,'JWST NIRCam',color=c_k,\
+        ax1.text(2,1E-8,'JWST NIRCam',color=c_k, verticalalignment='bottom',
             horizontalalignment='left',rotation=-30,fontsize=ccfs)
 
     caption += extract_short_caption(fname)
@@ -246,7 +246,8 @@ if cfg['ACS'] is True:
     fname = datapath+'HST_ACS.txt'
     a_ACS = ascii.read(fname)
     ax1.plot(a_ACS['Rho(as)'],a_ACS['F606W_contr'],color=c_v,linewidth=lw1,label='')
-    ax1.text(4,6*10**-9,'HST ACS',color=c_v,horizontalalignment='right',rotation=-35,fontsize=ccfs)
+    ax1.text(4,8*10**-9,'HST ACS',color=c_v,horizontalalignment='right',\
+        verticalalignment='top', rotation=-35,fontsize=ccfs)
     caption += extract_short_caption(fname)
 
 
