@@ -337,11 +337,11 @@ if cfg['pred_img_short'] is True:
     ax1.text(dat['Rho(as)'][0], 2.5*dat['contr_snr5'][0], 'Roman  \nCGI pred.  ', color='darkblue',\
         horizontalalignment='right', verticalalignment='bottom', weight='bold', fontsize=ccfs+1)
     if cfg['exp_t'] is True:
-        txt = ax1.text(0.95*dat['Rho(as)'][0], 1.6*dat['contr_snr5'][0], \
+        txt = ax1.text(0.99*dat['Rho(as)'][0], 1.6*dat['contr_snr5'][0], \
         'img, %g hr'%(dat['t_int_hr'][0]), color=c_v, weight='bold',\
         horizontalalignment='right', verticalalignment='top', fontsize=ccfs+1)
     else:
-        txt = ax1.text(0.95*dat['Rho(as)'][0], 1.8*dat['contr_snr5'][0], 'img', color=c_v, weight='bold',\
+        txt = ax1.text(0.99*dat['Rho(as)'][0], 1.8*dat['contr_snr5'][0], 'img', color=c_v, weight='bold',\
             horizontalalignment='right', verticalalignment='top', fontsize=ccfs+1)
     txt.set_path_effects([PathEffects.withStroke(linewidth=1, foreground='k')])
     caption += extract_short_caption(fname)
@@ -358,16 +358,16 @@ if cfg['pred_img_medium'] is True:
         horizontalalignment='right', verticalalignment='bottom', weight='bold', fontsize=ccfs+1)
     if cfg['exp_t'] is True:
         if cfg['pred_img_short'] is False:
-            txt = ax1.text(0.95*dat['Rho(as)'][0], 1.5*dat['contr_snr5'][0], \
+            txt = ax1.text(0.99*dat['Rho(as)'][0], 1.5*dat['contr_snr5'][0], \
             'img, %g hr'%(dat['t_int_hr'][0]), color=c_v, weight='bold',\
             horizontalalignment='right', verticalalignment='top', fontsize=ccfs+1)
         else:
-            txt = ax1.text(0.95*dat['Rho(as)'][0], 0.9*dat['contr_snr5'][0], \
+            txt = ax1.text(0.99*dat['Rho(as)'][0], 0.9*dat['contr_snr5'][0], \
             '%g hr'%(dat['t_int_hr'][0]), color=c_v, weight='bold',\
             horizontalalignment='right', verticalalignment='top', fontsize=ccfs+1)
     else:
         if cfg['pred_img_short'] is False:
-            txt = ax1.text(0.95*dat['Rho(as)'][0], 1.8*dat['contr_snr5'][0], 'img', color=c_v, weight='bold',\
+            txt = ax1.text(0.99*dat['Rho(as)'][0], 1.8*dat['contr_snr5'][0], 'img', color=c_v, weight='bold',\
             horizontalalignment='right', verticalalignment='top', fontsize=ccfs+1)
     txt.set_path_effects([PathEffects.withStroke(linewidth=1, foreground='k')])
     caption += extract_short_caption(fname)
@@ -379,21 +379,21 @@ if cfg['pred_img_long'] is True:
     dat['contr_snr5'] = dat['contr']*5/dat['SNR']
     dat['Rho(as)'] = dat['l/D'] * (dat['lambda'] / d_tel).decompose()*206265
     ax1.plot(dat['Rho(as)'], dat['contr_snr5'], color=c_v, linewidth=lw2, linestyle=lsl, label='')
-    if cfg['pred_img_short'] is False and cfg['pred_img_medium'] is False:
+    if (cfg['pred_img_short'] is False) and (cfg['pred_img_medium'] is False):
         ax1.text(dat['Rho(as)'][0], 2.5*dat['contr_snr5'][0], 'Roman  \nCGI pred.  ', color='darkblue',\
         horizontalalignment='right', verticalalignment='bottom', weight='bold', fontsize=ccfs+1)
     if cfg['exp_t'] is True:
         if (cfg['pred_img_short'] is False) and (cfg['pred_img_medium'] is False):
-            txt = ax1.text(0.95*dat['Rho(as)'][0], 1.5*dat['contr_snr5'][0], \
+            txt = ax1.text(0.99*dat['Rho(as)'][0], 1.5*dat['contr_snr5'][0], \
             'img, $\infty$ hr', color=c_v, weight='bold',\
             horizontalalignment='right', verticalalignment='top', fontsize=ccfs+1)
         else:
-            txt = ax1.text(0.95*dat['Rho(as)'][0], 0.6*dat['contr_snr5'][0], \
+            txt = ax1.text(0.99*dat['Rho(as)'][0], 0.6*dat['contr_snr5'][0], \
             '$\infty$ hr', color=c_v, weight='bold',\
             horizontalalignment='right', verticalalignment='top', fontsize=ccfs+1)
     else:
         if (cfg['pred_img_short'] is False) and (cfg['pred_img_medium'] is False):
-            txt = ax1.text(0.95*dat['Rho(as)'][0], 1.8*dat['contr_snr5'][0], 'img', color=c_v, weight='bold',\
+            txt = ax1.text(0.99*dat['Rho(as)'][0], 1.8*dat['contr_snr5'][0], 'img', color=c_v, weight='bold',\
             horizontalalignment='right', verticalalignment='top', fontsize=ccfs+1)
     txt.set_path_effects([PathEffects.withStroke(linewidth=1, foreground='k')])
     caption += extract_short_caption(fname)
@@ -413,7 +413,7 @@ if cfg['pred_spec_short'] is True:
         'spec, %g hr'%(dat['t_int_hr'][0]), color=c_band3, weight='bold',\
         horizontalalignment='right', verticalalignment='bottom', fontsize=ccfs+1, zorder=6)
     else:
-        txt = ax1.text(dat['Rho(as)'][0], 0.2*dat['contr_snr5'][0], \
+        txt = ax1.text(0.54*dat['Rho(as)'][-1], 1.2*dat['contr_snr5'][0], \
         'spec', color=c_band3, weight='bold',\
         horizontalalignment='left', verticalalignment='top', fontsize=ccfs+1, zorder=6)
     txt.set_path_effects([PathEffects.withStroke(linewidth=1, foreground='k')])
@@ -431,7 +431,7 @@ if cfg['pred_spec_medium'] is True:
             horizontalalignment='left', verticalalignment='center', weight='bold', fontsize=ccfs+1)
     if cfg['exp_t'] is True:
         if cfg['pred_spec_short'] is False:
-            txt = ax1.text(dat['Rho(as)'][0], 2.5*dat['contr_snr5'][0], \
+            txt = ax1.text(0.85*dat['Rho(as)'][-1], 1.0*dat['contr_snr5'][0], \
             'spec, %g hr'%(dat['t_int_hr'][0]), color=c_band3, weight='bold',\
             horizontalalignment='right', verticalalignment='bottom', fontsize=ccfs+1, zorder=6)
         else:
@@ -440,7 +440,7 @@ if cfg['pred_spec_medium'] is True:
             horizontalalignment='right', verticalalignment='bottom', fontsize=ccfs+1, zorder=6)
     else:
         if cfg['pred_spec_short'] is False:
-            txt = ax1.text(dat['Rho(as)'][0], 0.4*dat['contr_snr5'][0], \
+            txt = ax1.text(0.54*dat['Rho(as)'][-1], 1.4*dat['contr_snr5'][0], \
             'spec', color=c_band3, weight='bold',\
             horizontalalignment='left', verticalalignment='top', fontsize=ccfs+1, zorder=6)
     txt.set_path_effects([PathEffects.withStroke(linewidth=1, foreground='k')])
@@ -459,7 +459,7 @@ if cfg['pred_spec_long'] is True:
     if cfg['exp_t'] is True:
         if ( cfg['pred_spec_short'] is False) and (cfg[ 'pred_spec_medium'] is False):
             txt = ax1.text(dat['Rho(as)'][-1], 1.5*dat['contr_snr5'][0], \
-            'img, $\infty$ hr', color=c_band3, weight='bold',\
+            'spec, $\infty$ hr', color=c_band3, weight='bold',\
             horizontalalignment='right', verticalalignment='bottom', fontsize=ccfs+1, zorder=6)
         else:
             txt = ax1.text(0.65*dat['Rho(as)'][-1], 0.4*dat['contr_snr5'][0], \
@@ -467,7 +467,7 @@ if cfg['pred_spec_long'] is True:
             horizontalalignment='right', verticalalignment='bottom', fontsize=ccfs+1, zorder=6)
     else:
         if (cfg['pred_spec_short'] is False) and (cfg['pred_spec_medium'] is False):
-            txt = ax1.text(dat['Rho(as)'][0], 0.8*dat['contr_snr5'][0], \
+            txt = ax1.text(0.54*dat['Rho(as)'][-1], 1.8*dat['contr_snr5'][0], \
             'spec', color=c_band3, weight='bold',\
             horizontalalignment='left', verticalalignment='top', fontsize=ccfs+1, zorder=6)
     txt.set_path_effects([PathEffects.withStroke(linewidth=1, foreground='k')])
@@ -533,7 +533,7 @@ if cfg['pred_wide_img_long'] is True:
         ax1.text(3.4*dat['Rho(as)'][0], 1*dat['contr_snr5'][0], ' Roman\n CGI pred.', color='darkblue',\
             horizontalalignment='left', verticalalignment='bottom', weight='bold', fontsize=ccfs+1)
     if cfg['exp_t'] is True:
-        if cfg['pred_wide_img_short'] and cfg['pred_wide_img_medium'] is False:
+        if (cfg['pred_wide_img_short'] is False) and (cfg['pred_wide_img_medium'] is False):
             txt = ax1.text(1.2*dat['Rho(as)'][-1], 1.9*dat['contr_snr5'][-1], \
             'img, $\infty$ hr', color=c_band4, weight='bold',\
             horizontalalignment='center', verticalalignment='top', fontsize=ccfs+1)
@@ -543,7 +543,7 @@ if cfg['pred_wide_img_long'] is True:
             horizontalalignment='center', verticalalignment='top', fontsize=ccfs+1)
     else:
         if (cfg['pred_wide_img_short'] is False) and (cfg['pred_wide_img_medium'] is False):
-            txt = ax1.text(1.4*dat['Rho(as)'][-1], 0.8*dat['contr_snr5'][-3], \
+            txt = ax1.text(1.0*dat['Rho(as)'][-1], 0.8*dat['contr_snr5'][-3], \
             'img', color=c_band4, weight='bold',\
             horizontalalignment='right', verticalalignment='top', fontsize=ccfs+1)
     txt.set_path_effects([PathEffects.withStroke(linewidth=1, foreground='k')])
