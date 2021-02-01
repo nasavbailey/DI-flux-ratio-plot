@@ -84,8 +84,8 @@ Lacy models are described at https://ui.adsabs.harvard.edu/abs/2019arXiv19111058
     * spectroscopy : R=50 spectroscopy, 730nm / 15% BW, Shaped Pupil bowtie coronagraph.
     * wide FOV imaging : 825nm / 10% BW, Shaped Pupil wide field of view coronagraph.
 * **Integration time:**
-    * imaging : 25, 100, 10,000hr ('infinite' time)
-    * spectroscopy : 100, 400, 10,000hr
+    * imaging : 25, 100, 10000hr ('infinite' time)
+    * spectroscopy : 100, 400, 10000hr
 * **Post-processing:** Reference PSF subtraction, with an assumed additional factor of 2 improvement over the basic-RDI residual speckle component, from the application of more sophisticated post-processing techniques.
 * **Reference:** B. Kern & B. Nemati spreadsheet, personal communication.
 
