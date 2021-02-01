@@ -23,7 +23,7 @@ Tau_Ceti_axis: True # Tau Ceti e top y axis & label
 Prox_Cen:   False # Proxima Centauri b
 
 # CGI performance requirement and predictions (linestyle below)
-req:         False # CGI L1 requirement  
+req:         True # CGI L1 requirement  
 pred_img_short:   True # prediction for imaging with short exposure times
 pred_img_medium:  True # prediction for imaging with intermediate exposure times
 pred_img_long:   True # prediction for imaging with long exposure times
@@ -58,7 +58,7 @@ plot_font_size:  13  # font size for axis labels / title, etc.
 legend_font_size: 7.5  # font size for legend text
 label_font_size:  9  # font size for detection limit curve labels
 
-roman_linewidth: 4 # line width for WFIRST BTRs and detection limit curves
+roman_linewidth: 2.5 # line width for WFIRST BTRs and detection limit curves
 other_linewidth:  1 # line width for other instruments' detection limit curves
 
 roman_linestyle_short: '-.' # line style for Roman detection curves with short integration times
