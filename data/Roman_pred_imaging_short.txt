@@ -1,0 +1,12 @@
+#l/D 	contr    	lambda t_int_hr  fpp 	SNR
+#Short caption: Roman CGI narrow FOV imaging prediction: Modeled 5-sigma post-processed [RDI&fpp=2] contrast curve for Band 1 imaging of a V=5 G0V star with the HLC coronagraph, based on OS9. The model observation use MUFs=1 for instrument and observatory with no margins, and component performance estimates for 21mo into mission. Integration time is  25hr. Updates include: flight mask CGPERF tables, bench warping and DM temperature stability, coating reflectivity. 100hr approaches the 'infinite time' limit (source: B. Nemati spreadsheet, Feb 1, 2021 version)
+3.10	5.26E-09	575	25	2	5
+3.72	5.19E-09	575	25	2	5
+4.34	3.19E-09	575	25	2	5
+4.97	3.16E-09	575	25	2	5
+5.59	1.90E-09	575	25	2	5
+6.21	1.90E-09	575	25	2	5
+6.83	1.90E-09	575	25	2	5
+7.46	1.85E-09	575	25	2	5
+8.08	1.64E-09	575	25	2	5
+8.70	1.65E-09	575	25	2	5
