@@ -78,14 +78,14 @@ Lacy models are described at https://ui.adsabs.harvard.edu/abs/2019arXiv19111058
 
 
 ### Performance predictions :
-* **Description**: Model-predicted 5$\sigma$ final detection limits for a V=5 star in the three official observing modes. Model uncertainty factors (MUFs) for observatory and CGI set to unity. No performance margins. Incorporate results from OS9, with further updates to CGPERF tables, bench warping and DM temperature stability, and coating reflectivity. (Oct 1, 2020 spreadsheet version) 
+* **Description**: Model-predicted 5$\sigma$ final detection limits for a V=5 G0V star in the three official observing modes. Model uncertainty factors (MUFs) for observatory and CGI set to unity. No performance margins. Incorporate results from OS9, with further updates to CGPERF tables, bench warping and DM temperature stability, and coating reflectivity. (Feb 1, 2021 spreadsheet version) 
 * **Bandpass:**
     * narrow FOV imaging : 575nm / 10% BW, Hybrid Lyot coronagraph.
     * spectroscopy : R=50 spectroscopy, 730nm / 15% BW, Shaped Pupil bowtie coronagraph.
     * wide FOV imaging : 825nm / 10% BW, Shaped Pupil wide field of view coronagraph.
 * **Integration time:**
-    * imaging : 100hr
-    * spectroscopy : 400hr.
+    * imaging : 25, 100, 10000hr ('infinite' time)
+    * spectroscopy : 100, 400, 10000hr
 * **Post-processing:** Reference PSF subtraction, with an assumed additional factor of 2 improvement over the basic-RDI residual speckle component, from the application of more sophisticated post-processing techniques.
 * **Reference:** B. Kern & B. Nemati spreadsheet, personal communication.
 

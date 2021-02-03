@@ -22,12 +22,18 @@ Tau_Ceti:    True # Tau Ceti e & f data points
 Tau_Ceti_axis: True # Tau Ceti e top y axis & label
 Prox_Cen:   False # Proxima Centauri b
 
-# CGI performance requirement and predictions
+# CGI performance requirement and predictions (linestyle below)
 req:         True # CGI L1 requirement  
-pred_img:    True # prediction for imaging
-pred_wide_img: True # prediction for extended source detection limit
-pred_spec:   True # prediction for spectroscopy detection limit
-exp_t:       True # print exposures times used for predictions?
+pred_img_short:   True # prediction for imaging with short exposure times
+pred_img_medium:  True # prediction for imaging with intermediate exposure times
+pred_img_long:   True # prediction for imaging with long exposure times
+pred_spec_short:   True # prediction for spectroscopy detection limit with short exposure times
+pred_spec_medium:  True # prediction for spectroscopy detection limit with intermediate exposure times
+pred_spec_long:    True # prediction for spectroscopy detection limit with long exposure times
+pred_wide_img_short:  True # prediction for extended source detection limit with short exposure times
+pred_wide_img_medium: True # prediction for extended source detection limit with intermediate exposure times
+pred_wide_img_long:   True # prediction for extended source detection limit with long exposure times
+exp_t:      True # print exposures times used for predictions?
 
 # old requirements (kept only for references)
 old_L2req_img:    False # old L2 imaging requirement. Not longer exists.
@@ -52,8 +58,12 @@ plot_font_size:  13  # font size for axis labels / title, etc.
 legend_font_size: 7.5  # font size for legend text
 label_font_size:  9  # font size for detection limit curve labels
 
-roman_linewidth: 4 # line width for WFIRST BTRs and detection limit curves
+roman_linewidth: 2.5 # line width for WFIRST BTRs and detection limit curves
 other_linewidth:  1 # line width for other instruments' detection limit curves
+
+roman_linestyle_short: '-.' # line style for Roman detection curves with short integration times
+roman_linestyle_medium: '--' # line style for Roman detection curves with intermediate integration times
+roman_linestyle_long: '-' # line style for Roman detection curves with long integration times
 
 rv_markersize:      50 # reflected light RV marker size
 di_markersize:      40 # self-luminous planets marker size
