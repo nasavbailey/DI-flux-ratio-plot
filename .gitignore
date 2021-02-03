@@ -7,3 +7,4 @@ auto_caption*.txt
 output
 /*.yml
 my_ymls
+.DS_Store
