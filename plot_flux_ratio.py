@@ -354,8 +354,8 @@ if cfg['pred_img_medium'] is True:
     dat['Rho(as)'] = dat['l/D'] * (dat['lambda'] / d_tel).decompose()*206265
     ax1.plot(dat['Rho(as)'], dat['contr_snr5'], color=c_v, linewidth=lw2, linestyle=lsm, label='')
     if cfg['pred_img_short'] is False:
-        ax1.text(dat['Rho(as)'][0], 2.5*dat['contr_snr5'][0], 'Roman  \nCGI pred.  ', color='darkblue',\
-        horizontalalignment='right', verticalalignment='bottom', weight='bold', fontsize=ccfs+1)
+        ax1.text(dat['Rho(as)'][0], 2*dat['contr_snr5'][0], 'CGI pred.\nsingle star', color='darkblue',\
+        horizontalalignment='center', verticalalignment='bottom', weight='bold', fontsize=ccfs+1)
     if cfg['exp_t'] is True:
         if cfg['pred_img_short'] is False:
             txt = ax1.text(0.99*dat['Rho(as)'][0], 1.5*dat['contr_snr5'][0], \
@@ -371,7 +371,7 @@ if cfg['pred_img_medium'] is True:
             horizontalalignment='right', verticalalignment='top', fontsize=ccfs+1)
     txt.set_path_effects([PathEffects.withStroke(linewidth=1, foreground='k')])
     caption += extract_short_caption(fname)
-    
+
 if cfg['pred_img_long'] is True:
     fname = datapath+'Roman_pred_imaging_long.txt'
     dat = ascii.read(fname)
@@ -418,7 +418,7 @@ if cfg['pred_spec_short'] is True:
         horizontalalignment='left', verticalalignment='top', fontsize=ccfs+1, zorder=6)
     txt.set_path_effects([PathEffects.withStroke(linewidth=1, foreground='k')])
     caption += extract_short_caption(fname)
-    
+
 if cfg['pred_spec_medium'] is True:
     fname = datapath+'Roman_pred_spec_medium.txt'
     dat = ascii.read(fname)
@@ -445,7 +445,7 @@ if cfg['pred_spec_medium'] is True:
             horizontalalignment='left', verticalalignment='top', fontsize=ccfs+1, zorder=6)
     txt.set_path_effects([PathEffects.withStroke(linewidth=1, foreground='k')])
     caption += extract_short_caption(fname)
-    
+
 if cfg['pred_spec_long'] is True:
     fname = datapath+'Roman_pred_spec_long.txt'
     dat = ascii.read(fname)
@@ -471,7 +471,7 @@ if cfg['pred_spec_long'] is True:
             'spec', color=c_band3, weight='bold',\
             horizontalalignment='left', verticalalignment='top', fontsize=ccfs+1, zorder=6)
     txt.set_path_effects([PathEffects.withStroke(linewidth=1, foreground='k')])
-    caption += extract_short_caption(fname)    
+    caption += extract_short_caption(fname)
 
 
 if cfg['pred_wide_img_short'] is True:
@@ -521,7 +521,7 @@ if cfg['pred_wide_img_medium'] is True:
             horizontalalignment='right', verticalalignment='top', fontsize=ccfs+1)
     txt.set_path_effects([PathEffects.withStroke(linewidth=1, foreground='k')])
     caption += extract_short_caption(fname)
-    
+
 if cfg['pred_wide_img_long'] is True:
     fname = datapath+'Roman_pred_wideFOVimaging_long.txt'
     dat = ascii.read(fname)
@@ -627,12 +627,12 @@ if cfg['DI_H'] or cfg['DI_B1_pred'] or cfg['DI_B3_pred']:
 if cfg['DI_H'] is True:
     ax1.scatter(a_DI['Rho(as)'],a_DI['H_contr'],color=c_h, edgecolor='k', \
         alpha=alpha_di, marker='s', s=cfg['di_markersize']-15, zorder=2,\
-        label='directly imaged, 1.6$\mathdefault{\mu} $m observed')
+        label='self-luminous, 1.6$\mathdefault{\mu} $m observed')
 
 if cfg['DI_B3_pred'] is True:
     ax1.scatter(a_DI['Rho(as)'],a_DI['B3_contr'],color=c_band3, edgecolor='k', \
         marker='d', alpha=alpha_di, s=cfg['di_markersize'], zorder=2, \
-        label='directly imaged, 750nm predicted')
+        label='self-luminous, Band 3 predicted')
     if not cfg['DI_B1_pred']:
         for ct, rho in enumerate(a_DI['Rho(as)']):
             ax1.plot([rho,rho], [a_DI[ct]['B3_contr'], a_DI[ct]['H_contr']], \
@@ -644,7 +644,7 @@ if cfg['DI_B1_pred'] is True:
             color='lightgray', linewidth=1, linestyle=':', zorder=1)
     ax1.scatter(a_DI['Rho(as)'],a_DI['B1_contr'],color=c_v, edgecolor='k', \
         marker='o', alpha=alpha_di, s=cfg['di_markersize'], zorder=2, \
-        label='directly imaged, 550nm predicted')
+        label='self-luminous, Band 1 predicted')
 
 
 #########################################################################
