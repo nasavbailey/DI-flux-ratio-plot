@@ -1,0 +1,12 @@
+#l/D   contr  lambda  t_int_hr  fpp SNR
+#Short caption: Roman CGI wide FOV imaging prediction: Modeled 5-sigma post-processed [RDI&fpp=2] contrast curve for Band 4 imaging of a V=5 G0V star with the SPC wide FOV coronagraph, based on OS9. The model observation uses Current Best Estimates for instrument and observatory with no margins, and component performance estimates for 21mo into mission. Integration time is  100hr. Updates include: flight mask CGPERF tables, bench warping and DM temperature stability, coating reflectivity (source: B. Nemati spreadsheet, 08/16/2021 version).
+6.50	NaN	825	100	2	5
+7.98	2.10E-09	825	100	2	5
+9.46	1.60E-09	825	100	2	5
+10.93	1.61E-09	825	100	2	5
+12.41	1.60E-09	825	100	2	5
+13.89	1.60E-09	825	100	2	5
+15.37	1.60E-09	825	100	2	5
+16.84	1.61E-09	825	100	2	5
+18.32	1.68E-09	825	100	2	5
+19.80	2.81E-09	825	100	2	5

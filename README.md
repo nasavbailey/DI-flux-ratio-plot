@@ -8,8 +8,7 @@ This contains the python code to plot the flux ratio vs separation plot. It also
 * numpy
 * yaml
 
-_Note:_ this code is only tested with miniconda + [astroconda](https://astroconda.readthedocs.io/). 
-
+_Note:_ this code is only tested with miniconda + [astroconda](https://astroconda.readthedocs.io/) and python up to 3.8.11. 
 
 ## quickstart
 
@@ -21,7 +20,6 @@ Your figure and an auto-generated description will be created in the "output" fo
 
 **Read the docs!** See the `documentation` folder for an example plot and a complete description of the data and calculations.
 
-
 ## Customizing your plot
 
 ### YAML file
@@ -29,10 +27,10 @@ To customize what is plotted, place a YAML configuration file in the same direct
 
 ### Plot options
 
-Available WFIRST modes:
+Available modes for the Nancy Grace Roman Space Telescope:
 * imaging requirement (PLRA L1 TTTR5)
-* imaging & spectroscopy perfomance predictions
-* Obsolete requirements (Phase B) are available for reference only. 
+* imaging & spectroscopy perfomance predictions with or without model uncertainty factors
+* Obsolete requirements (Phase B) are available for reference only
 
 Available instruments:
 * Gemini GPI IFS
@@ -45,7 +43,7 @@ Available instruments:
 * JWST NIRCam
 
 Available planets:
-* known self-luminious directly imaged planets: measured H-band contrasts & predictions for CGI bandpasses.
+* known self-luminious directly imaged planets: measured H-band contrasts & predictions for CGI bandpasses
 * known RV planets: predicted reflected light brightness using either a simple 0.5 albedo model or predictions from the Imaging Mission Database
 * Earth & Jupiter at 10pc
 * Tau Ceti e & f
@@ -79,7 +77,7 @@ Thanks for your help! Before you submit a pull request please:
 ## License and acknowledgements
 Government sponsorship acknowledged. This work was carried out in part at the Jet Propulsion Laboratory, California Institute of Technology, under a contract with the National Aeronautics and Space Administration.
 
-Copyright 2019 California Institute of Technology.
+Copyright 2021 California Institute of Technology.
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License in the LICENSE file or at
 

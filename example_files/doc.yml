@@ -14,16 +14,17 @@ HABEX : False
 
 # planets
 DI_H:       True # known H-band contrasts of directly imaged planets
-DI_B1_pred: True # predicted Band 1 from self-luminous, directly imaged planets
+DI_B1_pred: False # predicted Band 1 from self-luminous, directly imaged planets
 DI_B3_pred: True # predicted Band 3 from self-luminous, directly imaged planets
 RV_pred:    'IMD' # [None, IMD, simple] predicted reflected light from known RV planets from either a simple Lambertian or the Imaging Mission Database
 solar_system: True # Earth & Jupiter
-Tau_Ceti:    True # Tau Ceti e & f data points
-Tau_Ceti_axis: True # Tau Ceti e top y axis & label
+Tau_Ceti:    False # Tau Ceti e & f data points
+Tau_Ceti_axis: False # Tau Ceti e top y axis & label
 Prox_Cen:   False # Proxima Centauri b
 
 # CGI performance requirement and predictions (linestyle below)
-req:         True # CGI L1 requirement  
+req:       False # CGI L1 requirement  
+eb_mode:    False # Error Budget mode, including MUFs. If False, MUFs=1
 pred_img_short:   True # prediction for imaging with short exposure times
 pred_img_medium:  True # prediction for imaging with intermediate exposure times
 pred_img_long:   True # prediction for imaging with long exposure times
@@ -47,7 +48,7 @@ save_pdf:   False # output PDF?
 save_jpg:   False # output JPG?
 jpg_dpi:    200
 save_png:   True # output PNG?
-png_dpi:    200
+png_dpi:    300
 
 
 color_by_lambda:  'simple'  # [ full / simple / minimal / none ] color code by  bandpass
@@ -58,7 +59,7 @@ plot_font_size:  13  # font size for axis labels / title, etc.
 legend_font_size: 7.5  # font size for legend text
 label_font_size:  9  # font size for detection limit curve labels
 
-roman_linewidth: 2.5 # line width for WFIRST BTRs and detection limit curves
+roman_linewidth: 2.5 # line width for Roman BTRs and detection limit curves
 other_linewidth:  1 # line width for other instruments' detection limit curves
 
 roman_linestyle_short: '-.' # line style for Roman detection curves with short integration times
@@ -72,5 +73,5 @@ marker_edge_width:  0.5  # width of borders on scatter plot markers
 # plot x and y limits
 x0: 0.07
 x1: 5
-y0: 1E-11
-y1: 4E-3
+y0: 3E-11
+y1: 8E-4

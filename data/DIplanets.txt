@@ -1,5 +1,5 @@
 #name	B1_delta	B3_delta	H_delta	Rho(as)	PA source
-#short caption: DI: Selected known self-luminous Directly Imaged (DI) exoplanets with known H-band contrasts. Predicted fluxes at Bands  1 and 3 are either from B. Lacy or from either COND (Teff<=1200K) or BT-SETTL models. For COND/BT values, WFC3 filters that approximate WFIRST bands were used (547nm 10% and 763nm 10%), because WFC3 colors are already provided with the model grids.
+#short caption: DI: Selected known self-luminous Directly Imaged (DI) exoplanets with known H-band contrasts. Predicted fluxes at Bands  1 and 3 are either from B. Lacy or from either COND (Teff<=1200K) or BT-SETTL models. For COND/BT values, WFC3 filters that approximate Roman's coronagraph instrument bands were used (547nm 10% and 763nm 10%), because WFC3 colors are already provided with the model grids.
 #References:
 #https://phoenix.ens-lyon.fr/Grids/AMES-Cond/
 #https://phoenix.ens-lyon.fr/Grids/BT-Cond/
