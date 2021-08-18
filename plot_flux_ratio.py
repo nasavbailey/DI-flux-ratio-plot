@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 import numpy as np
@@ -326,9 +326,14 @@ if cfg['GPI'] is True or cfg['generic ground-based'] is True:
 
 
 ## predictions
+eb_mode = ''
+if cfg['eb_mode'] is True:
+    eb_mode = '_eb'
+## Updating the figure's filename
+cfgname = cfgname+eb_mode
 
 if cfg['pred_img_short'] is True:
-    fname = datapath+'Roman_pred_imaging_short.txt'
+    fname = datapath+'Roman_pred_imaging_short'+eb_mode+'.txt'
     dat = ascii.read(fname)
     dat['lambda'].unit = u.nm
     dat['contr_snr5'] = dat['contr']*5/dat['SNR']
@@ -347,7 +352,7 @@ if cfg['pred_img_short'] is True:
     caption += extract_short_caption(fname)
 
 if cfg['pred_img_medium'] is True:
-    fname = datapath+'Roman_pred_imaging_medium.txt'
+    fname = datapath+'Roman_pred_imaging_medium'+eb_mode+'.txt'
     dat = ascii.read(fname)
     dat['lambda'].unit = u.nm
     dat['contr_snr5'] = dat['contr']*5/dat['SNR']
@@ -373,7 +378,7 @@ if cfg['pred_img_medium'] is True:
     caption += extract_short_caption(fname)
 
 if cfg['pred_img_long'] is True:
-    fname = datapath+'Roman_pred_imaging_long.txt'
+    fname = datapath+'Roman_pred_imaging_long'+eb_mode+'.txt'
     dat = ascii.read(fname)
     dat['lambda'].unit = u.nm
     dat['contr_snr5'] = dat['contr']*5/dat['SNR']
@@ -399,7 +404,7 @@ if cfg['pred_img_long'] is True:
     caption += extract_short_caption(fname)
 
 if cfg['pred_spec_short'] is True:
-    fname = datapath+'Roman_pred_spec_short.txt'
+    fname = datapath+'Roman_pred_spec_short'+eb_mode+'.txt'
     dat = ascii.read(fname)
     dat['lambda'].unit = u.nm
     dat['Rho(as)'] = dat['l/D'] * (dat['lambda'] / d_tel).decompose()*206265
@@ -420,7 +425,7 @@ if cfg['pred_spec_short'] is True:
     caption += extract_short_caption(fname)
 
 if cfg['pred_spec_medium'] is True:
-    fname = datapath+'Roman_pred_spec_medium.txt'
+    fname = datapath+'Roman_pred_spec_medium'+eb_mode+'.txt'
     dat = ascii.read(fname)
     dat['lambda'].unit = u.nm
     dat['Rho(as)'] = dat['l/D'] * (dat['lambda'] / d_tel).decompose()*206265
@@ -447,7 +452,7 @@ if cfg['pred_spec_medium'] is True:
     caption += extract_short_caption(fname)
 
 if cfg['pred_spec_long'] is True:
-    fname = datapath+'Roman_pred_spec_long.txt'
+    fname = datapath+'Roman_pred_spec_long'+eb_mode+'.txt'
     dat = ascii.read(fname)
     dat['lambda'].unit = u.nm
     dat['Rho(as)'] = dat['l/D'] * (dat['lambda'] / d_tel).decompose()*206265
@@ -475,7 +480,7 @@ if cfg['pred_spec_long'] is True:
 
 
 if cfg['pred_wide_img_short'] is True:
-    fname = datapath+'Roman_pred_wideFOVimaging_short.txt'
+    fname = datapath+'Roman_pred_wideFOVimaging_short'+eb_mode+'.txt'
     dat = ascii.read(fname)
     dat['lambda'].unit = u.nm
     dat['contr_snr5'] = dat['contr']*5/dat['SNR']
@@ -496,7 +501,7 @@ if cfg['pred_wide_img_short'] is True:
     caption += extract_short_caption(fname)
 
 if cfg['pred_wide_img_medium'] is True:
-    fname = datapath+'Roman_pred_wideFOVimaging_medium.txt'
+    fname = datapath+'Roman_pred_wideFOVimaging_medium'+eb_mode+'.txt'
     dat = ascii.read(fname)
     dat['lambda'].unit = u.nm
     dat['contr_snr5'] = dat['contr']*5/dat['SNR']
@@ -523,7 +528,7 @@ if cfg['pred_wide_img_medium'] is True:
     caption += extract_short_caption(fname)
 
 if cfg['pred_wide_img_long'] is True:
-    fname = datapath+'Roman_pred_wideFOVimaging_long.txt'
+    fname = datapath+'Roman_pred_wideFOVimaging_long'+eb_mode+'.txt'
     dat = ascii.read(fname)
     dat['lambda'].unit = u.nm
     dat['contr_snr5'] = dat['contr']*5/dat['SNR']

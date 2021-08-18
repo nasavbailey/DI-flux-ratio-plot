@@ -23,7 +23,8 @@ Tau_Ceti_axis: False # Tau Ceti e top y axis & label
 Prox_Cen:   False # Proxima Centauri b
 
 # CGI performance requirement and predictions (linestyle below)
-req:         False # CGI L1 requirement  
+req:       False # CGI L1 requirement  
+eb_mode:    False # Error Budget mode, including MUFs. If False, MUFs=1
 pred_img_short:   True # prediction for imaging with short exposure times
 pred_img_medium:  True # prediction for imaging with intermediate exposure times
 pred_img_long:   True # prediction for imaging with long exposure times
