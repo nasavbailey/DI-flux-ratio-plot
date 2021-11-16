@@ -8,3 +8,4 @@ output
 /*.yml
 my_ymls
 .DS_Store
+.*swp

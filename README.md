@@ -27,9 +27,19 @@ To customize what is plotted, place a YAML configuration file in the same direct
 
 ### Plot options
 
-Available modes for the Nancy Grace Roman Space Telescope:
+Available modes for the Coronaraph Instrument aboard the 
+Nancy Grace Roman Space Telescope:
+
 * imaging requirement (PLRA L1 TTTR5)
-* imaging & spectroscopy perfomance predictions with or without model uncertainty factors
+
+* imaging & spectroscopy for two perfomance scenarios: optimistic and 
+conservative
+
+  - Optimistic: predictions with most model uncertainty factors set to 1
+
+  - Conservative: predictions with model uncertainty factors set to their
+      current best estimates from the Coronagraph Instrument team
+
 * Obsolete requirements (Phase B) are available for reference only
 
 Available instruments:
