@@ -27,8 +27,9 @@ To customize what is plotted, place a YAML configuration file in the same direct
 
 ### Plot options
 
-Available modes for the Coronaraph Instrument aboard the 
-Nancy Grace Roman Space Telescope:
+Available modes for the 
+[Coronagraph Instrument](https://roman.gsfc.nasa.gov/coronagraph.html) aboard the 
+[Nancy Grace Roman Space Telescope](https://roman.gsfc.nasa.gov):
 
 * imaging requirement (PLRA L1 TTTR5)
 
