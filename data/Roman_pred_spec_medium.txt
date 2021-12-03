@@ -1,5 +1,5 @@
 #l/D 	contr  lambda t_int_hr  fpp	SNR
-#Short caption: Roman CGI wide FOV imaging prediction: Modeled 5-sigma post-processed [RDI&fpp=1.22] contrast curve for Band 3 spectroscopy of a V=5 G0V star with the SPC bowtie coronagraph, based on OS9. The model observation uses MUFs=1 for instrument and observatory with no margins, and component performance estimates for 21mo into mission. Integration time is  400hr. Updates include: flight mask CGPERF tables, bench warping and DM temperature stability, coating reflectivity (source: B. Nemati spreadsheet, 08/16/2021 version).
+#Short caption:  Roman CGI Single Slit, Prism-based Spectroscopy prediction: Modeled 5-sigma post-processed [RDI&fpp=1.22] contrast curve for Band 3 spectroscopy of a V=5 G0V star with the SPC bowtie coronagraph. The model observation uses an optimistic estimate for instrument and observatory and for 21mo into mission. Integration time is  400hr. Updates include: flight mask, performance tables, bench warping and DM temperature stability, coating reflectivity. Source: https://github.com/hsergi/Roman_Coronagraph_ETC/tree/main/tables/, 12/02/2021 version.
 3.10	4.59E-09	730	400	2	5
 3.74	3.86E-09	730	400	2	5
 4.39	3.31E-09	730	400	2	5

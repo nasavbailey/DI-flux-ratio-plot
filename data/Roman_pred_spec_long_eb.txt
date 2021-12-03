@@ -1,12 +1,12 @@
 #l/D 	contr  lambda t_int_hr  fpp	SNR
-#Short caption: Roman CGI narrow FOV imaging prediction: Modeled 5-sigma post-processed [RDI&fpp=1.22] contrast curve for Band 3 imaging of a V=5 G0V star with the HLC coronagraph, based on OS9. The model observation uses Current Best Estimates for instrument and observatory with margins, and component performance estimates for 21mo into mission. Integration time is  10000hr. Updates include: flight mask CGPERF tables, bench warping and DM temperature stability, coating reflectivity. 10000hr approaches the 'infinite time' limit (source: B. Nemati spreadsheet, 08/16/2021 version).
-3.10	4.33E-09	730	10000	2	5
-3.74	4.21E-09	730	10000	2	5
-4.39	3.37E-09	730	10000	2	5
-5.03	3.22E-09	730	10000	2	5
-5.68	3.12E-09	730	10000	2	5
-6.32	3.07E-09	730	10000	2	5
-6.97	3.08E-09	730	10000	2	5
-7.61	3.08E-09	730	10000	2	5
-8.26	4.74E-09	730	10000	2	5
-8.90	4.67E-09	730	10000	2	5
+#Short caption: Roman CGI Single Slit, Prism-based Spectroscopy prediction: Modeled 5-sigma post-processed [RDI&fpp=1.22] contrast curve for Band 3 spectroscopy of a V=5 G0V star with the SPC bowtie coronagraph. The model observation uses a conservative estimate for instrument and observatory performance and for 21mo into mission. Integration time is  100hr. Updates include: flight mask, performance tables, bench warping and DM temperature stability, coating reflectivity. 10000hr approaches the 'infinite time' limit. Source: https://github.com/hsergi/Roman_Coronagraph_ETC/tree/main/tables/, 12/02/2021 version.
+3.10	4.24E-09	730	10000	2	5
+3.74	4.16E-09	730	10000	2	5
+4.39	3.33E-09	730	10000	2	5
+5.03	3.19E-09	730	10000	2	5
+5.68	3.09E-09	730	10000	2	5
+6.32	3.04E-09	730	10000	2	5
+6.97	3.05E-09	730	10000	2	5
+7.61	3.05E-09	730	10000	2	5
+8.26	4.71E-09	730	10000	2	5
+8.90	4.59E-09	730	10000	2	5
