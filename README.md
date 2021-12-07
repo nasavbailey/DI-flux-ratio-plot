@@ -33,12 +33,12 @@ Available modes for the
 
 * imaging requirement (PLRA L1 TTTR5)
 
-* imaging & spectroscopy for two perfomance scenarios: optimistic and 
-conservative
+* imaging & spectroscopy for two perfomance scenarios of the instrument and
+the spacecraft: optimistic and conservative
 
-  - Optimistic: predictions with most model uncertainty factors set to 1
+  - Optimistic: predictions assume performance close to optimal
 
-  - Conservative: predictions with model uncertainty factors set to their
+  - Conservative: predictions assume model uncertainty factors with
       current best estimates from the Coronagraph Instrument team
 
 * Obsolete requirements (Phase B) are available for reference only
