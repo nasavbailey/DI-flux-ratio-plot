@@ -24,7 +24,8 @@ Prox_Cen:   False # Proxima Centauri b
 
 # CGI performance requirement and predictions (linestyle below)
 req:       False # CGI L1 requirement  
-eb_mode:    False # Error Budget mode, including MUFs. If False, MUFs=1
+cons_mode:    False # False (default): optimistic performance. True: conservative performance
+# The same performance level (either optimistic or conservative) is used in all the following modes:
 pred_img_short:   True # prediction for imaging with short exposure times
 pred_img_medium:  True # prediction for imaging with intermediate exposure times
 pred_img_long:   True # prediction for imaging with long exposure times
