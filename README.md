@@ -41,9 +41,8 @@ conservative
   - Optimistic: predictions assume instrumental and spacecraft performance 
 close to optimal
 
-  - Conservative: predictions assume instrumental and spacecraft performance 
-model uncertainty factors with current best estimates from the 
-Roman Coronagraph Instrument team
+  - Conservative: predictions with additional instrumental and spacecraft 
+performance model uncertainty factors
 
 * Obsolete requirements (Phase B) are available for reference only
 

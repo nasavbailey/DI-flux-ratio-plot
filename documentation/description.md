@@ -85,9 +85,8 @@ Two performance level scenarios for the Roman Coronagraph Instrument and spacecr
   - Optimistic: predictions assume instrumental and spacecraft performance
 close to optimal
 
-  - Conservative: predictions assume instrumental and spacecraft performance
-model uncertainty factors with current best estimates from the
-Roman Coronagraph Instrument team
+  - Conservative: predictions with additional instrumental and spacecraft
+performance model uncertainty factors
 
 The header of the `Roman_pred` files in the `data` folder has the version date
 of the instrumental and spacecraft performance.
