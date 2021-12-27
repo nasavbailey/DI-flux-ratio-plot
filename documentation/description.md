@@ -4,11 +4,12 @@
 
 [comment]: # (This .md file is compatible with the Pandoc PDF generator. Pandoc PDF uses LaTeX, so please do not use characters that are not recognized by LaTeX. Write any symbols as they'd appear in LaTeX. eg: use $\sigma$ ΝΟΤ σ. Unfortunately, Github doesn't include a math interpreter, so you'll just see the verbatim text online.)
 
-The Coronagraph Instrument (CGI) for NASA’s Wide Field Infrared Survey Telescope (Roman) will constitute a dramatic step forward for high-contrast imaging, integral field spectroscopy, and polarimetry of exoplanets and circumstellar disks, aiming to improve upon the sensitivity of current direct imaging facilities by two orders of magnitude or more. Furthermore, CGI will serve as a pathfinder for future terrestrial planet-imaging missions by demonstrating wavefront control, coronagraphy, and spectral retrieval in a new contrast regime, and by validating instrument and telescope models at unprecedented levels of precision. In this document, we present a “Roman in context” plot and describe the data and assumptions used to generate it.
+The Coronagraph Instrument (CGI) for NASA’s Nancy Grace Roman Space Telescope (Roman) will constitute a dramatic step forward for high-contrast imaging, integral field spectroscopy, and polarimetry of exoplanets and circumstellar disks, aiming to improve upon the sensitivity of current direct imaging facilities by two orders of magnitude or more. Furthermore, CGI will serve as a pathfinder for future terrestrial planet-imaging missions by demonstrating wavefront control, coronagraphy, and spectral retrieval in a new contrast regime, and by validating instrument and telescope models at unprecedented levels of precision. In this document, we present a “Roman in context” plot and describe the data and assumptions used to generate it.
 
 ![](flux_ratio_doc.png)
 
-_Figure 1:_ Predicted Roman performance in the context of known planets and existing and planned high-contrast instruments. The y-axis indicates the flux ratio between a planet and its host star (for individual planets) or between the star and the dimmest source detectable at 5$\sigma$ after post-processing (for instrument performance curves). The lower x-axis is projected separation in arcseconds, and the upper x-axis is the corresponding physical separation for the Tau Ceti system. Points and lines are color-coded by wavelength of observation. Solid and dashed lines are 5-sigma point source detection limits versus separation from the host star; these limits are calculated from post-processed data. The predicted performance for the future observatory, JWST, is plotted as a dashed line. Line labeled "Roman CGI req" is the Level 1 preformance  requirement. Lines labeled "Roman CGI pred." are current best performance predictions. Triangular points are estimated reflected light flux ratios for known gas giant radial velocity-detected (RV). Red squares are 1.6$\mu m$ flux ratios of known self-luminous directly-imaged (DI) planets. Dotted lines connect each DI planet’s measured 1.6$\mu m$ flux ratio to its predicted flux ratio at 750nm (yellow diamonds) or 550nm (blue circles), based on COND or BT-Settl planet evolutionary models. Cyan points represent the reflected light flux ratios of Earth and Jupiter at 10pc as well as super-Earths Tau Ceti e and f.
+_Figure 1:_ Predicted Roman performance in the context of known planets and existing and planned high-contrast instruments. The y-axis indicates the flux ratio between a planet and its host star (for individual planets) or between the star and the dimmest source detectable at 5$\sigma$ after post-processing (for instrument performance curves). The lower x-axis is projected separation in arcseconds, and the upper x-axis is the corresponding physical separation for the Tau Ceti system. Points and lines are color-coded by wavelength of observation. Solid and dashed lines are 5-sigma point source detection limits versus separation from the host star; these limits are calculated from post-processed data. The predicted performance for the future observatory, JWST, is plotted as a dashed line. Line labeled "Roman CGI req" is the Level 1 preformance  requirement. Lines labeled "Roman CGI pred." are current performance predictions 
+(see [Performance Predictions](#performance-predictions-)). Triangular points are estimated reflected light flux ratios for known gas giant radial velocity-detected (RV). Red squares are 1.6$\mu m$ flux ratios of known self-luminous directly-imaged (DI) planets. Dotted lines connect each DI planet’s measured 1.6$\mu m$ flux ratio to its predicted flux ratio at 750nm (yellow diamonds) or 550nm (blue circles), based on COND or BT-Settl planet evolutionary models. Cyan points represent the reflected light flux ratios of Earth and Jupiter at 10pc as well as super-Earths Tau Ceti e and f.
 
 ## Flux Ratio
 
@@ -78,7 +79,18 @@ Lacy models are described at https://ui.adsabs.harvard.edu/abs/2019arXiv19111058
 
 
 ### Performance predictions :
-* **Description**: Model-predicted 5$\sigma$ final detection limits for a V=5 G0V star in the three official observing modes. Model uncertainty factors (MUFs) for observatory and CGI set to unity. No performance margins. Incorporate results from OS9, with further updates to CGPERF tables, bench warping and DM temperature stability, and coating reflectivity. (Feb 1, 2021 spreadsheet version) 
+* **Description**: Model-predicted 5$\sigma$ final detection limits for a V=5 G0V star in the three official observing modes. 
+Two performance level scenarios for the Roman Coronagraph Instrument and spacecraft:
+*optimistic* and *conservative*.
+  - Optimistic: predictions assume instrumental and spacecraft performance
+close to optimal
+
+  - Conservative: predictions with additional instrumental and spacecraft
+performance model uncertainty factors
+
+The header of the `Roman_pred` files in the `data` folder has the version date
+of the instrumental and spacecraft performance.
+
 * **Bandpass:**
     * narrow FOV imaging : 575nm / 10% BW, Hybrid Lyot coronagraph.
     * spectroscopy : R=50 spectroscopy, 730nm / 15% BW, Shaped Pupil bowtie coronagraph.
@@ -86,8 +98,10 @@ Lacy models are described at https://ui.adsabs.harvard.edu/abs/2019arXiv19111058
 * **Integration time:**
     * imaging : 25, 100, 10000hr ('infinite' time)
     * spectroscopy : 100, 400, 10000hr
-* **Post-processing:** Reference PSF subtraction, with an assumed additional factor of 2 improvement over the basic-RDI residual speckle component, from the application of more sophisticated post-processing techniques.
-* **Reference:** B. Kern & B. Nemati spreadsheet, personal communication.
+* **Post-processing:** Reference PSF subtraction, with an assumed additional factor of 2 (imaging) and 1.22 (spectroscopy) improvement over the basic-RDI residual speckle component, from the application of more sophisticated post-processing techniques
+see this
+[report](https://roman.ipac.caltech.edu/docs/sims/20210110_Roman_CGI_post_processing_report_URS_corrected_typo.pdf).
+* **Reference:** B. Kern & B. Nemati CGI Perf spreadsheet, personal communication.
 
 
 ### Old CGI Tech Demo requirements.
