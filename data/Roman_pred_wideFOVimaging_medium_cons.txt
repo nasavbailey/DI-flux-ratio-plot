@@ -1,12 +1,12 @@
 #l/D   contr  lambda  t_int_hr  fpp SNR
-#Short caption: Roman CGI wide FOV imaging prediction: Modeled 5-sigma post-processed [RDI&fpp=2] contrast curve for Band 4 imaging of a V=5 G0V star with the HLC coronagraph. The model observation uses a conservative estimate for instrument and observatory performance and for 21mo into mission. Integration time is 100hr. Updates include: flight mask, performance tables, bench warping and DM temperature stability, coating reflectivity. Source: https://github.com/hsergi/Roman_Coronagraph_ETC/tree/main/tables/, 12/02/2021 version.
+#Short caption: Roman CGI wide FOV imaging prediction: Modeled 5-sigma post-processed [RDI&fpp=2] contrast curve for Band 4 imaging of a V=5 G0V star with the HLC coronagraph. The model observation uses a conservative estimate for instrument and observatory performance and for 21mo into mission. Integration time is 100hr. Updates include: flight mask, performance tables, bench warping and DM temperature stability, coating reflectivity. 05/10/2022 version.
 6.50	NaN	825	100	2	5
-7.98	1.78E-09	825	100	2	5
-9.46	1.36E-09	825	100	2	5
-10.93	1.36E-09	825	100	2	5
-12.41	1.35E-09	825	100	2	5
-13.89	1.35E-09	825	100	2	5
-15.37	1.35E-09	825	100	2	5
-16.84	1.36E-09	825	100	2	5
-18.32	1.42E-09	825	100	2	5
-19.80	2.33E-09	825	100	2	5
+7.98	1.98E-09	825	100	2	5
+9.46	1.54E-09	825	100	2	5
+10.93	1.55E-09	825	100	2	5
+12.41	1.54E-09	825	100	2	5
+13.89	1.54E-09	825	100	2	5
+15.37	1.54E-09	825	100	2	5
+16.84	1.55E-09	825	100	2	5
+18.32	1.62E-09	825	100	2	5
+19.80	2.76E-09	825	100	2	5

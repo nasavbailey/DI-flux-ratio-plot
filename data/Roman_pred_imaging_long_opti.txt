@@ -1,12 +1,12 @@
 #l/D 	contr    	lambda t_int_hr  fpp 	SNR
 #Short caption: Roman CGI narrow FOV imaging prediction: Modeled 5-sigma post-processed [RDI&fpp=2] contrast curve for Band 1 imaging of a V=5 G0V star with the HLC coronagraph. The model observation uses an optimistic estimate for instrument and observatory performance and for 21mo into mission. Integration time is 10000hr. Updates include: flight mask, performance tables, bench warping and DM temperature stability, coating reflectivity. 10000hr approaches the 'infinite time' limit. Source: https://github.com/hsergi/Roman_Coronagraph_ETC/tree/main/tables/, 12/02/2021 version.
-3.10	4.97E-09	575	10000	2	5
-3.74	4.99E-09	575	10000	2	5
-4.39	2.99E-09	575	10000	2	5
-5.03	1.54E-09	575	10000	2	5
-5.68	1.53E-09	575	10000	2	5
-6.32	1.53E-09	575	10000	2	5
-6.97	1.54E-09	575	10000	2	5
-7.61	1.54E-09	575	10000	2	5
-8.26	1.28E-09	575	10000	2	5
-8.90	1.29E-09	575	10000	2	5
+3.10	4.52E-09	575	10000	2	5
+3.74	4.54E-09	575	10000	2	5
+4.39	2.71E-09	575	10000	2	5
+5.03	1.40E-09	575	10000	2	5
+5.68	1.39E-09	575	10000	2	5
+6.32	1.39E-09	575	10000	2	5
+6.97	1.40E-09	575	10000	2	5
+7.61	1.40E-09	575	10000	2	5
+8.26	1.17E-09	575	10000	2	5
+8.90	1.17E-09	575	10000	2	5
