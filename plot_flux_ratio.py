@@ -775,7 +775,7 @@ first_legend = ax1.legend(fontsize=cfg['legend_font_size'], loc='upper right', \
     title='Known Exoplanets')
 first_legend.get_title().set_fontsize(8)
 
-ax1.grid(b=True, which='major', color='tan', linestyle='-', alpha=0.1)
+ax1.grid(visible=True, which='major', color='tan', linestyle='-', alpha=0.1)
 
 ax1.set_yscale('log')
 ax1.set_xscale('log')
