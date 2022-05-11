@@ -1,12 +1,12 @@
 #l/D 	contr  lambda t_int_hr  fpp	SNR
-#Short caption:  Roman CGI Single Slit, Prism-based Spectroscopy prediction: Modeled 5-sigma post-processed [RDI&fpp=1.22] contrast curve for Band 3 spectroscopy of a V=5 G0V star with the SPC bowtie coronagraph. The model observation uses an optimistic estimate for instrument and observatory and for 21mo into mission. Integration time is  400hr. Updates include: flight mask, performance tables, bench warping and DM temperature stability, coating reflectivity. 05/10/2022 version.
-3.10	4.37E-09	730	400	1.22	5
-3.74	3.63E-09	730	400	1.22	5
-4.39	3.10E-09	730	400	1.22	5
-5.03	3.02E-09	730	400	1.22	5
-5.68	2.93E-09	730	400	1.22	5
-6.32	2.88E-09	730	400	1.22	5
-6.97	2.90E-09	730	400	1.22	5
-7.61	2.89E-09	730	400	1.22	5
+#Short caption:  Roman CGI Single Slit, Prism-based Spectroscopy prediction: Modeled 5-sigma post-processed [RDI&fpp=1.22] contrast curve for Band 3 spectroscopy of a V=5 G0V star with the SPC bowtie coronagraph. The model observation uses an optimistic estimate for instrument and observatory and for 21mo into mission. Integration time is  400hr. Updates include: flight mask, performance tables, bench warping and DM temperature stability, coating reflectivity. 05/11/2022 version.
+3.10	4.38E-09	730	400	1.22	5
+3.74	3.64E-09	730	400	1.22	5
+4.39	3.11E-09	730	400	1.22	5
+5.03	3.03E-09	730	400	1.22	5
+5.68	2.94E-09	730	400	1.22	5
+6.32	2.89E-09	730	400	1.22	5
+6.97	2.91E-09	730	400	1.22	5
+7.61	2.90E-09	730	400	1.22	5
 8.26	4.22E-09	730	400	1.22	5
-8.90	5.02E-09	730	400	1.22	5
+8.90	5.04E-09	730	400	1.22	5

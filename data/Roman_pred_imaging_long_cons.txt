@@ -1,12 +1,12 @@
 #l/D 	contr    	lambda t_int_hr  fpp 	SNR
-#Short caption: Roman CGI narrow FOV imaging prediction: Modeled 5-sigma post-processed [RDI&fpp=2] contrast curve for Band 1 imaging of a V=5 G0V star with the HLC coronagraph. The model observation uses a conservative estimate for instrument and observatory performance and for 21mo into mission. Integration time is 10000hr. Updates include: flight mask, performance tables, bench warping and DM temperature stability, coating reflectivity. 10000hr approaches the 'infinite time' limit. 05/10/2022 version.
-3.10	7.16E-09	575	10000	2	5
-3.74	7.19E-09	575	10000	2	5
-4.39	4.84E-09	575	10000	2	5
-5.03	3.53E-09	575	10000	2	5
-5.68	3.52E-09	575	10000	2	5
-6.32	3.52E-09	575	10000	2	5
-6.97	3.53E-09	575	10000	2	5
-7.61	3.54E-09	575	10000	2	5
-8.26	3.48E-09	575	10000	2	5
-8.90	3.50E-09	575	10000	2	5
+#Short caption: Roman CGI narrow FOV imaging prediction: Modeled 5-sigma post-processed [RDI&fpp=2] contrast curve for Band 1 imaging of a V=5 G0V star with the HLC coronagraph. The model observation uses a conservative estimate for instrument and observatory performance and for 21mo into mission. Integration time is 10000hr. Updates include: flight mask, performance tables, bench warping and DM temperature stability, coating reflectivity. 10000hr approaches the 'infinite time' limit. 05/11/2022 version.
+3.10	1.25E-08	575	10000	2	5
+3.74	1.26E-08	575	10000	2	5
+4.39	8.29E-09	575	10000	2	5
+5.03	5.09E-09	575	10000	2	5
+5.68	5.08E-09	575	10000	2	5
+6.32	5.09E-09	575	10000	2	5
+6.97	5.10E-09	575	10000	2	5
+7.61	5.12E-09	575	10000	2	5
+8.26	4.67E-09	575	10000	2	5
+8.90	4.70E-09	575	10000	2	5
