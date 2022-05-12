@@ -360,7 +360,7 @@ if cfg['pred_img_medium'] is True:
     dat['Rho(as)'] = dat['l/D'] * (dat['lambda'] / d_tel).decompose()*206265
     ax1.plot(dat['Rho(as)'], dat['contr_snr5'], color=c_v, linewidth=lw2, linestyle=lsm, label='')
     if cfg['pred_img_short'] is False:
-        ax1.text(dat['Rho(as)'][0], 2*dat['contr_snr5'][0], 'CGI pred.\nsingle star', color='darkblue',\
+        ax1.text(dat['Rho(as)'][0], 2*dat['contr_snr5'][0], 'Roman CGI pred.', color='darkblue',\
         horizontalalignment='center', verticalalignment='bottom', weight='bold', fontsize=ccfs+1)
     if cfg['exp_t'] is True:
         if cfg['pred_img_short'] is False:
