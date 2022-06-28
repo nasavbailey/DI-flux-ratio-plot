@@ -74,9 +74,9 @@ if cfg['color_by_lambda'].lower() == 'full':
     if cfg['STIS']:
         ax2.plot([1,1],[1,1],color=c_bbvis,linewidth=lw1+2, label='broadband\nvisible')
     if cfg['old_L2req_spec'] or pred_spec or cfg['DI_B3_pred']:
-        ax2.plot([1,1],[1,1],color=c_band3,linewidth=lw1+2, label='CGI Band 3')
+        ax2.plot([1,1],[1,1],color=c_band3,linewidth=lw1+2, label='Band 3')
     if cfg['old_L2req_wide_img']:
-        ax2.plot([1,1],[1,1],color=c_band4,linewidth=lw1+2, label='CGI Band 4')
+        ax2.plot([1,1],[1,1],color=c_band4,linewidth=lw1+2, label='Band 4')
     if cfg['SPHERE']:
         ax2.plot([1,1],[1,1],color=c_yjh,linewidth=lw1+2, label='YJH-band')
     if cfg['GPI'] or cfg['NICMOS'] or cfg['DI_H']:
@@ -340,7 +340,7 @@ if cfg['pred_img_short'] is True:
     dat['contr_snr5'] = dat['contr']*5/dat['SNR']
     dat['Rho(as)'] = dat['l/D'] * (dat['lambda'] / d_tel).decompose()*206265
     ax1.plot(dat['Rho(as)'], dat['contr_snr5'], color=c_v, linewidth=lw2, linestyle=lss, label='')
-    ax1.text(dat['Rho(as)'][0], 2.5*dat['contr_snr5'][0], 'Roman  \nCGI pred.  ', color='darkblue',\
+    ax1.text(dat['Rho(as)'][0], 2.5*dat['contr_snr5'][0], 'Roman  \npred.  ', color='darkblue',\
         horizontalalignment='right', verticalalignment='bottom', weight='bold', fontsize=ccfs+1)
     if cfg['exp_t'] is True:
         txt = ax1.text(0.99*dat['Rho(as)'][0], 1.6*dat['contr_snr5'][0], \
@@ -360,7 +360,7 @@ if cfg['pred_img_medium'] is True:
     dat['Rho(as)'] = dat['l/D'] * (dat['lambda'] / d_tel).decompose()*206265
     ax1.plot(dat['Rho(as)'], dat['contr_snr5'], color=c_v, linewidth=lw2, linestyle=lsm, label='')
     if cfg['pred_img_short'] is False:
-        ax1.text(dat['Rho(as)'][0], 2*dat['contr_snr5'][0], 'CGI pred.\nsingle star', color='darkblue',\
+        ax1.text(dat['Rho(as)'][0], 2*dat['contr_snr5'][0], 'Roman  \npred.  ', color='darkblue',\
         horizontalalignment='center', verticalalignment='bottom', weight='bold', fontsize=ccfs+1)
     if cfg['exp_t'] is True:
         if cfg['pred_img_short'] is False:
@@ -386,7 +386,7 @@ if cfg['pred_img_long'] is True:
     dat['Rho(as)'] = dat['l/D'] * (dat['lambda'] / d_tel).decompose()*206265
     ax1.plot(dat['Rho(as)'], dat['contr_snr5'], color=c_v, linewidth=lw2, linestyle=lsl, label='')
     if (cfg['pred_img_short'] is False) and (cfg['pred_img_medium'] is False):
-        ax1.text(dat['Rho(as)'][0], 2.5*dat['contr_snr5'][0], 'Roman  \nCGI pred.  ', color='darkblue',\
+        ax1.text(dat['Rho(as)'][0], 2.5*dat['contr_snr5'][0], 'Roman  \npred.  ', color='darkblue',\
         horizontalalignment='right', verticalalignment='bottom', weight='bold', fontsize=ccfs+1)
     if cfg['exp_t'] is True:
         if (cfg['pred_img_short'] is False) and (cfg['pred_img_medium'] is False):
@@ -412,7 +412,7 @@ if cfg['pred_spec_short'] is True:
     dat['contr_snr5'] = dat['contr']*5/dat['SNR']
     ax1.plot(dat['Rho(as)'], dat['contr_snr5'], color=c_band3, linewidth=lw2, linestyle=lss, label='')
     if pred_img is False:
-        ax1.text(dat['Rho(as)'][0], 2.5*dat['contr_snr5'][0], ' Roman\n CGI pred.', color='darkblue',\
+        ax1.text(dat['Rho(as)'][0], 2.5*dat['contr_snr5'][0], ' Roman\npred.', color='darkblue',\
             horizontalalignment='left', verticalalignment='center', weight='bold', fontsize=ccfs+1)
     if cfg['exp_t'] is True:
         txt = ax1.text(0.85*dat['Rho(as)'][-1], 1.0*dat['contr_snr5'][0], \
@@ -433,7 +433,7 @@ if cfg['pred_spec_medium'] is True:
     dat['contr_snr5'] = dat['contr']*5/dat['SNR']
     ax1.plot(dat['Rho(as)'], dat['contr_snr5'], color=c_band3, linewidth=lw2, linestyle=lsm, label='')
     if (pred_img is False) and (cfg['pred_spec_short'] is False):
-        ax1.text(dat['Rho(as)'][0], 2.5*dat['contr_snr5'][0], ' Roman\n CGI pred.', color='darkblue',\
+        ax1.text(dat['Rho(as)'][0], 2.5*dat['contr_snr5'][0], ' Roman\n pred.', color='darkblue',\
             horizontalalignment='left', verticalalignment='center', weight='bold', fontsize=ccfs+1)
     if cfg['exp_t'] is True:
         if cfg['pred_spec_short'] is False:
@@ -460,7 +460,7 @@ if cfg['pred_spec_long'] is True:
     dat['contr_snr5'] = dat['contr']*5/dat['SNR']
     ax1.plot(dat['Rho(as)'], dat['contr_snr5'], color=c_band3, linewidth=lw2, linestyle=lsl, label='')
     if (pred_img is False) and (cfg['pred_spec_medium'] is False):
-        ax1.text(dat['Rho(as)'][0], 3.5*dat['contr_snr5'][0], ' Roman\n CGI pred.', color='darkblue',\
+        ax1.text(dat['Rho(as)'][0], 3.5*dat['contr_snr5'][0], ' Roman\n pred.', color='darkblue',\
             horizontalalignment='left', verticalalignment='center', weight='bold', fontsize=ccfs+1)
     if cfg['exp_t'] is True:
         if ( cfg['pred_spec_short'] is False) and (cfg[ 'pred_spec_medium'] is False):
@@ -488,7 +488,7 @@ if cfg['pred_wide_img_short'] is True:
     dat['Rho(as)'] = dat['l/D'] * (dat['lambda'] / d_tel).decompose()*206265
     ax1.plot(dat['Rho(as)'], dat['contr_snr5'], color=c_band4, linewidth=lw2, linestyle=lss, label='')
     if (pred_img is False) and (pred_spec is False):
-        ax1.text(1.5*dat['Rho(as)'][0], 1.1*dat['contr_snr5'][0], ' Roman\n CGI pred.', color='darkblue',\
+        ax1.text(1.5*dat['Rho(as)'][0], 1.1*dat['contr_snr5'][0], ' Roman\n pred.', color='darkblue',\
             horizontalalignment='left', verticalalignment='bottom', weight='bold', fontsize=ccfs+1)
     if cfg['exp_t'] is True:
         txt = ax1.text(1.1*dat['Rho(as)'][-1], 2.1*dat['contr_snr5'][-1], \
@@ -509,7 +509,7 @@ if cfg['pred_wide_img_medium'] is True:
     dat['Rho(as)'] = dat['l/D'] * (dat['lambda'] / d_tel).decompose()*206265
     ax1.plot(dat['Rho(as)'], dat['contr_snr5'], color=c_band4, linewidth=lw2, linestyle=lsm, label='')
     if (pred_img is False) and (pred_spec is False) and (cfg['pred_wide_img_short'] is False):
-        ax1.text(1.4*dat['Rho(as)'][0], 1.1*dat['contr_snr5'][0], ' Roman\n CGI pred.', color='darkblue',\
+        ax1.text(1.4*dat['Rho(as)'][0], 1.1*dat['contr_snr5'][0], ' Roman\n pred.', color='darkblue',\
             horizontalalignment='left', verticalalignment='bottom', weight='bold', fontsize=ccfs+1)
     if cfg['exp_t'] is True:
         if cfg['pred_wide_img_short'] is False:
@@ -536,7 +536,7 @@ if cfg['pred_wide_img_long'] is True:
     dat['Rho(as)'] = dat['l/D'] * (dat['lambda'] / d_tel).decompose()*206265
     ax1.plot(dat['Rho(as)'], dat['contr_snr5'], color=c_band4, linewidth=lw2, linestyle=lsl, label='')
     if (pred_img is False) and (pred_spec is False) and (cfg['pred_wide_img_short'] is False) and (cfg['pred_wide_img_medium'] is False):
-        ax1.text(3.4*dat['Rho(as)'][0], 1*dat['contr_snr5'][0], ' Roman\n CGI pred.', color='darkblue',\
+        ax1.text(3.4*dat['Rho(as)'][0], 1*dat['contr_snr5'][0], ' Roman\n pred.', color='darkblue',\
             horizontalalignment='left', verticalalignment='bottom', weight='bold', fontsize=ccfs+1)
     if cfg['exp_t'] is True:
         if (cfg['pred_wide_img_short'] is False) and (cfg['pred_wide_img_medium'] is False):
@@ -566,7 +566,7 @@ if cfg['req'] is True:
     ax1.plot(dat['Rho(as)'], dat['contr'], color=c_v, linewidth=lw2, label='')
     ax1.text(dat['Rho(as)'][0], 1.1*dat['contr'][0], 'img', color=c_v, weight='bold',\
         horizontalalignment='left', verticalalignment='bottom', fontsize=ccfs+1)
-    ax1.text(dat['Rho(as)'][0], dat['contr'][0], 'Roman CGI req.  ', color='darkblue',\
+    ax1.text(dat['Rho(as)'][0], dat['contr'][0], 'Roman req.  ', color='darkblue',\
         horizontalalignment='right', verticalalignment='bottom', weight='bold', fontsize=ccfs+1)
     caption += extract_short_caption(fname)
 
