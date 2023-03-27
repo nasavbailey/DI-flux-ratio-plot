@@ -173,7 +173,15 @@ Labeled "old L2 req." in figure if enabled.
 * **Post-processing:** Angular Differential Imaging & KLIP
 * **References:** J. Males, personal communication
 
-### JWST NIRCAM prediction
+### JWST NIRCAM
+* **Description:** 5$\sigma$ final detection limit curve on HIP 65426 from ERS program 1386.
+* **Bandpass:** F356W
+* **Exposures:** 2 rolls, ~10 min each on target star; 1 roll ~12 min on reference star
+* **Post-processing:** Angular Differential Imaging and Reference Differential Imaging
+* **References:**
+    * [Carter et al, PASP 122, 162 (2010)](https://ui.adsabs.harvard.edu/abs/2022arXiv220814990C/abstract)
+
+### JWST NIRCAM model prediction
 * **Description:** Model-predicted 5$\sigma$ final detection limit curve.
 * **Bandpass:** F210M
 * **Exposures:** 2x1hr rolls (+5/-5dgr), with a 10mas pointing uncertainty and a 10nm differential WFE.
@@ -196,6 +204,6 @@ Labeled "old L2 req." in figure if enabled.
 
 
 ## Authorship & Acknowledgements
-Vanessa Bailey, Jet Propulsion Laboratory, California Institute of Technology
+Vanessa Bailey and Sergi Hildebrandt Rafels, Jet Propulsion Laboratory, California Institute of Technology
 
 This work was carried out in part at the Jet Propulsion Laboratory, California Institute of Technology, under a contract with the National Aeronautics and Space Administration. Government sponsorship acknowledged.
