@@ -202,20 +202,35 @@ if cfg['HABEX'] is True:
 
 
 #########################################################################
-### NIRCAM detection limit
+### NIRCAM F356W detection limit
 
 if cfg['NIRCAM'] is True:
-    fname = datapath+'jwst_nircam.txt'
+    fname = datapath+'jwst_nircam_F356W.txt'
+    a_JWST = ascii.read(fname)
+    ax1.plot(a_JWST['Rho(as)'], a_JWST['356W_contrast'], color=c_k, linewidth=lw1*1.5, label='')
+    xy = [0.95*cfg['x1'], 0.7*a_JWST['356W_contrast'][-1]]
+    ax1.text(xy[0],xy[1], 'JWST NIRCam', color=c_k, rotation=-10, fontsize=ccfs, \
+        verticalalignment='top', horizontalalignment='right')
+    ax1.plot([0.9*xy[0], 0.95*xy[0]], [0.7*xy[1], xy[1]], 'k', linewidth=0.5)
+
+    caption += extract_short_caption(fname)
+
+
+#########################################################################
+### NIRCAM predicted detection limit
+
+if cfg['NIRCAM_pred'] is True:
+    fname = datapath+'jwst_nircam_pred.txt'
     a_JWST = ascii.read(fname)
     ax1.plot(a_JWST['Rho(as)'],a_JWST['210_contr'],color=c_k,linewidth=lw1,linestyle='--',label='')
     if cfg['SPHERE']:
-        xy=[4, 3E-8]
-        ax1.text(xy[0],xy[1], 'JWST NIRCam', color=c_k, rotation=-30, fontsize=ccfs, \
+        xy=[4.5, 3E-8]
+        ax1.text(xy[0],xy[1], 'JWST NIRCam pred', color=c_k, rotation=-30, fontsize=ccfs, \
             verticalalignment='bottom', horizontalalignment='right')
-        ax1.plot([xy[0]*0.95,xy[0]],[xy[1],1.1E-8],'k', linewidth=0.5)
+        ax1.plot([xy[0]*0.9,xy[0]*.95], [xy[1],1.1E-8], 'k', linewidth=0.5)
     else:
-        ax1.text(2,1E-8,'JWST NIRCam',color=c_k, verticalalignment='bottom',
-            horizontalalignment='left',rotation=-30,fontsize=ccfs)
+        ax1.text(2, 1.1E-8, 'JWST NIRCam pred', color=c_k, verticalalignment='bottom',
+            horizontalalignment='left', rotation=-30, fontsize=ccfs)
 
     caption += extract_short_caption(fname)
 
@@ -228,7 +243,7 @@ if cfg['NICMOS'] is True:
     a_NICMOS = ascii.read(fname)
     ax1.plot(a_NICMOS['Rho(as)'],a_NICMOS['F160W_contr'],color=c_h,\
         linewidth=lw1,label='')
-    ax1.text(max(a_NICMOS['Rho(as)']*1.1), min(a_NICMOS['F160W_contr']), 'HST NICMOS',\
+    ax1.text(max(a_NICMOS['Rho(as)']), 1.1*min(a_NICMOS['F160W_contr']), 'HST NICMOS',\
         color=c_h,horizontalalignment='right', verticalalignment='bottom', \
         rotation=-20,fontsize=ccfs)
     caption += extract_short_caption(fname)

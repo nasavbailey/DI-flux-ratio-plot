@@ -2,13 +2,14 @@
 
 # detection limits for current and future instruments
 NIRCAM: True
+NIRCAM_pred: False
 NICMOS: True
 STIS:   True
 ACS :   True
 generic ground-based: True # just show one ground-based curve? Overrides others.
-SPHERE: True
-GPI:    True
-MagAO:  True
+SPHERE: False
+GPI:    False
+MagAO:  False
 ELT :   False
 HABEX : False
 

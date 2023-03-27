@@ -4,7 +4,7 @@ See also [Roman Coronagraph Exposure Time Calculator](https://github.com/hsergi/
 for complementary information about integration times given a specific flux ratio.
 
 ## python requirements
-* python 2 or 3
+* python 3
 * matplotlib
 * astropy (tables, ascii, units)
 * numpy
