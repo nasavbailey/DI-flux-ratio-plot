@@ -1,4 +1,4 @@
-#Separation [mas]	K-band contrast
+#Separation[mas]	K_band_contrast
 #Short caption: GRAVITY exoplanet direct detection limits at K-band for the instrument GRAVITY on ON-AXIS mode at the Very Large Telescope Interferometer for 30 min integration spanning over around 1hr observations.
 #References: https://ui.adsabs.harvard.edu/abs/2024A%26A...686A.258P/abstract
 35.0	0.0006001

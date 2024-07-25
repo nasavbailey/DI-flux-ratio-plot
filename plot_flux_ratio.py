@@ -81,7 +81,7 @@ if cfg['color_by_lambda'].lower() == 'full':
         ax2.plot([1,1],[1,1],color=c_yjh,linewidth=lw1+2, label='YJH-band')
     if cfg['GPI'] or cfg['NICMOS'] or cfg['DI_H']:
         ax2.plot([1,1],[1,1],color=c_h,linewidth=lw1+2, label='H-band')
-    if cfg['SPHERE'] or cfg['NIRCAM']:
+    if cfg['SPHERE'] or cfg['NIRCAM'] or cfg['GRAVITY']:
         ax2.plot([1,1],[1,1],color=c_k,linewidth=lw1+2, label='K-band')
 
 elif cfg['color_by_lambda'].lower() == 'simple':
@@ -101,7 +101,7 @@ elif cfg['color_by_lambda'].lower() == 'simple':
         ax2.plot([1,1],[1,1],color=c_band3,linewidth=lw1+2, label='650 - 800nm')
     if cfg['old_L2req_wide_img'] or pred_wide_img:
         ax2.plot([1,1],[1,1],color=c_band4,linewidth=lw1+2, label='800 - 1000nm')
-    if cfg['GPI'] or cfg['SPHERE'] or cfg['NIRCAM'] or cfg['NICMOS'] or cfg['DI_H']:
+    if cfg['GPI'] or cfg['SPHERE'] or cfg['NIRCAM'] or cfg['NICMOS'] or cfg['DI_H'] or cfg['GRAVITY']:
         ax2.plot([1,1],[1,1],color=c_h,linewidth=lw1+2, label='> 1000 nm')
 
 
@@ -119,7 +119,7 @@ elif cfg['color_by_lambda'].lower() == 'minimal':
     if cfg['HABEX'] or cfg['ACS'] or cfg['STIS'] or cfg['DI_B1_pred'] or \
     cfg['DI_B3_pred'] or cfg['old_L2req_spec'] or pred_spec or  cfg['old_L2req_wide_img']:
         ax2.plot([1,1],[1,1],color=c_band4,linewidth=lw1+2, label='< 1000 nm')
-    if cfg['GPI'] or cfg['SPHERE'] or cfg['NIRCAM'] or cfg['NICMOS']:
+    if cfg['GPI'] or cfg['SPHERE'] or cfg['NIRCAM'] or cfg['NICMOS'] or cfg['GRAVITY']:
         ax2.plot([1,1],[1,1],color=c_h,linewidth=lw1+2, label='> 1000 nm')
 
 
@@ -333,6 +333,17 @@ if cfg['GPI'] is True or cfg['generic ground-based'] is True:
     if cfg['generic ground-based'] is True:
         txt = 'Ground-based'
     ax1.text(0.15,1.1*10**-4.8,txt,color=c_h,horizontalalignment='left',va='top',rotation=-26,fontsize=ccfs)
+    caption += extract_short_caption(fname)
+    
+#########################################################################
+### GRAVITY detection limit
+
+if cfg['GRAVITY'] is True and cfg['generic ground-based'] is False:
+    fname = datapath+'GRAVITY_pourre.txt'
+    a_GRAV = ascii.read(fname)
+    ax1.plot(a_GRAV['Separation[mas]']/1e3,a_GRAV['K_band_contrast'],color=c_k,linewidth=lw1,label='')
+    txt = 'VLTI GRAVITY'
+    ax1.text(0.07,1.1*10**-4.6,txt,color=c_k,horizontalalignment='left',va='top',rotation=-10,fontsize=ccfs)
     caption += extract_short_caption(fname)
 
 
