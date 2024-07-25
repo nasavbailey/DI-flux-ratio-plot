@@ -332,7 +332,7 @@ if cfg['GPI'] is True or cfg['generic ground-based'] is True:
         txt = 'Gemini GPI'
     if cfg['generic ground-based'] is True:
         txt = 'Ground-based'
-    ax1.text(0.15,1.1*10**-4.8,txt,color=c_h,horizontalalignment='left',va='top',rotation=-26,fontsize=ccfs)
+    ax1.text(0.15,1.1*10**-4.87,txt,color=c_h,horizontalalignment='left',va='top',rotation=-26,fontsize=ccfs)
     caption += extract_short_caption(fname)
     
 #########################################################################
