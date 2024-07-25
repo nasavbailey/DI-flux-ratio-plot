@@ -332,7 +332,7 @@ if cfg['GPI'] is True or cfg['generic ground-based'] is True:
         txt = 'Gemini GPI'
     if cfg['generic ground-based'] is True:
         txt = 'Ground-based'
-    ax1.text(0.15,1.1*10**-4.87,txt,color=c_h,horizontalalignment='left',va='top',rotation=-26,fontsize=ccfs)
+    ax1.text(0.18,1.1*10**-5.1,txt,color=c_h,horizontalalignment='left',va='top',rotation=-38,fontsize=ccfs)
     caption += extract_short_caption(fname)
     
 #########################################################################
@@ -343,7 +343,7 @@ if cfg['GRAVITY'] is True and cfg['generic ground-based'] is False:
     a_GRAV = ascii.read(fname)
     ax1.plot(a_GRAV['Separation[mas]']/1e3,a_GRAV['K_band_contrast'],color=c_k,linewidth=lw1,label='')
     txt = 'VLTI GRAVITY'
-    ax1.text(0.07,1.1*10**-4.6,txt,color=c_k,horizontalalignment='left',va='top',rotation=-10,fontsize=ccfs)
+    ax1.text(0.05,1.1*10**-4.6,txt,color=c_k,horizontalalignment='left',va='top',rotation=-10,fontsize=ccfs)
     caption += extract_short_caption(fname)
 
 
@@ -796,6 +796,10 @@ else:
 if cfg['timestamp'] is True:
     ax1.text(0.95*xlim[1], ylim[0]*2, "Generated "+str(date.today()) + '.', \
         horizontalalignment='right',verticalalignment='bottom',fontsize=ccfs+1, color='darkgray')
+        
+if cfg['GRAVITY'] is True and cfg['generic ground-based'] is False:
+    xlim[0] = 0.04
+    ylim[1] = 3e-3
 
 first_legend = ax1.legend(fontsize=cfg['legend_font_size'], loc='upper right', \
     title='Known Exoplanets')
