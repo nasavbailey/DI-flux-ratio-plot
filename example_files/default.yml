@@ -9,7 +9,7 @@ ACS :   True
 generic ground-based: False # just show one ground-based curve? Overrides others.
 SPHERE: True
 GPI:    True
-GRAVITY: True
+GRAVITY: False
 MagAO:  False
 ELT :   False
 HABEX : False
