@@ -324,13 +324,13 @@ if cfg['SPHERE'] is True and cfg['generic ground-based'] is False:
 #########################################################################
 ### GPI H-band
 
-if cfg['GPI'] is True or cfg['generic ground-based'] is True:
+if cfg['GPI'] is True or cfg[' ground-based'] is True:
     fname = datapath+'GPI_Sirius_Ltype.txt'
     a_GPI = ascii.read(fname)
     ax1.plot(a_GPI['Rho(as)'],a_GPI['H_contr_60min_Ltype'],color=c_h,linewidth=lw1,label='')
     if cfg['GPI'] is True:
         txt = 'Gemini GPI'
-    if cfg['generic ground-based'] is True:
+    if cfg[' ground-based'] is True:
         txt = 'Ground-based'
     ax1.text(0.18,1.1*10**-5.1,txt,color=c_h,horizontalalignment='left',va='top',rotation=-38,fontsize=ccfs)
     caption += extract_short_caption(fname)
@@ -338,7 +338,7 @@ if cfg['GPI'] is True or cfg['generic ground-based'] is True:
 #########################################################################
 ### GRAVITY detection limit
 
-if cfg['GRAVITY'] is True and cfg['generic ground-based'] is False:
+if cfg['GRAVITY'] is True:
     fname = datapath+'GRAVITY_pourre.txt'
     a_GRAV = ascii.read(fname)
     ax1.plot(a_GRAV['Separation[mas]']/1e3,a_GRAV['K_band_contrast'],color=c_k,linewidth=lw1,label='')
@@ -797,7 +797,7 @@ if cfg['timestamp'] is True:
     ax1.text(0.95*xlim[1], ylim[0]*2, "Generated "+str(date.today()) + '.', \
         horizontalalignment='right',verticalalignment='bottom',fontsize=ccfs+1, color='darkgray')
         
-if cfg['GRAVITY'] is True and cfg['generic ground-based'] is False:
+if cfg['GRAVITY'] is True:
     xlim[0] = 0.04
     ylim[1] = 3e-3
 
