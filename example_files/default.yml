@@ -6,12 +6,12 @@ NIRCAM_pred: False
 NICMOS: True
 STIS:   True
 ACS :   True
-generic ground-based: False # just show one ground-based curve? Overrides others.
+generic ground-based: True # just show one ground-based curve? Overrides others.
 SPHERE: True
 GPI:    True
-GRAVITY: False
 MagAO:  False
 ELT :   False
+GRAVITY: True
 HABEX : False
 
 # planets
