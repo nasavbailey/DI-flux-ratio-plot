@@ -9,10 +9,10 @@ ACS :   True
 generic ground-based: True # just show one ground-based curve? Overrides others.
 SPHERE: False
 GPI:    False
-GRAVITY: False
 MagAO:  False
 ELT :   False
 HABEX : False
+GRAVITY: True
 
 # planets
 DI_H:       True # known H-band contrasts of directly imaged planets
