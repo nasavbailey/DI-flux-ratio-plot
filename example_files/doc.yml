@@ -11,7 +11,9 @@ SPHERE: False
 GPI:    False
 MagAO:  False
 ELT :   False
+GRAVITY: True
 HABEX : False
+
 
 # planets
 DI_H:       True # known H-band contrasts of directly imaged planets

@@ -166,6 +166,13 @@ Labeled "old L2 req." in figure if enabled.
     * B. Macintosh & J. Chilcote, personal communication
     * [Ruffio, et al., ApJ 842, 14 (2017)](http://adsabs.harvard.edu/abs/2017ApJ...842...14R)
 
+### VLTI GRAVITY
+* **Description:** 5$\sigma$ final detection limit curve from observations of the ExoGRAVITY large programme with the ON-AXIS mode (max sep. 350 mas) 
+* **Bandpass:** K-band
+* **Integration time:** 27 min integration on the planet spread over 1hr to take advantage of the sky rotation (UV plane rotation)
+* **Post-processing:** GRAVITY data reduction software [Lapeyrere+2014], then ExoGRAVITY pipeline (https://gitlab.obspm.fr/mnowak/exogravity)
+* **Reference:** [N. Pourré et al, A&A Volume 686, id.A258 (2024)](https://ui.adsabs.harvard.edu/abs/2024A%26A...686A.258P%2F/abstract)
+
 ### Magellan VisAO
 * **Description:**  5$\sigma$ final detection limit curve from observations of Alpha Cen [Beta Pic]
 * **Bandpass:** i’ [Ys]

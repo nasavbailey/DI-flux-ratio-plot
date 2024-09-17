@@ -50,6 +50,7 @@ Available instruments:
 * Gemini GPI IFS
 * VLT SPHERE: IFS & IRDIS
 * Magellan VisAO
+* VLTI GRAVITY
 * generic ground-based (supersedes the above)
 * HST ACS
 * HST NICMOS
