@@ -75,7 +75,7 @@ di_markersize:      40 # self-luminous planets marker size
 marker_edge_width:  0.5  # width of borders on scatter plot markers
 
 # plot x and y limits
-x0: 0.07
+x0: 0.03
 x1: 5
 y0: 3E-11
-y1: 8E-4
+y1: 3E-3

@@ -797,9 +797,6 @@ if cfg['timestamp'] is True:
     ax1.text(0.95*xlim[1], ylim[0]*2, "Generated "+str(date.today()) + '.', \
         horizontalalignment='right',verticalalignment='bottom',fontsize=ccfs+1, color='darkgray')
         
-if cfg['GRAVITY'] is True:
-    xlim[0] = 0.04
-    ylim[1] = 3e-3
 
 first_legend = ax1.legend(fontsize=cfg['legend_font_size'], loc='upper right', \
     title='Known Exoplanets')
@@ -817,7 +814,11 @@ ax1.set_xlim(xlim)
 ax1.xaxis.set_major_formatter(ticker.FormatStrFormatter('%.1g'))
 
 if cfg['color_by_lambda'].lower() != 'none':
-    second_legend = ax2.legend(loc='upper left', fontsize=cfg['legend_font_size'], title='Wavelength ($\lambda_0$)')
+    if cfg['GRAVITY']:
+        thisloc = 'upper center'
+    else:
+        thisloc = 'upper left'
+    second_legend = ax2.legend(loc=thisloc, fontsize=cfg['legend_font_size'], title='Wavelength ($\lambda_0$)')
     second_legend.get_title().set_fontsize(8)
     ax2.set_ylim(ylim)
     ax2.set_xlim(xlim)
