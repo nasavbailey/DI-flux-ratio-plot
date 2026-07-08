@@ -4,13 +4,12 @@ See also the Roman Coronagraph Exposure Time Calculator [corgietc](https://githu
 for complementary information about integration times given a specific flux ratio.
 
 ## python requirements
-* python 3
+* python 3 (only tested up to 3.12)
 * matplotlib
 * astropy (tables, ascii, units)
 * numpy
 * yaml
 
-_Note:_ this code is only tested with miniconda + [astroconda](https://astroconda.readthedocs.io/) and python up to 3.9.11. 
 
 ## quickstart
 
