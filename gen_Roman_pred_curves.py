@@ -45,7 +45,8 @@ data = pandas.DataFrame(
         "SNR": SNRs,
     }
 )
-data.to_csv(os.path.join(datapath, "Roman_CDR_curves_list.csv"), index=False)
+# backup of original curve data for historical purposes
+# data.to_csv(os.path.join(datapath, "Roman_CDR_curves_list.csv"), index=False)
 
 # set up objects
 scriptfile = os.path.join(os.environ["CORGIETC_DATA_DIR"], "scripts", "CGI_Noise.json")
@@ -98,6 +99,7 @@ for _, row in data.iterrows():
         * mode["IWA"].unit
     )
 
+    # treat 10k hours as saturation
     if row.t_int_hr == 10000:
         dMags = OS.calc_saturation_dMag(
             TL,
@@ -108,6 +110,7 @@ for _, row in data.iterrows():
             mode,
             TK=TK,
         )
+    # otherwise, use the actual time
     else:
         dMags = OS.calc_dMag_per_intTime(
             np.ones(len(WAs)) * row.t_int_hr * u.hr,
@@ -120,17 +123,19 @@ for _, row in data.iterrows():
             TK=TK,
         )
 
+    # generate output table
     df = pandas.DataFrame(
         {
             "l/D": (WAs / mode["syst"]["input_angle_unit_value"]).value,
             "contr": 10 ** (-0.4 * dMags),
-            "lambda": np.ones(len(WAs)) * row["lambda"],
+            "lambda": np.ones(len(WAs)) * mode["lam"].to_value("nm"),
             "t_int_hr": np.ones(len(WAs)) * row.t_int_hr,
-            "fpp": np.ones(len(WAs)) * row.fpp,
-            "SNR": np.ones(len(WAs)) * row.SNR,
+            "fpp": np.ones(len(WAs)) * mode["pp_Factor_CBE"],
+            "SNR": np.ones(len(WAs)) * mode["SNR"],
         }
     )
 
+    # write to disk
     Table.from_pandas(df).write(
         os.path.join(datapath, row.Filename), format="ascii.ecsv", overwrite=True
     )
