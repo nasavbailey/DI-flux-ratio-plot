@@ -134,8 +134,18 @@ for _, row in data.iterrows():
             "SNR": np.ones(len(WAs)) * mode["SNR"],
         }
     )
+    tbl = Table.from_pandas(df)
+    tbl.meta["comments"] = (
+        f"Short caption: {row.Filename} was generated with corgietc "
+        f"(https://github.com/roman-corgi/corgietc) version {corgietc.__version__} "
+        f"running on EXOSIMS version {EXOSIMS.__version__}. The data in this file was "
+        f"generated using observing mode {mode['Scenario']} for a synthetic "
+        f"{TL.Spec[sInds]} star with V mag = {TL.Vmag[sInds]}. The local zodi "
+        f"flux was set to {fZ[sInds] :.2e} photons and the exozodi intensity was set "
+        f"to {JEZ[sInds] :.2e}. For any integration times of 10000 hours, the mode's "
+        "saturation curve was computed instead. Calculations were done assuming the "
+        f"mission was at {TK.currentTimeNorm} at L2."
+    )
 
     # write to disk
-    Table.from_pandas(df).write(
-        os.path.join(datapath, row.Filename), format="ascii.ecsv", overwrite=True
-    )
+    tbl.write(os.path.join(datapath, row.Filename), format="ascii.ecsv", overwrite=True)

@@ -7,6 +7,12 @@
 # - {name: t_int_hr, datatype: float64}
 # - {name: fpp, datatype: float64}
 # - {name: SNR, datatype: float64}
+# meta: !!omap
+# - {comments: 'Short caption: Roman_pred_spec_medium_cons.txt was generated with corgietc (https://github.com/roman-corgi/corgietc) version
+#     1.6.0 running on EXOSIMS version 3.6.5. The data in this file was generated using observing mode CON_SPEC_NFB3_SPC for a synthetic
+#     G5V star with V mag = 5.0. The local zodi flux was set to 6.31e-10 1 / arcsec2 photons and the exozodi intensity was set to 4.68e-01
+#     ph / (s arcsec2 m2). For any integration times of 10000 hours, the mode''s saturation curve was computed instead. Calculations were
+#     done assuming the mission was at 639.1875 d at L2.'}
 # schema: astropy-2.0
 l/D contr lambda t_int_hr fpp SNR
 3.1310000000000002 1.845543104569081e-08 730.0 400.0 1.2 5.0

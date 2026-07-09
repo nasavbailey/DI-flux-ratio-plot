@@ -17,7 +17,7 @@ import os
 ### import YAML file of user-defined options
 cfglist = glob('*yml')
 if len(cfglist) > 1:
-    raise Exception(('Mulitple YAML config files present: %s.\nMove all but desired config file to another folder.')%flist)
+    raise Exception(('Mulitple YAML config files present: %s.\nMove all but desired config file to another folder.')%cfglist)
 if len(cfglist) == 0:
     raise Exception('No .yml config files present. Place your .yml file in the same directory as plot_flux_ratio.py.')
 with open(cfglist[0],'r') as f:
@@ -158,12 +158,16 @@ if cfg['color_by_lambda'].lower() != 'none':
     caption += 'Lines and points are color coded by wavelength of observation.\n\n'
 
 def extract_short_caption(filename):
-    f = open(filename,'r')
-    lines = f.readlines()
-    f.close()
-    for l in lines:
-        if '#short caption:' in l.lower():
-            return '-- '+l.split('caption:')[1].strip()+'\n\n'
+    tmp = ascii.read(filename)
+    if "comments" in tmp.meta:
+        lines = tmp.meta["comments"]
+        # handle 1 vs many lines
+        if isinstance(lines, str):
+            lines = [lines,]
+        for l in lines:
+            if 'short caption:' in l.lower():
+                return '-- '+l.split('caption:')[1].strip()+'\n\n'
+
     # if no caption in text file
     print('\n**** WARNING **** no caption for '+filename+'\n')
     return ''
@@ -334,7 +338,7 @@ if cfg['GPI'] is True or cfg['generic ground-based'] is True:
         txt = 'Ground-based'
     ax1.text(0.18,1.1*10**-5.1,txt,color=c_h,horizontalalignment='left',va='top',rotation=-38,fontsize=ccfs)
     caption += extract_short_caption(fname)
-    
+
 #########################################################################
 ### GRAVITY detection limit
 
@@ -796,7 +800,7 @@ else:
 if cfg['timestamp'] is True:
     ax1.text(0.95*xlim[1], ylim[0]*2, "Generated "+str(date.today()) + '.', \
         horizontalalignment='right',verticalalignment='bottom',fontsize=ccfs+1, color='darkgray')
-        
+
 
 first_legend = ax1.legend(fontsize=cfg['legend_font_size'], loc='upper right', \
     title='Known Exoplanets')
