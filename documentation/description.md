@@ -101,7 +101,7 @@ of the instrumental and spacecraft performance.
 * **Post-processing:** Reference PSF subtraction, with an assumed additional factor of 2 (imaging) and 1.22 (spectroscopy) improvement over the basic-RDI residual speckle component, from the application of more sophisticated post-processing techniques
 see this
 [report](https://roman.ipac.caltech.edu/docs/sims/20210110_Roman_CGI_post_processing_report_URS_corrected_typo.pdf).
-* **Reference:** B. Kern & B. Nemati CGI Perf spreadsheet, personal communication.
+* **Reference:** generated using https://github.com/roman-corgi/corgietc/
 
 
 ### Old CGI Tech Demo requirements.
@@ -211,6 +211,7 @@ Labeled "old L2 req." in figure if enabled.
 
 
 ## Authorship & Acknowledgements
-Vanessa Bailey and Sergi Hildebrandt Rafels, Jet Propulsion Laboratory, California Institute of Technology
+Please cite the author as the "Roman Coronagraph Team"
+Contributors included: Vanessa Bailey, Dmitry Savransky, Bijan Nemati, Brian Kern, Sergi Hildebrandt Rafels and Rob Zellem.
 
-This work was carried out in part at the Jet Propulsion Laboratory, California Institute of Technology, under a contract with the National Aeronautics and Space Administration. Government sponsorship acknowledged.
+This work was carried out in part at the Jet Propulsion Laboratory, California Institute of Technology, under a contract with the National Aeronautics and Space Administration. 
